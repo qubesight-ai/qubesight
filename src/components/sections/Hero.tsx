@@ -32,7 +32,7 @@ const Hero = () => {
       <div className="container relative">
         <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
           {/* Left: editorial copy block */}
-          <div className="text-left max-w-2xl">
+          <div className="text-left max-w-2xl min-w-0">
             <motion.div
               initial={{ opacity: 0, y: 8, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
