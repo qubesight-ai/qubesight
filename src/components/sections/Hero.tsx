@@ -64,7 +64,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.05 }}
-              className="display-xl text-[clamp(2.6rem,6vw,5.25rem)] mb-8"
+              className="display-xl text-[clamp(1.9rem,6vw,5.25rem)] mb-8 break-words"
             >
               {t("hero.title")}{" "}
               <span className="accent-text">{t("hero.titleAccent")}</span>
