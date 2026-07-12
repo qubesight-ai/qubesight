@@ -32,7 +32,7 @@ const Hero = () => {
       <div className="container relative">
         <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
           {/* Left: editorial copy block */}
-          <div className="text-left max-w-2xl">
+          <div className="text-left max-w-2xl min-w-0">
             <motion.div
               initial={{ opacity: 0, y: 8, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -64,7 +64,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.05 }}
-              className="display-xl text-[clamp(2.6rem,6vw,5.25rem)] mb-8"
+              className="display-xl text-[clamp(1.9rem,6vw,5.25rem)] mb-8 break-words"
             >
               {t("hero.title")}{" "}
               <span className="accent-text">{t("hero.titleAccent")}</span>
@@ -140,7 +140,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30, rotate: -1 }}
             animate={{ opacity: 1, y: 0, rotate: 0 }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.32, 0.72, 0, 1] }}
-            className="relative mx-auto w-full max-w-md lg:max-w-none"
+            className="relative mx-auto w-full max-w-md lg:max-w-none min-w-0"
           >
             <HeroChatPreview />
             {/* Small floating stat chip overlay */}
