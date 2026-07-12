@@ -140,7 +140,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30, rotate: -1 }}
             animate={{ opacity: 1, y: 0, rotate: 0 }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.32, 0.72, 0, 1] }}
-            className="relative mx-auto w-full max-w-md lg:max-w-none"
+            className="relative mx-auto w-full max-w-md lg:max-w-none min-w-0"
           >
             <HeroChatPreview />
             {/* Small floating stat chip overlay */}
