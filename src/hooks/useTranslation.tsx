@@ -427,8 +427,8 @@ export const translations: Translations = {
   'pricing.compare.qs.3': { es: 'Llamadas simultáneas ilimitadas', en: 'Unlimited concurrent calls' },
 
   // AI Suite (Chat + Voice)
-  'pricing.suite.title': { es: 'AI Suite — Chat + Voz', en: 'AI Suite — Chat + Voice' },
-  'pricing.suite.subtitle': { es: 'Todo integrado en un solo sistema: chat + voz + CRM + agenda.', en: 'Everything integrated in one system: chat + voice + CRM + scheduling.' },
+  'pricing.suite.title': { es: 'AI Suite — Chat + Voz + Automaciones', en: 'AI Suite — Chat + Voice + Automations' },
+  'pricing.suite.subtitle': { es: 'Combina chatbot, voice bot y automatizaciones operativas en un solo sistema.', en: 'Combine chatbot, voice bot and operational automations in one system.' },
   'pricing.suite.business.name': { es: 'Business', en: 'Business' },
   'pricing.suite.business.desc': { es: 'Chat Bot + Voice Bot con todo incluido.', en: 'Chat Bot + Voice Bot with everything included.' },
   'pricing.suite.business.f1': { es: 'WhatsApp + Instagram + Facebook + Telegram + Web Chat', en: 'WhatsApp + Instagram + Facebook + Telegram + Web Chat' },
