@@ -104,7 +104,12 @@ const Header = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+                onClick={(e) => handleNavClick(e, link.id)}
+                aria-current={activeSection === link.id ? "true" : undefined}
+                className={`text-sm font-medium transition-colors duration-200 hover:text-foreground ${
+                  activeSection === link.id ? "text-foreground" : "text-muted-foreground"
+                }`}
+
               >
                 {link.label}
               </a>
