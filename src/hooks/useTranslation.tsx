@@ -11,7 +11,7 @@ export const translations: Translations = {
   'nav.problem': { es: 'Problema', en: 'Problem' },
   'nav.assistant': { es: 'Asistente', en: 'Assistant' },
   'nav.voicebot': { es: 'Voice Bot', en: 'Voice Bot' },
-  'nav.propia': { es: 'PropIA', en: 'PropIA' },
+  'nav.ops': { es: 'Ops', en: 'Ops' },
   'nav.industries': { es: 'Industrias', en: 'Industries' },
   'nav.pricing': { es: 'Precios', en: 'Pricing' },
   'nav.contact': { es: 'Empezar', en: 'Get Started' },

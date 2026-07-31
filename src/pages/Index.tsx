@@ -34,20 +34,19 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
-          <Founders />
           <TrustBar />
           <Problem />
           <Assistant />
           <Multichannel />
           <VoiceBot />
-          
           <QubeOps />
           <Industries />
           <DemoNiches />
-          <Testimonials />
-          <GuaranteeStrip />
           <Differentiation />
+          <Testimonials />
+          <Founders />
           <Pricing />
+          <GuaranteeStrip />
           <ROI />
           <FinalCTA />
         </main>

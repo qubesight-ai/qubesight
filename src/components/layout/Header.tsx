@@ -34,7 +34,7 @@ const Header = () => {
     { href: sectionHref("problem"), label: t("nav.problem") },
     { href: sectionHref("assistant"), label: t("nav.assistant") },
     { href: sectionHref("voicebot"), label: t("nav.voicebot") },
-    
+    { href: sectionHref("qubeops"), label: t("nav.ops") },
     { href: sectionHref("industries"), label: t("nav.industries") },
     { href: sectionHref("pricing"), label: t("nav.pricing") },
   ];
