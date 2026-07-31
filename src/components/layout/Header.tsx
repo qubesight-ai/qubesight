@@ -177,9 +177,15 @@ const Header = () => {
                   <a
                     key={link.href}
                     href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-4 py-3 text-foreground hover:bg-secondary rounded-lg transition-colors"
+                    onClick={(e) => {
+                      setIsMobileMenuOpen(false);
+                      handleNavClick(e, link.id);
+                    }}
+                    className={`block px-4 py-3 rounded-lg transition-colors hover:bg-secondary ${
+                      activeSection === link.id ? "text-primary bg-secondary/60" : "text-foreground"
+                    }`}
                   >
+
                     {link.label}
                   </a>
                 ))}
