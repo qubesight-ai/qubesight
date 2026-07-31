@@ -9,7 +9,7 @@ const Differentiation = () => {
   const us = [t("diff.us.1"), t("diff.us.2"), t("diff.us.3"), t("diff.us.4")];
 
   return (
-    <section className="py-24 sm:py-32 relative overflow-hidden">
+    <section id="differentiation" className="py-24 sm:py-32 relative overflow-hidden">
       <div
         className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-3xl opacity-20 pointer-events-none"
         style={{ background: "var(--gradient-glow)" }}

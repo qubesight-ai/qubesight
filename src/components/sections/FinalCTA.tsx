@@ -19,7 +19,7 @@ const FinalCTA = () => {
   ];
 
   return (
-    <section className="py-24 sm:py-32 relative overflow-hidden">
+    <section id="contacto" className="py-24 sm:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-30" />
       <div className="absolute inset-0 gradient-hero-bg opacity-60" />
       <div className="absolute bottom-0 left-0 right-0 h-[40vh] neon-grid-3d animate-grid-drift opacity-30 pointer-events-none" />
