@@ -25,6 +25,8 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileDemosOpen, setIsMobileDemosOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
   const { t, language } = useTranslation();
   const location = useLocation();
   const isHome = location.pathname === "/";
