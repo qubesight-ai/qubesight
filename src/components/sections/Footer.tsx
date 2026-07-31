@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Instagram, Facebook } from "lucide-react";
+import { MessageCircle, Instagram, Facebook, ArrowUp } from "lucide-react";
 import LogoCube from "@/components/LogoCube";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -13,6 +13,11 @@ const Footer = () => {
     { href: "#pricing", label: t("nav.pricing") },
     { href: "#faq", label: t("nav.faq") },
   ];
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.history.replaceState(null, "", window.location.pathname);
+  };
 
   return (
     <footer className="pt-20 pb-10 bg-card/50 border-t border-white/5 relative">
@@ -90,9 +95,20 @@ const Footer = () => {
           <p className="text-sm text-muted-foreground">
             © {currentYear} QubeSight. {t("footer.rights")}
           </p>
-          <p className="text-xs text-muted-foreground">
-            Made with <span className="text-primary">⚡</span> in Costa Rica
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="text-xs text-muted-foreground">
+              Made with <span className="text-primary">⚡</span> in Costa Rica
+            </p>
+            <button
+              type="button"
+              onClick={scrollToTop}
+              aria-label={t("footer.backToTop")}
+              className="inline-flex items-center gap-2 rounded-full glass-card border border-white/10 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors"
+            >
+              <ArrowUp className="h-3.5 w-3.5" strokeWidth={2} />
+              {t("footer.backToTop")}
+            </button>
+          </div>
         </div>
       </div>
     </footer>

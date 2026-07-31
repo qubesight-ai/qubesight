@@ -290,6 +290,7 @@ export const translations: Translations = {
   'footer.terms': { es: 'Términos', en: 'Terms' },
   'footer.privacy': { es: 'Privacidad', en: 'Privacy' },
   'footer.rights': { es: 'Todos los derechos reservados.', en: 'All rights reserved.' },
+  'footer.backToTop': { es: 'Volver arriba', en: 'Back to top' },
 
   // Founders
   'founders.title': { es: 'Conoce al equipo', en: 'Meet the team' },
