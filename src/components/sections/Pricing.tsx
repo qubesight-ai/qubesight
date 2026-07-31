@@ -324,11 +324,14 @@ const Pricing = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center mt-24 mb-10"
         >
+          <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20">
+            <Phone className="h-6 w-6 text-primary" />
+          </div>
           <span className="eyebrow mb-4">{t("pricing.section.voice")}</span>
           <h3 className="text-2xl sm:text-4xl font-bold font-display leading-tight">
             {t("pricing.voice.title")}
           </h3>
-          <p className="mt-3 text-muted-foreground">
+          <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
             {t("pricing.voice.subtitle")}
           </p>
         </motion.div>
