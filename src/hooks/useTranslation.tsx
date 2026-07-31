@@ -212,8 +212,8 @@ export const translations: Translations = {
   'pricing.channels.all': { es: 'Todos los canales', en: 'All channels' },
 
   // Voice Bot pricing
-  'pricing.voice.title': { es: 'Planes Voice Bot AI', en: 'Voice Bot AI plans' },
-  'pricing.voice.subtitle': { es: 'Recepcionistas inteligentes que responden, agendan y venden por ti 24/7.', en: 'Smart receptionists that answer, schedule and sell for you 24/7.' },
+  'pricing.voice.title': { es: 'Voice Bots IA — Recepcionistas Telefónicas', en: 'AI Voice Bots — Phone Receptionists' },
+  'pricing.voice.subtitle': { es: 'Atienden llamadas, agendan citas y cierran ventas por teléfono sin intervención humana.', en: 'Answer calls, book appointments and close sales by phone with zero human intervention.' },
   'pricing.voice.bronze.name': { es: 'Inicio', en: 'Starter' },
   'pricing.voice.bronze.desc': { es: 'Recepcionista IA para no perder llamadas.', en: 'AI receptionist so you never miss a call.' },
   'pricing.voice.bronze.f1': { es: 'Recepcionista IA 24/7', en: 'AI receptionist 24/7' },
@@ -427,8 +427,8 @@ export const translations: Translations = {
   'pricing.compare.qs.3': { es: 'Llamadas simultáneas ilimitadas', en: 'Unlimited concurrent calls' },
 
   // AI Suite (Chat + Voice)
-  'pricing.suite.title': { es: 'AI Suite — Chat + Voz', en: 'AI Suite — Chat + Voice' },
-  'pricing.suite.subtitle': { es: 'Todo integrado en un solo sistema: chat + voz + CRM + agenda.', en: 'Everything integrated in one system: chat + voice + CRM + scheduling.' },
+  'pricing.suite.title': { es: 'AI Suite — Chat + Voz + Automaciones', en: 'AI Suite — Chat + Voice + Automations' },
+  'pricing.suite.subtitle': { es: 'Combina chatbot, voice bot y automatizaciones operativas en un solo sistema.', en: 'Combine chatbot, voice bot and operational automations in one system.' },
   'pricing.suite.business.name': { es: 'Business', en: 'Business' },
   'pricing.suite.business.desc': { es: 'Chat Bot + Voice Bot con todo incluido.', en: 'Chat Bot + Voice Bot with everything included.' },
   'pricing.suite.business.f1': { es: 'WhatsApp + Instagram + Facebook + Telegram + Web Chat', en: 'WhatsApp + Instagram + Facebook + Telegram + Web Chat' },
@@ -448,6 +448,8 @@ export const translations: Translations = {
 
   // Section titles
   'pricing.section.chat': { es: '💬 AI Chat Bots', en: '💬 AI Chat Bots' },
+  'pricing.chat.title': { es: 'Chatbots IA para WhatsApp y Web', en: 'AI Chatbots for WhatsApp & Web' },
+  'pricing.chat.subtitle': { es: 'Atiende clientes automáticamente, captura leads y agenda citas 24/7.', en: 'Automatically serve customers, capture leads and book appointments 24/7.' },
   'pricing.section.voice': { es: '📞 AI Voice Bots', en: '📞 AI Voice Bots' },
   'pricing.section.suite': { es: '🚀 AI Suite', en: '🚀 AI Suite' },
 
