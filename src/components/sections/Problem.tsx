@@ -27,7 +27,7 @@ const Problem = () => {
   ];
 
   return (
-    <section id="problem" className="py-24 sm:py-32 relative overflow-hidden">
+    <section id="problem" className="py-16 sm:py-24 relative overflow-hidden">
       {/* Subtle red wash to underscore the pain */}
       <div className="absolute inset-0 pointer-events-none opacity-30"
         style={{ background: "radial-gradient(ellipse 60% 40% at 50% 0%, hsl(0 84% 40% / 0.18), transparent 70%)" }}

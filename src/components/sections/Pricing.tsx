@@ -131,7 +131,7 @@ const Pricing = () => {
   ];
 
   return (
-    <section id="pricing" className="py-24 sm:py-32 relative overflow-hidden">
+    <section id="pricing" className="py-16 sm:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
       <div className="absolute top-1/3 -left-40 w-96 h-96 rounded-full blur-3xl opacity-30 pointer-events-none animate-float-3d" style={{ background: "var(--gradient-glow)" }} />
       <div className="absolute bottom-1/4 -right-40 w-96 h-96 rounded-full blur-3xl opacity-30 pointer-events-none animate-float-3d" style={{ background: "radial-gradient(circle, hsl(217 91% 60% / 0.4), transparent 70%)", animationDelay: "-7s" }} />

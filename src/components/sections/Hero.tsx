@@ -9,8 +9,8 @@ const Hero = () => {
   const { t, language } = useTranslation();
   const whatsappUrl = `https://wa.me/50646009140?text=${encodeURIComponent(
     language === "es"
-      ? "Hola, quiero empezar a responder automáticamente con QubeSight."
-      : "Hi, I want to start replying automatically with QubeSight."
+      ? "Hola, quiero potenciar a mi equipo con QubeSight."
+      : "Hi, I want to empower my team with QubeSight."
   )}`;
 
   const stats = [
@@ -43,14 +43,14 @@ const Hero = () => {
                 <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-70" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
               </span>
-              {language === "es" ? "🎁 Primer mes gratis en Plan Inicio" : "🎁 First month free on Starter Plan"}
+              {language === "es" ? "Primer mes gratis en Plan Inicio" : "First month free on Starter Plan"}
             </motion.div>
 
             <motion.span
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="eyebrow mb-8"
+              className="eyebrow mb-6"
             >
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-70" />
@@ -64,7 +64,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.05 }}
-              className="display-xl text-[clamp(1.9rem,6vw,5.25rem)] mb-8 break-words"
+              className="display-xl text-[clamp(1.9rem,6vw,5.25rem)] mb-6 break-words"
             >
               {t("hero.title")}{" "}
               <span className="accent-text">{t("hero.titleAccent")}</span>
@@ -74,17 +74,9 @@ const Hero = () => {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.18 }}
-              className="text-lg text-muted-foreground max-w-xl leading-relaxed mb-3"
+              className="text-lg text-muted-foreground max-w-xl leading-relaxed mb-8"
             >
               {t("hero.subhead.1")}
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.24 }}
-              className="text-base text-foreground/80 max-w-xl leading-relaxed mb-10"
-            >
-              {t("hero.subhead.2")}
             </motion.p>
 
             <motion.div
@@ -94,7 +86,7 @@ const Hero = () => {
               className="flex flex-col sm:flex-row gap-3 mb-12"
             >
               <a
-                href="#demos"
+                href="#products"
                 className="group inline-flex items-center gap-3 rounded-full pl-6 pr-2 py-2 bg-gradient-to-br from-[hsl(249,65%,58%)] to-[hsl(258,75%,64%)] text-white font-semibold text-sm shadow-[0_18px_40px_-12px_hsl(249,70%,40%,0.6)] transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)] active:scale-[0.98]"
               >
                 <span>{t("hero.cta.primary")}</span>

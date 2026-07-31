@@ -19,7 +19,7 @@ const FinalCTA = () => {
   ];
 
   return (
-    <section id="contacto" className="py-24 sm:py-32 relative overflow-hidden">
+    <section id="contacto" className="py-20 sm:py-28 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-30" />
       <div className="absolute inset-0 gradient-hero-bg opacity-60" />
       <div className="absolute bottom-0 left-0 right-0 h-[40vh] neon-grid-3d animate-grid-drift opacity-30 pointer-events-none" />
@@ -65,7 +65,7 @@ const FinalCTA = () => {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button variant="hero" size="lg" asChild className="min-h-[56px] px-8">
-              <a href="#demos">
+              <a href="#products">
                 {t("final.cta.primary")}
                 <ArrowRight className="ml-1 h-5 w-5" />
               </a>

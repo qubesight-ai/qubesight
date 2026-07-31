@@ -9,9 +9,9 @@ const Footer = () => {
   const whatsappUrl = "https://wa.me/50646009140";
 
   const productLinks = [
-    { href: "#assistant", label: "QubeSight Assistant" },
-    
+    { href: "#products", label: t("nav.products") },
     { href: "#pricing", label: t("nav.pricing") },
+    { href: "#faq", label: t("nav.faq") },
   ];
 
   return (

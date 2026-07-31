@@ -44,7 +44,7 @@ const Industries = () => {
   ];
 
   return (
-    <section id="industries" className="py-24 sm:py-32 relative">
+    <section id="industries" className="py-16 sm:py-24 relative">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

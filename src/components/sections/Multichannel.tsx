@@ -14,7 +14,7 @@ const Multichannel = () => {
   ];
 
   return (
-    <section id="multichannel" className="py-24 sm:py-32 relative overflow-hidden">
+    <section id="multichannel" className="py-16 sm:py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-[0.06] pointer-events-none" />
       <div className="container relative">
         <motion.div

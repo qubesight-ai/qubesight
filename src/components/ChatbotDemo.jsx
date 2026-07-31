@@ -100,7 +100,7 @@ const NICHES = {
     extraFaqs: [
       {
         triggers: ["emergencia", "dolor", "urgente", "urgencia", "duele"],
-        response: `🚨 EMERGENCIA DENTAL\n\nTe atendemos hoy mismo.\n📞 2222-0000 (24/7)\nO escribe *"agendar"* y reservo el siguiente cupo libre.\n\n¿Quieres que un *recepcionista IA te llame ya mismo*? Escribe *"llamada"*.`,
+        response: `🚨 EMERGENCIA DENTAL\n\nTe atendemos hoy mismo.\n📞 2222-0000 (24/7)\nO escribe *"agendar"* y reservo el siguiente cupo libre.\n\n¿Quieres que un *asistente de voz IA te llame ya mismo*? Escribe *"llamada"*.`,
       },
       {
         triggers: ["seguro", "ins", "ccss", "aseguradora", "poliza", "póliza"],
@@ -190,10 +190,10 @@ const UNIVERSAL_FLOWS = [
     key: "voz",
     triggers: [
       "llamada", "llamame", "llámame", "llamar", "voz", "voice", "call",
-      "telefono", "teléfono", "recepcionista", "receptionist", "habla",
+      "telefono", "teléfono", "asistente", "receptionist", "habla",
     ],
     response: (niche) =>
-      `🎙️ RECEPCIONISTA IA POR VOZ\n\nNuestro asistente de voz puede llamarte ahora mismo y:\n\n• Contestar tus preguntas en tiempo real\n• Agendar tu ${niche.bookingLabel} en el calendario\n• Enviarte la *cotización por SMS* al terminar\n• Interpretar la llamada *español ↔ inglés* en vivo\n\n📞 Línea demo: ${niche.phone}\nO escribe *"agendar"* y te llamamos en menos de 1 minuto.`,
+      `🎙️ ASISTENTE DE VOZ IA\n\nNuestro asistente de voz puede llamarte ahora mismo y:\n\n• Contestar tus preguntas en tiempo real\n• Agendar tu ${niche.bookingLabel} en el calendario\n• Enviarte la *cotización por SMS* al terminar\n• Interpretar la llamada *español ↔ inglés* en vivo\n\n📞 Línea demo: ${niche.phone}\nO escribe *"agendar"* y te llamamos en menos de 1 minuto.`,
   },
   {
     key: "interprete",
@@ -262,7 +262,7 @@ function bookingConfirmation(niche, data) {
       .toLowerCase()
       .replace(/\s+/g, "")
       .slice(0, 8)}. Responde CANCELAR para anular."_\n\n` +
-    `🎙️ ¿Prefieres que un *recepcionista IA te llame* para confirmar por voz? Escribe *"llamada"*.`
+    `🎙️ ¿Prefieres que un *asistente de voz IA te llame* para confirmar por voz? Escribe *"llamada"*.`
   );
 }
 
@@ -345,7 +345,7 @@ function getScriptedReply(nicheKey, message) {
 }
 
 function getDefaultResponse(niche) {
-  return `No estoy seguro de haber entendido 😊\n\nPuedes:\n• Escribir *"menú"* para ver opciones\n• *"agendar"* para reservar tu ${niche.bookingLabel}\n• *"llamada"* para hablar con el recepcionista IA por voz\n• *"cotizar"* para recibir SMS con precios\n• *"english"* para cambiar a inglés con intérprete en vivo`;
+  return `No estoy seguro de haber entendido 😊\n\nPuedes:\n• Escribir *"menú"* para ver opciones\n• *"agendar"* para reservar tu ${niche.bookingLabel}\n• *"llamada"* para hablar con el asistente de voz IA por voz\n• *"cotizar"* para recibir SMS con precios\n• *"english"* para cambiar a inglés con intérprete en vivo`;
 }
 
 function formatMessage(text) {
@@ -606,7 +606,7 @@ export function ChatEmbedded({ nicheKey }) {
           ...prev,
           {
             role: "bot",
-            text: `¡Claro! Déjame tus datos y un asesor humano de *${niche.bizName}* te contactará por WhatsApp en minutos.\n\n💡 O escribe *"llamada"* para que el recepcionista IA te llame *ahora mismo* por voz.`,
+            text: `¡Claro! Déjame tus datos y un asesor humano de *${niche.bizName}* te contactará por WhatsApp en minutos.\n\n💡 O escribe *"llamada"* para que el asistente de voz IA te llame *ahora mismo* por voz.`,
             time: now(),
           },
         ]);

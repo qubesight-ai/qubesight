@@ -12,7 +12,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <section id="testimonials" className="py-24 sm:py-32 relative bg-secondary/30">
+    <section id="testimonials" className="py-16 sm:py-24 relative bg-secondary/30">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

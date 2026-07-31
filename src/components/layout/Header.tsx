@@ -34,11 +34,11 @@ const Header = () => {
 
   const navLinks = [
     { id: "problem", href: sectionHref("problem"), label: t("nav.problem") },
-    { id: "assistant", href: sectionHref("assistant"), label: t("nav.assistant") },
-    { id: "voicebot", href: sectionHref("voicebot"), label: t("nav.voicebot") },
-    { id: "qubeops", href: sectionHref("qubeops"), label: t("nav.ops") },
+    { id: "solution", href: sectionHref("solution"), label: t("nav.solution") },
+    { id: "products", href: sectionHref("products"), label: t("nav.products") },
     { id: "industries", href: sectionHref("industries"), label: t("nav.industries") },
     { id: "pricing", href: sectionHref("pricing"), label: t("nav.pricing") },
+    { id: "faq", href: sectionHref("faq"), label: t("nav.faq") },
   ];
 
   const HEADER_OFFSET = 80;
