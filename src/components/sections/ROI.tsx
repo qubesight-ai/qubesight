@@ -7,7 +7,7 @@ const ROI = () => {
   const bullets = [t("roi.b1"), t("roi.b2"), t("roi.b3"), t("roi.b4")];
 
   return (
-    <section className="py-20 sm:py-28 relative overflow-hidden">
+    <section id="roi" className="py-20 sm:py-28 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
       <div className="container relative">
         <motion.div

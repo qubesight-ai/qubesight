@@ -25,25 +25,52 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileDemosOpen, setIsMobileDemosOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
   const { t, language } = useTranslation();
   const location = useLocation();
   const isHome = location.pathname === "/";
   const sectionHref = (id: string) => (isHome ? `#${id}` : `/#${id}`);
 
   const navLinks = [
-    { href: sectionHref("problem"), label: t("nav.problem") },
-    { href: sectionHref("assistant"), label: t("nav.assistant") },
-    { href: sectionHref("voicebot"), label: t("nav.voicebot") },
-    { href: sectionHref("qubeops"), label: t("nav.ops") },
-    { href: sectionHref("industries"), label: t("nav.industries") },
-    { href: sectionHref("pricing"), label: t("nav.pricing") },
+    { id: "problem", href: sectionHref("problem"), label: t("nav.problem") },
+    { id: "assistant", href: sectionHref("assistant"), label: t("nav.assistant") },
+    { id: "voicebot", href: sectionHref("voicebot"), label: t("nav.voicebot") },
+    { id: "qubeops", href: sectionHref("qubeops"), label: t("nav.ops") },
+    { id: "industries", href: sectionHref("industries"), label: t("nav.industries") },
+    { id: "pricing", href: sectionHref("pricing"), label: t("nav.pricing") },
   ];
 
+  const HEADER_OFFSET = 80;
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (!isHome) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+    window.scrollTo({ top, behavior: "smooth" });
+    window.history.replaceState(null, "", `#${id}`);
+    setIsMobileMenuOpen(false);
+  };
+
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+      if (!isHome) return;
+      let current = "";
+      for (const link of navLinks) {
+        const el = document.getElementById(link.id);
+        if (el && el.getBoundingClientRect().top <= HEADER_OFFSET + 40) current = link.id;
+      }
+      setActiveSection(current);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isHome]);
+
 
   const whatsappUrl = `https://wa.me/50646009140?text=${encodeURIComponent(
     language === "es"
@@ -77,7 +104,12 @@ const Header = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+                onClick={(e) => handleNavClick(e, link.id)}
+                aria-current={activeSection === link.id ? "true" : undefined}
+                className={`text-sm font-medium transition-colors duration-200 hover:text-foreground ${
+                  activeSection === link.id ? "text-foreground" : "text-muted-foreground"
+                }`}
+
               >
                 {link.label}
               </a>
@@ -145,9 +177,15 @@ const Header = () => {
                   <a
                     key={link.href}
                     href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-4 py-3 text-foreground hover:bg-secondary rounded-lg transition-colors"
+                    onClick={(e) => {
+                      setIsMobileMenuOpen(false);
+                      handleNavClick(e, link.id);
+                    }}
+                    className={`block px-4 py-3 rounded-lg transition-colors hover:bg-secondary ${
+                      activeSection === link.id ? "text-primary bg-secondary/60" : "text-foreground"
+                    }`}
                   >
+
                     {link.label}
                   </a>
                 ))}

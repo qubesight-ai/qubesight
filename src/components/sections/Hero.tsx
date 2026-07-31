@@ -20,7 +20,7 @@ const Hero = () => {
   ];
 
   return (
-    <section className="relative min-h-[100dvh] flex items-center overflow-hidden pt-32 pb-20">
+    <section id="hero" className="relative min-h-[100dvh] flex items-center overflow-hidden pt-32 pb-20">
       {/* Ambient orbs */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-40 left-1/3 w-[640px] h-[640px] rounded-full blur-3xl opacity-40"
