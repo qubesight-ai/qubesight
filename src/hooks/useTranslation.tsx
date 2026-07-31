@@ -448,8 +448,14 @@ export const translations: Translations = {
 
   // Section titles
   'pricing.section.chat': { es: '💬 AI Chat Bots', en: '💬 AI Chat Bots' },
+  'pricing.chat.title': { es: 'Chatbots IA para WhatsApp y Web', en: 'AI Chatbots for WhatsApp & Web' },
+  'pricing.chat.subtitle': { es: 'Atiende clientes automáticamente, captura leads y agenda citas 24/7.', en: 'Automatically serve customers, capture leads and book appointments 24/7.' },
   'pricing.section.voice': { es: '📞 AI Voice Bots', en: '📞 AI Voice Bots' },
+  'pricing.voice.title': { es: 'Voice Bots IA — Recepcionistas Telefónicas', en: 'AI Voice Bots — Phone Receptionists' },
+  'pricing.voice.subtitle': { es: 'Atienden llamadas, agendan citas y cierran ventas por teléfono sin intervención humana.', en: 'Answer calls, book appointments and close sales by phone with zero human intervention.' },
   'pricing.section.suite': { es: '🚀 AI Suite', en: '🚀 AI Suite' },
+  'pricing.suite.title': { es: 'AI Suite — Chat + Voz + Automaciones', en: 'AI Suite — Chat + Voice + Automations' },
+  'pricing.suite.subtitle': { es: 'Combina chatbot, voice bot y automatizaciones operativas en un solo sistema.', en: 'Combine chatbot, voice bot and operational automations in one system.' },
 
   // Universal features
   'pricing.universal.title': { es: 'Todos los planes incluyen', en: 'All plans include' },

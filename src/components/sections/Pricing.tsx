@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Check, Sparkles } from "lucide-react";
+import { Check, Sparkles, MessageSquare, Phone, Rocket } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import CheckoutDialog from "@/components/CheckoutDialog";
 
