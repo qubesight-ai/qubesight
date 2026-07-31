@@ -31,19 +31,44 @@ const Header = () => {
   const sectionHref = (id: string) => (isHome ? `#${id}` : `/#${id}`);
 
   const navLinks = [
-    { href: sectionHref("problem"), label: t("nav.problem") },
-    { href: sectionHref("assistant"), label: t("nav.assistant") },
-    { href: sectionHref("voicebot"), label: t("nav.voicebot") },
-    { href: sectionHref("qubeops"), label: t("nav.ops") },
-    { href: sectionHref("industries"), label: t("nav.industries") },
-    { href: sectionHref("pricing"), label: t("nav.pricing") },
+    { id: "problem", href: sectionHref("problem"), label: t("nav.problem") },
+    { id: "assistant", href: sectionHref("assistant"), label: t("nav.assistant") },
+    { id: "voicebot", href: sectionHref("voicebot"), label: t("nav.voicebot") },
+    { id: "qubeops", href: sectionHref("qubeops"), label: t("nav.ops") },
+    { id: "industries", href: sectionHref("industries"), label: t("nav.industries") },
+    { id: "pricing", href: sectionHref("pricing"), label: t("nav.pricing") },
   ];
 
+  const HEADER_OFFSET = 80;
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (!isHome) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+    window.scrollTo({ top, behavior: "smooth" });
+    window.history.replaceState(null, "", `#${id}`);
+    setIsMobileMenuOpen(false);
+  };
+
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+      if (!isHome) return;
+      let current = "";
+      for (const link of navLinks) {
+        const el = document.getElementById(link.id);
+        if (el && el.getBoundingClientRect().top <= HEADER_OFFSET + 40) current = link.id;
+      }
+      setActiveSection(current);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isHome]);
+
 
   const whatsappUrl = `https://wa.me/50646009140?text=${encodeURIComponent(
     language === "es"
