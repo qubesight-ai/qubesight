@@ -212,8 +212,8 @@ export const translations: Translations = {
   'pricing.channels.all': { es: 'Todos los canales', en: 'All channels' },
 
   // Voice Bot pricing
-  'pricing.voice.title': { es: 'Planes Voice Bot AI', en: 'Voice Bot AI plans' },
-  'pricing.voice.subtitle': { es: 'Recepcionistas inteligentes que responden, agendan y venden por ti 24/7.', en: 'Smart receptionists that answer, schedule and sell for you 24/7.' },
+  'pricing.voice.title': { es: 'Voice Bots IA — Recepcionistas Telefónicas', en: 'AI Voice Bots — Phone Receptionists' },
+  'pricing.voice.subtitle': { es: 'Atienden llamadas, agendan citas y cierran ventas por teléfono sin intervención humana.', en: 'Answer calls, book appointments and close sales by phone with zero human intervention.' },
   'pricing.voice.bronze.name': { es: 'Inicio', en: 'Starter' },
   'pricing.voice.bronze.desc': { es: 'Recepcionista IA para no perder llamadas.', en: 'AI receptionist so you never miss a call.' },
   'pricing.voice.bronze.f1': { es: 'Recepcionista IA 24/7', en: 'AI receptionist 24/7' },
