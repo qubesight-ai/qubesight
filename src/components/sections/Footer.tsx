@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { MessageCircle, Instagram, Facebook, ArrowUp } from "lucide-react";
 import LogoCube from "@/components/LogoCube";
 import { useTranslation } from "@/hooks/useTranslation";
+import { getScrollBehavior } from "@/lib/sectionNav";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -14,8 +15,8 @@ const Footer = () => {
     { href: "#faq", label: t("nav.faq") },
   ];
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollToTop = (instant = false) => {
+    window.scrollTo({ top: 0, behavior: getScrollBehavior({ instant }) });
     window.history.replaceState(null, "", window.location.pathname);
   };
 
@@ -62,11 +63,16 @@ const Footer = () => {
           </motion.div>
 
           <div>
-            <h4 className="font-semibold font-display mb-4 text-sm uppercase tracking-wider">{t("footer.product")}</h4>
+            <h4 className="font-semibold font-display mb-4 text-sm uppercase tracking-wider">
+              {t("footer.product")}
+            </h4>
             <ul className="space-y-2.5">
               {productLinks.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <a
+                    href={l.href}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
                     {l.label}
                   </a>
                 </li>
@@ -75,7 +81,9 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-semibold font-display mb-4 text-sm uppercase tracking-wider">{t("footer.legal")}</h4>
+            <h4 className="font-semibold font-display mb-4 text-sm uppercase tracking-wider">
+              {t("footer.legal")}
+            </h4>
             <ul className="space-y-2.5">
               <li>
                 <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
@@ -101,9 +109,9 @@ const Footer = () => {
             </p>
             <button
               type="button"
-              onClick={scrollToTop}
+              onClick={(e) => scrollToTop(e.altKey)}
               aria-label={t("footer.backToTop")}
-              className="inline-flex items-center gap-2 rounded-full glass-card border border-white/10 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors"
+              className="inline-flex items-center gap-2 rounded-full glass-card border border-white/10 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
             >
               <ArrowUp className="h-3.5 w-3.5" strokeWidth={2} />
               {t("footer.backToTop")}
