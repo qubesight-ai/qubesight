@@ -175,9 +175,22 @@ const Pricing = () => {
           </div>
         </motion.div>
 
-        <div className="max-w-7xl mx-auto mb-6 text-center">
-          <span className="eyebrow">{t("pricing.section.chat")}</span>
-        </div>
+        {/* Chat Bot AI plans */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mx-auto text-center mt-16 mb-10"
+        >
+          <span className="eyebrow mb-4">{t("pricing.section.chat")}</span>
+          <h3 className="text-2xl sm:text-4xl font-bold font-display leading-tight mt-4">
+            {t("pricing.chat.title")}
+          </h3>
+          <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
+            {t("pricing.chat.subtitle")}
+          </p>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-7xl mx-auto">
           {plans.map((plan, i) => (
