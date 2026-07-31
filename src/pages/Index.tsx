@@ -11,6 +11,7 @@ import Industries from "@/components/sections/Industries";
 import Benefits from "@/components/sections/Benefits";
 import SocialProof from "@/components/sections/SocialProof";
 import Testimonials from "@/components/sections/Testimonials";
+import Founders from "@/components/sections/Founders";
 import Integrations from "@/components/sections/Integrations";
 import Pricing from "@/components/sections/Pricing";
 import FAQ from "@/components/sections/FAQ";
@@ -44,6 +45,7 @@ const Index = () => {
           <Benefits />
           <SocialProof />
           <Testimonials />
+          <Founders />
           <Integrations />
           <Pricing />
           <FAQ />

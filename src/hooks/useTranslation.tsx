@@ -293,13 +293,23 @@ export const translations: Translations = {
   'footer.backToTop': { es: 'Volver arriba', en: 'Back to top' },
 
   // Founders
-  'founders.title': { es: 'Conoce al equipo', en: 'Meet the team' },
+  'founders.badge': { es: 'Fundador', en: 'Founder' },
+  'founders.title': { es: 'Quién está', en: 'Who is' },
   'founders.titleAccent': { es: 'detrás de QubeSight.', en: 'behind QubeSight.' },
-  'founders.subtitle': { es: 'Construimos automatización con IA pensada para negocios reales en Latinoamérica.', en: 'We build AI automation designed for real businesses across Latin America.' },
+  'founders.subtitle': {
+    es: 'Construimos automatización con IA pensada para negocios reales en Latinoamérica.',
+    en: 'We build AI automation designed for real businesses across Latin America.',
+  },
   'founders.ernesto.role': { es: 'Fundador & CEO', en: 'Founder & CEO' },
-  'founders.ernesto.bio': { es: 'Lidera la estrategia, producto y desarrollo de IA en QubeSight.', en: 'Leads strategy, product and AI development at QubeSight.' },
+  'founders.ernesto.bio': {
+    es: 'Años de experiencia en atención al cliente en banca y telecomunicaciones le mostraron de primera mano el costo real de no responder a tiempo. Hoy construye QubeSight para que ningún negocio en Latinoamérica vuelva a perder un cliente por eso.',
+    en: 'Years of customer-service experience in banking and telecommunications showed him firsthand the real cost of not responding on time. Today he builds QubeSight so no business in Latin America loses a customer for that reason again.',
+  },
   'founders.karla.role': { es: 'Cofundadora & COO', en: 'Co-founder & COO' },
-  'founders.karla.bio': { es: 'Dirige operaciones y la experiencia de cliente para que cada implementación funcione.', en: 'Runs operations and customer experience to make every rollout work.' },
+  'founders.karla.bio': {
+    es: 'Dirige operaciones y la experiencia de cliente para que cada implementación funcione.',
+    en: 'Runs operations and customer experience to make every rollout work.',
+  },
 
   // Hero extras
   'hero.subhead.1': {

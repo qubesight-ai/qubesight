@@ -1,24 +1,39 @@
 import { useTranslation } from "@/hooks/useTranslation";
-import { Button } from "@/components/ui/button";
-import { Globe } from "lucide-react";
 
 const LanguageSwitcher = () => {
   const { language, setLanguage } = useTranslation();
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'es' ? 'en' : 'es');
-  };
-
   return (
-    <Button
-      variant="ghost"
-      size="sm"
-      onClick={toggleLanguage}
-      className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
+    <div
+      role="group"
+      aria-label="Language"
+      className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] p-0.5"
     >
-      <Globe className="h-4 w-4" />
-      <span className="uppercase font-medium">{language}</span>
-    </Button>
+      <button
+        type="button"
+        onClick={() => setLanguage("es")}
+        aria-pressed={language === "es"}
+        className={`min-h-[32px] min-w-[40px] rounded-full px-2.5 text-xs font-semibold uppercase tracking-wide transition-colors ${
+          language === "es"
+            ? "bg-primary text-primary-foreground shadow-sm"
+            : "text-muted-foreground hover:text-foreground"
+        }`}
+      >
+        ES
+      </button>
+      <button
+        type="button"
+        onClick={() => setLanguage("en")}
+        aria-pressed={language === "en"}
+        className={`min-h-[32px] min-w-[40px] rounded-full px-2.5 text-xs font-semibold uppercase tracking-wide transition-colors ${
+          language === "en"
+            ? "bg-primary text-primary-foreground shadow-sm"
+            : "text-muted-foreground hover:text-foreground"
+        }`}
+      >
+        EN
+      </button>
+    </div>
   );
 };
 
