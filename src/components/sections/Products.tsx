@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MessageSquare, Phone, Settings, Rocket, ArrowRight, Check } from "lucide-react";
+import { MessageSquare, Phone, Rocket, ArrowRight, Check } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
-type ProductKey = "assistant" | "voice" | "ops" | "suite";
+type ProductKey = "assistant" | "voice" | "suite";
 
 const Products = () => {
   const { t, language } = useTranslation();
@@ -38,15 +38,6 @@ const Products = () => {
       href: "#pricing",
     },
     {
-      key: "ops",
-      icon: Settings,
-      name: t("products.ops.name"),
-      tag: t("products.ops.tag"),
-      desc: t("products.ops.desc"),
-      forWhom: t("products.ops.for"),
-      href: "#pricing",
-    },
-    {
       key: "suite",
       icon: Rocket,
       name: t("products.suite.name"),
@@ -61,7 +52,6 @@ const Products = () => {
   const selectorOptions: { key: ProductKey; label: string }[] = [
     { key: "assistant", label: t("products.selector.q1") },
     { key: "voice", label: t("products.selector.q2") },
-    { key: "ops", label: t("products.selector.q3") },
     { key: "suite", label: t("products.selector.q4") },
   ];
 
@@ -72,14 +62,12 @@ const Products = () => {
       label: t("products.compare.channel"),
       assistant: t("products.compare.chat"),
       voice: t("products.compare.voice"),
-      ops: t("products.compare.ops"),
       suite: language === "es" ? "Todos" : "All",
     },
     {
       label: t("products.compare.best"),
       assistant: language === "es" ? "Inbox saturado" : "Busy inbox",
       voice: language === "es" ? "Línea telefónica" : "Phone line",
-      ops: language === "es" ? "Admin / cobros" : "Admin / billing",
       suite: language === "es" ? "Cobertura total" : "Full coverage",
     },
   ];
@@ -106,7 +94,7 @@ const Products = () => {
           <p className="mt-5 text-lg text-muted-foreground">{t("products.subtitle")}</p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto mb-8">
+        <div className="grid sm:grid-cols-3 gap-4 max-w-5xl mx-auto mb-8">
           {products.map((p, i) => (
             <motion.a
               key={p.key}
@@ -151,7 +139,6 @@ const Products = () => {
                   <th className="p-4 text-[10px] uppercase tracking-wider text-muted-foreground font-semibold" />
                   <th className="p-4 font-semibold">Assistant</th>
                   <th className="p-4 font-semibold">Voice Bot</th>
-                  <th className="p-4 font-semibold">Ops</th>
                   <th className="p-4 font-semibold text-primary">AI Suite</th>
                 </tr>
               </thead>
@@ -163,7 +150,6 @@ const Products = () => {
                     </td>
                     <td className="p-4">{row.assistant}</td>
                     <td className="p-4">{row.voice}</td>
-                    <td className="p-4">{row.ops}</td>
                     <td className="p-4 font-medium text-primary">{row.suite}</td>
                   </tr>
                 ))}
