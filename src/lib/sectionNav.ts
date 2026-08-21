@@ -3,6 +3,7 @@ export const NAV_SECTION_IDS = [
   "problem",
   "solution",
   "products",
+  "voicebot",
   "industries",
   "pricing",
   "faq",

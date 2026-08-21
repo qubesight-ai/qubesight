@@ -1,14 +1,34 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, Sparkles } from "lucide-react";
+import { ArrowRight, Check, Sparkles, MessageSquare, PhoneCall } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+
+type Interest = "chat" | "voice";
 
 const FinalCTA = () => {
   const { t, language } = useTranslation();
+  const [interest, setInterest] = useState<Interest>("chat");
+
+  const interestOptions: { key: Interest; icon: typeof MessageSquare; label: string }[] = [
+    {
+      key: "chat",
+      icon: MessageSquare,
+      label: language === "es" ? "Chatbots IA (WhatsApp y web)" : "AI Chatbots (WhatsApp & web)",
+    },
+    {
+      key: "voice",
+      icon: PhoneCall,
+      label: language === "es" ? "Voice Bots IA (recepción telefónica)" : "AI Voice Bots (phone reception)",
+    },
+  ];
+
+  const selectedLabel = interestOptions.find((o) => o.key === interest)!.label;
+
   const whatsappUrl = `https://wa.me/50646009140?text=${encodeURIComponent(
     language === "es"
-      ? "Hola, quiero hablar con un experto de QubeSight."
-      : "Hi, I want to talk to a QubeSight expert."
+      ? `Hola, quiero hablar con un experto de QubeSight. Me interesa: ${selectedLabel}.`
+      : `Hi, I want to talk to a QubeSight expert. I'm interested in: ${selectedLabel}.`
   )}`;
 
   const bullets = [
@@ -62,6 +82,40 @@ const FinalCTA = () => {
               </li>
             ))}
           </ul>
+
+          <div className="max-w-2xl mx-auto mb-8 text-left">
+            <p className="mb-3 text-sm font-semibold text-foreground/90 text-center">
+              {language === "es" ? "¿Qué te interesa?" : "What are you interested in?"}
+            </p>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {interestOptions.map((opt) => {
+                const active = interest === opt.key;
+                return (
+                  <button
+                    key={opt.key}
+                    type="button"
+                    onClick={() => setInterest(opt.key)}
+                    aria-pressed={active}
+                    className={`flex items-center gap-3 rounded-2xl border p-4 text-sm transition-all duration-300 ${
+                      active
+                        ? "border-primary/50 bg-primary/10 text-foreground shadow-glow"
+                        : "border-white/10 bg-white/[0.03] text-muted-foreground hover:border-primary/30"
+                    }`}
+                  >
+                    <span
+                      className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl border ${
+                        active ? "border-primary/40 bg-primary/15 text-primary" : "border-white/10 text-muted-foreground"
+                      }`}
+                    >
+                      <opt.icon className="h-4 w-4" />
+                    </span>
+                    <span className="font-medium leading-snug">{opt.label}</span>
+                    {active && <Check className="ml-auto h-4 w-4 text-primary" />}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button variant="hero" size="lg" asChild className="min-h-[56px] px-8">
