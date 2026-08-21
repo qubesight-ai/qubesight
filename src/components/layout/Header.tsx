@@ -43,6 +43,7 @@ const Header = () => {
     problem: "nav.problem",
     solution: "nav.solution",
     products: "nav.products",
+    voicebot: "nav.voicebot",
     industries: "nav.industries",
     pricing: "nav.pricing",
     faq: "nav.faq",
