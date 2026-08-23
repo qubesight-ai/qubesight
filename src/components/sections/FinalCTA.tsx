@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Check, Sparkles, MessageSquare, PhoneCall, Layers } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 type Interest = "chat" | "voice" | "suite";
 
