@@ -6,13 +6,15 @@ import { getScrollBehavior } from "@/lib/sectionNav";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const whatsappUrl = "https://wa.me/50646009140";
 
   const productLinks = [
     { href: "#products", label: t("nav.products") },
     { href: "#pricing", label: t("nav.pricing") },
     { href: "#faq", label: t("nav.faq") },
+    { href: "/register", label: language === "es" ? "Registrarse" : "Sign up" },
+    { href: "/login", label: language === "es" ? "Iniciar sesión" : "Log in" },
   ];
 
   const scrollToTop = (instant = false) => {

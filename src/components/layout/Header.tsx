@@ -14,6 +14,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import LogoCube from "@/components/LogoCube";
 import { useSectionNavigation } from "@/hooks/useSectionNavigation";
 import { NAV_SECTION_IDS } from "@/lib/sectionNav";
+import { useAuth } from "@/contexts/AuthContext";
 
 const demoLinks = [
   { to: "/restaurantes", emoji: "🍽️", label: "Restaurantes" },
@@ -30,9 +31,13 @@ const Header = () => {
   const desktopLinkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const { t, language } = useTranslation();
+  const { user } = useAuth();
   const location = useLocation();
   const isHome = location.pathname === "/";
   const sectionHref = (id: string) => (isHome ? `#${id}` : `/#${id}`);
+  const registerLabel = language === "es" ? "Registrarse" : "Sign up";
+  const loginLabel = language === "es" ? "Iniciar sesión" : "Log in";
+  const dashboardLabel = "Dashboard";
 
   const { activeSection, navigateToSection, refreshActive } = useSectionNavigation(
     NAV_SECTION_IDS,
@@ -58,10 +63,8 @@ const Header = () => {
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     if (!isHome) return;
     e.preventDefault();
-    // Alt+click requests instant jump (no smooth animation).
     navigateToSection(id, { instant: e.altKey });
     setIsMobileMenuOpen(false);
-    // Recalc after menu closes — header height changes on mobile.
     requestAnimationFrame(() => refreshActive());
   };
 
@@ -110,15 +113,8 @@ const Header = () => {
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;
-    // Mobile drawer changes header height — refresh active probe.
     requestAnimationFrame(() => refreshActive());
   }, [isMobileMenuOpen, refreshActive]);
-
-  const whatsappUrl = `https://wa.me/50646009140?text=${encodeURIComponent(
-    language === "es"
-      ? "Hola, quiero empezar con QubeSight."
-      : "Hi, I want to get started with QubeSight."
-  )}`;
 
   const demosLabel = language === "es" ? "Demos en vivo" : "Live demos";
   const navAriaLabel = language === "es" ? "Secciones principales" : "Main sections";
@@ -134,10 +130,7 @@ const Header = () => {
       }`}
     >
       <div className="container">
-        <nav
-          className="flex items-center justify-between h-20"
-          aria-label={navAriaLabel}
-        >
+        <nav className="flex items-center justify-between h-20" aria-label={navAriaLabel}>
           <Link
             to="/"
             className="group flex h-10 w-10 min-[420px]:w-[10.75rem] items-center overflow-hidden"
@@ -183,16 +176,10 @@ const Header = () => {
                 {demosLabel}
                 <ChevronDown className="h-3.5 w-3.5 transition-transform group-data-[state=open]:rotate-180" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                className="w-64 glass-card border-white/10 mt-2"
-              >
+              <DropdownMenuContent align="end" className="w-64 glass-card border-white/10 mt-2">
                 {demoLinks.map((d) => (
                   <DropdownMenuItem key={d.to} asChild className="cursor-pointer">
-                    <Link
-                      to={d.to}
-                      className="flex items-center gap-3 py-2.5 px-3 text-sm"
-                    >
+                    <Link to={d.to} className="flex items-center gap-3 py-2.5 px-3 text-sm">
                       <span className="text-lg">{d.emoji}</span>
                       <span className="flex-1">{d.label}</span>
                       <ArrowRight className="h-3.5 w-3.5 opacity-50" />
@@ -205,17 +192,37 @@ const Header = () => {
 
           <div className="hidden lg:flex items-center gap-3">
             <LanguageSwitcher />
-            <Button variant="hero" size="default" asChild className="min-h-[44px]">
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                {t("nav.contact")}
-                <ArrowRight className="ml-1 h-4 w-4" />
-              </a>
-            </Button>
+            {user ? (
+              <Button variant="hero" size="default" asChild className="min-h-[44px]">
+                <Link to="/dashboard">
+                  {dashboardLabel}
+                  <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
+              </Button>
+            ) : (
+              <>
+                <Button
+                  variant="ghost"
+                  size="default"
+                  asChild
+                  className="min-h-[44px] text-muted-foreground hover:text-foreground"
+                >
+                  <Link to="/login">{loginLabel}</Link>
+                </Button>
+                <Button variant="hero" size="default" asChild className="min-h-[44px]">
+                  <Link to="/register">
+                    {registerLabel}
+                    <ArrowRight className="ml-1 h-4 w-4" />
+                  </Link>
+                </Button>
+              </>
+            )}
           </div>
 
           <div className="lg:hidden flex items-center gap-2">
             <LanguageSwitcher />
             <button
+              type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 text-foreground min-h-[48px] min-w-[48px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 rounded-lg"
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
@@ -257,6 +264,7 @@ const Header = () => {
                 })}
 
                 <button
+                  type="button"
                   onClick={() => setIsMobileDemosOpen((v) => !v)}
                   aria-expanded={isMobileDemosOpen}
                   className="w-full flex items-center justify-between px-4 py-3 text-primary hover:bg-secondary rounded-lg transition-colors"
@@ -302,13 +310,29 @@ const Header = () => {
                   )}
                 </AnimatePresence>
 
-                <div className="px-4 pt-3">
-                  <Button variant="hero" size="lg" asChild className="w-full min-h-[48px]">
-                    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                      {t("nav.contact")}
-                      <ArrowRight className="ml-1 h-4 w-4" />
-                    </a>
-                  </Button>
+                <div className="px-4 pt-3 space-y-2">
+                  {user ? (
+                    <Button variant="hero" size="lg" asChild className="w-full min-h-[48px]">
+                      <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
+                        {dashboardLabel}
+                        <ArrowRight className="ml-1 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  ) : (
+                    <>
+                      <Button variant="hero" size="lg" asChild className="w-full min-h-[48px]">
+                        <Link to="/register" onClick={() => setIsMobileMenuOpen(false)}>
+                          {registerLabel}
+                          <ArrowRight className="ml-1 h-4 w-4" />
+                        </Link>
+                      </Button>
+                      <Button variant="outline" size="lg" asChild className="w-full min-h-[48px]">
+                        <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                          {loginLabel}
+                        </Link>
+                      </Button>
+                    </>
+                  )}
                 </div>
               </div>
             </motion.div>
