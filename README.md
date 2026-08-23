@@ -1,73 +1,212 @@
-# Welcome to your Lovable project
+# Qubesight Digital Boost
 
-## Project info
+## 🔥 PROMPT PARA LOVABLE – WEB PRINCIPAL QUBESIGHT
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+> Crea un **website profesional one-page (con secciones bien definidas)** para **Qubesight**, empresa de **soluciones digitales, automatización e inteligencia artificial** para negocios.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🎯 OBJETIVO DEL SITIO
 
-**Use Lovable**
+Presentar a Qubesight como **proveedor tecnológico serio y confiable**, generar **leads empresariales** y dirigirlos a contacto por **WhatsApp o formulario**.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🧠 CONTEXTO DE MARCA
 
-**Use your preferred IDE**
+* Nombre: **Qubesight**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+* Sector: Tecnología, IA, automatización, software empresarial
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+* Servicios: Apps, automatizaciones con IA, chatbots, websites, e-commerce, sistemas empresariales a la medida
 
-Follow these steps:
+* Estilo: corporativo, moderno, sobrio, minimalista
+
+* Tono: claro, directo, profesional (no marketing exagerado)
+
+* Público: pymes, emprendedores, empresas que quieren digitalizar procesos
+
+---
+
+## 🏗️ ESTRUCTURA OBLIGATORIA (ONE PAGE)
+
+### 1️⃣ HERO
+
+**Título principal (H1):**
+
+> Soluciones digitales y automatización con inteligencia artificial para tu negocio.
+
+**Subtítulo:**
+
+> Diseñamos, desarrollamos e implementamos tecnología a la medida que optimiza procesos y aumenta resultados.
+
+**Bullets destacados:**
+
+* Desarrollo a la medida
+
+* Automatización con IA
+
+* Implementación rápida
+
+* Soporte directo
+
+**CTA principal:**
+
+Botón visible: **“Hablar con un asesor”** → WhatsApp o formulario.
+
+---
+
+### 2️⃣ QUÉ HACEMOS
+
+Breve explicación clara:
+
+> En Qubesight ayudamos a empresas a digitalizar, automatizar y escalar sus operaciones mediante soluciones tecnológicas modernas y personalizadas.
+
+---
+
+### 3️⃣ SERVICIOS
+
+Mostrar tarjetas con:
+
+* **Websites profesionales**
+
+* **Tiendas e-commerce**
+
+* **Chatbots con IA**
+
+* **Automatizaciones inteligentes**
+
+* **Apps empresariales**
+
+* **Sistemas a la medida**
+
+Texto clave:
+
+> No usamos soluciones genéricas. Cada proyecto se adapta al negocio.
+
+---
+
+### 4️⃣ CÓMO TRABAJAMOS
+
+Proceso en 4 pasos:
+
+1. Diagnóstico del negocio
+
+2. Propuesta clara
+
+3. Desarrollo e implementación
+
+4. Soporte y optimización
+
+Lenguaje simple, empresarial.
+
+---
+
+### 5️⃣ POR QUÉ QUBESIGHT
+
+Bullets:
+
+* Tecnología moderna y escalable
+
+* Soluciones prácticas, no complicadas
+
+* Enfoque en resultados
+
+* Comunicación directa
+
+* Implementación eficiente
+
+---
+
+### 6️⃣ CASOS DE USO
+
+Mostrar ejemplos (no inventar logos):
+
+* Negocios que automatizan atención al cliente
+
+* Empresas que venden online
+
+* Equipos que optimizan procesos internos
+
+Texto:
+
+> Soluciones aplicables a distintos sectores.
+
+---
+
+### 7️⃣ CTA FINAL
+
+**Título:**
+
+> ¿Listo para digitalizar tu negocio?
+
+**Botón:**
+
+**“Solicitar propuesta”**
+
+---
+
+### 8️⃣ FOOTER LEGAL
+
+Incluir:
+
+* Qubesight ©
+
+* Aviso legal y privacidad
+
+* Contacto WhatsApp
+
+* Texto sobrio, corporativo
+
+---
+
+## 🎨 DISEÑO Y UX
+
+* Colores: blanco, negro, gris, acento azul o verde tecnológico
+
+* Tipografía moderna
+
+* Espaciado amplio
+
+* Animaciones sutiles
+
+* 100% responsive
+
+* SEO básico activo
+
+---
+
+## ⚙️ FUNCIONALIDAD
+
+* Botón WhatsApp funcional
+
+* Formulario simple
+
+* Carga rápida
+
+* Texto definitivo (sin placeholders)
+
+* Sitio listo para publicar sin edición manual
+
+This project was built with [Lovable](https://lovable.dev).
+
+**Live app**: https://qubesight.lovable.app
+
+## Build with Lovable
+
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/8a7d1a45-f30d-4e56-8350-cae0c22d4b46).
+
+- **Ship faster**: describe what you want to build and Lovable handles the code.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+
+## Development
+
+Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
+git clone <this-repository-url>
+cd <repository-name>
 npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
