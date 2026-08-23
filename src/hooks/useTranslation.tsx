@@ -447,8 +447,18 @@ export const translations: Translations = {
   'pricing.compare.qs.3': { es: 'Humanos en lo importante', en: 'Humans on what matters' },
 
   // AI Suite (Chat + Voice)
-  'pricing.suite.title': { es: 'AI Suite — Chatbot + Voice Bot juntos', en: 'AI Suite — Chatbot + Voice Bot together' },
-  'pricing.suite.subtitle': { es: 'Chat por WhatsApp y web + recepción telefónica con IA, en un solo sistema.', en: 'WhatsApp and web chat + AI phone reception, in one system.' },
+  'pricing.suite.title': { es: 'AI Suite — Chatbot + Voice Bot en un solo sistema', en: 'AI Suite — Chatbot + Voice Bot in one system' },
+  'pricing.suite.subtitle': { es: 'Tu negocio responde por escrito y por teléfono con la misma IA: mismo catálogo, misma agenda, mismo historial de cliente. Si escribe por WhatsApp y luego llama, la conversación continúa sin repetir nada.', en: 'Your business answers in writing and by phone with the same AI: same catalog, same calendar, same customer history. If they message on WhatsApp and then call, the conversation continues without repeating anything.' },
+  'pricing.suite.b1.title': { es: 'Cero llamadas y mensajes perdidos', en: 'Zero missed calls and messages' },
+  'pricing.suite.b1.desc': { es: 'Chat 24/7 y recepción telefónica cubren todos los canales, incluso fuera de horario.', en: 'Chat 24/7 and phone reception cover every channel, even after hours.' },
+  'pricing.suite.b2.title': { es: 'Una sola agenda y un solo CRM', en: 'One calendar, one CRM' },
+  'pricing.suite.b2.desc': { es: 'Las citas de chat y de voz caen en el mismo calendario, sin dobles reservas.', en: 'Chat and voice bookings land in the same calendar, no double bookings.' },
+  'pricing.suite.b3.title': { es: 'Contexto compartido entre canales', en: 'Shared context across channels' },
+  'pricing.suite.b3.desc': { es: 'La IA recuerda al cliente aunque cambie de WhatsApp a llamada telefónica.', en: 'AI remembers the customer even when they switch from WhatsApp to a phone call.' },
+  'pricing.suite.b4.title': { es: 'Más barato que contratar por separado', en: 'Cheaper than buying separately' },
+  'pricing.suite.b4.desc': { es: 'Un solo setup, una sola mensualidad y un solo equipo de soporte.', en: 'One setup, one monthly fee, one support team.' },
+  'pricing.suite.cta': { es: 'Solicitar propuesta AI Suite', en: 'Request AI Suite proposal' },
+
   'pricing.suite.business.name': { es: 'Business', en: 'Business' },
   'pricing.suite.business.desc': { es: 'Chat Bot + Voice Bot con todo incluido.', en: 'Chat Bot + Voice Bot with everything included.' },
   'pricing.suite.business.f1': { es: 'WhatsApp + Instagram + Facebook + Telegram + Web Chat', en: 'WhatsApp + Instagram + Facebook + Telegram + Web Chat' },
