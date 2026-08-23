@@ -1,34 +1,58 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, Sparkles, MessageSquare, PhoneCall } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { ArrowRight, Check, Sparkles, MessageSquare, PhoneCall, Layers } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
-type Interest = "chat" | "voice";
+type Interest = "chat" | "voice" | "suite";
 
 const FinalCTA = () => {
   const { t, language } = useTranslation();
   const [interest, setInterest] = useState<Interest>("chat");
+  const [name, setName] = useState("");
+  const [company, setCompany] = useState("");
+  const [contact, setContact] = useState("");
+  const es = language === "es";
 
   const interestOptions: { key: Interest; icon: typeof MessageSquare; label: string }[] = [
     {
       key: "chat",
       icon: MessageSquare,
-      label: language === "es" ? "Chatbots IA (WhatsApp y web)" : "AI Chatbots (WhatsApp & web)",
+      label: es ? "Chatbots IA (WhatsApp y web)" : "AI Chatbots (WhatsApp & web)",
     },
     {
       key: "voice",
       icon: PhoneCall,
-      label: language === "es" ? "Voice Bots IA (recepción telefónica)" : "AI Voice Bots (phone reception)",
+      label: es ? "Voice Bots IA (recepción telefónica)" : "AI Voice Bots (phone reception)",
+    },
+    {
+      key: "suite",
+      icon: Layers,
+      label: es ? "AI Suite (chat + voz juntos)" : "AI Suite (chat + voice together)",
     },
   ];
 
   const selectedLabel = interestOptions.find((o) => o.key === interest)!.label;
 
+  const messageLines = es
+    ? [
+        "Hola, quiero hablar con un experto de QubeSight.",
+        `Me interesa: ${selectedLabel}.`,
+        name.trim() && `Nombre: ${name.trim()}`,
+        company.trim() && `Empresa: ${company.trim()}`,
+        contact.trim() && `Correo / teléfono: ${contact.trim()}`,
+      ]
+    : [
+        "Hi, I want to talk to a QubeSight expert.",
+        `I'm interested in: ${selectedLabel}.`,
+        name.trim() && `Name: ${name.trim()}`,
+        company.trim() && `Company: ${company.trim()}`,
+        contact.trim() && `Email / phone: ${contact.trim()}`,
+      ];
+
   const whatsappUrl = `https://wa.me/50646009140?text=${encodeURIComponent(
-    language === "es"
-      ? `Hola, quiero hablar con un experto de QubeSight. Me interesa: ${selectedLabel}.`
-      : `Hi, I want to talk to a QubeSight expert. I'm interested in: ${selectedLabel}.`
+    messageLines.filter(Boolean).join("\n")
   )}`;
 
   const bullets = [
@@ -37,6 +61,7 @@ const FinalCTA = () => {
     t("final.bullet.3"),
     t("final.bullet.4"),
   ];
+
 
   return (
     <section id="contacto" className="py-20 sm:py-28 relative overflow-hidden">
