@@ -15,12 +15,17 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentFailure from "./pages/PaymentFailure";
 import LogoResponsiveTest from "./pages/LogoResponsiveTest";
 import NotFound from "./pages/NotFound";
+import Auth from "./pages/Auth";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <AuthProvider>
     <TranslationProvider>
       <TooltipProvider>
         <Toaster />
@@ -37,12 +42,19 @@ const App = () => (
             <Route path="/payment/success" element={<PaymentSuccess />} />
             <Route path="/payment/failure" element={<PaymentFailure />} />
             <Route path="/dev/logo-test" element={<LogoResponsiveTest />} />
+            <Route path="/login" element={<Auth mode="login" />} />
+            <Route path="/register" element={<Auth mode="register" />} />
+            <Route path="/forgot-password" element={<Auth mode="forgot" />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
     </TranslationProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 
