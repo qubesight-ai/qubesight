@@ -589,6 +589,26 @@ export const translations: Translations = {
   'faq.a6': { es: 'WhatsApp, Instagram, Facebook Messenger, Web Chat y llamadas telefónicas (Voice Bot).', en: 'WhatsApp, Instagram, Facebook Messenger, Web Chat and phone calls (Voice Bot).' },
   'faq.q7': { es: '¿Puedo cancelar cuando quiera?', en: 'Can I cancel anytime?' },
   'faq.a7': { es: 'Sí. Sin permanencia ni penalizaciones. También tienes garantía de 14 días.', en: 'Yes. No lock-in or penalties. You also get a 14-day guarantee.' },
+  'faq.group.chat': { es: 'Chatbots IA (WhatsApp y web)', en: 'AI Chatbots (WhatsApp & web)' },
+  'faq.group.voice': { es: 'Voice Bots IA (recepción telefónica)', en: 'AI Voice Bots (phone reception)' },
+  'faq.group.general': { es: 'General', en: 'General' },
+  'faq.c1.q': { es: '¿Usa mi número de WhatsApp actual?', en: 'Does it use my current WhatsApp number?' },
+  'faq.c1.a': { es: 'Sí. Conectamos tu número existente o te configuramos uno nuevo, según prefieras.', en: 'Yes. We connect your existing number or set up a new one, whichever you prefer.' },
+  'faq.c2.q': { es: '¿El chatbot responde como robot?', en: 'Does the chatbot sound robotic?' },
+  'faq.c2.a': { es: 'No. Se entrena con tu catálogo, precios y tono de marca, y entiende notas de voz y mensajes con errores de escritura.', en: 'No. It is trained on your catalog, prices and brand tone, and it understands voice notes and messages with typos.' },
+  'faq.c3.q': { es: '¿Puede agendar citas y cobrar?', en: 'Can it book appointments and take payments?' },
+  'faq.c3.a': { es: 'Agenda citas directo en tu calendario y envía enlaces de pago o de reserva dentro del mismo chat.', en: 'It books appointments straight into your calendar and sends payment or booking links inside the same chat.' },
+  'faq.c4.q': { es: '¿Qué pasa si supero los mensajes del plan?', en: 'What if I exceed my plan messages?' },
+  'faq.c4.a': { es: 'No se corta el servicio: se cobra un excedente por mensaje y te avisamos antes de llegar al límite.', en: 'Service never stops: an overage per message applies and we warn you before you hit the limit.' },
+  'faq.v1.q': { es: '¿Se nota que es una voz de IA?', en: 'Can callers tell it is an AI voice?' },
+  'faq.v1.a': { es: 'La voz es natural y con latencia baja. Además siempre se identifica como asistente si el cliente lo pregunta.', en: 'The voice is natural with low latency. It also identifies itself as an assistant if the caller asks.' },
+  'faq.v2.q': { es: '¿Contesta varias llamadas al mismo tiempo?', en: 'Does it answer several calls at once?' },
+  'faq.v2.a': { es: 'Sí. Atiende llamadas simultáneas sin dejar a nadie en espera ni mandar a buzón.', en: 'Yes. It handles simultaneous calls with no hold queues or voicemail.' },
+  'faq.v3.q': { es: '¿Puede transferir la llamada a una persona?', en: 'Can it transfer the call to a person?' },
+  'faq.v3.a': { es: 'Sí. Transfiere a tu equipo según tus reglas y, si nadie contesta, toma el mensaje y lo envía por WhatsApp.', en: 'Yes. It transfers to your team by your rules and, if nobody answers, takes a message and sends it via WhatsApp.' },
+  'faq.v4.q': { es: '¿Necesito cambiar mi central telefónica?', en: 'Do I need to change my phone system?' },
+  'faq.v4.a': { es: 'No. Te damos un número nuevo o desviamos el actual; la instalación no toca tu operación.', en: 'No. We give you a new number or forward your current one; setup does not disrupt your operation.' },
+
 };
 
 interface TranslationContextType {
