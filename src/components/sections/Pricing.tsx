@@ -598,8 +598,29 @@ const Pricing = () => {
           <h3 className="text-2xl sm:text-4xl font-bold font-display leading-tight mt-4">
             {t("pricing.suite.title")}
           </h3>
-          <p className="mt-3 text-muted-foreground max-w-xl mx-auto">{t("pricing.suite.subtitle")}</p>
+          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">{t("pricing.suite.subtitle")}</p>
+
+          <div className="mt-8 grid sm:grid-cols-2 gap-3 text-left max-w-3xl mx-auto">
+            {[1, 2, 3, 4].map((n) => (
+              <div key={n} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <div className="flex items-start gap-2">
+                  <Check className="h-4 w-4 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="text-sm font-semibold">{t(`pricing.suite.b${n}.title`)}</p>
+                    <p className="text-sm text-muted-foreground mt-0.5">{t(`pricing.suite.b${n}.desc`)}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8">
+            <Button variant="heroOutline" size="lg" asChild className="min-h-[52px] px-8">
+              <a href="#contacto">{t("pricing.suite.cta")}</a>
+            </Button>
+          </div>
         </motion.div>
+
 
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch">
           {suitePlans.map((plan, i) => (

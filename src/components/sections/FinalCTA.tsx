@@ -1,34 +1,58 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, Sparkles, MessageSquare, PhoneCall } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { ArrowRight, Check, Sparkles, MessageSquare, PhoneCall, Layers } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
-type Interest = "chat" | "voice";
+type Interest = "chat" | "voice" | "suite";
 
 const FinalCTA = () => {
   const { t, language } = useTranslation();
   const [interest, setInterest] = useState<Interest>("chat");
+  const [name, setName] = useState("");
+  const [company, setCompany] = useState("");
+  const [contact, setContact] = useState("");
+  const es = language === "es";
 
   const interestOptions: { key: Interest; icon: typeof MessageSquare; label: string }[] = [
     {
       key: "chat",
       icon: MessageSquare,
-      label: language === "es" ? "Chatbots IA (WhatsApp y web)" : "AI Chatbots (WhatsApp & web)",
+      label: es ? "Chatbots IA (WhatsApp y web)" : "AI Chatbots (WhatsApp & web)",
     },
     {
       key: "voice",
       icon: PhoneCall,
-      label: language === "es" ? "Voice Bots IA (recepción telefónica)" : "AI Voice Bots (phone reception)",
+      label: es ? "Voice Bots IA (recepción telefónica)" : "AI Voice Bots (phone reception)",
+    },
+    {
+      key: "suite",
+      icon: Layers,
+      label: es ? "AI Suite (chat + voz juntos)" : "AI Suite (chat + voice together)",
     },
   ];
 
   const selectedLabel = interestOptions.find((o) => o.key === interest)!.label;
 
+  const messageLines = es
+    ? [
+        "Hola, quiero hablar con un experto de QubeSight.",
+        `Me interesa: ${selectedLabel}.`,
+        name.trim() && `Nombre: ${name.trim()}`,
+        company.trim() && `Empresa: ${company.trim()}`,
+        contact.trim() && `Correo / teléfono: ${contact.trim()}`,
+      ]
+    : [
+        "Hi, I want to talk to a QubeSight expert.",
+        `I'm interested in: ${selectedLabel}.`,
+        name.trim() && `Name: ${name.trim()}`,
+        company.trim() && `Company: ${company.trim()}`,
+        contact.trim() && `Email / phone: ${contact.trim()}`,
+      ];
+
   const whatsappUrl = `https://wa.me/50646009140?text=${encodeURIComponent(
-    language === "es"
-      ? `Hola, quiero hablar con un experto de QubeSight. Me interesa: ${selectedLabel}.`
-      : `Hi, I want to talk to a QubeSight expert. I'm interested in: ${selectedLabel}.`
+    messageLines.filter(Boolean).join("\n")
   )}`;
 
   const bullets = [
@@ -37,6 +61,7 @@ const FinalCTA = () => {
     t("final.bullet.3"),
     t("final.bullet.4"),
   ];
+
 
   return (
     <section id="contacto" className="py-20 sm:py-28 relative overflow-hidden">
@@ -87,7 +112,7 @@ const FinalCTA = () => {
             <p className="mb-3 text-sm font-semibold text-foreground/90 text-center">
               {language === "es" ? "¿Qué te interesa?" : "What are you interested in?"}
             </p>
-            <div className="grid sm:grid-cols-2 gap-3">
+            <div className="grid sm:grid-cols-3 gap-3">
               {interestOptions.map((opt) => {
                 const active = interest === opt.key;
                 return (
@@ -115,7 +140,52 @@ const FinalCTA = () => {
                 );
               })}
             </div>
+
+            <div className="mt-6 grid sm:grid-cols-3 gap-3">
+              <div>
+                <label htmlFor="cta-name" className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                  {es ? "Nombre" : "Name"}
+                </label>
+                <Input
+                  id="cta-name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder={es ? "Tu nombre" : "Your name"}
+                  className="bg-white/[0.03] border-white/10"
+                />
+              </div>
+              <div>
+                <label htmlFor="cta-company" className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                  {es ? "Empresa" : "Company"}
+                </label>
+                <Input
+                  id="cta-company"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  placeholder={es ? "Nombre del negocio" : "Business name"}
+                  className="bg-white/[0.03] border-white/10"
+                />
+              </div>
+              <div>
+                <label htmlFor="cta-contact" className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                  {es ? "Correo o teléfono" : "Email or phone"}
+                </label>
+                <Input
+                  id="cta-contact"
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
+                  placeholder={es ? "correo@empresa.com" : "you@company.com"}
+                  className="bg-white/[0.03] border-white/10"
+                />
+              </div>
+            </div>
+            <p className="mt-3 text-center text-xs text-muted-foreground">
+              {es
+                ? "Estos datos se envían en tu mensaje de WhatsApp para que el asesor responda con contexto."
+                : "These details are included in your WhatsApp message so the advisor replies with context."}
+            </p>
           </div>
+
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button variant="hero" size="lg" asChild className="min-h-[56px] px-8">
