@@ -57,6 +57,21 @@ const FinalCTA = () => {
     messageLines.filter(Boolean).join("\n")
   )}`;
 
+  const saveLead = async () => {
+    try {
+      await supabase.from("leads").insert({
+        name: name.trim() || null,
+        company: company.trim() || null,
+        contact: contact.trim() || null,
+        interest: selectedLabel,
+        language,
+        source: "final_cta",
+      });
+    } catch {
+      toast.error(es ? "No pudimos guardar tus datos." : "We couldn't save your details.");
+    }
+  };
+
   const bullets = [
     t("final.bullet.1"),
     t("final.bullet.2"),
