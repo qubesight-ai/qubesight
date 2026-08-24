@@ -195,7 +195,7 @@ const Pricing = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-8 max-w-7xl mx-auto">
           {plans.map((plan, i) => (
             <motion.div
               key={i}
@@ -336,7 +336,7 @@ const Pricing = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto perspective-2000 items-stretch">
+        <div className="grid md:grid-cols-3 gap-x-6 gap-y-10 lg:gap-x-8 max-w-6xl mx-auto perspective-2000 items-stretch">
           {[
             {
               id: "voice_starter",
