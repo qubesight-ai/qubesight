@@ -212,7 +212,7 @@ const FinalCTA = () => {
               </a>
             </Button>
             <Button variant="heroOutline" size="lg" asChild className="min-h-[56px] px-8">
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => { void saveLead(); }}>
                 {t("final.cta")}
               </a>
             </Button>
