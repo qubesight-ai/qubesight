@@ -107,18 +107,21 @@ const Hero = () => {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
-              className="flex items-stretch divide-x divide-white/5 rounded-2xl bg-white/[0.025] border border-white/[0.06] backdrop-blur-sm"
+              className="grid grid-cols-1 xs:grid-cols-3 divide-y xs:divide-y-0 xs:divide-x divide-white/5 rounded-2xl bg-white/[0.025] border border-white/[0.06] backdrop-blur-sm"
             >
               {stats.map((stat, i) => (
-                <div key={i} className="flex items-center gap-3 px-5 py-4 flex-1 min-w-0">
-                  <div className="h-9 w-9 rounded-xl bg-primary/10 text-primary grid place-items-center border border-primary/20">
+                <div
+                  key={i}
+                  className="flex items-center gap-3 px-4 py-3.5 sm:px-5 sm:py-4 min-w-0 xs:flex-col xs:items-start sm:flex-row sm:items-center"
+                >
+                  <div className="h-9 w-9 flex-shrink-0 rounded-xl bg-primary/10 text-primary grid place-items-center border border-primary/20">
                     <stat.icon className="h-4 w-4" strokeWidth={1.5} />
                   </div>
                   <div className="min-w-0">
-                    <div className="text-lg font-semibold text-foreground tabular-nums tracking-tight leading-none">
+                    <div className="text-base sm:text-lg font-semibold text-foreground tabular-nums tracking-tight leading-none">
                       {stat.value}
                     </div>
-                    <div className="text-[11px] text-muted-foreground mt-1 leading-tight truncate">
+                    <div className="text-[11px] text-muted-foreground mt-1 leading-tight">
                       {stat.label}
                     </div>
                   </div>
