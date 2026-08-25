@@ -18,3 +18,16 @@
 .prototype-shell section[class*="min-h-[170vh]"] [class*="bg-[#0d1020]"],.prototype-shell section[class*="min-h-[170vh]"] [class*="bg-[#090a14]"]{background:#fff!important}
 .prototype-shell section[class*="min-h-[170vh]"] [class*="text-white"]{color:#071120!important}
 .prototype-shell section[class*="min-h-[170vh]"] [class*="text-emerald"]{color:#087d62!important}
+
+
+/* Pricing readability: this module was authored for a dark site, so every surface gets an explicit light contrast contract. */
+.prototype-shell #pricing{color:#071120!important;background:#f4f4f0!important}
+.prototype-shell #pricing .bento-tile,.prototype-shell #pricing .glass-card{background:#fff!important;color:#071120!important;border-color:rgba(7,17,32,.17)!important}
+.prototype-shell #pricing .bento-tile::before,.prototype-shell #pricing .glass-card::before{background:none!important}
+.prototype-shell #pricing .text-white,.prototype-shell #pricing .text-primary-foreground{color:#071120!important}
+.prototype-shell #pricing .text-muted-foreground{color:#526071!important}
+.prototype-shell #pricing .bg-white\/\[0\.03\],.prototype-shell #pricing .bg-white\/\[0\.04\]{background:#fff!important}
+.prototype-shell #pricing .border-white\/10,.prototype-shell #pricing .border-white\/\[0\.08\]{border-color:rgba(7,17,32,.15)!important}
+.prototype-shell #pricing button.bg-primary,.prototype-shell #pricing [class*="bg-primary"][class*="text-white"],.prototype-shell #pricing .gradient-bg{background:#2864ff!important;color:#fff!important}
+.prototype-shell #pricing button.bg-primary *,.prototype-shell #pricing [class*="bg-primary"][class*="text-white"] *,.prototype-shell #pricing .gradient-bg *{color:#fff!important}
+.prototype-shell #pricing .shadow-glow,.prototype-shell #pricing [class*="shadow-"]{box-shadow:0 14px 32px -24px rgba(7,17,32,.35)!important}
