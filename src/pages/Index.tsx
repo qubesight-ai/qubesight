@@ -1,5 +1,6 @@
 import Header from "@/components/layout/Header";
 import Hero from "@/components/sections/Hero";
+import CinematicStory from "@/components/sections/CinematicStory";
 import TrustBar from "@/components/sections/TrustBar";
 import Problem from "@/components/sections/Problem";
 import Solution from "@/components/sections/Solution";
@@ -34,6 +35,7 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
+          <CinematicStory />
           <TrustBar />
           <Problem />
           <Solution />
@@ -60,3 +62,4 @@ const Index = () => {
 };
 
 export default Index;
+
