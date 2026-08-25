@@ -31,3 +31,16 @@
 .prototype-shell #pricing button.bg-primary,.prototype-shell #pricing [class*="bg-primary"][class*="text-white"],.prototype-shell #pricing .gradient-bg{background:#2864ff!important;color:#fff!important}
 .prototype-shell #pricing button.bg-primary *,.prototype-shell #pricing [class*="bg-primary"][class*="text-white"] *,.prototype-shell #pricing .gradient-bg *{color:#fff!important}
 .prototype-shell #pricing .shadow-glow,.prototype-shell #pricing [class*="shadow-"]{box-shadow:0 14px 32px -24px rgba(7,17,32,.35)!important}
+
+
+/* Final pricing text guard: no inherited white typography is allowed in this section. */
+.prototype-shell #pricing,
+.prototype-shell #pricing *{color:#071120!important}
+.prototype-shell #pricing .text-muted-foreground{color:#526071!important}
+.prototype-shell #pricing .text-primary,.prototype-shell #pricing svg.text-primary{color:#2864ff!important}
+.prototype-shell #pricing button,
+.prototype-shell #pricing button *,
+.prototype-shell #pricing a[class*="bg-primary"],
+.prototype-shell #pricing a[class*="bg-primary"] *{color:#fff!important}
+.prototype-shell #pricing button[class*="outline"],
+.prototype-shell #pricing button[class*="outline"] *{color:#071120!important}
