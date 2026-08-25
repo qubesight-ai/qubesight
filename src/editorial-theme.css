@@ -1,0 +1,7 @@
+/* Editorial skin: presentation changes only; every original route and section remains intact. */
+.editorial-shell{--editorial-paper:#f4f4f0;--editorial-ink:#071120;--editorial-blue:#2864ff;background:var(--editorial-paper);color:var(--editorial-ink)}
+.editorial-shell .grain-overlay{opacity:.02;mix-blend-mode:multiply}.editorial-shell h1,.editorial-shell h2,.editorial-shell h3{letter-spacing:-.065em}.editorial-shell .display-xl{letter-spacing:-.075em}.editorial-shell section{border-color:rgba(7,17,32,.13)}
+.editorial-shell .glass-card{border-color:rgba(7,17,32,.13);box-shadow:0 18px 48px -24px rgba(7,17,32,.28)}
+.editorial-shell .bg-grid{background-image:linear-gradient(to right,rgba(7,17,32,.08) 1px,transparent 1px),linear-gradient(to bottom,rgba(7,17,32,.08) 1px,transparent 1px)}
+.editorial-shell .btn-sheen,.editorial-shell [class*="bg-primary"]{box-shadow:none}.editorial-shell .depth-card:hover{transform:translateY(-8px);box-shadow:0 24px 50px -26px rgba(7,17,32,.45)}
+@media(min-width:768px){.editorial-shell section{scroll-margin-top:76px}.editorial-shell .reveal-up{transform:translateY(56px)}}
