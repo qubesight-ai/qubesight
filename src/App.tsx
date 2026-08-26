@@ -17,7 +17,9 @@ import LogoResponsiveTest from "./pages/LogoResponsiveTest";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import AdminLeads from "./pages/AdminLeads";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import AdminRoute from "./components/auth/AdminRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
@@ -47,6 +49,9 @@ const App = () => (
             <Route path="/forgot-password" element={<Auth mode="forgot" />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
+            <Route element={<AdminRoute />}>
+              <Route path="/admin/leads" element={<AdminLeads />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
