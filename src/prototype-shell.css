@@ -137,3 +137,12 @@
 .prototype-shell button *,
 .prototype-shell [class*="bg-primary"] *,
 .prototype-shell .prototype-button *{color:#fff!important;stroke:#fff!important}
+
+
+/* Restore the hero's blue spheres in place of the rotating hypercubes. */
+.prototype-cube{perspective:none!important;transform-style:flat!important;animation:prototype-orb-float 7s ease-in-out infinite!important}
+.prototype-cube-b{animation-delay:-2.4s!important}
+.prototype-cube>span{display:none!important}
+.prototype-cube>span:first-child{display:block!important;inset:0!important;transform:none!important;opacity:1!important;border:0!important;border-radius:50%!important;background:radial-gradient(circle at 30% 25%,#9ac1ff 0%,#3d8eff 25%,#006AFF 57%,#0054c7 100%)!important;box-shadow:inset -18px -23px 35px rgba(0,52,135,.34),inset 13px 14px 22px rgba(255,255,255,.34),0 28px 45px rgba(0,106,255,.23)!important}
+.prototype-cube i{display:none!important}
+@keyframes prototype-orb-float{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(0,-18px,0) scale(1.04)}}
