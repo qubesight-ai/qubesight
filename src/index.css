@@ -22,33 +22,33 @@
     --secondary-foreground: 240 18% 93%;
 
     --muted: 240 18% 14%;
-    --muted-foreground: 240 17% 60%;     /* #8888a8 */
+    --muted-foreground: 240 14% 72%;     /* clearer secondary text on dark */
 
-    /* Accent = Teal #00cec9 */
-    --accent: 178 100% 40%;
+    /* Accent = Teal — dark enough for white label text */
+    --accent: 178 85% 28%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 15% 18%;
-    --input: 240 15% 18%;
+    --border: 240 15% 26%;
+    --input: 240 15% 26%;
     --ring: 249 75% 64%;
 
     --radius: 1rem;
 
     --sidebar-background: 240 40% 4%;
-    --sidebar-foreground: 240 17% 60%;
+    --sidebar-foreground: 240 14% 72%;
     --sidebar-primary: 249 75% 64%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 20% 12%;
     --sidebar-accent-foreground: 240 18% 93%;
-    --sidebar-border: 240 15% 18%;
+    --sidebar-border: 240 15% 26%;
     --sidebar-ring: 249 75% 64%;
 
     /* Brand tokens — restrained: indigo lead, violet support, teal only as detail */
     --gradient-primary: linear-gradient(135deg, hsl(249 70% 58%) 0%, hsl(258 78% 66%) 100%);
-    --gradient-text: linear-gradient(180deg, hsl(250 35% 96%) 0%, hsl(255 60% 80%) 100%);
+    --gradient-text: linear-gradient(180deg, hsl(250 40% 98%) 0%, hsl(255 65% 84%) 100%);
     --gradient-hero: radial-gradient(ellipse at top, hsl(249 60% 22% / 0.32), transparent 60%), hsl(240 40% 4%);
     --gradient-dark: linear-gradient(180deg, hsl(240 40% 4%) 0%, hsl(240 30% 7%) 100%);
     --gradient-glow: radial-gradient(circle at center, hsl(249 75% 64% / 0.18), transparent 70%);
@@ -127,12 +127,17 @@
     box-shadow: var(--shadow-glow-blue);
   }
 
+  /* Soft brand ink for tiny badges/labels (readable on dark) */
+  .text-brand-soft {
+    color: hsl(249 70% 78%);
+  }
+
   /* Glassmorphism cards — true edge refraction */
   .glass-card {
     position: relative;
-    @apply bg-white/[0.035] backdrop-blur-xl border border-white/[0.07];
+    @apply bg-white/[0.05] backdrop-blur-xl border border-white/[0.12];
     box-shadow:
-      inset 0 1px 0 0 hsl(0 0% 100% / 0.07),
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.08),
       inset 0 -1px 0 0 hsl(0 0% 0% / 0.35),
       0 10px 40px -12px hsl(249 75% 10% / 0.6);
     transition: border-color .35s ease, transform .35s ease, box-shadow .45s ease;
@@ -141,21 +146,21 @@
     content: "";
     position: absolute; inset: 0;
     border-radius: inherit;
-    background: radial-gradient(120% 60% at 50% 0%, hsl(0 0% 100% / 0.06), transparent 60%);
+    background: radial-gradient(120% 60% at 50% 0%, hsl(0 0% 100% / 0.07), transparent 60%);
     pointer-events: none;
-    opacity: .7;
+    opacity: .75;
   }
   .glass-card:hover {
-    border-color: hsl(249 75% 64% / 0.28);
+    border-color: hsl(249 75% 64% / 0.35);
     box-shadow:
-      inset 0 1px 0 0 hsl(0 0% 100% / 0.09),
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.1),
       0 18px 60px -16px hsl(249 75% 30% / 0.5),
-      0 0 0 1px hsl(249 75% 64% / 0.12);
+      0 0 0 1px hsl(249 75% 64% / 0.14);
     transform: translateY(-3px);
   }
 
   .glass-nav {
-    @apply bg-background/70 backdrop-blur-2xl border-b border-white/5;
+    @apply bg-background/80 backdrop-blur-2xl border-b border-white/10;
   }
 
   /* Subtle grid pattern overlay */
@@ -357,12 +362,12 @@ html {
 /* Eyebrow micro-badge */
 .eyebrow {
   display: inline-flex; align-items: center; gap: .5rem;
-  padding: .35rem .75rem;
-  font-size: 10px; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.22em;
-  color: hsl(250 35% 80%);
-  background: hsl(0 0% 100% / 0.04);
-  border: 1px solid hsl(0 0% 100% / 0.08);
+  padding: .4rem .85rem;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  color: hsl(250 40% 86%);
+  background: hsl(0 0% 100% / 0.05);
+  border: 1px solid hsl(0 0% 100% / 0.12);
   border-radius: 999px;
 }
 
@@ -414,7 +419,8 @@ html {
 }
 
 /* Voice Admin */
-.auth-input{display:block;width:100%;margin-top:.45rem;padding:.78rem .9rem;border-radius:.75rem;border:1px solid hsl(var(--border));background:hsl(var(--background)/.7);color:hsl(var(--foreground));outline:none}.auth-input:focus{border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(var(--primary)/.15)}
+.auth-input{display:block;width:100%;margin-top:.45rem;padding:.78rem .9rem;border-radius:.75rem;border:1px solid hsl(0 0% 100% / 0.14);background:hsl(0 0% 100% / 0.05);color:hsl(var(--foreground));outline:none}.auth-input::placeholder{color:hsl(var(--muted-foreground));opacity:1}.auth-input:focus{border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(var(--primary)/.18)}
 .admin-sidebar{position:fixed;inset:0 auto 0 0;width:15rem;background:#071d31;z-index:40;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .2s}.admin-sidebar.open{transform:none}.admin-sidebar nav button{width:100%;display:flex;align-items:center;gap:.75rem;padding:.72rem .85rem;border-radius:.65rem;color:#9aafc1;font-size:.82rem}.admin-sidebar nav button:hover,.admin-sidebar nav button.active{background:#123852;color:white}.admin-panel{background:white;border:1px solid #e3eaf1;border-radius:1rem;box-shadow:0 2px 12px rgba(15,45,70,.04)}.panel-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;padding:1.25rem;border-bottom:1px solid #edf1f5}.panel-head h2{font-size:.95rem;font-weight:650}.panel-head p{font-size:.72rem;color:#7d8c99;margin-top:.2rem}.panel-head>button:not(.admin-primary){font-size:.72rem;color:#176ac1}.admin-primary{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.65rem .9rem;border-radius:.6rem;background:#1268e8;color:white;font-size:.72rem;font-weight:650}.admin-primary:disabled{opacity:.45}.agent-row{display:grid;grid-template-columns:3rem minmax(0,1fr) 1fr 1fr 2.5rem;gap:1rem;align-items:center;padding:1rem 1.25rem}.agent-icon{width:2.5rem;height:2.5rem;border-radius:.7rem;background:#eaf3ff;color:#1268e8;display:grid;place-items:center}.agent-row h3{font-size:.88rem;margin-top:.3rem;font-weight:650}.agent-row p{font-size:.68rem;color:#748493;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.status-pill{display:inline-block;background:#e7f8f0;color:#13845a;padding:.23rem .5rem;border-radius:2rem;font-size:.58rem;font-weight:700}.status-pill.inactive{background:#eef1f4;color:#6d7984}.icon-action{width:2.2rem;height:2.2rem;border:1px solid #e1e8ee;border-radius:.55rem;display:grid;place-items:center;color:#647789}.admin-table{width:100%;border-collapse:collapse;font-size:.72rem}.admin-table th{text-align:left;color:#95a1ab;font-size:.58rem;letter-spacing:.06em;padding:.8rem 1rem;border-bottom:1px solid #e8edf2}.admin-table td{padding:.9rem 1rem;border-bottom:1px solid #edf1f4}.modal-layer{position:fixed;inset:0;background:rgba(3,20,35,.68);z-index:60;display:grid;place-items:center;padding:1rem}.editor{width:min(42rem,100%);max-height:94vh;overflow:auto;background:white;border-radius:1rem;padding:1.6rem;position:relative;color:#172b3d}.editor-close{position:absolute;right:1rem;top:1rem;color:#71808d}.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}.editor-grid label{font-size:.68rem;font-weight:650;color:#596c7b}.editor-grid input,.editor-grid select,.editor-grid textarea{display:block;width:100%;margin-top:.35rem;border:1px solid #dfe7ed;border-radius:.55rem;padding:.65rem .75rem;font:inherit;outline:none}.editor-grid input:focus,.editor-grid textarea:focus{border-color:#65a8ee;box-shadow:0 0 0 3px #e8f3ff}.editor-grid .wide{grid-column:1/-1}.editor footer{display:flex;justify-content:flex-end;gap:.7rem;margin-top:1.2rem}.editor footer>button:not(.admin-primary){padding:.65rem .9rem;border:1px solid #e0e7ed;border-radius:.6rem;font-size:.72rem}
+.editor.chatbot-editor{width:min(54rem,100%)}
 @media(min-width:768px){.admin-sidebar{transform:none}}
 @media(max-width:767px){.editor-grid{grid-template-columns:1fr}.editor-grid .wide{grid-column:auto}.agent-row{grid-template-columns:2.7rem 1fr 2.2rem}}

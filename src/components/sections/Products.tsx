@@ -120,7 +120,7 @@ const Products = () => {
               </div>
               <h3 className="text-lg font-semibold font-display mb-2">{p.name}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed flex-grow mb-4">{p.desc}</p>
-              <p className="text-xs text-primary/90 font-medium">{p.forWhom}</p>
+              <p className="text-xs text-brand-soft font-medium">{p.forWhom}</p>
             </motion.a>
           ))}
         </div>
@@ -196,7 +196,7 @@ const Products = () => {
               </p>
               <a
                 href="#pricing"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-brand-soft transition-colors"
               >
                 {t("products.selector.cta")}
                 <ArrowRight className="h-4 w-4" />

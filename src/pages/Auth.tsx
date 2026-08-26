@@ -138,7 +138,7 @@ export default function Auth({ mode }: { mode: "login" | "register" | "forgot" }
               )}
               <button
                 disabled={busy}
-                className="w-full gradient-bg rounded-xl py-3 font-medium flex justify-center gap-2"
+                className="w-full gradient-bg text-primary-foreground rounded-xl py-3 font-medium flex justify-center gap-2"
               >
                 {busy && <Loader2 className="animate-spin" size={18} />}
                 {mode === "login"

@@ -118,7 +118,7 @@ const Hero = () => {
                     <div className="text-lg font-semibold text-foreground tabular-nums tracking-tight leading-none">
                       {stat.value}
                     </div>
-                    <div className="text-[11px] text-muted-foreground mt-1 leading-tight truncate">
+                    <div className="text-xs text-muted-foreground mt-1 leading-tight truncate">
                       {stat.label}
                     </div>
                   </div>
@@ -147,7 +147,7 @@ const Hero = () => {
               </div>
               <div>
                 <div className="text-sm font-semibold leading-none">+312</div>
-                <div className="text-[11px] text-muted-foreground mt-1">
+                <div className="text-xs text-muted-foreground mt-1">
                   {language === "es" ? "reservas esta semana" : "bookings this week"}
                 </div>
               </div>

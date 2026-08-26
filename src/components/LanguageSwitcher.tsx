@@ -7,7 +7,7 @@ const LanguageSwitcher = () => {
     <div
       role="group"
       aria-label="Language"
-      className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] p-0.5"
+      className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.05] p-0.5"
     >
       <button
         type="button"

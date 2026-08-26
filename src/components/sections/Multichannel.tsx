@@ -50,7 +50,7 @@ const Multichannel = () => {
                 <div className="h-12 w-12 rounded-2xl gradient-bg flex items-center justify-center text-primary-foreground shadow-glow">
                   <MessageCircle className="h-6 w-6" />
                 </div>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary/80 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-soft px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20">
                   Canal #1
                 </span>
               </div>
@@ -97,7 +97,7 @@ const Multichannel = () => {
                   <div className="text-sm font-semibold leading-tight">{c.label}</div>
                   <div className="text-xs text-muted-foreground truncate">{c.tag}</div>
                 </div>
-                <ArrowUpRight className="h-4 w-4 text-muted-foreground/50 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]" />
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]" />
               </div>
             </motion.div>
           ))}

@@ -27,7 +27,7 @@ const TrustBar = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-6"
+          className="text-center text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground mb-6"
         >
           {t("trustbar.title")}
         </motion.p>

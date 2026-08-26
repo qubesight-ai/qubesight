@@ -171,7 +171,7 @@ const Header = () => {
             })}
 
             <DropdownMenu>
-              <DropdownMenuTrigger className="group inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary/60 rounded-sm">
+              <DropdownMenuTrigger className="group inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-brand-soft transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary/60 rounded-sm">
                 <Sparkles className="h-3.5 w-3.5" />
                 {demosLabel}
                 <ChevronDown className="h-3.5 w-3.5 transition-transform group-data-[state=open]:rotate-180" />
@@ -242,7 +242,7 @@ const Header = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden overflow-hidden glass-nav border-t border-white/5"
+              className="lg:hidden overflow-hidden glass-nav border-t border-white/10"
             >
               <div className="py-4 space-y-1">
                 {navLinks.map((link) => {

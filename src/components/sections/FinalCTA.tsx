@@ -126,7 +126,7 @@ const FinalCTA = () => {
                     className={`flex items-center gap-3 rounded-2xl border p-4 text-sm transition-all duration-300 ${
                       active
                         ? "border-primary/50 bg-primary/10 text-foreground shadow-glow"
-                        : "border-white/10 bg-white/[0.03] text-muted-foreground hover:border-primary/30"
+                        : "border-white/10 bg-white/[0.05] text-muted-foreground hover:border-primary/30"
                     }`}
                   >
                     <span
@@ -153,7 +153,7 @@ const FinalCTA = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder={es ? "Tu nombre" : "Your name"}
-                  className="bg-white/[0.03] border-white/10"
+                  className="bg-white/[0.05] border-white/10"
                 />
               </div>
               <div>
@@ -165,7 +165,7 @@ const FinalCTA = () => {
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
                   placeholder={es ? "Nombre del negocio" : "Business name"}
-                  className="bg-white/[0.03] border-white/10"
+                  className="bg-white/[0.05] border-white/10"
                 />
               </div>
               <div>
@@ -177,7 +177,7 @@ const FinalCTA = () => {
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
                   placeholder={es ? "correo@empresa.com" : "you@company.com"}
-                  className="bg-white/[0.03] border-white/10"
+                  className="bg-white/[0.05] border-white/10"
                 />
               </div>
             </div>

@@ -41,7 +41,7 @@ const HowItWorks = () => {
             >
               <div className="relative mx-auto mb-5 h-16 w-16 rounded-2xl glass-card border border-primary/25 grid place-items-center text-primary">
                 <step.icon className="h-6 w-6" strokeWidth={1.75} />
-                <span className="absolute -top-2 -right-2 text-[10px] font-bold tracking-wider text-primary/80 bg-background border border-primary/20 rounded-md px-1.5 py-0.5">
+                <span className="absolute -top-2 -right-2 text-[10px] font-bold tracking-wider text-brand-soft bg-background border border-primary/20 rounded-md px-1.5 py-0.5">
                   {step.n}
                 </span>
               </div>

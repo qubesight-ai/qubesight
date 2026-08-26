@@ -302,7 +302,7 @@ const Pricing = () => {
                 className={`rounded-2xl p-4 border flex flex-col items-center text-center ${
                   ch.highlight
                     ? "border-primary/50 bg-primary/10"
-                    : "border-white/10 bg-white/[0.03]"
+                    : "border-white/10 bg-white/[0.05]"
                 }`}
               >
                 <span className="text-xs sm:text-sm font-semibold">{ch.label}</span>
@@ -554,7 +554,7 @@ const Pricing = () => {
             {t("pricing.compare.title")}
           </h4>
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className="glass-card rounded-2xl p-6 opacity-80">
+            <div className="glass-card rounded-2xl p-6">
               <h5 className="text-base font-bold font-display mb-4 text-muted-foreground">
                 {t("pricing.compare.human")}
               </h5>
@@ -602,7 +602,7 @@ const Pricing = () => {
 
           <div className="mt-8 grid sm:grid-cols-2 gap-3 text-left max-w-3xl mx-auto">
             {[1, 2, 3, 4].map((n) => (
-              <div key={n} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <div key={n} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
                 <div className="flex items-start gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0 mt-1" />
                   <div>
@@ -697,7 +697,7 @@ const Pricing = () => {
               t("pricing.universal.f4"),
               t("pricing.universal.f5"),
             ].map((f, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-2xl border border-white/10 bg-white/[0.03] p-3">
+              <div key={i} className="flex items-start gap-2 rounded-2xl border border-white/10 bg-white/[0.05] p-3">
                 <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
                 <span>{f}</span>
               </div>

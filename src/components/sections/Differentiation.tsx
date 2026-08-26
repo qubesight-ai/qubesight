@@ -52,7 +52,7 @@ const Differentiation = () => {
               </div>
               <ul className="space-y-3">
                 {others.map((o, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground/90">
+                  <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
                     <X className="h-4 w-4 text-destructive/70 flex-shrink-0 mt-0.5" />
                     <span className="line-through decoration-destructive/30 decoration-1">{o}</span>
                   </li>
@@ -79,7 +79,7 @@ const Differentiation = () => {
                     {t("diff.us.title")}
                   </h3>
                 </div>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary/80 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-soft px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20">
                   QubeSight
                 </span>
               </div>

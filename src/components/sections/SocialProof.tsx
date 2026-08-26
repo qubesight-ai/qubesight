@@ -35,7 +35,7 @@ const SocialProof = () => {
               </div>
             ))}
           </div>
-          <p className="mt-8 text-center text-[11px] text-muted-foreground/70">
+          <p className="mt-8 text-center text-[11px] text-muted-foreground">
             {t("social.note")}
           </p>
         </motion.div>

@@ -23,7 +23,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="pt-20 pb-10 bg-card/50 border-t border-white/5 relative">
+    <footer className="pt-20 pb-10 bg-card/50 border-t border-white/10 relative">
       <div className="container">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
           <motion.div
@@ -101,7 +101,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
             © {currentYear} QubeSight. {t("footer.rights")}
           </p>

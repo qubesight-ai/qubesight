@@ -145,7 +145,7 @@ const VoiceBot = () => {
           >
             <div className="bezel-inner bento-tile p-7 sm:p-8 h-full flex flex-col justify-between bg-primary/[0.04]">
               <div>
-                <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-primary/80 mb-3">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-soft mb-3">
                   {t("voicebot.row.savings")}
                 </div>
                 <p className="text-xl sm:text-2xl font-bold font-display leading-snug gradient-text">
