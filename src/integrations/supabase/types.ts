@@ -145,7 +145,9 @@ export type Database = {
           interest: string
           language: string | null
           name: string | null
+          notified_at: string | null
           source: string | null
+          user_agent: string | null
         }
         Insert: {
           company?: string | null
@@ -155,7 +157,9 @@ export type Database = {
           interest: string
           language?: string | null
           name?: string | null
+          notified_at?: string | null
           source?: string | null
+          user_agent?: string | null
         }
         Update: {
           company?: string | null
@@ -165,7 +169,9 @@ export type Database = {
           interest?: string
           language?: string | null
           name?: string | null
+          notified_at?: string | null
           source?: string | null
+          user_agent?: string | null
         }
         Relationships: []
       }
