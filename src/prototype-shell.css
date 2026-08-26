@@ -44,3 +44,27 @@
 .prototype-shell #pricing a[class*="bg-primary"] *{color:#fff!important}
 .prototype-shell #pricing button[class*="outline"],
 .prototype-shell #pricing button[class*="outline"] *{color:#071120!important}
+
+
+/* Global light typography contract: no white text anywhere in the public site. */
+.prototype-shell,
+.prototype-shell *{color:#071120!important}
+.prototype-shell svg{stroke:#071120!important}
+.prototype-shell .text-muted-foreground{color:#526071!important}
+.prototype-shell .text-primary,.prototype-shell .text-primary svg{color:#2864ff!important;stroke:#2864ff!important}
+.prototype-shell [class*="bg-primary"],
+.prototype-shell [class*="gradient-bg"],
+.prototype-shell .prototype-button,
+.prototype-shell button{background:#dbe6ff!important;color:#071120!important;border-color:rgba(7,17,32,.18)!important;box-shadow:none!important}
+.prototype-shell button *,
+.prototype-shell [class*="bg-primary"] *,
+.prototype-shell [class*="gradient-bg"] *,
+.prototype-shell .prototype-button *{color:#071120!important;stroke:#071120!important}
+.prototype-shell [class*="bg-[#0"],
+.prototype-shell [class*="bg-slate"],
+.prototype-shell [class*="bg-zinc"],
+.prototype-shell [class*="bg-black"]{background-color:#f4f4f0!important}
+.prototype-shell [class*="from-"],
+.prototype-shell [class*="to-"],
+.prototype-shell [class*="gradient"]{background-image:none!important}
+.prototype-shell .prototype-orb{background:#dbe6ff!important}
