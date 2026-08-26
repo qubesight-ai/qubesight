@@ -108,3 +108,23 @@
 
 /* Demo routes share the new light QubeSight template instead of the legacy page chrome. */
 .demo-template-shell{position:relative;overflow:hidden}.prototype-demo-cubes{pointer-events:none;position:absolute;right:-42px;top:118px;width:155px;height:155px;transform-style:preserve-3d;animation:qube-rotate 16s linear infinite;z-index:0}.prototype-demo-cubes span{position:absolute;inset:0;background:#006AFF;border:1px solid #071120}.prototype-demo-cubes span:nth-child(1){transform:translateZ(77px);background:#3d8eff}.prototype-demo-cubes span:nth-child(2){transform:rotateY(90deg) translateZ(77px);background:#006AFF}.prototype-demo-cubes span:nth-child(3){transform:rotateX(90deg) translateZ(77px);background:#0054c7}.demo-template-shell section{background:#f4f4f0!important;color:#071120!important}.demo-template-shell section:nth-child(even){background:#eaf1ff!important}.demo-template-shell *{color:#071120}.demo-template-shell .text-muted-foreground{color:#526071!important}.demo-template-shell button,.demo-template-shell [class*="bg-primary"]{background:#006AFF!important;color:#071120!important}.demo-template-shell button *,.demo-template-shell [class*="bg-primary"] *{color:#071120!important;stroke:#071120!important}
+
+/* 4D-inspired QubeSight hypercube: two nested rotating cubes connected by depth. */
+.prototype-cube{--cube-size:clamp(110px,17vw,290px);width:var(--cube-size);height:var(--cube-size);perspective:1200px}
+.prototype-cube-b{--cube-size:clamp(55px,8vw,130px);width:var(--cube-size);height:var(--cube-size)}
+.prototype-cube>span,.prototype-cube i b{display:block;position:absolute;inset:0;backface-visibility:visible;border:1px solid rgba(7,17,32,.35);background:rgba(0,106,255,.58)}
+.prototype-cube>span:nth-child(1){transform:translateZ(calc(var(--cube-size) / 2));background:#3d8eff!important}
+.prototype-cube>span:nth-child(2){transform:rotateY(90deg) translateZ(calc(var(--cube-size) / 2));background:#006AFF!important}
+.prototype-cube>span:nth-child(3){transform:rotateX(90deg) translateZ(calc(var(--cube-size) / 2));background:#0054c7!important}
+.prototype-cube>span:nth-child(4){transform:rotateY(180deg) translateZ(calc(var(--cube-size) / 2));background:#75abff!important}
+.prototype-cube>span:nth-child(5){transform:rotateY(-90deg) translateZ(calc(var(--cube-size) / 2));background:#0054c7!important}
+.prototype-cube>span:nth-child(6){transform:rotateX(-90deg) translateZ(calc(var(--cube-size) / 2));background:#9ac1ff!important}
+.prototype-cube i{position:absolute;inset:27%;display:block;transform-style:preserve-3d;animation:hypercube-inner 8s linear infinite reverse}
+.prototype-cube i b{background:rgba(0,106,255,.25)!important;border-color:#071120!important}
+.prototype-cube i b:nth-child(1){transform:translateZ(calc(var(--cube-size) / 8))}
+.prototype-cube i b:nth-child(2){transform:rotateY(90deg) translateZ(calc(var(--cube-size) / 8))}
+.prototype-cube i b:nth-child(3){transform:rotateX(90deg) translateZ(calc(var(--cube-size) / 8))}
+.prototype-cube i b:nth-child(4){transform:rotateY(180deg) translateZ(calc(var(--cube-size) / 8))}
+.prototype-cube i b:nth-child(5){transform:rotateY(-90deg) translateZ(calc(var(--cube-size) / 8))}
+.prototype-cube i b:nth-child(6){transform:rotateX(-90deg) translateZ(calc(var(--cube-size) / 8))}
+@keyframes hypercube-inner{from{transform:rotateX(0) rotateY(0)}to{transform:rotateX(360deg) rotateY(-360deg)}}
