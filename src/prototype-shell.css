@@ -68,3 +68,16 @@
 .prototype-shell [class*="to-"],
 .prototype-shell [class*="gradient"]{background-image:none!important}
 .prototype-shell .prototype-orb{background:#dbe6ff!important}
+
+
+/* Restore the light-blue visual language while keeping every label navy. */
+.prototype-shell .prototype-content>section:nth-child(2n),
+.prototype-shell [class*="bg-primary"],
+.prototype-shell [class*="bg-primary/"],
+.prototype-shell .prototype-button,
+.prototype-shell button{background-color:#dbe6ff!important;background-image:none!important;color:#071120!important}
+.prototype-shell [class*="bg-primary/10"]{background-color:#eaf1ff!important}
+.prototype-shell .prototype-orb{background:#9fc2ff!important}
+.prototype-shell button *,
+.prototype-shell [class*="bg-primary"] *,
+.prototype-shell .prototype-button *{color:#071120!important;stroke:#071120!important}
