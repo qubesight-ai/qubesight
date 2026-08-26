@@ -19,6 +19,7 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
+import DemoTemplateShell from "./components/layout/DemoTemplateShell";
 
 const queryClient = new QueryClient();
 
@@ -34,11 +35,11 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/case-study/:slug" element={<CaseStudyPage />} />
-            <Route path="/restaurantes" element={<Restaurantes />} />
-            <Route path="/salones" element={<Salones />} />
-            <Route path="/dental" element={<Dental />} />
-            <Route path="/gimnasios" element={<Gimnasios />} />
-            <Route path="/inmobiliarias" element={<Inmobiliarias />} />
+            <Route path="/restaurantes" element={<DemoTemplateShell><Restaurantes /></DemoTemplateShell>} />
+            <Route path="/salones" element={<DemoTemplateShell><Salones /></DemoTemplateShell>} />
+            <Route path="/dental" element={<DemoTemplateShell><Dental /></DemoTemplateShell>} />
+            <Route path="/gimnasios" element={<DemoTemplateShell><Gimnasios /></DemoTemplateShell>} />
+            <Route path="/inmobiliarias" element={<DemoTemplateShell><Inmobiliarias /></DemoTemplateShell>} />
             <Route path="/payment/success" element={<PaymentSuccess />} />
             <Route path="/payment/failure" element={<PaymentFailure />} />
             <Route path="/dev/logo-test" element={<LogoResponsiveTest />} />
