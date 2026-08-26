@@ -68,3 +68,28 @@
 .prototype-shell [class*="to-"],
 .prototype-shell [class*="gradient"]{background-image:none!important}
 .prototype-shell .prototype-orb{background:#dbe6ff!important}
+
+
+/* Restore the light-blue visual language while keeping every label navy. */
+.prototype-shell .prototype-content>section:nth-child(2n),
+.prototype-shell [class*="bg-primary"],
+.prototype-shell [class*="bg-primary/"],
+.prototype-shell .prototype-button,
+.prototype-shell button{background-color:#dbe6ff!important;background-image:none!important;color:#071120!important}
+.prototype-shell [class*="bg-primary/10"]{background-color:#eaf1ff!important}
+.prototype-shell .prototype-orb{background:#9fc2ff!important}
+.prototype-shell button *,
+.prototype-shell [class*="bg-primary"] *,
+.prototype-shell .prototype-button *{color:#071120!important;stroke:#071120!important}
+
+
+/* QubeSight mark: soft light-blue rotating cubes, never white labels. */
+.prototype-orb{display:none!important}
+.prototype-cube{position:absolute;z-index:0;width:clamp(110px,17vw,290px);height:clamp(110px,17vw,290px);transform-style:preserve-3d;animation:qube-rotate 16s linear infinite;filter:drop-shadow(0 28px 35px rgba(40,100,255,.18))}
+.prototype-cube span{position:absolute;inset:0;border:1px solid rgba(7,17,32,.18);background:#9fc2ff}
+.prototype-cube span:nth-child(1){transform:translateZ(calc(clamp(110px,17vw,290px) / 2));background:#c8dcff}
+.prototype-cube span:nth-child(2){transform:rotateY(90deg) translateZ(calc(clamp(110px,17vw,290px) / 2));background:#7fadff}
+.prototype-cube span:nth-child(3){transform:rotateX(90deg) translateZ(calc(clamp(110px,17vw,290px) / 2));background:#5d91f5}
+.prototype-cube-a{right:3vw;top:18vh}.prototype-cube-b{right:27vw;bottom:11vh;width:clamp(55px,8vw,130px);height:clamp(55px,8vw,130px);animation-direction:reverse;animation-duration:11s}
+@keyframes qube-rotate{from{transform:rotateX(-18deg) rotateY(0deg) rotateZ(10deg)}to{transform:rotateX(342deg) rotateY(360deg) rotateZ(370deg)}}
+@media(max-width:760px){.prototype-cube-a{right:-8vw;top:27vh}.prototype-cube-b{right:12vw;bottom:12vh}}
