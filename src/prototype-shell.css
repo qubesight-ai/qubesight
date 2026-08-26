@@ -93,3 +93,15 @@
 .prototype-cube-a{right:3vw;top:18vh}.prototype-cube-b{right:27vw;bottom:11vh;width:clamp(55px,8vw,130px);height:clamp(55px,8vw,130px);animation-direction:reverse;animation-duration:11s}
 @keyframes qube-rotate{from{transform:rotateX(-18deg) rotateY(0deg) rotateZ(10deg)}to{transform:rotateX(342deg) rotateY(360deg) rotateZ(370deg)}}
 @media(max-width:760px){.prototype-cube-a{right:-8vw;top:27vh}.prototype-cube-b{right:12vw;bottom:12vh}}
+
+
+/* Exact QubeSight blue: #006AFF. Text intentionally stays navy, never white. */
+.prototype-shell{--primary:216 100% 50%;--accent:216 100% 50%}
+.prototype-shell .prototype-cube span{background:#006AFF!important;border-color:#071120!important}
+.prototype-shell .prototype-cube span:nth-child(1){background:#3d8eff!important}
+.prototype-shell .prototype-cube span:nth-child(2){background:#006AFF!important}
+.prototype-shell .prototype-cube span:nth-child(3){background:#0054c7!important}
+.prototype-shell .prototype-orb{background:#006AFF!important}
+.prototype-shell .text-primary,.prototype-shell .text-primary svg{color:#006AFF!important;stroke:#006AFF!important}
+.prototype-shell [class*="bg-primary"],.prototype-shell .prototype-button,.prototype-shell button{background-color:#006AFF!important;color:#071120!important}
+.prototype-shell [class*="bg-primary"] *,.prototype-shell .prototype-button *,.prototype-shell button *{color:#071120!important;stroke:#071120!important}
