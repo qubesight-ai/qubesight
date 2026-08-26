@@ -128,3 +128,12 @@
 .prototype-cube i b:nth-child(5){transform:rotateY(-90deg) translateZ(calc(var(--cube-size) / 8))}
 .prototype-cube i b:nth-child(6){transform:rotateX(-90deg) translateZ(calc(var(--cube-size) / 8))}
 @keyframes hypercube-inner{from{transform:rotateX(0) rotateY(0)}to{transform:rotateX(360deg) rotateY(-360deg)}}
+
+
+/* Contrast rule: white text only where the surface itself is QubeSight blue (#006AFF). */
+.prototype-shell button,
+.prototype-shell [class*="bg-primary"],
+.prototype-shell .prototype-button{background-color:#006AFF!important;color:#fff!important}
+.prototype-shell button *,
+.prototype-shell [class*="bg-primary"] *,
+.prototype-shell .prototype-button *{color:#fff!important;stroke:#fff!important}
