@@ -205,7 +205,7 @@ const Header = () => {
                   variant="ghost"
                   size="default"
                   asChild
-                  className="hidden xl:inline-flex min-h-[44px] text-muted-foreground hover:text-foreground"
+                  className="hidden 2xl:inline-flex min-h-[44px] text-muted-foreground hover:text-foreground"
                 >
                   <Link to="/login">{loginLabel}</Link>
                 </Button>
