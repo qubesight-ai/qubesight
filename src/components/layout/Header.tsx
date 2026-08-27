@@ -139,7 +139,7 @@ const Header = () => {
             <LogoCube />
           </Link>
 
-          <div className="hidden lg:flex items-center gap-6 xl:gap-7 whitespace-nowrap">
+          <div className="hidden lg:flex items-center gap-4 xl:gap-7 whitespace-nowrap">
             {navLinks.map((link, index) => {
               const isActive = activeSection === link.id;
               return (
@@ -190,7 +190,7 @@ const Header = () => {
             </DropdownMenu>
           </div>
 
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2 shrink-0">
             <LanguageSwitcher />
             {user ? (
               <Button variant="hero" size="default" asChild className="min-h-[44px]">
@@ -205,7 +205,7 @@ const Header = () => {
                   variant="ghost"
                   size="default"
                   asChild
-                  className="min-h-[44px] text-muted-foreground hover:text-foreground"
+                  className="hidden xl:inline-flex min-h-[44px] text-muted-foreground hover:text-foreground"
                 >
                   <Link to="/login">{loginLabel}</Link>
                 </Button>
