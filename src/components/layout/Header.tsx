@@ -130,16 +130,16 @@ const Header = () => {
       }`}
     >
       <div className="container">
-        <nav className="flex items-center justify-between h-20" aria-label={navAriaLabel}>
+        <nav className="flex items-center justify-between gap-6 h-20" aria-label={navAriaLabel}>
           <Link
             to="/"
-            className="group flex h-10 w-10 min-[420px]:w-[10.75rem] items-center overflow-hidden"
+            className="group flex h-10 w-10 min-[420px]:w-[10.75rem] shrink-0 items-center overflow-hidden"
             aria-label="QubeSight"
           >
             <LogoCube />
           </Link>
 
-          <div className="hidden lg:flex items-center gap-7">
+          <div className="hidden lg:flex items-center gap-4 xl:gap-7 whitespace-nowrap">
             {navLinks.map((link, index) => {
               const isActive = activeSection === link.id;
               return (
@@ -190,7 +190,7 @@ const Header = () => {
             </DropdownMenu>
           </div>
 
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2 shrink-0">
             <LanguageSwitcher />
             {user ? (
               <Button variant="hero" size="default" asChild className="min-h-[44px]">
@@ -205,7 +205,7 @@ const Header = () => {
                   variant="ghost"
                   size="default"
                   asChild
-                  className="min-h-[44px] text-muted-foreground hover:text-foreground"
+                  className="hidden 2xl:inline-flex min-h-[44px] text-muted-foreground hover:text-foreground"
                 >
                   <Link to="/login">{loginLabel}</Link>
                 </Button>
