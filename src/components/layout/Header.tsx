@@ -130,16 +130,16 @@ const Header = () => {
       }`}
     >
       <div className="container">
-        <nav className="flex items-center justify-between h-20" aria-label={navAriaLabel}>
+        <nav className="flex items-center justify-between gap-6 h-20" aria-label={navAriaLabel}>
           <Link
             to="/"
-            className="group flex h-10 w-10 min-[420px]:w-[10.75rem] items-center overflow-hidden"
+            className="group flex h-10 w-10 min-[420px]:w-[10.75rem] shrink-0 items-center overflow-hidden"
             aria-label="QubeSight"
           >
             <LogoCube />
           </Link>
 
-          <div className="hidden lg:flex items-center gap-7">
+          <div className="hidden lg:flex items-center gap-6 xl:gap-7 whitespace-nowrap">
             {navLinks.map((link, index) => {
               const isActive = activeSection === link.id;
               return (
