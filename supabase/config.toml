@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.dlocalgo-webhook]
 verify_jwt = false
+
+[functions.chatbot-ai]
+verify_jwt = true
