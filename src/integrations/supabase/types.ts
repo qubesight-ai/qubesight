@@ -261,6 +261,33 @@ export type Database = {
         }
         Relationships: []
       }
+      rate_limit_counters: {
+        Row: {
+          action: string
+          request_count: number
+          subject_key: string
+          updated_at: string
+          window_seconds: number
+          window_start: string
+        }
+        Insert: {
+          action: string
+          request_count?: number
+          subject_key: string
+          updated_at?: string
+          window_seconds: number
+          window_start: string
+        }
+        Update: {
+          action?: string
+          request_count?: number
+          subject_key?: string
+          updated_at?: string
+          window_seconds?: number
+          window_start?: string
+        }
+        Relationships: []
+      }
       voice_agents: {
         Row: {
           created_at: string
@@ -319,6 +346,19 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      consume_rate_limit: {
+        Args: {
+          p_action: string
+          p_limit: number
+          p_subject_key: string
+          p_window_seconds: number
+        }
+        Returns: {
+          allowed: boolean
+          current_count: number
+          retry_after_seconds: number
+        }[]
+      }
       create_organization: {
         Args: { org_industry?: string; org_name: string }
         Returns: string
@@ -326,6 +366,7 @@ export type Database = {
       is_admin: { Args: never; Returns: boolean }
       is_org_member: { Args: { target_org: string }; Returns: boolean }
       is_org_owner: { Args: { target_org: string }; Returns: boolean }
+      purge_rate_limit_counters: { Args: never; Returns: undefined }
     }
     Enums: {
       app_role: "client" | "admin"
