@@ -177,3 +177,16 @@
 .demo-template-shell [class*="bg-primary/5"],.demo-template-shell [class*="bg-primary/10"],.demo-template-shell [class*="bg-primary/20"]{background-color:#e4edff!important}
 .prototype-shell [class*="bg-primary/5"] *,.prototype-shell [class*="bg-primary/10"] *,.prototype-shell [class*="bg-primary/15"] *,.prototype-shell [class*="bg-primary/20"] *,.prototype-shell [class*="bg-primary/30"] *,
 .demo-template-shell [class*="bg-primary/5"] *,.demo-template-shell [class*="bg-primary/10"] *,.demo-template-shell [class*="bg-primary/20"] *{color:#0054c7!important;stroke:#0054c7!important}
+/* Solid QubeSight-blue surfaces: every label on top of them is white, and nested CTAs invert. */
+.prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) *,
+.prototype-shell .gradient-bg *,
+.demo-template-shell [class*="bg-primary"]:not([class*="bg-primary/"]) *{color:#fff!important;stroke:#fff!important}
+.prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) .text-muted-foreground,
+.prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) .text-muted-foreground *,
+.prototype-shell .gradient-bg .text-muted-foreground{color:rgba(255,255,255,.86)!important}
+.prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) button,
+.prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) a[class*="bg-"],
+.prototype-shell .gradient-bg button{background-color:#fff!important;color:#00378a!important}
+.prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) button *,
+.prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) a[class*="bg-"] *,
+.prototype-shell .gradient-bg button *{color:#00378a!important;stroke:#00378a!important}
