@@ -172,18 +172,27 @@
 .prototype-shell .text-muted-foreground,.prototype-shell .text-muted-foreground *{color:#4a5768!important}
 .prototype-shell .text-primary,.prototype-shell .text-primary *,.prototype-shell .text-primary svg{color:#006AFF!important;stroke:#006AFF!important}
 .prototype-shell .text-brand-soft{color:#0054c7!important}
-/* Soft primary tints (bg-primary/5..30) stay light so the icons inside remain visible. */
-.prototype-shell [class*="bg-primary/5"],.prototype-shell [class*="bg-primary/10"],.prototype-shell [class*="bg-primary/15"],.prototype-shell [class*="bg-primary/20"],.prototype-shell [class*="bg-primary/30"],
-.demo-template-shell [class*="bg-primary/5"],.demo-template-shell [class*="bg-primary/10"],.demo-template-shell [class*="bg-primary/20"]{background-color:#e4edff!important}
-.prototype-shell [class*="bg-primary/5"] *,.prototype-shell [class*="bg-primary/10"] *,.prototype-shell [class*="bg-primary/15"] *,.prototype-shell [class*="bg-primary/20"] *,.prototype-shell [class*="bg-primary/30"] *,
-.demo-template-shell [class*="bg-primary/5"] *,.demo-template-shell [class*="bg-primary/10"] *,.demo-template-shell [class*="bg-primary/20"] *{color:#0054c7!important;stroke:#0054c7!important}
-/* Solid QubeSight-blue surfaces: every label on top of them is white, and nested CTAs invert. */
+/* ===== FINAL contrast pass: primary tints vs solid primary ===== */
+/* Translucent primary tints (bg-primary/10, bg-primary/[0.04], ...) = light surface, dark text */
+.prototype-shell [class*="bg-primary/"],
+.demo-template-shell [class*="bg-primary/"]{background-color:#eaf1ff!important;color:#071120!important}
+.prototype-shell [class*="bg-primary/"] *,
+.demo-template-shell [class*="bg-primary/"] *{color:#071120!important;stroke:currentColor!important}
+.prototype-shell [class*="bg-primary/"] .text-muted-foreground,
+.prototype-shell [class*="bg-primary/"] .text-muted-foreground *,
+.demo-template-shell [class*="bg-primary/"] .text-muted-foreground{color:#4a5768!important}
+.prototype-shell [class*="bg-primary/"] svg,
+.demo-template-shell [class*="bg-primary/"] svg{color:#0054c7!important;stroke:#0054c7!important}
+/* Solid primary surfaces = QubeSight blue with white text */
+.prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]),
+.prototype-shell .gradient-bg,
+.demo-template-shell [class*="bg-primary"]:not([class*="bg-primary/"]){background-color:#006AFF!important;color:#fff!important}
 .prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) *,
 .prototype-shell .gradient-bg *,
-.demo-template-shell [class*="bg-primary"]:not([class*="bg-primary/"]) *{color:#fff!important;stroke:#fff!important}
-.prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) .text-muted-foreground,
-.prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) .text-muted-foreground *,
-.prototype-shell .gradient-bg .text-muted-foreground{color:rgba(255,255,255,.86)!important}
+.demo-template-shell [class*="bg-primary"]:not([class*="bg-primary/"]) *{color:#fff!important;stroke:currentColor!important}
+.prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) svg,
+.prototype-shell .gradient-bg svg{stroke:#fff!important}
+/* CTA nested inside a solid blue card inverts to white */
 .prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) button,
 .prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) a[class*="bg-"],
 .prototype-shell .gradient-bg button{background-color:#fff!important;color:#00378a!important}
