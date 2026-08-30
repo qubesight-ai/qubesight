@@ -360,7 +360,7 @@ export const translations: Translations = {
   'pricing.voice.bronze.capacity': { es: '2,000 minutos (~400 llamadas)', en: '2,000 minutes (~400 calls)' },
   'pricing.voice.silver.capacity': { es: '5,000 minutos (~1,000 llamadas)', en: '5,000 minutes (~1,000 calls)' },
   'pricing.voice.gold.capacity': { es: '12,000 minutos', en: '12,000 minutes' },
-  'pricing.voice.overage': { es: 'Uso adicional: $0.10 por minuto', en: 'Overage usage: $0.10 per minute' },
+  'pricing.voice.overage': { es: 'Excedente de minutos entrantes: $0.10 por minuto', en: 'Inbound minute overage: $0.10 per minute' },
 
   // PropIA repositioning
   'propia.title.v2': { es: 'PropIA — Tu equipo de', en: 'PropIA — Your automatic' },
@@ -427,11 +427,11 @@ export const translations: Translations = {
   'pricing.voice.setup48': { es: 'Configuración en 48 horas', en: 'Setup in 48 hours' },
   'pricing.voice.noContract': { es: 'Sin contratos largos', en: 'No long-term contracts' },
   'pricing.voice.overage.title': { es: 'Uso adicional', en: 'Additional usage' },
-  'pricing.voice.overage.item': { es: 'Minutos salientes: $0.07 / min', en: 'Outbound minutes: $0.07 / min' },
-  'pricing.voice.overage.note': { es: 'Los minutos entrantes están incluidos en cada plan. Solo pagas extra cuando el sistema realiza llamadas salientes.', en: 'Inbound minutes are included in each plan. You only pay extra when the system makes outbound calls.' },
+  'pricing.voice.overage.item': { es: 'Minutos de llamadas salientes: $0.07 por minuto', en: 'Outbound call minutes: $0.07 per minute' },
+  'pricing.voice.overage.note': { es: 'Los minutos entrantes incluidos dependen del plan contratado. El excedente se cobra únicamente cuando se supera el límite mensual.', en: 'Inbound minutes included depend on the contracted plan. Overage is charged only when the monthly limit is exceeded.' },
   'pricing.addon.badge': { es: 'Recomendado para aumentar ventas', en: 'Recommended to boost sales' },
   'pricing.addon.name': { es: 'Outbound Engine', en: 'Outbound Engine' },
-  'pricing.addon.desc': { es: 'Recordatorios y follow-ups automáticos ($0.07/min saliente).', en: 'Automatic reminders and follow-ups ($0.07/min outbound).' },
+  'pricing.addon.desc': { es: 'Recordatorios y follow-ups automáticos. Minutos salientes: $0.07 por minuto.', en: 'Automatic reminders and follow-ups. Outbound minutes: $0.07 per minute.' },
   'pricing.addon.f1': { es: 'Recordatorios automáticos', en: 'Automatic reminders' },
   'pricing.addon.f2': { es: 'Follow-ups inteligentes', en: 'Smart follow-ups' },
   'pricing.addon.f3': { es: 'Llamadas salientes automatizadas', en: 'Automated outbound calls' },
