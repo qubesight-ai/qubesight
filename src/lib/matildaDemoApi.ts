@@ -17,7 +17,12 @@ async function request<T>(path: string, init: RequestInit): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-export const createMatildaSession = () => request<MatildaSession>("/web-demo/session", { method: "POST" });
+export const createMatildaSession = (turnstileToken: string) => {
+  if (!turnstileToken) throw new MatildaDemoApiError(400, "Completa la verificación antes de iniciar la demostración.");
+  const form = new FormData();
+  form.append("turnstile_token", turnstileToken);
+  return request<MatildaSession>("/web-demo/session", { method: "POST", body: form });
+};
 export const sendMatildaAudio = (sessionId: string, audio: Blob) => { const form = new FormData(); form.append("session_id", sessionId); form.append("audio", audio, `matilda-message.${audio.type.includes("ogg") ? "ogg" : "webm"}`); return request<MatildaMessage>("/web-demo/message", { method: "POST", body: form }); };
 export const getMatildaAudio = async (messageId: string): Promise<MatildaAudioStatus> => { let response: Response; try { response = await fetch(url(`/web-demo/message/${encodeURIComponent(messageId)}/audio`)); } catch { throw new MatildaDemoApiError(undefined, "No se pudo consultar la respuesta de voz."); } if (response.status === 202 || response.ok) return response.json() as Promise<MatildaAudioStatus>; throw new MatildaDemoApiError(response.status, publicMessages[response.status] ?? "La respuesta de voz no está disponible en este momento."); };
 export const deleteMatildaSession = async (sessionId: string) => { try { await fetch(url(`/web-demo/session/${encodeURIComponent(sessionId)}`), { method: "DELETE" }); } catch { /* Server expiry is sufficient. */ } };
