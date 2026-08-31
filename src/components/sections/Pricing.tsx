@@ -238,15 +238,15 @@ const Pricing = () => {
                 <div className="mt-2 text-sm text-muted-foreground">
                   {yearly ? (
                     <>
-                      <span className="text-foreground font-semibold">${plan.price * 12}</span>{" "}
+                      <span className="text-foreground font-semibold">${(plan.monthly * 12 * 0.8).toFixed(2)}</span>{" "}
                       {t("pricing.annualTotal")}{" "}
                       <span className="text-primary">
-                        ({t("pricing.youSave")} ${(plan.price * 12) / 4})
+                        ({t("pricing.youSave")} ${(plan.monthly * 12 * 0.2).toFixed(2)})
                       </span>
                     </>
                   ) : (
                     <>
-                      <span className="text-foreground font-semibold">${plan.price * 12}</span>{" "}
+                      <span className="text-foreground font-semibold">${(plan.monthly * 12).toFixed(2)}</span>{" "}
                       {t("pricing.annualTotal")}
                     </>
                   )}
@@ -657,10 +657,10 @@ const Pricing = () => {
                   <span className="text-muted-foreground">{t("pricing.month")}</span>
                 </div>
                 <div className="mt-2 text-sm text-muted-foreground">
-                  <span className="text-foreground font-semibold">${plan.price * 12}</span>{" "}
+                  <span className="text-foreground font-semibold">${(plan.monthly * 12 * 0.8).toFixed(2)}</span>{" "}
                   {t("pricing.annualTotal")}
                   {yearly && (
-                    <span className="text-primary"> ({t("pricing.youSave")} ${(plan.price * 12) / 4})</span>
+                    <span className="text-primary"> ({t("pricing.youSave")} ${(plan.monthly * 12 * 0.2).toFixed(2)})</span>
                   )}
                 </div>
               </div>
@@ -695,13 +695,14 @@ const Pricing = () => {
           <h4 className="text-center text-sm font-bold uppercase tracking-[0.2em] text-primary mb-6">
             {t("pricing.universal.title")}
           </h4>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
             {[
               t("pricing.universal.f1"),
               t("pricing.universal.f2"),
               t("pricing.universal.f3"),
               t("pricing.universal.f4"),
               t("pricing.universal.f5"),
+              t("pricing.universal.f6"),
             ].map((f, i) => (
               <div key={i} className="flex items-start gap-2 rounded-2xl border border-white/10 bg-white/[0.05] p-3">
                 <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
@@ -709,6 +710,9 @@ const Pricing = () => {
               </div>
             ))}
           </div>
+          <p className="max-w-3xl mx-auto mt-6 text-center text-xs sm:text-sm text-muted-foreground italic px-4">
+            {t("pricing.customNote")}
+          </p>
         </motion.div>
       </div>
 
