@@ -6,6 +6,7 @@ import HowItWorks from "@/components/sections/HowItWorks";
 import Multichannel from "@/components/sections/Multichannel";
 import Products from "@/components/sections/Products";
 import VoiceBot from "@/components/sections/VoiceBot";
+import MatildaVoiceDemo from "@/components/sections/MatildaVoiceDemo";
 import Industries from "@/components/sections/Industries";
 import Benefits from "@/components/sections/Benefits";
 import SocialProof from "@/components/sections/SocialProof";
@@ -31,6 +32,6 @@ const PrototypeHero = () => {
 
 const PrototypeShellHome = () => {
   useScrollReveal();
-  return <div className="prototype-shell"><Header/><main><PrototypeHero/><section className="prototype-statement"><span>[ 01 — EL PROBLEMA ]</span><h2>La misma inteligencia que tu equipo necesita.<br/><em>Una experiencia que tus clientes merecen.</em></h2><p>QubeSight conserva todos tus canales, productos y flujos; el nuevo diseño simplemente les da una experiencia más clara y memorable.</p></section><CinematicStory/><div className="prototype-content"><TrustBar/><Problem/><Solution/><HowItWorks/><Multichannel/><Products/><VoiceBot/><Industries/><Benefits/><SocialProof/><Testimonials/><Founders/><Integrations/><Pricing/><FAQ/><GuaranteeStrip/><FinalCTA/></div></main><Footer/><WhatsAppButton/></div>;
+  return <div className="prototype-shell"><Header/><main><PrototypeHero/><section className="prototype-statement"><span>[ 01 — EL PROBLEMA ]</span><h2>La misma inteligencia que tu equipo necesita.<br/><em>Una experiencia que tus clientes merecen.</em></h2><p>QubeSight conserva todos tus canales, productos y flujos; el nuevo diseño simplemente les da una experiencia más clara y memorable.</p></section><CinematicStory/><div className="prototype-content"><TrustBar/><Problem/><Solution/><HowItWorks/><Multichannel/><Products/><VoiceBot/><MatildaVoiceDemo/><Industries/><Benefits/><SocialProof/><Testimonials/><Founders/><Integrations/><Pricing/><FAQ/><GuaranteeStrip/><FinalCTA/></div></main><Footer/><WhatsAppButton/></div>;
 };
 export default PrototypeShellHome;
