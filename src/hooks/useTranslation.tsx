@@ -485,11 +485,13 @@ export const translations: Translations = {
 
   // Universal features
   'pricing.universal.title': { es: 'Todos los planes incluyen', en: 'All plans include' },
-  'pricing.universal.f1': { es: 'Activación en 48 horas', en: 'Activation in 48 hours' },
+  'pricing.universal.f1': { es: 'Activación estándar en aproximadamente 48 horas', en: 'Standard activation in approximately 48 hours' },
   'pricing.universal.f2': { es: 'Sin contratos de permanencia', en: 'No long-term contracts' },
-  'pricing.universal.f3': { es: 'Garantía de 14 días', en: '14-day guarantee' },
-  'pricing.universal.f4': { es: 'Soporte técnico', en: 'Technical support' },
-  'pricing.universal.f5': { es: 'Actualizaciones continuas', en: 'Continuous updates' },
+  'pricing.universal.f3': { es: 'Cancelación sin penalización', en: 'Cancellation without penalty' },
+  'pricing.universal.f4': { es: 'Garantía de satisfacción de 14 días', en: '14-day satisfaction guarantee' },
+  'pricing.universal.f5': { es: 'Soporte técnico', en: 'Technical support' },
+  'pricing.universal.f6': { es: 'Actualizaciones continuas', en: 'Continuous updates' },
+  'pricing.customNote': { es: 'Las integraciones personalizadas, migraciones de datos y configuraciones complejas pueden requerir más tiempo. El alcance y el plazo se confirman antes de iniciar el proyecto.', en: 'Custom integrations, data migrations, and complex setups may require more time. Scope and timeline are confirmed before starting the project.' },
 
   // Solution
   'solution.badge': { es: 'La solución', en: 'The solution' },
