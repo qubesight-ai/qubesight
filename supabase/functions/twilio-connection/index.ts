@@ -196,7 +196,6 @@ async function syncNumbers(
   connectionId: string,
   numbers: TwilioNumber[],
 ) {
-  if (!numbers.length) return;
   const rows = numbers
     .filter((number) => /^PN[0-9A-Fa-f]{32}$/.test(number.sid)
       && /^\+[1-9][0-9]{6,14}$/.test(number.phone_number))
@@ -212,6 +211,25 @@ async function syncNumbers(
       last_synced_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     }));
+
+  const currentSids = new Set(rows.map((row) => row.provider_number_sid));
+  const { data: existing, error: existingError } = await admin
+    .from("phone_numbers")
+    .select("id,provider_number_sid")
+    .eq("telephony_connection_id", connectionId);
+  if (existingError) throw new HttpError(500, "No se pudieron reconciliar los números.");
+
+  const staleIds = (existing ?? [])
+    .filter((row) => !currentSids.has(row.provider_number_sid))
+    .map((row) => row.id);
+  if (staleIds.length) {
+    const { error: staleError } = await admin
+      .from("phone_numbers")
+      .delete()
+      .in("id", staleIds);
+    if (staleError) throw new HttpError(500, "No se pudieron reconciliar los números.");
+  }
+
   if (!rows.length) return;
   const { error } = await admin
     .from("phone_numbers")
@@ -341,7 +359,7 @@ serve(async (req) => {
     const { error: vaultDeleteError } = await admin.rpc("vault_delete_twilio_secret", {
       p_secret_id: secretId,
     });
-    if (vaultDeleteError) console.error("orphaned Twilio vault secret", secretId);
+    if (vaultDeleteError) console.error("Twilio Vault cleanup failed");
     return json({ connection: null, numbers: [] });
   } catch (error) {
     const status = error instanceof HttpError ? error.status : 500;
