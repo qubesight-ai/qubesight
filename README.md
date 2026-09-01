@@ -14,17 +14,17 @@ Presentar a Qubesight como **proveedor tecnológico serio y confiable**, generar
 
 ## 🧠 CONTEXTO DE MARCA
 
-* Nombre: **Qubesight**
+- Nombre: **Qubesight**
 
-* Sector: Tecnología, IA, automatización, software empresarial
+- Sector: Tecnología, IA, automatización, software empresarial
 
-* Servicios: Apps, automatizaciones con IA, chatbots, websites, e-commerce, sistemas empresariales a la medida
+- Servicios: Apps, automatizaciones con IA, chatbots, websites, e-commerce, sistemas empresariales a la medida
 
-* Estilo: corporativo, moderno, sobrio, minimalista
+- Estilo: corporativo, moderno, sobrio, minimalista
 
-* Tono: claro, directo, profesional (no marketing exagerado)
+- Tono: claro, directo, profesional (no marketing exagerado)
 
-* Público: pymes, emprendedores, empresas que quieren digitalizar procesos
+- Público: pymes, emprendedores, empresas que quieren digitalizar procesos
 
 ---
 
@@ -42,13 +42,13 @@ Presentar a Qubesight como **proveedor tecnológico serio y confiable**, generar
 
 **Bullets destacados:**
 
-* Desarrollo a la medida
+- Desarrollo a la medida
 
-* Automatización con IA
+- Automatización con IA
 
-* Implementación rápida
+- Implementación rápida
 
-* Soporte directo
+- Soporte directo
 
 **CTA principal:**
 
@@ -68,17 +68,17 @@ Breve explicación clara:
 
 Mostrar tarjetas con:
 
-* **Websites profesionales**
+- **Websites profesionales**
 
-* **Tiendas e-commerce**
+- **Tiendas e-commerce**
 
-* **Chatbots con IA**
+- **Chatbots con IA**
 
-* **Automatizaciones inteligentes**
+- **Automatizaciones inteligentes**
 
-* **Apps empresariales**
+- **Apps empresariales**
 
-* **Sistemas a la medida**
+- **Sistemas a la medida**
 
 Texto clave:
 
@@ -106,15 +106,15 @@ Lenguaje simple, empresarial.
 
 Bullets:
 
-* Tecnología moderna y escalable
+- Tecnología moderna y escalable
 
-* Soluciones prácticas, no complicadas
+- Soluciones prácticas, no complicadas
 
-* Enfoque en resultados
+- Enfoque en resultados
 
-* Comunicación directa
+- Comunicación directa
 
-* Implementación eficiente
+- Implementación eficiente
 
 ---
 
@@ -122,11 +122,11 @@ Bullets:
 
 Mostrar ejemplos (no inventar logos):
 
-* Negocios que automatizan atención al cliente
+- Negocios que automatizan atención al cliente
 
-* Empresas que venden online
+- Empresas que venden online
 
-* Equipos que optimizan procesos internos
+- Equipos que optimizan procesos internos
 
 Texto:
 
@@ -150,43 +150,43 @@ Texto:
 
 Incluir:
 
-* Qubesight ©
+- Qubesight ©
 
-* Aviso legal y privacidad
+- Aviso legal y privacidad
 
-* Contacto WhatsApp
+- Contacto WhatsApp
 
-* Texto sobrio, corporativo
+- Texto sobrio, corporativo
 
 ---
 
 ## 🎨 DISEÑO Y UX
 
-* Colores: blanco, negro, gris, acento azul o verde tecnológico
+- Colores: blanco, negro, gris, acento azul o verde tecnológico
 
-* Tipografía moderna
+- Tipografía moderna
 
-* Espaciado amplio
+- Espaciado amplio
 
-* Animaciones sutiles
+- Animaciones sutiles
 
-* 100% responsive
+- 100% responsive
 
-* SEO básico activo
+- SEO básico activo
 
 ---
 
 ## ⚙️ FUNCIONALIDAD
 
-* Botón WhatsApp funcional
+- Botón WhatsApp funcional
 
-* Formulario simple
+- Formulario simple
 
-* Carga rápida
+- Carga rápida
 
-* Texto definitivo (sin placeholders)
+- Texto definitivo (sin placeholders)
 
-* Sitio listo para publicar sin edición manual
+- Sitio listo para publicar sin edición manual
 
 This project was built with [Lovable](https://lovable.dev).
 

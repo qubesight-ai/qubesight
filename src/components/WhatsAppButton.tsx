@@ -5,7 +5,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 const WhatsAppButton = () => {
   const { t } = useTranslation();
   const whatsappNumber = "50646009140";
-  const whatsappMessage = encodeURIComponent(t('whatsapp.message'));
+  const whatsappMessage = encodeURIComponent(t("whatsapp.message"));
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   return (
@@ -22,9 +22,9 @@ const WhatsAppButton = () => {
       aria-label="WhatsApp"
     >
       <MessageCircle className="h-6 w-6 text-primary-foreground group-hover:scale-110 transition-transform duration-200" />
-      
+
       <span className="absolute right-full mr-3 px-3 py-2 rounded-lg bg-card text-foreground text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none border border-border">
-        {t('whatsapp.tooltip')}
+        {t("whatsapp.tooltip")}
       </span>
     </motion.a>
   );

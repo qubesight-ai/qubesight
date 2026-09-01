@@ -1,0 +1,7 @@
+dist
+node_modules
+.agents
+package-lock.json
+bun.lock
+bun.lockb
+src/integrations/supabase/types.ts

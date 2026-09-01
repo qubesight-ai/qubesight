@@ -26,7 +26,9 @@ const Spline3D = ({ scene, className }: Spline3DProps) => {
 
   return (
     <div className={className}>
-      <Suspense fallback={<div className="w-full h-full" style={{ background: "var(--gradient-glow)" }} />}>
+      <Suspense
+        fallback={<div className="w-full h-full" style={{ background: "var(--gradient-glow)" }} />}
+      >
         <ErrorBoundary onError={() => setErrored(true)}>
           <Spline scene={scene} style={{ width: "100%", height: "100%" }} />
         </ErrorBoundary>
@@ -36,7 +38,10 @@ const Spline3D = ({ scene, className }: Spline3DProps) => {
 };
 
 import { Component, ReactNode } from "react";
-class ErrorBoundary extends Component<{ children: ReactNode; onError: () => void }, { hasError: boolean }> {
+class ErrorBoundary extends Component<
+  { children: ReactNode; onError: () => void },
+  { hasError: boolean }
+> {
   state = { hasError: false };
   static getDerivedStateFromError() {
     return { hasError: true };

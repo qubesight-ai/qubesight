@@ -42,13 +42,37 @@ const HeroChatPreview = () => {
 
   const steps: Step[] = useMemo(
     () => [
-      { key: "ring",  ms: 1400, labelEs: "Llamada entrante",       labelEn: "Incoming call",      icon: Phone },
-      { key: "ans",   ms: 1800, labelEs: "IA contesta en 2 seg",   labelEn: "AI answers in 2s",   icon: Mic },
-      { key: "talk",  ms: 3000, labelEs: "Conversa e interpreta",  labelEn: "Talks & interprets", icon: Mic },
-      { key: "book",  ms: 2200, labelEs: "Agenda el turno",        labelEn: "Books appointment",  icon: CalendarCheck },
-      { key: "sms",   ms: 2200, labelEs: "Envía cotización SMS",   labelEn: "Sends SMS quote",    icon: MessageSquare },
+      { key: "ring", ms: 1400, labelEs: "Llamada entrante", labelEn: "Incoming call", icon: Phone },
+      {
+        key: "ans",
+        ms: 1800,
+        labelEs: "IA contesta en 2 seg",
+        labelEn: "AI answers in 2s",
+        icon: Mic,
+      },
+      {
+        key: "talk",
+        ms: 3000,
+        labelEs: "Conversa e interpreta",
+        labelEn: "Talks & interprets",
+        icon: Mic,
+      },
+      {
+        key: "book",
+        ms: 2200,
+        labelEs: "Agenda el turno",
+        labelEn: "Books appointment",
+        icon: CalendarCheck,
+      },
+      {
+        key: "sms",
+        ms: 2200,
+        labelEs: "Envía cotización SMS",
+        labelEn: "Sends SMS quote",
+        icon: MessageSquare,
+      },
     ],
-    []
+    [],
   );
 
   const [stepIdx, setStepIdx] = useState(0);
@@ -81,7 +105,9 @@ const HeroChatPreview = () => {
 
   const current = steps[stepIdx];
   const callActive = stepIdx >= 1;
-  const m = Math.floor(elapsed / 60).toString().padStart(2, "0");
+  const m = Math.floor(elapsed / 60)
+    .toString()
+    .padStart(2, "0");
   const s = (elapsed % 60).toString().padStart(2, "0");
 
   return (
@@ -101,7 +127,7 @@ const HeroChatPreview = () => {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
             </span>
             <span className="text-[10px] font-semibold uppercase tracking-widest text-emerald-300">
-              {callActive ? (es ? "En vivo" : "Live") : (es ? "Sonando" : "Ringing")}
+              {callActive ? (es ? "En vivo" : "Live") : es ? "Sonando" : "Ringing"}
             </span>
           </div>
         </div>
@@ -131,8 +157,14 @@ const HeroChatPreview = () => {
           >
             {!callActive && (
               <>
-                <span className="absolute inset-0 rounded-full bg-primary/25 animate-ping" style={{ animationDuration: "1.2s" }} />
-                <span className="absolute -inset-3 rounded-full bg-primary/10 animate-ping" style={{ animationDuration: "1.6s" }} />
+                <span
+                  className="absolute inset-0 rounded-full bg-primary/25 animate-ping"
+                  style={{ animationDuration: "1.2s" }}
+                />
+                <span
+                  className="absolute -inset-3 rounded-full bg-primary/10 animate-ping"
+                  style={{ animationDuration: "1.6s" }}
+                />
               </>
             )}
             <div className="relative h-20 w-20 rounded-full bg-gradient-to-br from-[hsl(249,65%,56%)] to-[hsl(258,70%,62%)] grid place-items-center text-white shadow-[0_0_40px_-8px_hsl(249,70%,50%,0.5)]">
@@ -141,7 +173,7 @@ const HeroChatPreview = () => {
           </motion.div>
           <div className="text-lg font-semibold text-foreground tracking-tight">QubeSight AI</div>
           <div className="text-xs text-muted-foreground tabular-nums">
-            {callActive ? `${m}:${s}` : (es ? "Llamando…" : "Calling…")}
+            {callActive ? `${m}:${s}` : es ? "Llamando…" : "Calling…"}
           </div>
         </div>
 

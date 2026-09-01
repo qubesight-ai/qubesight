@@ -5,7 +5,9 @@ import { useTranslation } from "@/hooks/useTranslation";
 const Assistant = () => {
   const { t, language } = useTranslation();
   const whatsappUrl = `https://wa.me/50646009140?text=${encodeURIComponent(
-    language === "es" ? "Hola, quiero mi QubeSight Assistant." : "Hi, I want my QubeSight Assistant."
+    language === "es"
+      ? "Hola, quiero mi QubeSight Assistant."
+      : "Hi, I want my QubeSight Assistant.",
   )}`;
 
   // Capability tiles — bento grid
@@ -27,8 +29,10 @@ const Assistant = () => {
     <section id="assistant" className="relative py-28 sm:py-36 overflow-hidden">
       {/* Ambient orb */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-1/4 -left-40 w-[520px] h-[520px] rounded-full blur-3xl opacity-25"
-             style={{ background: "radial-gradient(circle, hsl(249 70% 40% / 0.4), transparent 60%)" }} />
+        <div
+          className="absolute top-1/4 -left-40 w-[520px] h-[520px] rounded-full blur-3xl opacity-25"
+          style={{ background: "radial-gradient(circle, hsl(249 70% 40% / 0.4), transparent 60%)" }}
+        />
       </div>
 
       <div className="container">
@@ -115,9 +119,7 @@ const Assistant = () => {
                       <Icon className="h-5 w-5" strokeWidth={1.5} />
                     </div>
                     <div className="mt-auto">
-                      <p className="text-foreground/90 text-[15px] leading-snug">
-                        {tile.title}
-                      </p>
+                      <p className="text-foreground/90 text-[15px] leading-snug">{tile.title}</p>
                     </div>
                   </>
                 )}

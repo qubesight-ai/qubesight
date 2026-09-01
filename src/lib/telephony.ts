@@ -51,16 +51,13 @@ async function invokeTelephony(body: Record<string, unknown>): Promise<Telephony
 
 export const getTelephonyState = () => invokeTelephony({ action: "status" });
 
-export const connectTwilio = (
-  accountSid: string,
-  apiKeySid: string,
-  apiKeySecret: string,
-) => invokeTelephony({
-  action: "connect",
-  account_sid: accountSid,
-  api_key_sid: apiKeySid,
-  api_key_secret: apiKeySecret,
-});
+export const connectTwilio = (accountSid: string, apiKeySid: string, apiKeySecret: string) =>
+  invokeTelephony({
+    action: "connect",
+    account_sid: accountSid,
+    api_key_sid: apiKeySid,
+    api_key_secret: apiKeySecret,
+  });
 
 export const refreshTwilioNumbers = () => invokeTelephony({ action: "refresh" });
 

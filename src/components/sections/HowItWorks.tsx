@@ -23,8 +23,7 @@ const HowItWorks = () => {
         >
           <span className="eyebrow mb-5 inline-flex">{t("how.badge")}</span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {t("how.title")}{" "}
-            <span className="gradient-text">{t("how.titleAccent")}</span>
+            {t("how.title")} <span className="gradient-text">{t("how.titleAccent")}</span>
           </h2>
         </motion.div>
 

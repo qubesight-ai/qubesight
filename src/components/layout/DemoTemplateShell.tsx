@@ -7,7 +7,9 @@ const DemoTemplateShell = ({ children }: { children: ReactNode }) => (
   <div className="prototype-shell demo-template-shell min-h-screen">
     <Header />
     <div className="prototype-demo-cubes" aria-hidden="true">
-      <span /><span /><span />
+      <span />
+      <span />
+      <span />
     </div>
     <main className="relative z-10 pt-20">{children}</main>
     <Footer />
@@ -16,4 +18,3 @@ const DemoTemplateShell = ({ children }: { children: ReactNode }) => (
 );
 
 export default DemoTemplateShell;
-

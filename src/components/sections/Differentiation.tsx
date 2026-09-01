@@ -27,8 +27,7 @@ const Differentiation = () => {
             {t("diff.badge")}
           </span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-[1.05] text-balance">
-            {t("diff.title")}{" "}
-            <span className="gradient-text">{t("diff.titleAccent")}</span>
+            {t("diff.title")} <span className="gradient-text">{t("diff.titleAccent")}</span>
           </h2>
         </motion.div>
 

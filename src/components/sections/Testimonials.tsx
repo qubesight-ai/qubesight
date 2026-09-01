@@ -47,12 +47,16 @@ const Testimonials = () => {
                 ))}
               </div>
               <div className="flex items-center gap-3 pt-4 border-t border-white/5">
-                <div className={`h-11 w-11 rounded-full bg-gradient-to-br ${tm.color} flex items-center justify-center text-white font-bold`}>
+                <div
+                  className={`h-11 w-11 rounded-full bg-gradient-to-br ${tm.color} flex items-center justify-center text-white font-bold`}
+                >
                   {tm.initials}
                 </div>
                 <div>
                   <div className="font-semibold text-sm">{t(`testimonials.${tm.key}.name`)}</div>
-                  <div className="text-xs text-muted-foreground">{t(`testimonials.${tm.key}.role`)}</div>
+                  <div className="text-xs text-muted-foreground">
+                    {t(`testimonials.${tm.key}.role`)}
+                  </div>
                 </div>
               </div>
             </motion.div>

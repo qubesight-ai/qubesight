@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type FormEvent } from "react";
 
 // ─── NICHE CONFIGURATIONS ────────────────────────────────────────────────────
 // Each niche has:
@@ -169,7 +169,15 @@ const NICHES = {
     ],
     extraFaqs: [
       {
-        triggers: ["credito", "crédito", "hipoteca", "hipotecario", "banco", "prestamo", "préstamo"],
+        triggers: [
+          "credito",
+          "crédito",
+          "hipoteca",
+          "hipotecario",
+          "banco",
+          "prestamo",
+          "préstamo",
+        ],
         response: `💳 ASESORÍA HIPOTECARIA\n\nTrabajamos con BAC, BCR, Davivienda, Promerica.\n\n• Pre-aprobación en 48h\n• Hasta 90% de financiamiento\n• Plazo hasta 30 años\n\nEscribe *"cotizar"* y te envío simulación por SMS.`,
       },
       {
@@ -184,36 +192,77 @@ const NICHES = {
   },
 };
 
+type NicheKey = keyof typeof NICHES;
+type Niche = (typeof NICHES)[NicheKey];
+type Service = Niche["services"][number];
+type BookingStage = "idle" | "service" | "date" | "time" | "name" | "phone" | "done";
+type BookingData = {
+  service?: Service;
+  date?: string;
+  time?: string;
+  name?: string;
+  phone?: string;
+};
+type DemoMessage = { role: "user" | "bot"; text: string; time: string };
+
 // ─── UNIVERSAL CROSS-NICHE FLOWS (voice, SMS, interpretation, payment) ───────
 const UNIVERSAL_FLOWS = [
   {
     key: "voz",
     triggers: [
-      "llamada", "llamame", "llámame", "llamar", "voz", "voice", "call",
-      "telefono", "teléfono", "asistente", "receptionist", "habla",
+      "llamada",
+      "llamame",
+      "llámame",
+      "llamar",
+      "voz",
+      "voice",
+      "call",
+      "telefono",
+      "teléfono",
+      "asistente",
+      "receptionist",
+      "habla",
     ],
-    response: (niche) =>
+    response: (niche: Niche) =>
       `🎙️ ASISTENTE DE VOZ IA\n\nNuestro asistente de voz puede llamarte ahora mismo y:\n\n• Contestar tus preguntas en tiempo real\n• Agendar tu ${niche.bookingLabel} en el calendario\n• Enviarte la *cotización por SMS* al terminar\n• Interpretar la llamada *español ↔ inglés* en vivo\n\n📞 Línea demo: ${niche.phone}\nO escribe *"agendar"* y te llamamos en menos de 1 minuto.`,
   },
   {
     key: "interprete",
     triggers: [
-      "english", "ingles", "inglés", "interprete", "intérprete",
-      "interpretacion", "interpretación", "traducir", "translate",
-      "idioma", "language", "bilingue", "bilingüe",
+      "english",
+      "ingles",
+      "inglés",
+      "interprete",
+      "intérprete",
+      "interpretacion",
+      "interpretación",
+      "traducir",
+      "translate",
+      "idioma",
+      "language",
+      "bilingue",
+      "bilingüe",
     ],
-    response: (niche) =>
+    response: (_niche: Niche) =>
       `🌐 INTERPRETACIÓN EN VIVO\n\nWe also speak English! 🇺🇸🇪🇸\n\nNuestro asistente IA traduce la llamada en tiempo real:\n• Español ↔ English ↔ Português\n• Latencia < 1 segundo\n• Sin operador humano de por medio\n\nEscribe *"llamada"* para probarlo o *"agendar"* y te contactamos en tu idioma.`,
   },
   {
     key: "cotizar",
     triggers: [
-      "cotizar", "cotizacion", "cotización", "presupuesto", "precio total",
-      "sms", "mensaje", "quote",
+      "cotizar",
+      "cotizacion",
+      "cotización",
+      "presupuesto",
+      "precio total",
+      "sms",
+      "mensaje",
+      "quote",
     ],
-    response: (niche) => {
-      const top = niche.services.slice(0, 3)
-        .map((s) => `• ${s.name} — ${s.price}`).join("\n");
+    response: (niche: Niche) => {
+      const top = niche.services
+        .slice(0, 3)
+        .map((s) => `• ${s.name} — ${s.price}`)
+        .join("\n");
       return `📲 COTIZACIÓN POR SMS\n\nTe enviamos un resumen al instante a tu celular:\n\n${top}\n\nEscribe *"agendar"* y al final del flujo te llega el SMS con tu cotización personalizada y enlace de pago.`;
     },
   },
@@ -222,23 +271,31 @@ const UNIVERSAL_FLOWS = [
 // ─── BOOKING STATE MACHINE ────────────────────────────────────────────────────
 // Stages: idle → service → date → time → name → phone → done
 const BOOKING_TRIGGERS = [
-  "agendar", "reservar", "reserva", "cita", "turno", "visita",
-  "appointment", "book", "pedir", "ordenar",
+  "agendar",
+  "reservar",
+  "reserva",
+  "cita",
+  "turno",
+  "visita",
+  "appointment",
+  "book",
+  "pedir",
+  "ordenar",
 ];
 
-function isBookingTrigger(msg) {
+function isBookingTrigger(msg: string) {
   const m = msg.toLowerCase().trim();
   return BOOKING_TRIGGERS.some((t) => m === t || m.includes(t));
 }
 
-function bookingPrompt(stage, niche, data) {
+function bookingPrompt(stage: BookingStage, niche: Niche, data: BookingData): string {
   switch (stage) {
     case "service":
       return `📋 AGENDAR ${niche.bookingLabel.toUpperCase()}\n\n¿Qué servicio te interesa?\n\n${niche.services
         .map((s) => `${s.id}️⃣ ${s.name} — ${s.price}`)
         .join("\n")}\n\n✍️ Escribe el número.`;
     case "date":
-      return `📅 Perfecto, *${data.service.name}*.\n\n¿Para qué día? (ej: *mañana*, *viernes*, *15/jun*)`;
+      return `📅 Perfecto, *${data.service?.name ?? "servicio seleccionado"}*.\n\n¿Para qué día? (ej: *mañana*, *viernes*, *15/jun*)`;
     case "time":
       return `🕐 ¿A qué hora? (ej: *10am*, *3:30pm*, *en la tarde*)`;
     case "name":
@@ -246,11 +303,14 @@ function bookingPrompt(stage, niche, data) {
     case "phone":
       return `📱 Último paso — ¿a qué número te envío la *confirmación + cotización por SMS*?`;
     default:
-      return null;
+      return "";
   }
 }
 
-function bookingConfirmation(niche, data) {
+function bookingConfirmation(niche: Niche, data: BookingData) {
+  if (!data.service || !data.name || !data.date || !data.time || !data.phone) {
+    return "No pude completar la reserva. Escribe *agendar* para intentarlo nuevamente.";
+  }
   return (
     `✅ ¡${data.name.split(" ")[0]}, ${niche.bookingLabel} confirmada!\n\n` +
     `🗓️ ${data.date} · ${data.time}\n` +
@@ -269,14 +329,14 @@ function bookingConfirmation(niche, data) {
 // ─── QUICK REPLIES ────────────────────────────────────────────────────────────
 const QUICK_REPLIES = {
   restaurante: ["Menú", "Reservar", "🎙️ Llamada IA", "📲 Cotizar SMS", "🌐 English"],
-  salon:       ["Servicios", "Agendar cita", "🎙️ Llamada IA", "📲 Cotizar SMS", "🌐 English"],
-  dental:      ["Tratamientos", "Agendar cita", "Emergencia", "🎙️ Llamada IA", "📲 Cotizar SMS"],
-  gym:         ["Membresías", "Agendar visita", "Clases", "🎙️ Llamada IA", "📲 Cotizar SMS"],
-  inmobiliaria:["Propiedades", "Agendar visita", "Crédito", "🎙️ Llamada IA", "🌐 English"],
+  salon: ["Servicios", "Agendar cita", "🎙️ Llamada IA", "📲 Cotizar SMS", "🌐 English"],
+  dental: ["Tratamientos", "Agendar cita", "Emergencia", "🎙️ Llamada IA", "📲 Cotizar SMS"],
+  gym: ["Membresías", "Agendar visita", "Clases", "🎙️ Llamada IA", "📲 Cotizar SMS"],
+  inmobiliaria: ["Propiedades", "Agendar visita", "Crédito", "🎙️ Llamada IA", "🌐 English"],
 };
 
 // ─── RESPONSE RESOLVER ────────────────────────────────────────────────────────
-function buildMenu(niche) {
+function buildMenu(niche: Niche) {
   return (
     `👋 ¡Bienvenido a *${niche.bizName}*! ${niche.emoji}\n\n` +
     `📋 ${niche.bookingLabel === "reserva" ? "MENÚ" : "SERVICIOS"}\n` +
@@ -285,12 +345,12 @@ function buildMenu(niche) {
   );
 }
 
-function getServiceByNumber(niche, msg) {
+function getServiceByNumber(niche: Niche, msg: string) {
   const m = msg.trim();
   return niche.services.find((s) => s.id === m) || null;
 }
 
-function matchUniversal(msg, niche) {
+function matchUniversal(msg: string, niche: Niche) {
   const m = msg.toLowerCase().trim();
   for (const flow of UNIVERSAL_FLOWS) {
     if (flow.triggers.some((t) => m === t || m.includes(t))) {
@@ -300,14 +360,35 @@ function matchUniversal(msg, niche) {
   return null;
 }
 
-function matchFaq(msg, niche) {
+function matchFaq(msg: string, niche: Niche) {
   const m = msg.toLowerCase().trim();
   // menu
-  if (["hola", "menu", "menú", "inicio", "start", "hi", "buenas", "servicios", "tratamientos", "membresias", "membresías", "propiedades", "catalogo", "catálogo"].some((t) => m === t || m.includes(t))) {
+  if (
+    [
+      "hola",
+      "menu",
+      "menú",
+      "inicio",
+      "start",
+      "hi",
+      "buenas",
+      "servicios",
+      "tratamientos",
+      "membresias",
+      "membresías",
+      "propiedades",
+      "catalogo",
+      "catálogo",
+    ].some((t) => m === t || m.includes(t))
+  ) {
     return buildMenu(niche);
   }
   // promo
-  if (["promo", "descuento", "oferta", "promocion", "promoción", "cupon", "cupón"].some((t) => m.includes(t))) {
+  if (
+    ["promo", "descuento", "oferta", "promocion", "promoción", "cupon", "cupón"].some((t) =>
+      m.includes(t),
+    )
+  ) {
     return `🎁 PROMO DEL MES\n\nCupón: *QUBE10*\n10% de descuento en tu primer ${niche.bookingLabel}.\nVigencia: este mes.\n\nEscribe *"agendar"* para aplicarla.`;
   }
   // horario
@@ -315,11 +396,26 @@ function matchFaq(msg, niche) {
     return `🕐 HORARIO\n\nLun–Vie: 8am – 7pm\nSáb: 8am – 4pm\nDom: cerrado\n\n🤖 Pero el *asistente IA está 24/7* por chat, voz y SMS.`;
   }
   // ubicacion
-  if (["donde", "dónde", "ubicacion", "ubicación", "direccion", "dirección", "como llegar", "cómo llegar"].some((t) => m.includes(t))) {
+  if (
+    [
+      "donde",
+      "dónde",
+      "ubicacion",
+      "ubicación",
+      "direccion",
+      "dirección",
+      "como llegar",
+      "cómo llegar",
+    ].some((t) => m.includes(t))
+  ) {
     return `📍 UBICACIÓN\n\n${niche.address}\n\n📞 ${niche.phone}\n\n¿Te envío el pin de Google Maps por SMS? Escribe *"cotizar"* con tu número.`;
   }
   // asesor
-  if (["asesor", "humano", "persona", "hablar con", "agente", "contactar", "llamame", "llámame"].some((t) => m.includes(t))) {
+  if (
+    ["asesor", "humano", "persona", "hablar con", "agente", "contactar", "llamame", "llámame"].some(
+      (t) => m.includes(t),
+    )
+  ) {
     return null; // handled separately by lead form
   }
   // niche-specific FAQs
@@ -330,7 +426,7 @@ function matchFaq(msg, niche) {
 }
 
 // Returns scripted reply if a strong match, otherwise null (fall back to AI)
-function getScriptedReply(nicheKey, message) {
+function getScriptedReply(nicheKey: NicheKey, message: string) {
   const niche = NICHES[nicheKey];
   // service number
   const svc = getServiceByNumber(niche, message);
@@ -344,66 +440,97 @@ function getScriptedReply(nicheKey, message) {
   return null;
 }
 
-function getDefaultResponse(niche) {
+function getDefaultResponse(niche: Niche) {
   return `No estoy seguro de haber entendido 😊\n\nPuedes:\n• Escribir *"menú"* para ver opciones\n• *"agendar"* para reservar tu ${niche.bookingLabel}\n• *"llamada"* para hablar con el asistente de voz IA por voz\n• *"cotizar"* para recibir SMS con precios\n• *"english"* para cambiar a inglés con intérprete en vivo`;
 }
 
-function formatMessage(text) {
+function formatMessage(text: string) {
   const parts = text.split(/(\*[^*]+\*)/g);
   return parts.map((part, i) =>
-    part.startsWith("*") && part.endsWith("*")
-      ? <strong key={i}>{part.slice(1, -1)}</strong>
-      : part
+    part.startsWith("*") && part.endsWith("*") ? (
+      <strong key={i}>{part.slice(1, -1)}</strong>
+    ) : (
+      part
+    ),
   );
 }
 
 function Tick() {
   return (
-    <svg viewBox="0 0 16 11" width="15" height="11" style={{ marginLeft: 2, verticalAlign: "middle" }}>
-      <path fill="#53bdeb" d="M11.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-2.405-2.272a.463.463 0 0 0-.336-.146.484.484 0 0 0-.343.146l-.311.31a.473.473 0 0 0 0 .675l3.218 3.218c.094.094.22.146.343.146a.484.484 0 0 0 .343-.146L11.4 1.31a.473.473 0 0 0 0-.675l-.329-.329z"/>
-      <path fill="#53bdeb" d="M15.917.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178L9.042 8.365 8.077 7.4a.473.473 0 0 0-.675 0l-.312.311a.473.473 0 0 0 0 .675l1.683 1.683c.094.094.22.146.343.146a.484.484 0 0 0 .343-.146l6.787-8.373a.473.473 0 0 0 0-.675l-.329-.368z"/>
+    <svg
+      viewBox="0 0 16 11"
+      width="15"
+      height="11"
+      style={{ marginLeft: 2, verticalAlign: "middle" }}
+    >
+      <path
+        fill="#53bdeb"
+        d="M11.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-2.405-2.272a.463.463 0 0 0-.336-.146.484.484 0 0 0-.343.146l-.311.31a.473.473 0 0 0 0 .675l3.218 3.218c.094.094.22.146.343.146a.484.484 0 0 0 .343-.146L11.4 1.31a.473.473 0 0 0 0-.675l-.329-.329z"
+      />
+      <path
+        fill="#53bdeb"
+        d="M15.917.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178L9.042 8.365 8.077 7.4a.473.473 0 0 0-.675 0l-.312.311a.473.473 0 0 0 0 .675l1.683 1.683c.094.094.22.146.343.146a.484.484 0 0 0 .343-.146l6.787-8.373a.473.473 0 0 0 0-.675l-.329-.368z"
+      />
     </svg>
   );
 }
 
-function Bubble({ msg }) {
+function Bubble({ msg }: { msg: DemoMessage }) {
   const isBot = msg.role === "bot";
   return (
-    <div style={{ display: "flex", justifyContent: isBot ? "flex-start" : "flex-end", marginBottom: 4, padding: "0 6px" }}>
-      <div style={{
-        position: "relative",
-        maxWidth: "78%",
-        background: isBot ? "#ffffff" : "#d9fdd3",
-        color: "#111b21",
-        borderRadius: 7.5,
-        padding: "6px 9px 8px 9px",
-        fontSize: 14.2,
-        lineHeight: 1.42,
-        whiteSpace: "pre-wrap",
-        boxShadow: "0 1px 0.5px rgba(11,20,26,0.13)",
-        marginLeft: isBot ? 8 : 0,
-        marginRight: isBot ? 0 : 8,
-        borderTopLeftRadius: isBot ? 0 : 7.5,
-        borderTopRightRadius: isBot ? 7.5 : 0,
-      }}>
-        <span aria-hidden style={{
-          position: "absolute", top: 0,
-          left: isBot ? -8 : "auto",
-          right: isBot ? "auto" : -8,
-          width: 8, height: 13,
+    <div
+      style={{
+        display: "flex",
+        justifyContent: isBot ? "flex-start" : "flex-end",
+        marginBottom: 4,
+        padding: "0 6px",
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          maxWidth: "78%",
           background: isBot ? "#ffffff" : "#d9fdd3",
-          clipPath: isBot
-            ? "polygon(100% 0, 0 0, 100% 100%)"
-            : "polygon(0 0, 100% 0, 0 100%)",
-        }} />
-        <div style={{ paddingRight: isBot ? 44 : 58, minWidth: 60 }}>
-          {formatMessage(msg.text)}
-        </div>
-        <div style={{
-          position: "absolute", right: 8, bottom: 3,
-          fontSize: 10.5, color: "#667781",
-          display: "flex", alignItems: "center", gap: 1, lineHeight: 1,
-        }}>
+          color: "#111b21",
+          borderRadius: 7.5,
+          padding: "6px 9px 8px 9px",
+          fontSize: 14.2,
+          lineHeight: 1.42,
+          whiteSpace: "pre-wrap",
+          boxShadow: "0 1px 0.5px rgba(11,20,26,0.13)",
+          marginLeft: isBot ? 8 : 0,
+          marginRight: isBot ? 0 : 8,
+          borderTopLeftRadius: isBot ? 0 : 7.5,
+          borderTopRightRadius: isBot ? 7.5 : 0,
+        }}
+      >
+        <span
+          aria-hidden
+          style={{
+            position: "absolute",
+            top: 0,
+            left: isBot ? -8 : "auto",
+            right: isBot ? "auto" : -8,
+            width: 8,
+            height: 13,
+            background: isBot ? "#ffffff" : "#d9fdd3",
+            clipPath: isBot ? "polygon(100% 0, 0 0, 100% 100%)" : "polygon(0 0, 100% 0, 0 100%)",
+          }}
+        />
+        <div style={{ paddingRight: isBot ? 44 : 58, minWidth: 60 }}>{formatMessage(msg.text)}</div>
+        <div
+          style={{
+            position: "absolute",
+            right: 8,
+            bottom: 3,
+            fontSize: 10.5,
+            color: "#667781",
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+            lineHeight: 1,
+          }}
+        >
           <span>{msg.time}</span>
           {!isBot && <Tick />}
         </div>
@@ -414,22 +541,45 @@ function Bubble({ msg }) {
 
 function TypingIndicator() {
   return (
-    <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: 4, padding: "0 6px" }}>
-      <div style={{
-        position: "relative", background: "#ffffff", borderRadius: 7.5,
-        borderTopLeftRadius: 0,
-        padding: "10px 14px", display: "flex", gap: 4, marginLeft: 8,
-        boxShadow: "0 1px 0.5px rgba(11,20,26,0.13)",
-      }}>
-        <span aria-hidden style={{
-          position: "absolute", top: 0, left: -8, width: 8, height: 13,
-          background: "#ffffff", clipPath: "polygon(100% 0, 0 0, 100% 100%)",
-        }} />
-        {[0, 1, 2].map(i => (
-          <div key={i} style={{
-            width: 6, height: 6, borderRadius: "50%", background: "#9aa5ab",
-            animation: `bounce 1.2s ease-in-out ${i * 0.2}s infinite`,
-          }} />
+    <div
+      style={{ display: "flex", justifyContent: "flex-start", marginBottom: 4, padding: "0 6px" }}
+    >
+      <div
+        style={{
+          position: "relative",
+          background: "#ffffff",
+          borderRadius: 7.5,
+          borderTopLeftRadius: 0,
+          padding: "10px 14px",
+          display: "flex",
+          gap: 4,
+          marginLeft: 8,
+          boxShadow: "0 1px 0.5px rgba(11,20,26,0.13)",
+        }}
+      >
+        <span
+          aria-hidden
+          style={{
+            position: "absolute",
+            top: 0,
+            left: -8,
+            width: 8,
+            height: 13,
+            background: "#ffffff",
+            clipPath: "polygon(100% 0, 0 0, 100% 100%)",
+          }}
+        />
+        {[0, 1, 2].map((i) => (
+          <div
+            key={i}
+            style={{
+              width: 6,
+              height: 6,
+              borderRadius: "50%",
+              background: "#9aa5ab",
+              animation: `bounce 1.2s ease-in-out ${i * 0.2}s infinite`,
+            }}
+          />
         ))}
       </div>
     </div>
@@ -437,19 +587,21 @@ function TypingIndicator() {
 }
 
 // ─── EMBEDDED (INLINE) CHAT — full chat window rendered directly on page ─────
-export function ChatEmbedded({ nicheKey }) {
+export function ChatEmbedded({ nicheKey }: { nicheKey: NicheKey }) {
   const niche = NICHES[nicheKey];
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<DemoMessage[]>([]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [leadSubmitted, setLeadSubmitted] = useState(false);
-  const [booking, setBooking] = useState({ stage: "idle", data: {} });
-  const bottomRef = useRef(null);
+  const [booking, setBooking] = useState<{ stage: BookingStage; data: BookingData }>({
+    stage: "idle",
+    data: {},
+  });
+  const bottomRef = useRef<HTMLDivElement | null>(null);
   const hasWelcomed = useRef(false);
 
-  const now = () =>
-    new Date().toLocaleTimeString("es-CR", { hour: "2-digit", minute: "2-digit" });
+  const now = () => new Date().toLocaleTimeString("es-CR", { hour: "2-digit", minute: "2-digit" });
 
   useEffect(() => {
     if (bottomRef.current) bottomRef.current.scrollIntoView({ behavior: "smooth" });
@@ -478,12 +630,12 @@ export function ChatEmbedded({ nicheKey }) {
   }, [niche]);
 
   const HUMAN_TRIGGERS = ["asesor", "humano", "persona", "hablar con", "agente", "contactar"];
-  const looksLikeHumanRequest = (msg) => {
+  const looksLikeHumanRequest = (msg: string) => {
     const m = msg.toLowerCase();
     return HUMAN_TRIGGERS.some((t) => m.includes(t));
   };
 
-  const callAI = async (history, userMsg) => {
+  const callAI = async (history: DemoMessage[], userMsg: string): Promise<string | null> => {
     try {
       const apiMessages = history
         .filter((m) => m.role === "user" || m.role === "bot")
@@ -503,8 +655,10 @@ export function ChatEmbedded({ nicheKey }) {
         body: JSON.stringify({ messages: apiMessages, nicheKey }),
       });
       if (!res.ok) {
-        if (res.status === 429) return "⏳ Estoy recibiendo muchas consultas. Intenta en unos segundos.";
-        if (res.status === 402) return "⚠️ Servicio de IA temporalmente no disponible. Escribe *menú* para ver opciones.";
+        if (res.status === 429)
+          return "⏳ Estoy recibiendo muchas consultas. Intenta en unos segundos.";
+        if (res.status === 402)
+          return "⚠️ Servicio de IA temporalmente no disponible. Escribe *menú* para ver opciones.";
         return null;
       }
       const data = await res.json();
@@ -515,44 +669,64 @@ export function ChatEmbedded({ nicheKey }) {
     }
   };
 
-  const botSay = (text, delay = 700) => {
+  const botSay = (text: string, delay = 700) => {
     setTyping(true);
-    setTimeout(() => {
-      setTyping(false);
-      setMessages((prev) => [...prev, { role: "bot", text, time: now() }]);
-    }, delay + Math.random() * 400);
+    setTimeout(
+      () => {
+        setTyping(false);
+        setMessages((prev) => [...prev, { role: "bot", text, time: now() }]);
+      },
+      delay + Math.random() * 400,
+    );
   };
 
-  const advanceBooking = (userMsg) => {
+  const advanceBooking = (userMsg: string) => {
     const { stage, data } = booking;
 
     if (stage === "service") {
       // accept number or natural mention
-      const svc = getServiceByNumber(niche, userMsg) ||
-        niche.services.find((s) => userMsg.toLowerCase().includes(s.name.toLowerCase().split(" ")[0]));
+      const svc =
+        getServiceByNumber(niche, userMsg) ||
+        niche.services.find((s) =>
+          userMsg.toLowerCase().includes(s.name.toLowerCase().split(" ")[0]),
+        );
       if (!svc) {
-        botSay(`Mmm, no encontré ese servicio 😊\n\n${niche.services.map((s) => `${s.id}️⃣ ${s.name}`).join("\n")}\n\nEscribe el número.`);
+        botSay(
+          `Mmm, no encontré ese servicio 😊\n\n${niche.services.map((s) => `${s.id}️⃣ ${s.name}`).join("\n")}\n\nEscribe el número.`,
+        );
         return true;
       }
-      const next = { stage: "date", data: { ...data, service: svc } };
+      const next: { stage: BookingStage; data: BookingData } = {
+        stage: "date",
+        data: { ...data, service: svc },
+      };
       setBooking(next);
       botSay(bookingPrompt("date", niche, next.data));
       return true;
     }
     if (stage === "date") {
-      const next = { stage: "time", data: { ...data, date: userMsg } };
+      const next: { stage: BookingStage; data: BookingData } = {
+        stage: "time",
+        data: { ...data, date: userMsg },
+      };
       setBooking(next);
       botSay(bookingPrompt("time", niche, next.data));
       return true;
     }
     if (stage === "time") {
-      const next = { stage: "name", data: { ...data, time: userMsg } };
+      const next: { stage: BookingStage; data: BookingData } = {
+        stage: "name",
+        data: { ...data, time: userMsg },
+      };
       setBooking(next);
       botSay(bookingPrompt("name", niche, next.data));
       return true;
     }
     if (stage === "name") {
-      const next = { stage: "phone", data: { ...data, name: userMsg } };
+      const next: { stage: BookingStage; data: BookingData } = {
+        stage: "phone",
+        data: { ...data, name: userMsg },
+      };
       setBooking(next);
       botSay(bookingPrompt("phone", niche, next.data));
       return true;
@@ -567,7 +741,7 @@ export function ChatEmbedded({ nicheKey }) {
     return false;
   };
 
-  const send = async (text) => {
+  const send = async (text: string) => {
     const msg = (text || input).trim();
     if (!msg) return;
     setInput("");
@@ -581,7 +755,10 @@ export function ChatEmbedded({ nicheKey }) {
 
     // 2) start booking?
     if (isBookingTrigger(msg)) {
-      const next = { stage: "service", data: {} };
+      const next: { stage: BookingStage; data: BookingData } = {
+        stage: "service",
+        data: {},
+      };
       setBooking(next);
       botSay(bookingPrompt("service", niche, next.data));
       return;
@@ -592,10 +769,13 @@ export function ChatEmbedded({ nicheKey }) {
     const wantsHuman = looksLikeHumanRequest(msg);
 
     if (scripted && !wantsHuman) {
-      setTimeout(() => {
-        setTyping(false);
-        setMessages((prev) => [...prev, { role: "bot", text: scripted, time: now() }]);
-      }, 700 + Math.random() * 400);
+      setTimeout(
+        () => {
+          setTyping(false);
+          setMessages((prev) => [...prev, { role: "bot", text: scripted, time: now() }]);
+        },
+        700 + Math.random() * 400,
+      );
       return;
     }
 
@@ -620,11 +800,14 @@ export function ChatEmbedded({ nicheKey }) {
     if (aiReply) {
       setMessages((prev) => [...prev, { role: "bot", text: aiReply, time: now() }]);
     } else {
-      setMessages((prev) => [...prev, { role: "bot", text: getDefaultResponse(niche), time: now() }]);
+      setMessages((prev) => [
+        ...prev,
+        { role: "bot", text: getDefaultResponse(niche), time: now() },
+      ]);
     }
   };
 
-  const submitLead = (name, phone) => {
+  const submitLead = (name: string, phone: string) => {
     setShowLeadForm(false);
     setLeadSubmitted(true);
     setMessages((prev) => [
@@ -637,14 +820,14 @@ export function ChatEmbedded({ nicheKey }) {
       },
     ]);
     const text = encodeURIComponent(
-      `Hola, soy ${name} (${phone}). Me interesa ${niche.bizName} (demo desde QubeSight).`
+      `Hola, soy ${name} (${phone}). Me interesa ${niche.bizName} (demo desde QubeSight).`,
     );
     setTimeout(() => {
       window.open(`https://wa.me/50646009140?text=${text}`, "_blank", "noopener,noreferrer");
     }, 1200);
   };
 
-  const darken = (hex, amt = 0.18) => {
+  const darken = (hex: string, amt = 0.18) => {
     const h = hex.replace("#", "");
     const r = Math.max(0, Math.round(parseInt(h.slice(0, 2), 16) * (1 - amt)));
     const g = Math.max(0, Math.round(parseInt(h.slice(2, 4), 16) * (1 - amt)));
@@ -677,110 +860,220 @@ export function ChatEmbedded({ nicheKey }) {
         .qs-input::placeholder { color: #8696a0; }
       `}</style>
 
-      <div style={{ position: "relative", width: "100%", display: "flex", justifyContent: "center" }}>
-        <div aria-hidden style={{
-          position: "absolute", inset: "-40px",
-          background: `radial-gradient(60% 50% at 50% 40%, ${niche.color}55 0%, transparent 70%)`,
-          filter: "blur(40px)", opacity: 0.6, pointerEvents: "none", zIndex: 0,
-        }} />
+      <div
+        style={{ position: "relative", width: "100%", display: "flex", justifyContent: "center" }}
+      >
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset: "-40px",
+            background: `radial-gradient(60% 50% at 50% 40%, ${niche.color}55 0%, transparent 70%)`,
+            filter: "blur(40px)",
+            opacity: 0.6,
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
 
-        <div className="qs-embedded-shell" style={{
-          position: "relative", zIndex: 1, margin: "0 auto", borderRadius: 14,
-          background: WA_BG, display: "flex", flexDirection: "column",
-          boxShadow: "0 30px 80px -20px rgba(0,0,0,0.55), 0 8px 24px -8px rgba(0,0,0,0.4)",
-          overflow: "hidden", fontFamily: "'Segoe UI', Helvetica, system-ui, -apple-system, sans-serif",
-          border: "1px solid rgba(0,0,0,0.15)",
-        }}>
+        <div
+          className="qs-embedded-shell"
+          style={{
+            position: "relative",
+            zIndex: 1,
+            margin: "0 auto",
+            borderRadius: 14,
+            background: WA_BG,
+            display: "flex",
+            flexDirection: "column",
+            boxShadow: "0 30px 80px -20px rgba(0,0,0,0.55), 0 8px 24px -8px rgba(0,0,0,0.4)",
+            overflow: "hidden",
+            fontFamily: "'Segoe UI', Helvetica, system-ui, -apple-system, sans-serif",
+            border: "1px solid rgba(0,0,0,0.15)",
+          }}
+        >
           {/* WhatsApp Header */}
-          <div style={{
-            background: WA_HEADER, color: "#fff", padding: "10px 14px",
-            display: "flex", alignItems: "center", gap: 12, flexShrink: 0,
-          }}>
+          <div
+            style={{
+              background: WA_HEADER,
+              color: "#fff",
+              padding: "10px 14px",
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              flexShrink: 0,
+            }}
+          >
             {/* Back arrow */}
             <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style={{ opacity: 0.95 }}>
-              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
             </svg>
             {/* Avatar */}
-            <div style={{
-              position: "relative", width: 40, height: 40, borderRadius: "50%",
-              background: niche.color, display: "flex", alignItems: "center",
-              justifyContent: "center", fontSize: 20, flexShrink: 0,
-              border: "1px solid rgba(255,255,255,0.2)",
-            }}>
+            <div
+              style={{
+                position: "relative",
+                width: 40,
+                height: 40,
+                borderRadius: "50%",
+                background: niche.color,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 20,
+                flexShrink: 0,
+                border: "1px solid rgba(255,255,255,0.2)",
+              }}
+            >
               {niche.emoji}
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontWeight: 500, fontSize: 16, lineHeight: 1.2, letterSpacing: "0" }}>
                 {niche.bizName}
               </div>
-              <div style={{ fontSize: 12.5, opacity: 0.85, marginTop: 1, display: "flex", alignItems: "center", gap: 5 }}>
-                <span style={{
-                  width: 7, height: 7, borderRadius: "50%", background: "#4ade80",
-                  display: "inline-block", animation: "qs-pulse 2s ease-out infinite",
-                }} />
+              <div
+                style={{
+                  fontSize: 12.5,
+                  opacity: 0.85,
+                  marginTop: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 5,
+                }}
+              >
+                <span
+                  style={{
+                    width: 7,
+                    height: 7,
+                    borderRadius: "50%",
+                    background: "#4ade80",
+                    display: "inline-block",
+                    animation: "qs-pulse 2s ease-out infinite",
+                  }}
+                />
                 en línea · IA 24/7
               </div>
             </div>
             {/* WA header icons */}
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff" style={{ opacity: 0.9 }} aria-label="Videollamada">
-              <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+            <svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="#fff"
+              style={{ opacity: 0.9 }}
+              aria-label="Videollamada"
+            >
+              <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
             </svg>
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff" style={{ opacity: 0.9 }} aria-label="Llamar">
-              <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+            <svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="#fff"
+              style={{ opacity: 0.9 }}
+              aria-label="Llamar"
+            >
+              <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" />
             </svg>
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff" style={{ opacity: 0.9 }} aria-label="Más">
-              <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+            <svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="#fff"
+              style={{ opacity: 0.9 }}
+              aria-label="Más"
+            >
+              <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
             </svg>
           </div>
 
           {/* Messages with WhatsApp doodle background */}
-          <div style={{
-            flex: 1, overflowY: "auto", padding: "12px 6px 8px",
-            background: `${waPattern}, ${WA_BG}`,
-            backgroundRepeat: "repeat",
-          }}>
+          <div
+            style={{
+              flex: 1,
+              overflowY: "auto",
+              padding: "12px 6px 8px",
+              background: `${waPattern}, ${WA_BG}`,
+              backgroundRepeat: "repeat",
+            }}
+          >
             {/* Date chip */}
             <div style={{ display: "flex", justifyContent: "center", margin: "6px 0 12px" }}>
-              <span style={{
-                background: "#e1f2fa", color: "#54656f", fontSize: 12.2,
-                padding: "5px 12px", borderRadius: 7.5, fontWeight: 500,
-                boxShadow: "0 1px 0.5px rgba(11,20,26,0.13)",
-              }}>HOY</span>
+              <span
+                style={{
+                  background: "#e1f2fa",
+                  color: "#54656f",
+                  fontSize: 12.2,
+                  padding: "5px 12px",
+                  borderRadius: 7.5,
+                  fontWeight: 500,
+                  boxShadow: "0 1px 0.5px rgba(11,20,26,0.13)",
+                }}
+              >
+                HOY
+              </span>
             </div>
             {/* Encryption notice chip */}
             <div style={{ display: "flex", justifyContent: "center", margin: "0 12px 12px" }}>
-              <span style={{
-                background: "#fdf4c5", color: "#54656f", fontSize: 11.5,
-                padding: "6px 12px", borderRadius: 7.5, textAlign: "center", lineHeight: 1.35,
-                boxShadow: "0 1px 0.5px rgba(11,20,26,0.13)", maxWidth: 320,
-              }}>🔒 Los mensajes están cifrados de extremo a extremo. Demo IA · QubeSight</span>
+              <span
+                style={{
+                  background: "#fdf4c5",
+                  color: "#54656f",
+                  fontSize: 11.5,
+                  padding: "6px 12px",
+                  borderRadius: 7.5,
+                  textAlign: "center",
+                  lineHeight: 1.35,
+                  boxShadow: "0 1px 0.5px rgba(11,20,26,0.13)",
+                  maxWidth: 320,
+                }}
+              >
+                🔒 Los mensajes están cifrados de extremo a extremo. Demo IA · QubeSight
+              </span>
             </div>
-            {messages.map((msg, i) => <Bubble key={i} msg={msg} />)}
+            {messages.map((msg, i) => (
+              <Bubble key={i} msg={msg} />
+            ))}
             {typing && <TypingIndicator />}
             <div ref={bottomRef} />
           </div>
 
           {showLeadForm && (
-            <LeadForm color={niche.color} gradient={`linear-gradient(135deg, ${WA_HEADER_2} 0%, ${WA_SEND} 100%)`}
-              onSubmit={submitLead} onCancel={() => setShowLeadForm(false)} />
+            <LeadForm
+              color={niche.color}
+              gradient={`linear-gradient(135deg, ${WA_HEADER_2} 0%, ${WA_SEND} 100%)`}
+              onSubmit={submitLead}
+              onCancel={() => setShowLeadForm(false)}
+            />
           )}
 
           {messages.length > 0 && !typing && !showLeadForm && booking.stage === "idle" && (
-            <div style={{
-              padding: "8px 10px", background: "rgba(239,234,226,0.85)",
-              backdropFilter: "blur(8px)", display: "flex", gap: 6, flexWrap: "wrap",
-              borderTop: "1px solid rgba(0,0,0,0.06)",
-            }}>
+            <div
+              style={{
+                padding: "8px 10px",
+                background: "rgba(239,234,226,0.85)",
+                backdropFilter: "blur(8px)",
+                display: "flex",
+                gap: 6,
+                flexWrap: "wrap",
+                borderTop: "1px solid rgba(0,0,0,0.06)",
+              }}
+            >
               {QUICK_REPLIES[nicheKey].map((q) => (
-                <button key={q} className="qs-quick-btn"
+                <button
+                  key={q}
+                  className="qs-quick-btn"
                   onClick={() => send(q.replace(/^[^\p{L}]+/u, "").toLowerCase())}
-                  style={{ border: `1px solid ${WA_SEND}`, color: WA_HEADER }}>
+                  style={{ border: `1px solid ${WA_SEND}`, color: WA_HEADER }}
+                >
                   {q}
                 </button>
               ))}
               {!leadSubmitted && (
-                <button className="qs-quick-btn" onClick={() => setShowLeadForm(true)}
-                  style={{ border: `1px solid ${WA_SEND}`, background: WA_SEND, color: "#fff" }}>
+                <button
+                  className="qs-quick-btn"
+                  onClick={() => setShowLeadForm(true)}
+                  style={{ border: `1px solid ${WA_SEND}`, background: WA_SEND, color: "#fff" }}
+                >
                   💬 Hablar con humano
                 </button>
               )}
@@ -788,50 +1081,89 @@ export function ChatEmbedded({ nicheKey }) {
           )}
 
           {/* WhatsApp Input bar */}
-          <div style={{
-            display: "flex", padding: "8px 10px", background: WA_INPUT_BAR,
-            gap: 8, alignItems: "center", flexShrink: 0,
-          }}>
-            <button aria-label="Emoji" style={{
-              background: "transparent", border: "none", cursor: "pointer",
-              padding: 6, color: "#54656f", display: "flex",
-            }}>
+          <div
+            style={{
+              display: "flex",
+              padding: "8px 10px",
+              background: WA_INPUT_BAR,
+              gap: 8,
+              alignItems: "center",
+              flexShrink: 0,
+            }}
+          >
+            <button
+              aria-label="Emoji"
+              style={{
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: 6,
+                color: "#54656f",
+                display: "flex",
+              }}
+            >
               <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <path d="M11.999 2C6.486 2 2 6.487 2 12s4.486 10 9.999 10C17.514 22 22 17.513 22 12S17.514 2 11.999 2zm.001 18c-4.41 0-8-3.589-8-8s3.59-8 8-8 8 3.589 8 8-3.59 8-8 8zM8.5 11A1.5 1.5 0 1 1 10 9.5 1.5 1.5 0 0 1 8.5 11zm7 0A1.5 1.5 0 1 1 17 9.5a1.5 1.5 0 0 1-1.5 1.5zm.76 3.62a4.99 4.99 0 0 1-8.52 0 .75.75 0 1 1 1.29-.76 3.49 3.49 0 0 0 5.94 0 .75.75 0 0 1 1.29.76z"/>
+                <path d="M11.999 2C6.486 2 2 6.487 2 12s4.486 10 9.999 10C17.514 22 22 17.513 22 12S17.514 2 11.999 2zm.001 18c-4.41 0-8-3.589-8-8s3.59-8 8-8 8 3.589 8 8-3.59 8-8 8zM8.5 11A1.5 1.5 0 1 1 10 9.5 1.5 1.5 0 0 1 8.5 11zm7 0A1.5 1.5 0 1 1 17 9.5a1.5 1.5 0 0 1-1.5 1.5zm.76 3.62a4.99 4.99 0 0 1-8.52 0 .75.75 0 1 1 1.29-.76 3.49 3.49 0 0 0 5.94 0 .75.75 0 0 1 1.29.76z" />
               </svg>
             </button>
-            <button aria-label="Adjuntar" style={{
-              background: "transparent", border: "none", cursor: "pointer",
-              padding: 6, color: "#54656f", display: "flex",
-            }}>
+            <button
+              aria-label="Adjuntar"
+              style={{
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: 6,
+                color: "#54656f",
+                display: "flex",
+              }}
+            >
               <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <path d="M1.816 15.556v.002c0 1.502.584 2.912 1.646 3.972s2.472 1.647 3.974 1.647a5.58 5.58 0 0 0 3.972-1.645l9.547-9.548c.769-.768 1.147-1.767 1.058-2.817-.079-.968-.548-1.927-1.319-2.698-1.594-1.592-4.068-1.711-5.517-.262l-7.916 7.915c-.881.881-.792 2.25.214 3.261.959.958 2.423 1.053 3.263.215l5.511-5.512c.28-.28.267-.722.053-.936l-.244-.244c-.191-.191-.567-.349-.957.04l-5.506 5.506c-.18.18-.635.127-.976-.214-.098-.097-.576-.613-.213-.973l7.915-7.917c.818-.817 2.267-.699 3.23.262.5.501.802 1.1.849 1.685.051.573-.156 1.111-.589 1.543l-9.547 9.549a3.97 3.97 0 0 1-2.829 1.171 3.975 3.975 0 0 1-2.83-1.173 3.973 3.973 0 0 1-1.172-2.828c0-1.071.415-2.076 1.172-2.83l7.209-7.211c.157-.157.264-.579.028-.814L11.5 4.36a.572.572 0 0 0-.834.018l-7.205 7.207a5.577 5.577 0 0 0-1.645 3.971z"/>
+                <path d="M1.816 15.556v.002c0 1.502.584 2.912 1.646 3.972s2.472 1.647 3.974 1.647a5.58 5.58 0 0 0 3.972-1.645l9.547-9.548c.769-.768 1.147-1.767 1.058-2.817-.079-.968-.548-1.927-1.319-2.698-1.594-1.592-4.068-1.711-5.517-.262l-7.916 7.915c-.881.881-.792 2.25.214 3.261.959.958 2.423 1.053 3.263.215l5.511-5.512c.28-.28.267-.722.053-.936l-.244-.244c-.191-.191-.567-.349-.957.04l-5.506 5.506c-.18.18-.635.127-.976-.214-.098-.097-.576-.613-.213-.973l7.915-7.917c.818-.817 2.267-.699 3.23.262.5.501.802 1.1.849 1.685.051.573-.156 1.111-.589 1.543l-9.547 9.549a3.97 3.97 0 0 1-2.829 1.171 3.975 3.975 0 0 1-2.83-1.173 3.973 3.973 0 0 1-1.172-2.828c0-1.071.415-2.076 1.172-2.83l7.209-7.211c.157-.157.264-.579.028-.814L11.5 4.36a.572.572 0 0 0-.834.018l-7.205 7.207a5.577 5.577 0 0 0-1.645 3.971z" />
               </svg>
             </button>
-            <input className="qs-input" value={input}
+            <input
+              className="qs-input"
+              value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && send()}
+              onKeyDown={(e) => e.key === "Enter" && send(input)}
               placeholder={booking.stage !== "idle" ? "Responde aquí..." : "Mensaje"}
               style={{
-                flex: 1, border: "none", borderRadius: 8,
-                padding: "10px 14px", fontSize: 14.5, background: "#fff",
-                outline: "none", color: "#111b21",
+                flex: 1,
+                border: "none",
+                borderRadius: 8,
+                padding: "10px 14px",
+                fontSize: 14.5,
+                background: "#fff",
+                outline: "none",
+                color: "#111b21",
                 boxShadow: "0 1px 1px rgba(0,0,0,0.04)",
               }}
             />
-            <button className="qs-send-btn" onClick={() => send()} style={{
-              width: 42, height: 42, borderRadius: "50%", background: WA_SEND,
-              border: "none", color: "#fff", cursor: "pointer",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              flexShrink: 0,
-            }} aria-label="Enviar">
+            <button
+              className="qs-send-btn"
+              onClick={() => send(input)}
+              style={{
+                width: 42,
+                height: 42,
+                borderRadius: "50%",
+                background: WA_SEND,
+                border: "none",
+                color: "#fff",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
+              aria-label="Enviar"
+            >
               {input.trim() ? (
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff">
-                  <path d="M1.101 21.757 23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"/>
+                  <path d="M1.101 21.757 23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z" />
                 </svg>
               ) : (
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff">
-                  <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/>
+                  <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z" />
                 </svg>
               )}
             </button>
@@ -843,65 +1175,139 @@ export function ChatEmbedded({ nicheKey }) {
 }
 
 // ─── LEAD FORM ────────────────────────────────────────────────────────────────
-function LeadForm({ color, gradient, onSubmit, onCancel }) {
+function LeadForm({
+  color,
+  gradient,
+  onSubmit,
+  onCancel,
+}: {
+  color: string;
+  gradient: string;
+  onSubmit: (name: string, phone: string) => void;
+  onCancel: () => void;
+}) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const valid = name.trim().length >= 2 && phone.trim().length >= 7;
 
-  const handle = (e) => {
+  const handle = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!valid) return;
     onSubmit(name.trim(), phone.trim());
   };
 
   return (
-    <form onSubmit={handle} style={{
-      padding: "14px 16px", background: "rgba(255,255,255,0.92)",
-      backdropFilter: "blur(8px)", borderTop: `2px solid ${color}`,
-      display: "flex", flexDirection: "column", gap: 8,
-    }}>
+    <form
+      onSubmit={handle}
+      style={{
+        padding: "14px 16px",
+        background: "rgba(255,255,255,0.92)",
+        backdropFilter: "blur(8px)",
+        borderTop: `2px solid ${color}`,
+        display: "flex",
+        flexDirection: "column",
+        gap: 8,
+      }}
+    >
       <div style={{ fontSize: 12.5, fontWeight: 600, color: "#374151" }}>
         Déjanos tus datos y un asesor te contactará
       </div>
-      <input autoFocus value={name} onChange={(e) => setName(e.target.value)}
-        placeholder="Tu nombre" maxLength={60}
-        style={{ border: "1.5px solid #e5e7eb", borderRadius: 12, padding: "10px 14px",
-          fontSize: 13.5, background: "#f9fafb", outline: "none", color: "#111827" }}
+      <input
+        autoFocus
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Tu nombre"
+        maxLength={60}
+        style={{
+          border: "1.5px solid #e5e7eb",
+          borderRadius: 12,
+          padding: "10px 14px",
+          fontSize: 13.5,
+          background: "#f9fafb",
+          outline: "none",
+          color: "#111827",
+        }}
         onFocus={(e) => (e.target.style.borderColor = color)}
-        onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")} />
-      <input value={phone}
+        onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")}
+      />
+      <input
+        value={phone}
         onChange={(e) => setPhone(e.target.value.replace(/[^\d+\s-]/g, ""))}
-        placeholder="WhatsApp / Teléfono" maxLength={20} type="tel"
-        style={{ border: "1.5px solid #e5e7eb", borderRadius: 12, padding: "10px 14px",
-          fontSize: 13.5, background: "#f9fafb", outline: "none", color: "#111827" }}
+        placeholder="WhatsApp / Teléfono"
+        maxLength={20}
+        type="tel"
+        style={{
+          border: "1.5px solid #e5e7eb",
+          borderRadius: 12,
+          padding: "10px 14px",
+          fontSize: 13.5,
+          background: "#f9fafb",
+          outline: "none",
+          color: "#111827",
+        }}
         onFocus={(e) => (e.target.style.borderColor = color)}
-        onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")} />
+        onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")}
+      />
       <div style={{ display: "flex", gap: 8 }}>
-        <button type="button" onClick={onCancel} style={{
-          flex: "0 0 auto", padding: "10px 14px", borderRadius: 999,
-          border: "1.5px solid #e5e7eb", background: "#fff", color: "#6b7280",
-          fontSize: 13, fontWeight: 500, cursor: "pointer",
-        }}>Cancelar</button>
-        <button type="submit" disabled={!valid} style={{
-          flex: 1, padding: "10px 14px", borderRadius: 999, border: "none",
-          background: valid ? gradient : "#cbd5e1", color: "#fff",
-          fontSize: 13.5, fontWeight: 700, cursor: valid ? "pointer" : "not-allowed",
-          boxShadow: valid ? `0 6px 18px -4px ${color}88` : "none",
-          transition: "transform .15s ease",
-        }}>Enviar y abrir WhatsApp →</button>
+        <button
+          type="button"
+          onClick={onCancel}
+          style={{
+            flex: "0 0 auto",
+            padding: "10px 14px",
+            borderRadius: 999,
+            border: "1.5px solid #e5e7eb",
+            background: "#fff",
+            color: "#6b7280",
+            fontSize: 13,
+            fontWeight: 500,
+            cursor: "pointer",
+          }}
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          disabled={!valid}
+          style={{
+            flex: 1,
+            padding: "10px 14px",
+            borderRadius: 999,
+            border: "none",
+            background: valid ? gradient : "#cbd5e1",
+            color: "#fff",
+            fontSize: 13.5,
+            fontWeight: 700,
+            cursor: valid ? "pointer" : "not-allowed",
+            boxShadow: valid ? `0 6px 18px -4px ${color}88` : "none",
+            transition: "transform .15s ease",
+          }}
+        >
+          Enviar y abrir WhatsApp →
+        </button>
       </div>
     </form>
   );
 }
 
 // ─── Floating widget (legacy) — minimal re-export ────────────────────────────
-function ChatWidget({ nicheKey }) {
+function ChatWidget({ nicheKey }: { nicheKey: NicheKey }) {
   return <ChatEmbedded nicheKey={nicheKey} />;
 }
-export function ChatRestaurante()  { return <ChatWidget nicheKey="restaurante" />; }
-export function ChatSalon()        { return <ChatWidget nicheKey="salon" />; }
-export function ChatDental()       { return <ChatWidget nicheKey="dental" />; }
-export function ChatGym()          { return <ChatWidget nicheKey="gym" />; }
-export function ChatInmobiliaria() { return <ChatWidget nicheKey="inmobiliaria" />; }
+export function ChatRestaurante() {
+  return <ChatWidget nicheKey="restaurante" />;
+}
+export function ChatSalon() {
+  return <ChatWidget nicheKey="salon" />;
+}
+export function ChatDental() {
+  return <ChatWidget nicheKey="dental" />;
+}
+export function ChatGym() {
+  return <ChatWidget nicheKey="gym" />;
+}
+export function ChatInmobiliaria() {
+  return <ChatWidget nicheKey="inmobiliaria" />;
+}
 
 export default ChatWidget;

@@ -55,8 +55,7 @@ const FAQ = () => {
         >
           <span className="eyebrow mb-5 inline-flex">{t("faq.badge")}</span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {t("faq.title")}{" "}
-            <span className="gradient-text">{t("faq.titleAccent")}</span>
+            {t("faq.title")} <span className="gradient-text">{t("faq.titleAccent")}</span>
           </h2>
         </motion.div>
 
@@ -73,11 +72,7 @@ const FAQ = () => {
               </h3>
               <Accordion type="single" collapsible className="w-full">
                 {group.items.map((item, i) => (
-                  <AccordionItem
-                    key={i}
-                    value={`item-${gi}-${i}`}
-                    className="border-white/8 px-1"
-                  >
+                  <AccordionItem key={i} value={`item-${gi}-${i}`} className="border-white/8 px-1">
                     <AccordionTrigger className="text-left text-base font-medium hover:no-underline hover:text-primary py-5">
                       {t(item.q)}
                     </AccordionTrigger>
@@ -94,6 +89,5 @@ const FAQ = () => {
     </section>
   );
 };
-
 
 export default FAQ;

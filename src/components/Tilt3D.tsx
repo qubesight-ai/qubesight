@@ -43,7 +43,10 @@ const Tilt3D = ({ children, className, max = 8, glare = true }: Tilt3DProps) => 
       ref={ref}
       onMouseMove={handleMove}
       onMouseLeave={reset}
-      className={cn("relative transition-transform duration-200 ease-out [transform-style:preserve-3d] will-change-transform", className)}
+      className={cn(
+        "relative transition-transform duration-200 ease-out [transform-style:preserve-3d] will-change-transform",
+        className,
+      )}
     >
       {children}
       {glare && (

@@ -33,9 +33,7 @@ const NicheDemoPage = ({ title, subtitle, badge, children }: NicheDemoPageProps)
             <h1 className="text-4xl sm:text-6xl font-bold font-display leading-tight mb-6 text-balance max-w-4xl">
               {title}
             </h1>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl">
-              {subtitle}
-            </p>
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl">{subtitle}</p>
           </div>
         </section>
 

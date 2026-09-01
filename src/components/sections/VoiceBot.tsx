@@ -1,16 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import {
-  Phone,
-  Clock,
-  Calendar,
-  CreditCard,
-  Mic,
-  Zap,
-  ArrowRight,
-  Users,
-  Bot,
-} from "lucide-react";
+import { Phone, Clock, Calendar, CreditCard, Mic, Zap, ArrowRight, Users, Bot } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const VoiceBot = () => {
@@ -19,7 +9,7 @@ const VoiceBot = () => {
   const whatsappUrl = `https://wa.me/50646009140?text=${encodeURIComponent(
     language === "es"
       ? "Hola, quiero información sobre el Voice Bot AI de QubeSight."
-      : "Hi, I want info about QubeSight's Voice Bot AI."
+      : "Hi, I want info about QubeSight's Voice Bot AI.",
   )}`;
 
   const benefits = [
@@ -76,8 +66,7 @@ const VoiceBot = () => {
             {t("voicebot.badge")}
           </span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-[1.05] text-balance">
-            {t("voicebot.title")}{" "}
-            <span className="gradient-text">{t("voicebot.titleAccent")}</span>
+            {t("voicebot.title")} <span className="gradient-text">{t("voicebot.titleAccent")}</span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground">{t("voicebot.subtitle.v2")}</p>
         </motion.div>
@@ -151,9 +140,7 @@ const VoiceBot = () => {
                 <p className="text-xl sm:text-2xl font-bold font-display leading-snug gradient-text">
                   {t("voicebot.mantra")}
                 </p>
-                <p className="mt-4 text-sm text-muted-foreground">
-                  {t("voicebot.activation")}
-                </p>
+                <p className="mt-4 text-sm text-muted-foreground">{t("voicebot.activation")}</p>
               </div>
               <Button variant="hero" size="lg" asChild className="mt-6 min-h-[52px] group">
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">

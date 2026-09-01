@@ -108,8 +108,7 @@ export function scrollToSection(
 
   if (options.updateHash !== false) {
     const replace =
-      options.historyReplace ??
-      ((url: string) => win.history.replaceState(null, "", url));
+      options.historyReplace ?? ((url: string) => win.history.replaceState(null, "", url));
     replace(`#${id}`);
   }
 

@@ -2,7 +2,15 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Building2, UtensilsCrossed, Stethoscope, Dumbbell, Check, ArrowRight, Layers } from "lucide-react";
+import {
+  Building2,
+  UtensilsCrossed,
+  Stethoscope,
+  Dumbbell,
+  Check,
+  ArrowRight,
+  Layers,
+} from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const Industries = () => {
@@ -13,7 +21,11 @@ const Industries = () => {
       key: "realestate",
       icon: Building2,
       title: t("industries.realestate.title"),
-      bullets: [t("industries.realestate.b1"), t("industries.realestate.b2"), t("industries.realestate.b3")],
+      bullets: [
+        t("industries.realestate.b1"),
+        t("industries.realestate.b2"),
+        t("industries.realestate.b3"),
+      ],
       demoTo: "/inmobiliarias",
       metric: { value: "+38%", label: "leads calificados" },
     },
@@ -21,7 +33,11 @@ const Industries = () => {
       key: "restaurants",
       icon: UtensilsCrossed,
       title: t("industries.restaurants.title"),
-      bullets: [t("industries.restaurants.b1"), t("industries.restaurants.b2"), t("industries.restaurants.b3")],
+      bullets: [
+        t("industries.restaurants.b1"),
+        t("industries.restaurants.b2"),
+        t("industries.restaurants.b3"),
+      ],
       demoTo: "/restaurantes",
       metric: { value: "24/7", label: "reservas automáticas" },
     },
@@ -136,9 +152,7 @@ const Industries = () => {
                         <div className="display-xl text-5xl sm:text-6xl font-bold gradient-text leading-none">
                           {ind.metric.value}
                         </div>
-                        <div className="mt-2 text-sm text-muted-foreground">
-                          {ind.metric.label}
-                        </div>
+                        <div className="mt-2 text-sm text-muted-foreground">{ind.metric.label}</div>
                       </div>
                       <div className="text-xs text-muted-foreground">
                         Basado en clientes activos del sector en los últimos 6 meses.
@@ -152,7 +166,9 @@ const Industries = () => {
                       </div>
                       <div className="text-sm">
                         <div className="font-semibold">Implementación en 7 días</div>
-                        <div className="text-muted-foreground text-xs">Integración con tu stack actual.</div>
+                        <div className="text-muted-foreground text-xs">
+                          Integración con tu stack actual.
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -30,8 +30,7 @@ const Solution = () => {
         >
           <span className="eyebrow mb-5 inline-flex">{t("solution.badge")}</span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {t("solution.title")}{" "}
-            <span className="gradient-text">{t("solution.titleAccent")}</span>
+            {t("solution.title")} <span className="gradient-text">{t("solution.titleAccent")}</span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
             {t("solution.subtitle")}

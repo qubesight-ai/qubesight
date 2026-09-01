@@ -35,8 +35,7 @@ function Cubes() {
       const c = cubes[i];
       mesh.rotation.x = t * c.speed * 0.5;
       mesh.rotation.y = t * c.speed;
-      mesh.position.y =
-        c.position[1] + Math.sin(t * c.floatSpeed + c.seed) * c.floatAmp;
+      mesh.position.y = c.position[1] + Math.sin(t * c.floatSpeed + c.seed) * c.floatAmp;
     });
   });
 
@@ -45,12 +44,7 @@ function Cubes() {
       {cubes.map((c, i) => (
         <mesh key={i} position={c.position}>
           <boxGeometry args={[c.size, c.size, c.size]} />
-          <meshBasicMaterial
-            color={c.color}
-            wireframe
-            transparent
-            opacity={c.opacity}
-          />
+          <meshBasicMaterial color={c.color} wireframe transparent opacity={c.opacity} />
         </mesh>
       ))}
     </group>
@@ -85,11 +79,7 @@ function GridPlane() {
 
 const BackgroundScene = () => {
   return (
-    <div
-      aria-hidden
-      className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: 0 }}
-    >
+    <div aria-hidden className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
       <Canvas
         camera={{ position: [0, 0, 10], fov: 60 }}
         gl={{ alpha: true, antialias: true }}

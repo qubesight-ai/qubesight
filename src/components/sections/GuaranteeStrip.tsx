@@ -7,7 +7,11 @@ const GuaranteeStrip = () => {
 
   const items = [
     { icon: Zap, title: t("guarantee.setup.title"), desc: t("guarantee.setup.desc") },
-    { icon: ShieldCheck, title: t("guarantee.nocontract.title"), desc: t("guarantee.nocontract.desc") },
+    {
+      icon: ShieldCheck,
+      title: t("guarantee.nocontract.title"),
+      desc: t("guarantee.nocontract.desc"),
+    },
     { icon: Headphones, title: t("guarantee.support.title"), desc: t("guarantee.support.desc") },
     { icon: RefreshCw, title: t("guarantee.refund.title"), desc: t("guarantee.refund.desc") },
   ];

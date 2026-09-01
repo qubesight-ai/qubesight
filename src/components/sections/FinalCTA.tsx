@@ -54,7 +54,7 @@ const FinalCTA = () => {
       ];
 
   const whatsappUrl = `https://wa.me/50646009140?text=${encodeURIComponent(
-    messageLines.filter(Boolean).join("\n")
+    messageLines.filter(Boolean).join("\n"),
   )}`;
 
   const bullets = [
@@ -64,7 +64,6 @@ const FinalCTA = () => {
     t("final.bullet.4"),
   ];
 
-
   return (
     <section id="contacto" className="py-20 sm:py-28 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-30" />
@@ -72,10 +71,14 @@ const FinalCTA = () => {
       <div className="absolute bottom-0 left-0 right-0 h-[40vh] neon-grid-3d animate-grid-drift opacity-30 pointer-events-none" />
 
       {/* Floating glow orbs */}
-      <div className="absolute top-1/4 left-10 w-72 h-72 rounded-full blur-3xl opacity-40 pointer-events-none animate-pulse-glow"
-        style={{ background: "var(--gradient-glow)" }} />
-      <div className="absolute bottom-1/4 right-10 w-72 h-72 rounded-full blur-3xl opacity-30 pointer-events-none"
-        style={{ background: "radial-gradient(circle, hsl(217 91% 60% / 0.3), transparent 70%)" }} />
+      <div
+        className="absolute top-1/4 left-10 w-72 h-72 rounded-full blur-3xl opacity-40 pointer-events-none animate-pulse-glow"
+        style={{ background: "var(--gradient-glow)" }}
+      />
+      <div
+        className="absolute bottom-1/4 right-10 w-72 h-72 rounded-full blur-3xl opacity-30 pointer-events-none"
+        style={{ background: "radial-gradient(circle, hsl(217 91% 60% / 0.3), transparent 70%)" }}
+      />
 
       <div className="container relative">
         <motion.div
@@ -94,8 +97,7 @@ const FinalCTA = () => {
           </span>
 
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-display leading-tight mb-6 text-balance">
-            {t("final.title")}{" "}
-            <span className="gradient-text">{t("final.titleAccent")}</span>
+            {t("final.title")} <span className="gradient-text">{t("final.titleAccent")}</span>
           </h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
             {t("final.description")}
@@ -131,7 +133,9 @@ const FinalCTA = () => {
                   >
                     <span
                       className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl border ${
-                        active ? "border-primary/40 bg-primary/15 text-primary" : "border-white/10 text-muted-foreground"
+                        active
+                          ? "border-primary/40 bg-primary/15 text-primary"
+                          : "border-white/10 text-muted-foreground"
                       }`}
                     >
                       <opt.icon className="h-4 w-4" />
@@ -145,7 +149,10 @@ const FinalCTA = () => {
 
             <div className="mt-6 grid sm:grid-cols-3 gap-3">
               <div>
-                <label htmlFor="cta-name" className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                <label
+                  htmlFor="cta-name"
+                  className="mb-1.5 block text-xs font-medium text-muted-foreground"
+                >
                   {es ? "Nombre" : "Name"}
                 </label>
                 <Input
@@ -157,7 +164,10 @@ const FinalCTA = () => {
                 />
               </div>
               <div>
-                <label htmlFor="cta-company" className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                <label
+                  htmlFor="cta-company"
+                  className="mb-1.5 block text-xs font-medium text-muted-foreground"
+                >
                   {es ? "Empresa" : "Company"}
                 </label>
                 <Input
@@ -169,7 +179,10 @@ const FinalCTA = () => {
                 />
               </div>
               <div>
-                <label htmlFor="cta-contact" className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                <label
+                  htmlFor="cta-contact"
+                  className="mb-1.5 block text-xs font-medium text-muted-foreground"
+                >
                   {es ? "Correo o teléfono" : "Email or phone"}
                 </label>
                 <Input
@@ -187,7 +200,6 @@ const FinalCTA = () => {
                 : "These details are included in your WhatsApp message so the advisor replies with context."}
             </p>
           </div>
-
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button variant="hero" size="lg" asChild className="min-h-[56px] px-8">
@@ -209,9 +221,7 @@ const FinalCTA = () => {
           <p className="mt-4 text-sm sm:text-base gradient-text font-display font-bold italic">
             {t("final.tagline")}
           </p>
-          <p className="mt-6 text-xs text-muted-foreground">
-            {t("final.fineprint")}
-          </p>
+          <p className="mt-6 text-xs text-muted-foreground">{t("final.fineprint")}</p>
         </motion.div>
       </div>
     </section>

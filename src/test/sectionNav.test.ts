@@ -63,9 +63,7 @@ describe("sectionNav — scroll behavior", () => {
   });
 
   it("uses instant when the user requests it", () => {
-    expect(
-      getScrollBehavior({ instant: true, matchMedia: { matches: false } }),
-    ).toBe("auto");
+    expect(getScrollBehavior({ instant: true, matchMedia: { matches: false } })).toBe("auto");
   });
 });
 
@@ -125,14 +123,11 @@ describe("sectionNav — header offset & scroll target", () => {
     const scrollToFn = vi.fn();
     const historyReplace = vi.fn();
 
-    const ok = scrollToSection(
-      "faq",
-      {
-        scrollToFn,
-        historyReplace,
-        matchMedia: { matches: false },
-      },
-    );
+    const ok = scrollToSection("faq", {
+      scrollToFn,
+      historyReplace,
+      matchMedia: { matches: false },
+    });
 
     expect(ok).toBe(true);
     expect(scrollToFn).toHaveBeenCalledWith({ top: 820, behavior: "smooth" });
@@ -153,9 +148,7 @@ describe("sectionNav — header offset & scroll target", () => {
       matchMedia: { matches: false },
     });
 
-    expect(scrollToFn).toHaveBeenCalledWith(
-      expect.objectContaining({ behavior: "auto" }),
-    );
+    expect(scrollToFn).toHaveBeenCalledWith(expect.objectContaining({ behavior: "auto" }));
   });
 
   it("returns false for missing anchors", () => {

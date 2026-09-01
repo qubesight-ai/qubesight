@@ -22,8 +22,7 @@ const Benefits = () => {
             {t("roi.badge")}
           </span>
           <h2 className="text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {t("roi.title")}{" "}
-            <span className="gradient-text">{t("roi.titleAccent")}</span>
+            {t("roi.title")} <span className="gradient-text">{t("roi.titleAccent")}</span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground">{t("roi.description")}</p>
         </motion.div>

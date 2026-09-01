@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Linkedin } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
-import ernestoImg from "@/assets/founder-ernesto.png";
+import ernestoImg from "@/assets/founder-ernesto.webp";
 
 const Founders = () => {
   const { t } = useTranslation();
@@ -18,8 +18,7 @@ const Founders = () => {
         >
           <span className="eyebrow mb-5 inline-flex">{t("founders.badge")}</span>
           <h2 className="text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {t("founders.title")}{" "}
-            <span className="gradient-text">{t("founders.titleAccent")}</span>
+            {t("founders.title")} <span className="gradient-text">{t("founders.titleAccent")}</span>
           </h2>
         </motion.div>
 
