@@ -11,3 +11,6 @@ verify_jwt = false
 
 [functions.chatbot-ai]
 verify_jwt = true
+
+[functions.twilio-connection]
+verify_jwt = true

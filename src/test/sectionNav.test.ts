@@ -44,6 +44,7 @@ describe("sectionNav — hash / anchors", () => {
       "problem",
       "solution",
       "products",
+      "voicebot",
       "industries",
       "pricing",
       "faq",
