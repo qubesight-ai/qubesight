@@ -288,7 +288,9 @@ class AgentManager:
             lines.extend(["  respond 404", "}"])
             content = "\n".join(lines) + "\n"
 
-        atomic_write(self.settings.caddy_routes_file, content, 0o640)
+        # Route declarations contain no secrets. Keep the generated import
+        # readable by an unprivileged Caddy service after every atomic replace.
+        atomic_write(self.settings.caddy_routes_file, content, 0o644)
         self.runner.run(
             ["/usr/bin/caddy", "validate", "--config", "/etc/caddy/Caddyfile"], check=True
         )
