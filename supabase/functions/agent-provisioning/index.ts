@@ -420,7 +420,7 @@ serve(async (req) => {
     }
 
     if (action === "reconcile" && twilio) {
-      const webhookUrl = `${runtimeBaseUrl}/twilio/voice`;
+      const webhookUrl = `${runtimeBaseUrl}/incoming-call`;
       await updateTwilioWebhook(
         twilio.connection.account_sid,
         twilio.connection.api_key_sid,
