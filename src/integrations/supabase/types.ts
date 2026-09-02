@@ -231,6 +231,79 @@ export type Database = {
         }
         Relationships: []
       }
+      phone_numbers: {
+        Row: {
+          assigned_agent_id: string | null
+          capabilities: Json
+          created_at: string
+          current_voice_url: string | null
+          friendly_name: string
+          id: string
+          last_synced_at: string
+          organization_id: string
+          phone_number: string
+          provider_number_sid: string
+          selected: boolean
+          telephony_connection_id: string
+          updated_at: string
+          webhook_status: string
+        }
+        Insert: {
+          assigned_agent_id?: string | null
+          capabilities?: Json
+          created_at?: string
+          current_voice_url?: string | null
+          friendly_name?: string
+          id?: string
+          last_synced_at?: string
+          organization_id: string
+          phone_number: string
+          provider_number_sid: string
+          selected?: boolean
+          telephony_connection_id: string
+          updated_at?: string
+          webhook_status?: string
+        }
+        Update: {
+          assigned_agent_id?: string | null
+          capabilities?: Json
+          created_at?: string
+          current_voice_url?: string | null
+          friendly_name?: string
+          id?: string
+          last_synced_at?: string
+          organization_id?: string
+          phone_number?: string
+          provider_number_sid?: string
+          selected?: boolean
+          telephony_connection_id?: string
+          updated_at?: string
+          webhook_status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "phone_numbers_assigned_agent_id_fkey"
+            columns: ["assigned_agent_id"]
+            isOneToOne: false
+            referencedRelation: "voice_agents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "phone_numbers_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "phone_numbers_telephony_connection_id_fkey"
+            columns: ["telephony_connection_id"]
+            isOneToOne: false
+            referencedRelation: "telephony_connections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -287,6 +360,56 @@ export type Database = {
           window_start?: string
         }
         Relationships: []
+      }
+      telephony_connections: {
+        Row: {
+          account_sid: string
+          api_key_sid: string
+          created_at: string
+          created_by: string | null
+          id: string
+          organization_id: string
+          provider: string
+          status: string
+          updated_at: string
+          vault_secret_id: string
+          verified_at: string | null
+        }
+        Insert: {
+          account_sid: string
+          api_key_sid: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          organization_id: string
+          provider?: string
+          status?: string
+          updated_at?: string
+          vault_secret_id: string
+          verified_at?: string | null
+        }
+        Update: {
+          account_sid?: string
+          api_key_sid?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          organization_id?: string
+          provider?: string
+          status?: string
+          updated_at?: string
+          vault_secret_id?: string
+          verified_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "telephony_connections_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       voice_agents: {
         Row: {
@@ -367,6 +490,22 @@ export type Database = {
       is_org_member: { Args: { target_org: string }; Returns: boolean }
       is_org_owner: { Args: { target_org: string }; Returns: boolean }
       purge_rate_limit_counters: { Args: never; Returns: undefined }
+      select_twilio_phone_number: {
+        Args: { p_organization_id: string; p_provider_number_sid: string }
+        Returns: undefined
+      }
+      vault_delete_twilio_secret: {
+        Args: { p_secret_id: string }
+        Returns: undefined
+      }
+      vault_read_twilio_secret: {
+        Args: { p_secret_id: string }
+        Returns: string
+      }
+      vault_store_twilio_secret: {
+        Args: { p_existing_id?: string; p_name?: string; p_secret: string }
+        Returns: string
+      }
     }
     Enums: {
       app_role: "client" | "admin"
@@ -387,12 +526,12 @@ export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
         DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -416,11 +555,11 @@ export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -441,11 +580,11 @@ export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -466,11 +605,11 @@ export type Enums<
   DefaultSchemaEnumNameOrOptions extends
     | keyof DefaultSchema["Enums"]
     | { schema: keyof DatabaseWithoutInternals },
-  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+  EnumName extends (DefaultSchemaEnumNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaEnumNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -483,11 +622,11 @@ export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema["CompositeTypes"]
     | { schema: keyof DatabaseWithoutInternals },
-  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+  CompositeTypeName extends (PublicCompositeTypeNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never = never,
+    : never) = never,
 > = PublicCompositeTypeNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
