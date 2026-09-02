@@ -26,6 +26,10 @@ fi
 if [[ ! -f /etc/qubesight/agent-runtime.env ]]; then
   install -m 0600 "${SOURCE_DIR}/agent-runtime.env.example" /etc/qubesight/agent-runtime.env
 fi
+if [[ ! -f /etc/qubesight/agent-runtime-secrets.env ]]; then
+  install -m 0600 "${SOURCE_DIR}/agent-runtime-secrets.env.example" \
+    /etc/qubesight/agent-runtime-secrets.env
+fi
 
 systemctl daemon-reload
 echo "Files installed. Configure /etc/qubesight/*.env and Caddy before enabling the service."
