@@ -1,4 +1,6 @@
 export type ResourceStatus = "active" | "inactive" | "suspended";
+export type ProvisioningStatus =
+  "not_deployed" | "provisioning" | "running" | "degraded" | "stopped" | "error";
 
 export type Agent = {
   id: string;
@@ -10,6 +12,14 @@ export type Agent = {
   objective: string;
   greeting: string;
   system_prompt: string;
+  deployment_revision: number;
+  deployed_revision: number | null;
+  provisioning_status: ProvisioningStatus;
+  runtime_service: string | null;
+  runtime_url: string | null;
+  last_health_at: string | null;
+  last_deployed_at: string | null;
+  last_provisioning_error: string | null;
 };
 
 export type Call = {
