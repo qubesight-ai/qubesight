@@ -39,7 +39,9 @@ def payload(agent_id):
             "greeting": "Hola",
             "system_prompt": "Eres Matilda",
             "twilio_phone": "+15065550123",
+            "twilio_account_sid": "AC" + "c" * 32,
             "twilio_auth_token": "a" * 32,
+            "call_ingest_hmac_secret": "d" * 64,
         },
     }
 
