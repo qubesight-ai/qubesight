@@ -14,6 +14,8 @@
 7. Only after a valid runtime response, the Edge Function configures Twilio's
    `VoiceUrl` as the agent's `/incoming-call` endpoint and records the assignment.
 8. Runtime and webhook state are returned to the dashboard through RLS-protected rows.
+9. When a call finishes, the generic runtime signs its result with a separate
+   HMAC secret and `call-ingest` writes the call to the correct organization.
 
 ## Failure behavior
 
@@ -25,7 +27,7 @@
 
 ## Required production decisions
 
-- Publish an immutable QubeSight voice runtime image implementing the documented contract.
+- Publish the included generic voice runtime as an immutable GHCR image.
 - Choose the dedicated provisioner and voice-runtime hostnames.
 - Store all three Supabase secrets and the matching VPS HMAC secret.
 - Import the managed Caddy route file and deploy the new database migration/functions.
