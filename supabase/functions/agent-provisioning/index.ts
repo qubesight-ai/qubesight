@@ -18,6 +18,7 @@ const RUNTIME_PUBLIC_BASE = (Deno.env.get("AGENT_RUNTIME_PUBLIC_BASE_URL") ?? ""
   /\/$/,
   "",
 );
+const CALL_INGEST_SECRET = Deno.env.get("AGENT_CALL_INGEST_HMAC_SECRET") ?? "";
 
 const admin = createClient(SUPABASE_URL, SERVICE_ROLE_KEY, {
   auth: { persistSession: false, autoRefreshToken: false },
@@ -226,6 +227,9 @@ function assertServerConfiguration() {
   if (!RUNTIME_PUBLIC_BASE.startsWith("https://")) {
     throw new HttpError(503, "La URL pública de agentes no está configurada.");
   }
+  if (CALL_INGEST_SECRET.length < 32) {
+    throw new HttpError(503, "La ingestión segura de llamadas no está configurada.");
+  }
 }
 
 async function callProvisioner(payload: Record<string, unknown>) {
@@ -382,6 +386,7 @@ serve(async (req) => {
         ? await readTwilioContext(organizationId, agent.id, action)
         : null;
     const runtimeBaseUrl = `${RUNTIME_PUBLIC_BASE}/agents/${agent.id}`;
+    const callIngestSecret = await hmacHex(CALL_INGEST_SECRET, `agent:${agent.id}`);
 
     await admin
       .from("voice_agents")
@@ -408,7 +413,9 @@ serve(async (req) => {
               greeting: agent.greeting,
               system_prompt: agent.system_prompt,
               twilio_phone: twilio?.phone.phone_number,
+              twilio_account_sid: twilio?.connection.account_sid,
               twilio_auth_token: twilio?.authToken,
+              call_ingest_hmac_secret: callIngestSecret,
             },
           }
         : {}),
