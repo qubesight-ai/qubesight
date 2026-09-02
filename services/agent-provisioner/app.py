@@ -37,7 +37,9 @@ SAFE_TEXT_LIMITS = {
     "greeting": 2_000,
     "system_prompt": 20_000,
     "twilio_phone": 20,
+    "twilio_account_sid": 34,
     "twilio_auth_token": 64,
+    "call_ingest_hmac_secret": 64,
 }
 
 
@@ -133,8 +135,12 @@ def validate_config(value: Any) -> dict[str, str]:
         raise ProvisioningError(400, "name and system_prompt are required")
     if not re.fullmatch(r"\+[1-9][0-9]{6,14}", clean["twilio_phone"]):
         raise ProvisioningError(400, "invalid Twilio phone number")
+    if not re.fullmatch(r"AC[0-9A-Fa-f]{32}", clean["twilio_account_sid"]):
+        raise ProvisioningError(400, "invalid Twilio Account SID")
     if not re.fullmatch(r"[0-9A-Fa-f]{32}", clean["twilio_auth_token"]):
         raise ProvisioningError(400, "invalid Twilio Auth Token")
+    if not re.fullmatch(r"[0-9a-f]{64}", clean["call_ingest_hmac_secret"]):
+        raise ProvisioningError(400, "invalid call ingest credential")
     return clean
 
 
@@ -233,6 +239,9 @@ class AgentManager:
     ) -> None:
         directory = self._agent_dir(agent_id)
         directory.mkdir(parents=True, exist_ok=True, mode=0o700)
+        data_directory = directory / "data"
+        data_directory.mkdir(parents=True, exist_ok=True, mode=0o700)
+        os.chown(data_directory, self.settings.runtime_uid, self.settings.runtime_gid)
         runtime_config = {
             "schema_version": 1,
             "agent_id": agent_id,
