@@ -17,7 +17,9 @@ install -d -m 0750 /etc/qubesight
 if [[ ! -f /etc/caddy/qubesight-agents.caddy ]]; then
   printf '%s\n' '# Managed by QubeSight Agent Provisioner. No active agents.' \
     > /etc/caddy/qubesight-agents.caddy
-  chmod 0640 /etc/caddy/qubesight-agents.caddy
+  # This file contains routes only, never credentials. Caddy commonly runs as
+  # an unprivileged user and must be able to read the imported configuration.
+  chmod 0644 /etc/caddy/qubesight-agents.caddy
 fi
 
 if [[ ! -f /etc/qubesight/provisioner.env ]]; then
