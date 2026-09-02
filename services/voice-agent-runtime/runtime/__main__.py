@@ -9,7 +9,10 @@ def main() -> None:
         raise RuntimeError("PORT is outside the allowed range")
     uvicorn.run(
         "runtime.main:app",
-        host="0.0.0.0",
+        # Containers use the host network so Caddy can proxy without exposing
+        # a Docker bridge. Binding to loopback keeps every allocated agent port
+        # private even when the host firewall is permissive.
+        host="127.0.0.1",
         port=port,
         proxy_headers=True,
         forwarded_allow_ips="127.0.0.1",
@@ -18,4 +21,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
