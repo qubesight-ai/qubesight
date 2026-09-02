@@ -117,9 +117,9 @@ class ServerConfig:
             openai_base_url=_required_env("OPENAI_BASE_URL"),
             llm_model=os.environ.get("LLM_MODEL", "openai/gpt-oss-20b"),
             whisper_url=_required_env("WHISPER_URL"),
-            whisper_api_key=_required_env("WHISPER_API_KEY"),
+            whisper_api_key=os.environ.get("WHISPER_API_KEY", "").strip(),
             supertonic_url=_required_env("SUPERTONIC_URL"),
-            supertonic_api_key=_required_env("SUPERTONIC_API_KEY"),
+            supertonic_api_key=os.environ.get("SUPERTONIC_API_KEY", "").strip(),
             call_ingest_url=_required_env("CALL_INGEST_URL"),
             data_dir=data_dir,
         )
