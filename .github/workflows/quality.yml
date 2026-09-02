@@ -29,6 +29,8 @@ jobs:
       - run: npm test
       - name: Test VPS provisioner
         run: python3 -m unittest discover -s services/agent-provisioner -p 'test_*.py' -v
+      - name: Test generic voice runtime
+        run: python3 -m unittest discover -s services/voice-agent-runtime -p 'test_*.py' -v
       - run: npm run build
 
   security-review:
