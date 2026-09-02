@@ -31,6 +31,10 @@ Edge Function and the voice-agent host. The browser never contacts it directly.
 7. writes call records to Supabase through a server-only credential or a narrowly
    scoped ingestion endpoint—not with the public browser key.
 
+The implementation lives in `services/voice-agent-runtime`. It follows the
+Matilda request flow and endpoint contract while loading all identity, objective,
+greeting and prompt data from the per-agent configuration.
+
 The provisioner does not turn Matilda's existing source tree into that image.
 The image must be built and published separately under a release tag or digest.
 
@@ -42,6 +46,7 @@ python3 -m unittest -v test_app.py
 sudo bash ./install.sh
 sudoedit /etc/qubesight/provisioner.env
 sudoedit /etc/qubesight/agent-runtime.env
+sudoedit /etc/qubesight/agent-runtime-secrets.env
 ```
 
 Add these top-level Caddy sites. Use a dedicated hostname for each plane:
@@ -73,10 +78,12 @@ openssl rand -hex 32
 supabase secrets set \
   AGENT_PROVISIONER_URL=https://provisioner.example.com \
   AGENT_RUNTIME_PUBLIC_BASE_URL=https://voice.example.com \
-  AGENT_PROVISIONER_HMAC_SECRET=the-generated-value
+  AGENT_PROVISIONER_HMAC_SECRET=the-generated-value \
+  AGENT_CALL_INGEST_HMAC_SECRET=a-second-independent-random-value
 supabase db push
 supabase functions deploy twilio-connection
 supabase functions deploy agent-provisioning
+supabase functions deploy call-ingest --no-verify-jwt
 ```
 
 Existing Twilio connections contain only the API Key Secret. Reconnect them once
