@@ -17,3 +17,6 @@ verify_jwt = true
 
 [functions.agent-provisioning]
 verify_jwt = true
+
+[functions.call-ingest]
+verify_jwt = false
