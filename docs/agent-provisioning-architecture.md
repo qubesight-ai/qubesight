@@ -12,7 +12,7 @@
 6. The provisioner writes private configuration, reconciles the systemd/Docker
    runtime, checks `/health`, generates the Caddy route and returns observed state.
 7. Only after a valid runtime response, the Edge Function configures Twilio's
-   `VoiceUrl` and records the assignment.
+   `VoiceUrl` as the agent's `/incoming-call` endpoint and records the assignment.
 8. Runtime and webhook state are returned to the dashboard through RLS-protected rows.
 
 ## Failure behavior
