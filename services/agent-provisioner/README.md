@@ -23,7 +23,8 @@ Edge Function and the voice-agent host. The browser never contacts it directly.
 2. reads JSON from `AGENT_CONFIG_PATH`;
 3. listens on the supplied `PORT` using host networking;
 4. exposes `GET /health` and returns HTTP 200 only when dependencies are ready;
-5. exposes `POST /twilio/voice` and validates `X-Twilio-Signature` with the
+5. exposes `POST /incoming-call`, `/recording` and `/timeout`, and validates
+   `X-Twilio-Signature` with the
    `twilio_auth_token` and the configured `runtime_base_url` in the private
    configuration (Caddy strips the per-agent route prefix before proxying);
 6. exposes any subsequent Twilio HTTP/WebSocket routes below the same root;
