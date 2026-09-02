@@ -27,6 +27,7 @@ export default function TelephonySettings() {
   const [accountSid, setAccountSid] = useState("");
   const [apiKeySid, setApiKeySid] = useState("");
   const [apiKeySecret, setApiKeySecret] = useState("");
+  const [authToken, setAuthToken] = useState("");
 
   useEffect(() => {
     getTelephonyState()
@@ -39,9 +40,10 @@ export default function TelephonySettings() {
     event.preventDefault();
     setBusy("connect");
     try {
-      const next = await connectTwilio(accountSid, apiKeySid, apiKeySecret);
+      const next = await connectTwilio(accountSid, apiKeySid, apiKeySecret, authToken);
       setState(next);
       setApiKeySecret("");
+      setAuthToken("");
       toast.success("Cuenta Twilio verificada y conectada.");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "No se pudo conectar Twilio.");
@@ -84,6 +86,7 @@ export default function TelephonySettings() {
       setAccountSid("");
       setApiKeySid("");
       setApiKeySecret("");
+      setAuthToken("");
       toast.success("Twilio fue desconectado.");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "No se pudo desconectar Twilio.");
@@ -144,6 +147,20 @@ export default function TelephonySettings() {
                 required
               />
             </label>
+            <label className="block text-xs font-semibold text-slate-600">
+              Auth Token
+              <input
+                className="auth-input font-mono"
+                type="password"
+                value={authToken}
+                onChange={(e) => setAuthToken(e.target.value)}
+                autoComplete="new-password"
+                required
+              />
+              <span className="mt-1 block font-normal text-slate-400">
+                Se usa únicamente para validar que los webhooks provienen de Twilio.
+              </span>
+            </label>
           </div>
           <button className="admin-primary mt-6" disabled={busy === "connect"}>
             {busy === "connect" ? (
@@ -161,7 +178,7 @@ export default function TelephonySettings() {
             <li>No se almacena en LocalStorage ni variables Vite.</li>
             <li>No vuelve a mostrarse después de guardarla.</li>
             <li>Puedes revocarla desde Twilio y desconectarla aquí.</li>
-            <li>Esta fase no compra números ni modifica webhooks.</li>
+            <li>El Auth Token permitirá validar la firma de cada webhook.</li>
           </ul>
         </aside>
       </div>
@@ -179,6 +196,11 @@ export default function TelephonySettings() {
           <p className="text-sm text-slate-500 mt-1">
             {state.connection.account_sid_masked} · API Key {state.connection.api_key_sid_masked}
           </p>
+          {!state.connection.webhook_validation_configured && (
+            <p className="text-xs text-amber-700 mt-2">
+              Reconecta Twilio para guardar el Auth Token antes de desplegar agentes.
+            </p>
+          )}
         </div>
         <div className="flex flex-wrap gap-2">
           <button className="admin-primary" onClick={refresh} disabled={busy === "refresh"}>
@@ -208,7 +230,7 @@ export default function TelephonySettings() {
         <div className="panel-head">
           <div>
             <h2>Números existentes</h2>
-            <p>Selecciona el número que se asignará en una fase posterior al agente.</p>
+            <p>Selecciona el número que se asignará al desplegar un agente.</p>
           </div>
         </div>
         {state.numbers.length === 0 ? (
