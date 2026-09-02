@@ -9,7 +9,7 @@ Type=simple
 EnvironmentFile=/etc/qubesight/agent-runtime.env
 EnvironmentFile=/var/lib/qubesight-agents/%i/runtime.env
 ExecStartPre=-/usr/bin/docker rm -f qubesight-agent-%i
-ExecStart=/usr/bin/docker run --rm --name qubesight-agent-%i --network host --read-only --cap-drop=ALL --security-opt=no-new-privileges:true --pids-limit=256 --memory=1g --cpus=1.5 --tmpfs /tmp:rw,noexec,nosuid,size=256m --user 10001:10001 -e AGENT_ID=${AGENT_ID} -e PORT=${AGENT_PORT} -e AGENT_CONFIG_PATH=/run/qubesight/config.json -v /var/lib/qubesight-agents/%i/config.json:/run/qubesight/config.json:ro ${AGENT_RUNTIME_IMAGE}
+ExecStart=/usr/bin/docker run --rm --name qubesight-agent-%i --network host --read-only --cap-drop=ALL --security-opt=no-new-privileges:true --pids-limit=256 --memory=1g --cpus=1.5 --tmpfs /tmp:rw,noexec,nosuid,size=256m --user 10001:10001 --env-file /etc/qubesight/agent-runtime-secrets.env -e AGENT_ID=${AGENT_ID} -e PORT=${AGENT_PORT} -e AGENT_CONFIG_PATH=/run/qubesight/config.json -e AGENT_DATA_DIR=/data -v /var/lib/qubesight-agents/%i/config.json:/run/qubesight/config.json:ro -v /var/lib/qubesight-agents/%i/data:/data:rw ${AGENT_RUNTIME_IMAGE}
 ExecStop=/usr/bin/docker stop --time 20 qubesight-agent-%i
 Restart=on-failure
 RestartSec=5
@@ -23,4 +23,3 @@ ReadWritePaths=/var/lib/qubesight-agents/%i
 
 [Install]
 WantedBy=multi-user.target
-
