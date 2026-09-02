@@ -218,3 +218,14 @@
 /* Softer alternating section tint: one calm tint family instead of saturated periwinkle. */
 .prototype-shell .prototype-content>section:nth-child(2n){background:#eef3fc!important}
 .prototype-shell section[class*="min-h-[170vh]"]{background:#eef3fc!important}
+
+
+/* Filled pricing CTAs must keep white labels (beat the text-primary-foreground guard). */
+.prototype-shell #pricing button.gradient-bg,
+.prototype-shell #pricing button[class*="bg-primary"],
+.prototype-shell #pricing a[class*="bg-primary"],
+.prototype-shell #pricing .gradient-bg{color:#fff!important;background-color:#006AFF!important;background-image:none!important}
+.prototype-shell #pricing button.gradient-bg *,
+.prototype-shell #pricing button[class*="bg-primary"] *,
+.prototype-shell #pricing a[class*="bg-primary"] *,
+.prototype-shell #pricing .gradient-bg *{color:#fff!important;stroke:#fff!important}
