@@ -7,6 +7,7 @@ export type TelephonyConnection = {
   account_sid_masked: string;
   api_key_sid_masked: string;
   verified_at: string | null;
+  webhook_validation_configured: boolean;
 };
 
 export type TelephonyPhoneNumber = {
@@ -51,12 +52,18 @@ async function invokeTelephony(body: Record<string, unknown>): Promise<Telephony
 
 export const getTelephonyState = () => invokeTelephony({ action: "status" });
 
-export const connectTwilio = (accountSid: string, apiKeySid: string, apiKeySecret: string) =>
+export const connectTwilio = (
+  accountSid: string,
+  apiKeySid: string,
+  apiKeySecret: string,
+  authToken: string,
+) =>
   invokeTelephony({
     action: "connect",
     account_sid: accountSid,
     api_key_sid: apiKeySid,
     api_key_secret: apiKeySecret,
+    auth_token: authToken,
   });
 
 export const refreshTwilioNumbers = () => invokeTelephony({ action: "refresh" });
