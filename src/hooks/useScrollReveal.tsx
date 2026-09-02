@@ -6,9 +6,7 @@ import { useEffect } from "react";
  */
 export const useScrollReveal = () => {
   useEffect(() => {
-    const els = document.querySelectorAll<HTMLElement>(
-      ".reveal-up, .reveal-left, .reveal-right"
-    );
+    const els = document.querySelectorAll<HTMLElement>(".reveal-up, .reveal-left, .reveal-right");
     if (!els.length) return;
 
     const io = new IntersectionObserver(
@@ -20,7 +18,7 @@ export const useScrollReveal = () => {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
     );
 
     els.forEach((el) => io.observe(el));

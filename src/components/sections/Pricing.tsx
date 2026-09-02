@@ -8,9 +8,12 @@ import CheckoutDialog from "@/components/CheckoutDialog";
 const Pricing = () => {
   const { t } = useTranslation();
   const [yearly, setYearly] = useState(false);
-  const [checkout, setCheckout] = useState<{ open: boolean; amount: number; description: string; planId: string }>(
-    { open: false, amount: 0, description: "", planId: "" },
-  );
+  const [checkout, setCheckout] = useState<{
+    open: boolean;
+    amount: number;
+    description: string;
+    planId: string;
+  }>({ open: false, amount: 0, description: "", planId: "" });
 
   const openCheckout = (planId: string, amount: number, planName: string) => {
     setCheckout({ open: true, amount, description: `QubeSight — ${planName}`, planId });
@@ -139,8 +142,17 @@ const Pricing = () => {
   return (
     <section id="pricing" className="py-16 sm:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
-      <div className="absolute top-1/3 -left-40 w-96 h-96 rounded-full blur-3xl opacity-30 pointer-events-none animate-float-3d" style={{ background: "var(--gradient-glow)" }} />
-      <div className="absolute bottom-1/4 -right-40 w-96 h-96 rounded-full blur-3xl opacity-30 pointer-events-none animate-float-3d" style={{ background: "radial-gradient(circle, hsl(217 91% 60% / 0.4), transparent 70%)", animationDelay: "-7s" }} />
+      <div
+        className="absolute top-1/3 -left-40 w-96 h-96 rounded-full blur-3xl opacity-30 pointer-events-none animate-float-3d"
+        style={{ background: "var(--gradient-glow)" }}
+      />
+      <div
+        className="absolute bottom-1/4 -right-40 w-96 h-96 rounded-full blur-3xl opacity-30 pointer-events-none animate-float-3d"
+        style={{
+          background: "radial-gradient(circle, hsl(217 91% 60% / 0.4), transparent 70%)",
+          animationDelay: "-7s",
+        }}
+      />
       <div className="container relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -149,12 +161,9 @@ const Pricing = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center mb-14"
         >
-          <span className="eyebrow mb-6">
-            {t("pricing.badge")}
-          </span>
+          <span className="eyebrow mb-6">{t("pricing.badge")}</span>
           <h2 className="display-xl text-[clamp(2rem,4.5vw,3.75rem)] mt-4">
-            {t("pricing.title")}{" "}
-            <span className="accent-text">{t("pricing.titleAccent")}</span>
+            {t("pricing.title")} <span className="accent-text">{t("pricing.titleAccent")}</span>
           </h2>
 
           {/* Toggle */}
@@ -162,7 +171,9 @@ const Pricing = () => {
             <button
               onClick={() => setYearly(false)}
               className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-500 ease-[cubic-bezier(.2,.8,.2,1)] ${
-                !yearly ? "bg-gradient-to-br from-[hsl(249,65%,58%)] to-[hsl(258,75%,64%)] text-white shadow-[0_10px_24px_-10px_hsl(249,70%,40%,0.7)]" : "text-muted-foreground hover:text-foreground"
+                !yearly
+                  ? "bg-gradient-to-br from-[hsl(249,65%,58%)] to-[hsl(258,75%,64%)] text-white shadow-[0_10px_24px_-10px_hsl(249,70%,40%,0.7)]"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {t("pricing.monthly")}
@@ -170,11 +181,15 @@ const Pricing = () => {
             <button
               onClick={() => setYearly(true)}
               className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-500 ease-[cubic-bezier(.2,.8,.2,1)] flex items-center gap-2 ${
-                yearly ? "bg-gradient-to-br from-[hsl(249,65%,58%)] to-[hsl(258,75%,64%)] text-white shadow-[0_10px_24px_-10px_hsl(249,70%,40%,0.7)]" : "text-muted-foreground hover:text-foreground"
+                yearly
+                  ? "bg-gradient-to-br from-[hsl(249,65%,58%)] to-[hsl(258,75%,64%)] text-white shadow-[0_10px_24px_-10px_hsl(249,70%,40%,0.7)]"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {t("pricing.yearly")}
-              <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${yearly ? "bg-white/20" : "bg-primary/20 text-primary"}`}>
+              <span
+                className={`text-[10px] px-1.5 py-0.5 rounded-full ${yearly ? "bg-white/20" : "bg-primary/20 text-primary"}`}
+              >
                 {t("pricing.save")}
               </span>
             </button>
@@ -210,17 +225,17 @@ const Pricing = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.08, ease: [0.32, 0.72, 0, 1] }}
               className={`bento-tile p-7 flex flex-col ${
-                plan.popular ? "!border-primary/40 ring-1 ring-primary/30 shadow-[0_30px_80px_-30px_hsl(249,70%,30%,0.6)]" : ""
+                plan.popular
+                  ? "!border-primary/40 ring-1 ring-primary/30 shadow-[0_30px_80px_-30px_hsl(249,70%,30%,0.6)]"
+                  : ""
               }`}
             >
-
               {plan.popular && (
                 <span className="absolute -top-3 left-6 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-br from-[hsl(249,65%,58%)] to-[hsl(258,75%,64%)] text-white text-[10px] font-bold uppercase tracking-[0.18em] shadow-[0_10px_24px_-8px_hsl(249,70%,40%,0.7)]">
                   <Sparkles className="h-3 w-3" />
                   {t("pricing.popular")}
                 </span>
               )}
-
 
               <h3 className="text-xl font-bold font-display mb-1">{plan.name}</h3>
               <p className="text-sm text-muted-foreground mb-6">{plan.desc}</p>
@@ -238,7 +253,9 @@ const Pricing = () => {
                 <div className="mt-2 text-sm text-muted-foreground">
                   {yearly ? (
                     <>
-                      <span className="text-foreground font-semibold">${(plan.monthly * 12 * 0.8).toFixed(2)}</span>{" "}
+                      <span className="text-foreground font-semibold">
+                        ${(plan.monthly * 12 * 0.8).toFixed(2)}
+                      </span>{" "}
                       {t("pricing.annualTotal")}{" "}
                       <span className="text-primary">
                         ({t("pricing.youSave")} ${(plan.monthly * 12 * 0.2).toFixed(2)})
@@ -246,7 +263,9 @@ const Pricing = () => {
                     </>
                   ) : (
                     <>
-                      <span className="text-foreground font-semibold">${(plan.monthly * 12).toFixed(2)}</span>{" "}
+                      <span className="text-foreground font-semibold">
+                        ${(plan.monthly * 12).toFixed(2)}
+                      </span>{" "}
                       {t("pricing.annualTotal")}
                     </>
                   )}
@@ -278,8 +297,6 @@ const Pricing = () => {
           {t("pricing.note")}
         </p>
 
-
-
         {/* Channel add-ons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -292,9 +309,7 @@ const Pricing = () => {
             <h4 className="text-lg sm:text-2xl font-bold font-display">
               {t("pricing.channels.title")}
             </h4>
-            <p className="text-sm text-muted-foreground mt-1">
-              {t("pricing.channels.subtitle")}
-            </p>
+            <p className="text-sm text-muted-foreground mt-1">{t("pricing.channels.subtitle")}</p>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
@@ -320,7 +335,6 @@ const Pricing = () => {
             ))}
           </div>
         </motion.div>
-
 
         {/* Voice Bot AI plans */}
         <motion.div
@@ -427,8 +441,8 @@ const Pricing = () => {
                     plan.tier === "bronze"
                       ? "bg-amber-700"
                       : plan.tier === "silver"
-                      ? "bg-slate-300"
-                      : "bg-yellow-400"
+                        ? "bg-slate-300"
+                        : "bg-yellow-400"
                   }`}
                 />
                 <h3 className="text-xl font-bold font-display">Voice Bot {plan.name}</h3>
@@ -521,20 +535,22 @@ const Pricing = () => {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
             <div className="flex-1">
               <h4 className="text-xl font-bold font-display mb-1">
-                {t("pricing.addon.name")} —{" "}
-                <span className="gradient-text">$29</span>
+                {t("pricing.addon.name")} — <span className="gradient-text">$29</span>
                 <span className="text-muted-foreground text-base font-normal">
-                  {" "}{t("pricing.month")}
+                  {" "}
+                  {t("pricing.month")}
                 </span>
               </h4>
               <p className="text-sm text-muted-foreground mb-4">{t("pricing.addon.desc")}</p>
               <ul className="space-y-2">
-                {[t("pricing.addon.f1"), t("pricing.addon.f2"), t("pricing.addon.f3")].map((f, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-sm">
-                    <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>{f}</span>
-                  </li>
-                ))}
+                {[t("pricing.addon.f1"), t("pricing.addon.f2"), t("pricing.addon.f3")].map(
+                  (f, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-sm">
+                      <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                      <span>{f}</span>
+                    </li>
+                  ),
+                )}
               </ul>
             </div>
             <Button
@@ -565,9 +581,18 @@ const Pricing = () => {
                 {t("pricing.compare.human")}
               </h5>
               <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2"><span className="text-destructive">✕</span>{t("pricing.compare.human.1")}</li>
-                <li className="flex items-center gap-2"><span className="text-destructive">✕</span>{t("pricing.compare.human.2")}</li>
-                <li className="flex items-center gap-2"><span className="text-destructive">✕</span>{t("pricing.compare.human.3")}</li>
+                <li className="flex items-center gap-2">
+                  <span className="text-destructive">✕</span>
+                  {t("pricing.compare.human.1")}
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-destructive">✕</span>
+                  {t("pricing.compare.human.2")}
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-destructive">✕</span>
+                  {t("pricing.compare.human.3")}
+                </li>
               </ul>
             </div>
             <div className="glass-card rounded-2xl p-6 border-primary/40 shadow-glow">
@@ -575,9 +600,18 @@ const Pricing = () => {
                 {t("pricing.compare.qs")}
               </h5>
               <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />{t("pricing.compare.qs.1")}</li>
-                <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />{t("pricing.compare.qs.2")}</li>
-                <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />{t("pricing.compare.qs.3")}</li>
+                <li className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-primary" />
+                  {t("pricing.compare.qs.1")}
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-primary" />
+                  {t("pricing.compare.qs.2")}
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-primary" />
+                  {t("pricing.compare.qs.3")}
+                </li>
               </ul>
             </div>
           </div>
@@ -604,7 +638,9 @@ const Pricing = () => {
           <h3 className="text-2xl sm:text-4xl font-bold font-display leading-tight mt-4">
             {t("pricing.suite.title")}
           </h3>
-          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">{t("pricing.suite.subtitle")}</p>
+          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
+            {t("pricing.suite.subtitle")}
+          </p>
 
           <div className="mt-8 grid sm:grid-cols-2 gap-3 text-left max-w-3xl mx-auto">
             {[1, 2, 3, 4].map((n) => (
@@ -613,7 +649,9 @@ const Pricing = () => {
                   <Check className="h-4 w-4 text-primary flex-shrink-0 mt-1" />
                   <div>
                     <p className="text-sm font-semibold">{t(`pricing.suite.b${n}.title`)}</p>
-                    <p className="text-sm text-muted-foreground mt-0.5">{t(`pricing.suite.b${n}.desc`)}</p>
+                    <p className="text-sm text-muted-foreground mt-0.5">
+                      {t(`pricing.suite.b${n}.desc`)}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -627,7 +665,6 @@ const Pricing = () => {
           </div>
         </motion.div>
 
-
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch">
           {suitePlans.map((plan, i) => (
             <motion.div
@@ -637,7 +674,9 @@ const Pricing = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.08, ease: [0.32, 0.72, 0, 1] }}
               className={`bento-tile p-8 flex flex-col ${
-                plan.popular ? "!border-primary/40 ring-1 ring-primary/30 shadow-[0_30px_80px_-30px_hsl(249,70%,30%,0.6)]" : ""
+                plan.popular
+                  ? "!border-primary/40 ring-1 ring-primary/30 shadow-[0_30px_80px_-30px_hsl(249,70%,30%,0.6)]"
+                  : ""
               }`}
             >
               {plan.popular && (
@@ -657,10 +696,15 @@ const Pricing = () => {
                   <span className="text-muted-foreground">{t("pricing.month")}</span>
                 </div>
                 <div className="mt-2 text-sm text-muted-foreground">
-                  <span className="text-foreground font-semibold">${(plan.monthly * 12 * 0.8).toFixed(2)}</span>{" "}
+                  <span className="text-foreground font-semibold">
+                    ${(plan.monthly * 12 * 0.8).toFixed(2)}
+                  </span>{" "}
                   {t("pricing.annualTotal")}
                   {yearly && (
-                    <span className="text-primary"> ({t("pricing.youSave")} ${(plan.monthly * 12 * 0.2).toFixed(2)})</span>
+                    <span className="text-primary">
+                      {" "}
+                      ({t("pricing.youSave")} ${(plan.monthly * 12 * 0.2).toFixed(2)})
+                    </span>
                   )}
                 </div>
               </div>
@@ -704,7 +748,10 @@ const Pricing = () => {
               t("pricing.universal.f5"),
               t("pricing.universal.f6"),
             ].map((f, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-2xl border border-white/10 bg-white/[0.05] p-3">
+              <div
+                key={i}
+                className="flex items-start gap-2 rounded-2xl border border-white/10 bg-white/[0.05] p-3"
+              >
                 <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
                 <span>{f}</span>
               </div>

@@ -4,14 +4,30 @@ import { useMatildaDemo } from "@/hooks/useMatildaDemo";
 import { createMatildaSession, sendMatildaAudio } from "@/lib/matildaDemoApi";
 
 vi.mock("@/lib/matildaDemoApi", () => ({
-  createMatildaSession: vi.fn(), deleteMatildaSession: vi.fn(), getMatildaAudio: vi.fn(), sendMatildaAudio: vi.fn(),
-  MatildaDemoApiError: class MatildaDemoApiError extends Error { constructor(public status?: number, message?: string) { super(message); } },
+  createMatildaSession: vi.fn(),
+  deleteMatildaSession: vi.fn(),
+  getMatildaAudio: vi.fn(),
+  sendMatildaAudio: vi.fn(),
+  MatildaDemoApiError: class MatildaDemoApiError extends Error {
+    constructor(
+      public status?: number,
+      message?: string,
+    ) {
+      super(message);
+    }
+  },
 }));
 
-const session = (expires_at = "2099-01-01T00:00:00Z") => ({ session_id: "session", remaining_turns: 5, expires_at });
+const session = (expires_at = "2099-01-01T00:00:00Z") => ({
+  session_id: "session",
+  remaining_turns: 5,
+  expires_at,
+});
 
 describe("useMatildaDemo y Turnstile", () => {
-  beforeEach(() => { vi.clearAllMocks(); });
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
   it("sin token no crea la sesión", async () => {
     const { result } = renderHook(() => useMatildaDemo());

@@ -32,7 +32,7 @@ const AnimatedCounter = ({ to, duration = 1800, format = defaultFormat, classNam
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
     io.observe(ref.current);
     return () => io.disconnect();

@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -34,7 +40,13 @@ const COUNTRIES = [
   { code: "ES", name: "España", currency: "USD" },
 ];
 
-const CheckoutDialog = ({ open, onOpenChange, amount, description, planId }: CheckoutDialogProps) => {
+const CheckoutDialog = ({
+  open,
+  onOpenChange,
+  amount,
+  description,
+  planId,
+}: CheckoutDialogProps) => {
   const { language } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -57,7 +69,9 @@ const CheckoutDialog = ({ open, onOpenChange, amount, description, planId }: Che
   const handlePay = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !email.trim()) {
-      toast.error(language === "es" ? "Nombre y email son obligatorios" : "Name and email are required");
+      toast.error(
+        language === "es" ? "Nombre y email son obligatorios" : "Name and email are required",
+      );
       return;
     }
     setLoading(true);
@@ -103,16 +117,39 @@ const CheckoutDialog = ({ open, onOpenChange, amount, description, planId }: Che
         <form onSubmit={handlePay} className="space-y-4 mt-2">
           <div className="space-y-1.5">
             <Label htmlFor="dl-name">{language === "es" ? "Nombre completo" : "Full name"}</Label>
-            <Input id="dl-name" value={name} onChange={(e) => setName(e.target.value)} required disabled={loading} maxLength={100} />
+            <Input
+              id="dl-name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              disabled={loading}
+              maxLength={100}
+            />
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="dl-email">Email</Label>
-            <Input id="dl-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required disabled={loading} maxLength={100} />
+            <Input
+              id="dl-email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={loading}
+              maxLength={100}
+            />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <Label htmlFor="dl-phone">{language === "es" ? "Teléfono (opcional)" : "Phone (optional)"}</Label>
-              <Input id="dl-phone" value={phone} onChange={(e) => setPhone(e.target.value)} disabled={loading} maxLength={30} />
+              <Label htmlFor="dl-phone">
+                {language === "es" ? "Teléfono (opcional)" : "Phone (optional)"}
+              </Label>
+              <Input
+                id="dl-phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                disabled={loading}
+                maxLength={30}
+              />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="dl-country">{language === "es" ? "País" : "Country"}</Label>
@@ -132,16 +169,20 @@ const CheckoutDialog = ({ open, onOpenChange, amount, description, planId }: Che
             </div>
           </div>
 
-          <Button type="submit" variant="hero" size="lg" className="w-full min-h-[48px]" disabled={loading}>
+          <Button
+            type="submit"
+            variant="hero"
+            size="lg"
+            className="w-full min-h-[48px]"
+            disabled={loading}
+          >
             {loading ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                 {language === "es" ? "Redirigiendo…" : "Redirecting…"}
               </>
             ) : (
-              <>
-                {language === "es" ? `Pagar $${amount} USD` : `Pay $${amount} USD`}
-              </>
+              <>{language === "es" ? `Pagar $${amount} USD` : `Pay $${amount} USD`}</>
             )}
           </Button>
 

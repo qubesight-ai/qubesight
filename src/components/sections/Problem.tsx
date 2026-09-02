@@ -29,8 +29,12 @@ const Problem = () => {
   return (
     <section id="problem" className="py-16 sm:py-24 relative overflow-hidden">
       {/* Subtle red wash to underscore the pain */}
-      <div className="absolute inset-0 pointer-events-none opacity-30"
-        style={{ background: "radial-gradient(ellipse 60% 40% at 50% 0%, hsl(0 84% 40% / 0.18), transparent 70%)" }}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 40% at 50% 0%, hsl(0 84% 40% / 0.18), transparent 70%)",
+        }}
       />
 
       <div className="container relative">
@@ -46,8 +50,7 @@ const Problem = () => {
             {t("problem.badge")}
           </span>
           <h2 className="text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {t("problem.title")}{" "}
-            <span className="gradient-text">{t("problem.titleAccent")}</span>
+            {t("problem.title")} <span className="gradient-text">{t("problem.titleAccent")}</span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">{t("problem.subtitle")}</p>
         </motion.div>
@@ -74,7 +77,9 @@ const Problem = () => {
                 <div className="text-4xl sm:text-5xl font-bold font-display text-destructive mb-3 leading-none">
                   {item.value}
                 </div>
-                <h3 className="text-lg font-semibold font-display mb-2 leading-snug">{item.title}</h3>
+                <h3 className="text-lg font-semibold font-display mb-2 leading-snug">
+                  {item.title}
+                </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
               </div>
             </motion.div>

@@ -88,8 +88,7 @@ const Products = () => {
         >
           <span className="eyebrow mb-5 inline-flex">{t("products.badge")}</span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {t("products.title")}{" "}
-            <span className="gradient-text">{t("products.titleAccent")}</span>
+            {t("products.title")} <span className="gradient-text">{t("products.titleAccent")}</span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground">{t("products.subtitle")}</p>
         </motion.div>
@@ -119,7 +118,9 @@ const Products = () => {
                 {p.tag}
               </div>
               <h3 className="text-lg font-semibold font-display mb-2">{p.name}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed flex-grow mb-4">{p.desc}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed flex-grow mb-4">
+                {p.desc}
+              </p>
               <p className="text-xs text-brand-soft font-medium">{p.forWhom}</p>
             </motion.a>
           ))}

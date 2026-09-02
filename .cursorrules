@@ -1,0 +1,11 @@
+# QubeSight engineering guardrails
+
+- Generate application code in TypeScript (`.ts`/`.tsx`), never new JavaScript files.
+- Keep UI components presentational. Put API access in `src/lib` services and stateful workflows in `src/hooks`.
+- Never place API keys, service-role keys, provider secrets, or credentials in client code or `VITE_*` variables.
+- Validate every server boundary with Zod, authenticate the caller, authorize organization access, and rate-limit expensive operations.
+- Preserve tenant isolation through `organization_id` and Supabase RLS. Never trust an organization ID supplied by the browser without membership verification.
+- Prefer streaming for conversational AI. Support cancellation and expose safe, actionable errors.
+- Use domain-specific names, small functions, explicit return types at public boundaries, and dependency injection for third-party providers.
+- Add or update tests for every behavior change. Run `npm run validate` before proposing a merge.
+- Do not modify or restart the production Matilda or Tem runtimes from repository code.

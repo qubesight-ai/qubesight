@@ -10,7 +10,7 @@ const Hero = () => {
   const whatsappUrl = `https://wa.me/50646009140?text=${encodeURIComponent(
     language === "es"
       ? "Hola, quiero potenciar a mi equipo con QubeSight."
-      : "Hi, I want to empower my team with QubeSight."
+      : "Hi, I want to empower my team with QubeSight.",
   )}`;
 
   const stats = [
@@ -20,13 +20,22 @@ const Hero = () => {
   ];
 
   return (
-    <section id="hero" className="relative min-h-[100dvh] flex items-center overflow-hidden pt-32 pb-20">
+    <section
+      id="hero"
+      className="relative min-h-[100dvh] flex items-center overflow-hidden pt-32 pb-20"
+    >
       {/* Ambient orbs */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-40 left-1/3 w-[640px] h-[640px] rounded-full blur-3xl opacity-40"
-             style={{ background: "radial-gradient(circle, hsl(249 70% 40% / 0.45), transparent 60%)" }} />
-        <div className="absolute bottom-0 -right-40 w-[520px] h-[520px] rounded-full blur-3xl opacity-30"
-             style={{ background: "radial-gradient(circle, hsl(258 70% 45% / 0.4), transparent 60%)" }} />
+        <div
+          className="absolute -top-40 left-1/3 w-[640px] h-[640px] rounded-full blur-3xl opacity-40"
+          style={{
+            background: "radial-gradient(circle, hsl(249 70% 40% / 0.45), transparent 60%)",
+          }}
+        />
+        <div
+          className="absolute bottom-0 -right-40 w-[520px] h-[520px] rounded-full blur-3xl opacity-30"
+          style={{ background: "radial-gradient(circle, hsl(258 70% 45% / 0.4), transparent 60%)" }}
+        />
       </div>
 
       <div className="container relative">
@@ -43,7 +52,9 @@ const Hero = () => {
                 <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-70" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
               </span>
-              {language === "es" ? "Primer mes gratis en Plan Inicio" : "First month free on Starter Plan"}
+              {language === "es"
+                ? "Primer mes gratis en Plan Inicio"
+                : "First month free on Starter Plan"}
             </motion.div>
 
             <motion.span
@@ -59,15 +70,13 @@ const Hero = () => {
               {t("hero.badge")}
             </motion.span>
 
-
             <motion.h1
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.05 }}
               className="display-xl text-[clamp(1.9rem,6vw,5.25rem)] mb-6 break-words"
             >
-              {t("hero.title")}{" "}
-              <span className="accent-text">{t("hero.titleAccent")}</span>
+              {t("hero.title")} <span className="accent-text">{t("hero.titleAccent")}</span>
             </motion.h1>
 
             <motion.p
@@ -160,4 +169,3 @@ const Hero = () => {
 };
 
 export default Hero;
-

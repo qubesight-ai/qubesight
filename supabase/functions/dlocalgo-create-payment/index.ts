@@ -68,7 +68,9 @@ Deno.serve(async (req) => {
   if (country && !/^[A-Z]{2}$/.test(country)) return bad("country must be a 2-letter ISO code");
 
   const description = (body.description ?? "QubeSight").slice(0, 100);
-  const order_id = (body.order_id ?? `qs_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`).slice(0, 128);
+  const order_id = (
+    body.order_id ?? `qs_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`
+  ).slice(0, 128);
 
   const origin = req.headers.get("origin") ?? "https://qubesight.lat";
   const success_url = body.success_url ?? `${origin}/payment/success`;
@@ -125,7 +127,11 @@ Deno.serve(async (req) => {
   if (!dlRes.ok) {
     console.error("dLocal Go error:", dlRes.status, data);
     return new Response(
-      JSON.stringify({ error: "dLocal Go rejected the payment request", status: dlRes.status, details: data }),
+      JSON.stringify({
+        error: "dLocal Go rejected the payment request",
+        status: dlRes.status,
+        details: data,
+      }),
       { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   }

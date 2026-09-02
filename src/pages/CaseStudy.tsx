@@ -1,9 +1,26 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  ArrowLeft, ArrowRight, Brain, ArrowRightLeft, Database, Zap, Settings,
-  BarChart3, ShoppingCart, CreditCard, Package, Globe, Languages, Users,
-  GraduationCap, BookOpen, LayoutDashboard, FileBarChart, Shield, Quote,
+  ArrowLeft,
+  ArrowRight,
+  Brain,
+  ArrowRightLeft,
+  Database,
+  Zap,
+  Settings,
+  BarChart3,
+  ShoppingCart,
+  CreditCard,
+  Package,
+  Globe,
+  Languages,
+  Users,
+  GraduationCap,
+  BookOpen,
+  LayoutDashboard,
+  FileBarChart,
+  Shield,
+  Quote,
   ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,9 +31,23 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/sections/Footer";
 
 const iconMap: Record<string, React.ElementType> = {
-  Brain, ArrowRightLeft, Database, Zap, Settings, BarChart3,
-  ShoppingCart, CreditCard, Package, Globe, Languages, Users,
-  GraduationCap, BookOpen, LayoutDashboard, FileBarChart, Shield,
+  Brain,
+  ArrowRightLeft,
+  Database,
+  Zap,
+  Settings,
+  BarChart3,
+  ShoppingCart,
+  CreditCard,
+  Package,
+  Globe,
+  Languages,
+  Users,
+  GraduationCap,
+  BookOpen,
+  LayoutDashboard,
+  FileBarChart,
+  Shield,
 };
 
 const fadeUp = {
@@ -36,7 +67,7 @@ const CaseStudyPage = () => {
   const whatsappMessage = encodeURIComponent(
     lang === "es"
       ? "Hola, me interesa una solución similar para mi negocio."
-      : "Hello, I'm interested in a similar solution for my business."
+      : "Hello, I'm interested in a similar solution for my business.",
   );
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
@@ -225,9 +256,7 @@ const CaseStudyPage = () => {
                   <span className="font-semibold text-primary text-sm uppercase tracking-wider">
                     {tech.name[lang]}
                   </span>
-                  <span className="text-muted-foreground">
-                    {tech.rationale[lang]}
-                  </span>
+                  <span className="text-muted-foreground">{tech.rationale[lang]}</span>
                 </motion.div>
               ))}
             </div>
@@ -292,9 +321,7 @@ const CaseStudyPage = () => {
               {lang === "es" ? "Resultados de Negocio" : "Business Outcomes"}
             </h2>
             <p className="text-muted-foreground text-lg">
-              {lang === "es"
-                ? "Impacto medible que generamos."
-                : "Measurable impact we delivered."}
+              {lang === "es" ? "Impacto medible que generamos." : "Measurable impact we delivered."}
             </p>
           </motion.div>
 
@@ -335,12 +362,8 @@ const CaseStudyPage = () => {
               "{cs.testimonial.quote[lang]}"
             </blockquote>
             <div>
-              <p className="font-semibold text-foreground text-lg">
-                {cs.testimonial.name}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                {cs.testimonial.title[lang]}
-              </p>
+              <p className="font-semibold text-foreground text-lg">{cs.testimonial.name}</p>
+              <p className="text-sm text-muted-foreground">{cs.testimonial.title[lang]}</p>
             </div>
           </motion.div>
         </div>
@@ -360,9 +383,7 @@ const CaseStudyPage = () => {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
             <div className="relative z-10 max-w-2xl mx-auto">
               <h2 className="text-3xl sm:text-4xl font-bold font-display mb-4 text-foreground">
-                {lang === "es"
-                  ? "¿Necesitas una solución similar?"
-                  : "Need a similar solution?"}
+                {lang === "es" ? "¿Necesitas una solución similar?" : "Need a similar solution?"}
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
                 {lang === "es"

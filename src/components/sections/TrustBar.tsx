@@ -1,5 +1,14 @@
 import { motion } from "framer-motion";
-import { UtensilsCrossed, Scissors, Stethoscope, Dumbbell, Building2, Store, Briefcase, Sparkles } from "lucide-react";
+import {
+  UtensilsCrossed,
+  Scissors,
+  Stethoscope,
+  Dumbbell,
+  Building2,
+  Store,
+  Briefcase,
+  Sparkles,
+} from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const TrustBar = () => {
@@ -20,7 +29,10 @@ const TrustBar = () => {
   const items = [...industries, ...industries];
 
   return (
-    <section aria-label="Industrias atendidas" className="py-10 border-y border-white/5 bg-card/20 backdrop-blur-sm overflow-hidden">
+    <section
+      aria-label="Industrias atendidas"
+      className="py-10 border-y border-white/5 bg-card/20 backdrop-blur-sm overflow-hidden"
+    >
       <div className="container">
         <motion.p
           initial={{ opacity: 0 }}

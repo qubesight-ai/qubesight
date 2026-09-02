@@ -55,7 +55,11 @@ export default function Auth({ mode }: { mode: "login" | "register" | "forgot" }
     <main className="min-h-screen grid lg:grid-cols-2 bg-background">
       <section className="hidden lg:flex relative overflow-hidden border-r border-white/10 p-12 flex-col justify-between">
         <div className="absolute inset-0 bg-grid opacity-40" />
-        <Link to="/" className="relative inline-flex h-10 w-[10.75rem] items-center" aria-label="QubeSight">
+        <Link
+          to="/"
+          className="relative inline-flex h-10 w-[10.75rem] items-center"
+          aria-label="QubeSight"
+        >
           <LogoCube />
         </Link>
         <div className="relative max-w-lg">
@@ -64,7 +68,8 @@ export default function Auth({ mode }: { mode: "login" | "register" | "forgot" }
           </p>
           <h1 className="text-5xl leading-tight mb-6">Tus agentes de voz, bajo control.</h1>
           <p className="text-muted-foreground text-lg">
-            Configura el comportamiento, monitorea llamadas y administra tu operación desde un solo lugar.
+            Configura el comportamiento, monitorea llamadas y administra tu operación desde un solo
+            lugar.
           </p>
         </div>
         <p className="relative text-xs text-muted-foreground">© 2026 QubeSight Digital Boost</p>

@@ -65,10 +65,12 @@ async function hmac(value: string) {
 }
 
 function clientIp(req: Request) {
-  return (req.headers.get("x-forwarded-for") ?? "").split(",")[0]?.trim()
-    || req.headers.get("cf-connecting-ip")
-    || req.headers.get("x-real-ip")
-    || "unknown";
+  return (
+    (req.headers.get("x-forwarded-for") ?? "").split(",")[0]?.trim() ||
+    req.headers.get("cf-connecting-ip") ||
+    req.headers.get("x-real-ip") ||
+    "unknown"
+  );
 }
 
 async function enforceRateLimit(req: Request, action: Action, userId: string) {
@@ -85,7 +87,10 @@ async function enforceRateLimit(req: Request, action: Action, userId: string) {
     hmac(`twilio:ip:${clientIp(req)}`),
   ]);
 
-  for (const [scope, subject] of [["user", userKey], ["ip", ipKey]] as const) {
+  for (const [scope, subject] of [
+    ["user", userKey],
+    ["ip", ipKey],
+  ] as const) {
     const { data, error } = await admin.rpc("consume_rate_limit", {
       p_subject_key: subject,
       p_action: `twilio:${action}:${scope}`,
@@ -99,23 +104,21 @@ async function enforceRateLimit(req: Request, action: Action, userId: string) {
     const row = Array.isArray(data) ? data[0] : data;
     if (!row?.allowed) {
       const retry = Math.max(1, Number(row?.retry_after_seconds ?? windowSeconds));
-      console.warn(JSON.stringify({
-        event: "twilio_rate_limited",
-        action,
-        scope,
-        subject: subject.slice(0, 12),
-        at: new Date().toISOString(),
-      }));
+      console.warn(
+        JSON.stringify({
+          event: "twilio_rate_limited",
+          action,
+          scope,
+          subject: subject.slice(0, 12),
+          at: new Date().toISOString(),
+        }),
+      );
       throw new HttpError(429, "Demasiadas solicitudes. Intenta nuevamente más tarde.", retry);
     }
   }
 }
 
-async function twilioRequest(
-  accountSid: string,
-  apiKeySid: string,
-  apiKeySecret: string,
-) {
+async function twilioRequest(accountSid: string, apiKeySid: string, apiKeySecret: string) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 12000);
   try {
@@ -138,9 +141,9 @@ async function twilioRequest(
     }
     if (!response.ok) throw new HttpError(502, "Twilio no pudo verificar la cuenta.");
     const payload = await response.json();
-    return (Array.isArray(payload?.incoming_phone_numbers)
-      ? payload.incoming_phone_numbers
-      : []) as TwilioNumber[];
+    return (
+      Array.isArray(payload?.incoming_phone_numbers) ? payload.incoming_phone_numbers : []
+    ) as TwilioNumber[];
   } catch (error) {
     if (error instanceof HttpError) throw error;
     if (error instanceof DOMException && error.name === "AbortError") {
@@ -191,14 +194,12 @@ async function readSecret(secretId: string) {
   return data;
 }
 
-async function syncNumbers(
-  organizationId: string,
-  connectionId: string,
-  numbers: TwilioNumber[],
-) {
+async function syncNumbers(organizationId: string, connectionId: string, numbers: TwilioNumber[]) {
   const rows = numbers
-    .filter((number) => /^PN[0-9A-Fa-f]{32}$/.test(number.sid)
-      && /^\+[1-9][0-9]{6,14}$/.test(number.phone_number))
+    .filter(
+      (number) =>
+        /^PN[0-9A-Fa-f]{32}$/.test(number.sid) && /^\+[1-9][0-9]{6,14}$/.test(number.phone_number),
+    )
     .map((number) => ({
       organization_id: organizationId,
       telephony_connection_id: connectionId,
@@ -223,10 +224,7 @@ async function syncNumbers(
     .filter((row) => !currentSids.has(row.provider_number_sid))
     .map((row) => row.id);
   if (staleIds.length) {
-    const { error: staleError } = await admin
-      .from("phone_numbers")
-      .delete()
-      .in("id", staleIds);
+    const { error: staleError } = await admin.from("phone_numbers").delete().in("id", staleIds);
     if (staleError) throw new HttpError(500, "No se pudieron reconciliar los números.");
   }
 
@@ -246,7 +244,9 @@ async function responseState(organizationId: string) {
 
   const { data: numbers, error } = await admin
     .from("phone_numbers")
-    .select("provider_number_sid,phone_number,friendly_name,capabilities,current_voice_url,selected,webhook_status,last_synced_at")
+    .select(
+      "provider_number_sid,phone_number,friendly_name,capabilities,current_voice_url,selected,webhook_status,last_synced_at",
+    )
     .eq("organization_id", organizationId)
     .order("phone_number");
   if (error) throw new HttpError(500, "No se pudieron consultar los números.");
@@ -268,9 +268,7 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   if (req.method !== "POST") return json({ error: "Método no permitido" }, 405);
 
-  const token = (req.headers.get("Authorization") ?? "")
-    .replace(/^Bearer\s+/i, "")
-    .trim();
+  const token = (req.headers.get("Authorization") ?? "").replace(/^Bearer\s+/i, "").trim();
 
   try {
     const { userId, organizationId } = await ownerContext(token);
@@ -287,37 +285,39 @@ serve(async (req) => {
       const accountSid = text(body.account_sid, 34);
       const apiKeySid = text(body.api_key_sid, 34);
       const apiKeySecret = text(body.api_key_secret, 512);
-      if (!/^AC[0-9A-Fa-f]{32}$/.test(accountSid)
-        || !/^SK[0-9A-Fa-f]{32}$/.test(apiKeySid)
-        || apiKeySecret.length < 8) {
+      if (
+        !/^AC[0-9A-Fa-f]{32}$/.test(accountSid) ||
+        !/^SK[0-9A-Fa-f]{32}$/.test(apiKeySid) ||
+        apiKeySecret.length < 8
+      ) {
         throw new HttpError(400, "Formato de credenciales inválido.");
       }
 
       const numbers = await twilioRequest(accountSid, apiKeySid, apiKeySecret);
       const existing = await getConnection(organizationId);
-      const { data: secretId, error: vaultError } = await admin.rpc(
-        "vault_store_twilio_secret",
-        {
-          p_secret: apiKeySecret,
-          p_existing_id: existing?.vault_secret_id ?? null,
-          p_name: `twilio-${organizationId}`,
-        },
-      );
+      const { data: secretId, error: vaultError } = await admin.rpc("vault_store_twilio_secret", {
+        p_secret: apiKeySecret,
+        p_existing_id: existing?.vault_secret_id ?? null,
+        p_name: `twilio-${organizationId}`,
+      });
       if (vaultError || !secretId) throw new HttpError(500, "No se pudo cifrar la credencial.");
 
       const { data: connection, error } = await admin
         .from("telephony_connections")
-        .upsert({
-          organization_id: organizationId,
-          provider: "twilio",
-          account_sid: accountSid,
-          api_key_sid: apiKeySid,
-          vault_secret_id: secretId,
-          status: "verified",
-          verified_at: new Date().toISOString(),
-          created_by: userId,
-          updated_at: new Date().toISOString(),
-        }, { onConflict: "organization_id,provider" })
+        .upsert(
+          {
+            organization_id: organizationId,
+            provider: "twilio",
+            account_sid: accountSid,
+            api_key_sid: apiKeySid,
+            vault_secret_id: secretId,
+            status: "verified",
+            verified_at: new Date().toISOString(),
+            created_by: userId,
+            updated_at: new Date().toISOString(),
+          },
+          { onConflict: "organization_id,provider" },
+        )
         .select("id")
         .single();
       if (error || !connection) throw new HttpError(500, "No se pudo guardar la conexión.");
@@ -363,9 +363,8 @@ serve(async (req) => {
     return json({ connection: null, numbers: [] });
   } catch (error) {
     const status = error instanceof HttpError ? error.status : 500;
-    const message = error instanceof HttpError
-      ? error.message
-      : "Error inesperado al administrar Twilio.";
+    const message =
+      error instanceof HttpError ? error.message : "Error inesperado al administrar Twilio.";
     if (status >= 500) console.error("twilio-connection error", message);
     const retry = error instanceof HttpError ? error.retryAfter : undefined;
     return json(

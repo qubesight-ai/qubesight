@@ -1,5 +1,13 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Instagram, Facebook, Globe, Phone, Network, ArrowUpRight } from "lucide-react";
+import {
+  MessageCircle,
+  Instagram,
+  Facebook,
+  Globe,
+  Phone,
+  Network,
+  ArrowUpRight,
+} from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const Multichannel = () => {
@@ -29,8 +37,7 @@ const Multichannel = () => {
             {t("multi.badge")}
           </span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-[1.05] text-balance">
-            {t("multi.title")}{" "}
-            <span className="gradient-text">{t("multi.titleAccent")}</span>
+            {t("multi.title")} <span className="gradient-text">{t("multi.titleAccent")}</span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground">{t("multi.description")}</p>
         </motion.div>

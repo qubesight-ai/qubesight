@@ -58,7 +58,6 @@ function NestedCubes() {
       <points ref={particles} geometry={particleGeom}>
         <pointsMaterial color="#8b7ee8" size={0.04} transparent opacity={0.7} />
       </points>
-
     </group>
   );
 }

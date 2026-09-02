@@ -1,11 +1,11 @@
-import imgTemteaching from "@/assets/portfolio/temteaching.png";
-import imgOverstop from "@/assets/portfolio/overstop.png";
-import imgTimAutomation from "@/assets/portfolio/tim-automation.png";
-import imgTimVoice from "@/assets/portfolio/tim-voice.png";
-import imgQubesight from "@/assets/portfolio/qubesight.png";
-import imgAjhb1 from "@/assets/portfolio/ajhb1.png";
+import imgTemteaching from "@/assets/portfolio/temteaching.webp";
+import imgOverstop from "@/assets/portfolio/overstop.webp";
+import imgTimAutomation from "@/assets/portfolio/tim-automation.webp";
+import imgTimVoice from "@/assets/portfolio/tim-voice.webp";
+import imgQubesight from "@/assets/portfolio/qubesight.webp";
+import imgAjhb1 from "@/assets/portfolio/ajhb1.webp";
 
-export type Language = 'es' | 'en';
+export type Language = "es" | "en";
 
 interface Bilingual {
   es: string;
@@ -54,12 +54,12 @@ export interface CaseStudy {
 }
 
 export const categories = [
-  { key: 'all', label: { es: 'Todos', en: 'All' } },
-  { key: 'ai', label: { es: 'IA & Automatización', en: 'AI & Automation' } },
-  { key: 'edtech', label: { es: 'Plataformas Educativas', en: 'EdTech' } },
-  { key: 'web', label: { es: 'Desarrollo Web', en: 'Web Development' } },
-  { key: 'ecommerce', label: { es: 'E-commerce', en: 'E-commerce' } },
-  { key: 'systems', label: { es: 'Sistemas Empresariales', en: 'Business Systems' } },
+  { key: "all", label: { es: "Todos", en: "All" } },
+  { key: "ai", label: { es: "IA & Automatización", en: "AI & Automation" } },
+  { key: "edtech", label: { es: "Plataformas Educativas", en: "EdTech" } },
+  { key: "web", label: { es: "Desarrollo Web", en: "Web Development" } },
+  { key: "ecommerce", label: { es: "E-commerce", en: "E-commerce" } },
+  { key: "systems", label: { es: "Sistemas Empresariales", en: "Business Systems" } },
 ];
 
 export const caseStudies: CaseStudy[] = [
@@ -84,23 +84,38 @@ export const caseStudies: CaseStudy[] = [
     techStack: [
       {
         name: { es: "Frontend", en: "Frontend" },
-        rationale: { es: "React — Elegido por su reusabilidad de componentes y velocidad.", en: "React — Chosen for its component reusability and speed." },
+        rationale: {
+          es: "React — Elegido por su reusabilidad de componentes y velocidad.",
+          en: "React — Chosen for its component reusability and speed.",
+        },
       },
       {
         name: { es: "Backend", en: "Backend" },
-        rationale: { es: "Node.js — Para manejar solicitudes de API en tiempo real de forma eficiente.", en: "Node.js — To handle real-time API requests efficiently." },
+        rationale: {
+          es: "Node.js — Para manejar solicitudes de API en tiempo real de forma eficiente.",
+          en: "Node.js — To handle real-time API requests efficiently.",
+        },
       },
       {
         name: { es: "IA/NLP", en: "AI/NLP" },
-        rationale: { es: "Dialogflow CX — Seleccionada por su robusto reconocimiento de intenciones e integración sencilla con telefonía.", en: "Dialogflow CX — Selected for its robust intent matching and easy telephony integration." },
+        rationale: {
+          es: "Dialogflow CX — Seleccionada por su robusto reconocimiento de intenciones e integración sencilla con telefonía.",
+          en: "Dialogflow CX — Selected for its robust intent matching and easy telephony integration.",
+        },
       },
       {
         name: { es: "Base de Datos", en: "Database" },
-        rationale: { es: "PostgreSQL — Para integridad de datos y consultas complejas.", en: "PostgreSQL — For data integrity and complex querying." },
+        rationale: {
+          es: "PostgreSQL — Para integridad de datos y consultas complejas.",
+          en: "PostgreSQL — For data integrity and complex querying.",
+        },
       },
       {
         name: { es: "DevOps", en: "DevOps" },
-        rationale: { es: "AWS (EC2, RDS) — Para asegurar 99.9% de uptime y auto-escalado.", en: "AWS (EC2, RDS) — To ensure 99.9% uptime and auto-scaling." },
+        rationale: {
+          es: "AWS (EC2, RDS) — Para asegurar 99.9% de uptime y auto-escalado.",
+          en: "AWS (EC2, RDS) — To ensure 99.9% uptime and auto-scaling.",
+        },
       },
     ],
     architectureDiagram: {
@@ -140,11 +155,17 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         value: "30%",
-        label: { es: "Consultas resueltas completamente por IA", en: "Inquiries resolved entirely by AI" },
+        label: {
+          es: "Consultas resueltas completamente por IA",
+          en: "Inquiries resolved entirely by AI",
+        },
       },
       {
         value: "$4,200",
-        label: { es: "Ahorro anual estimado vs turno nocturno", en: "Estimated annual savings vs night shift" },
+        label: {
+          es: "Ahorro anual estimado vs turno nocturno",
+          en: "Estimated annual savings vs night shift",
+        },
       },
     ],
     testimonial: {
@@ -175,29 +196,92 @@ export const caseStudies: CaseStudy[] = [
       en: "TIM Automation, an industrial services company with 12 employees, relied on manual processes for work order management, invoicing, and client follow-up. Human errors caused costly rework and the admin team spent over 60% of their time on repetitive tasks.",
     },
     techStack: [
-      { name: { es: "Frontend", en: "Frontend" }, rationale: { es: "React — Interfaces dinámicas con actualización en tiempo real de estados de órdenes.", en: "React — Dynamic interfaces with real-time work order status updates." } },
-      { name: { es: "Backend", en: "Backend" }, rationale: { es: "Node.js + Express — Manejo eficiente de webhooks y eventos asíncronos de automatización.", en: "Node.js + Express — Efficient handling of webhooks and async automation events." } },
-      { name: { es: "Automatización", en: "Automation" }, rationale: { es: "n8n + Scripts personalizados — Flujos de trabajo visuales combinados con lógica de negocio a medida.", en: "n8n + Custom Scripts — Visual workflows combined with custom business logic." } },
-      { name: { es: "Base de Datos", en: "Database" }, rationale: { es: "PostgreSQL — Integridad transaccional para facturación y auditoría completa.", en: "PostgreSQL — Transactional integrity for billing and complete audit trails." } },
+      {
+        name: { es: "Frontend", en: "Frontend" },
+        rationale: {
+          es: "React — Interfaces dinámicas con actualización en tiempo real de estados de órdenes.",
+          en: "React — Dynamic interfaces with real-time work order status updates.",
+        },
+      },
+      {
+        name: { es: "Backend", en: "Backend" },
+        rationale: {
+          es: "Node.js + Express — Manejo eficiente de webhooks y eventos asíncronos de automatización.",
+          en: "Node.js + Express — Efficient handling of webhooks and async automation events.",
+        },
+      },
+      {
+        name: { es: "Automatización", en: "Automation" },
+        rationale: {
+          es: "n8n + Scripts personalizados — Flujos de trabajo visuales combinados con lógica de negocio a medida.",
+          en: "n8n + Custom Scripts — Visual workflows combined with custom business logic.",
+        },
+      },
+      {
+        name: { es: "Base de Datos", en: "Database" },
+        rationale: {
+          es: "PostgreSQL — Integridad transaccional para facturación y auditoría completa.",
+          en: "PostgreSQL — Transactional integrity for billing and complete audit trails.",
+        },
+      },
     ],
     architectureDiagram: {
       es: "Entrada de Datos → Motor de Automatización → Reglas de Negocio → Acciones Automatizadas → Dashboard de Monitoreo",
       en: "Data Input → Automation Engine → Business Rules → Automated Actions → Monitoring Dashboard",
     },
     features: [
-      { title: { es: "Órdenes de Trabajo Automatizadas", en: "Automated Work Orders" }, description: { es: "Las órdenes se crean, asignan y actualizan automáticamente según reglas de negocio, eliminando cuellos de botella administrativos.", en: "Work orders are automatically created, assigned, and updated based on business rules, eliminating administrative bottlenecks." }, icon: "Zap" },
-      { title: { es: "Facturación Inteligente", en: "Smart Invoicing" }, description: { es: "Genera facturas automáticamente al completar una orden, con cálculos de materiales, mano de obra y márgenes configurables.", en: "Automatically generates invoices upon order completion, with configurable material, labor, and margin calculations." }, icon: "Settings" },
-      { title: { es: "Dashboard de Rendimiento", en: "Performance Dashboard" }, description: { es: "Panel en tiempo real con KPIs operativos, tiempos de respuesta y productividad por equipo para decisiones basadas en datos.", en: "Real-time dashboard with operational KPIs, response times, and team productivity for data-driven decisions." }, icon: "BarChart3" },
+      {
+        title: { es: "Órdenes de Trabajo Automatizadas", en: "Automated Work Orders" },
+        description: {
+          es: "Las órdenes se crean, asignan y actualizan automáticamente según reglas de negocio, eliminando cuellos de botella administrativos.",
+          en: "Work orders are automatically created, assigned, and updated based on business rules, eliminating administrative bottlenecks.",
+        },
+        icon: "Zap",
+      },
+      {
+        title: { es: "Facturación Inteligente", en: "Smart Invoicing" },
+        description: {
+          es: "Genera facturas automáticamente al completar una orden, con cálculos de materiales, mano de obra y márgenes configurables.",
+          en: "Automatically generates invoices upon order completion, with configurable material, labor, and margin calculations.",
+        },
+        icon: "Settings",
+      },
+      {
+        title: { es: "Dashboard de Rendimiento", en: "Performance Dashboard" },
+        description: {
+          es: "Panel en tiempo real con KPIs operativos, tiempos de respuesta y productividad por equipo para decisiones basadas en datos.",
+          en: "Real-time dashboard with operational KPIs, response times, and team productivity for data-driven decisions.",
+        },
+        icon: "BarChart3",
+      },
     ],
     metrics: [
-      { value: "35h", label: { es: "Horas manuales eliminadas al mes", en: "Manual hours eliminated per month" } },
-      { value: "30%", label: { es: "Reducción en errores de facturación", en: "Reduction in billing errors" } },
-      { value: "2x", label: { es: "Aumento en velocidad de procesamiento de órdenes", en: "Increase in order processing speed" } },
+      {
+        value: "35h",
+        label: { es: "Horas manuales eliminadas al mes", en: "Manual hours eliminated per month" },
+      },
+      {
+        value: "30%",
+        label: { es: "Reducción en errores de facturación", en: "Reduction in billing errors" },
+      },
+      {
+        value: "2x",
+        label: {
+          es: "Aumento en velocidad de procesamiento de órdenes",
+          en: "Increase in order processing speed",
+        },
+      },
     ],
     testimonial: {
-      quote: { es: "Antes tardábamos días en procesar una orden completa. Ahora el sistema lo hace en minutos. Qubesight entendió nuestro negocio y automatizó exactamente lo que necesitábamos.", en: "We used to take days to process a complete order. Now the system does it in minutes. Qubesight understood our business and automated exactly what we needed." },
+      quote: {
+        es: "Antes tardábamos días en procesar una orden completa. Ahora el sistema lo hace en minutos. Qubesight entendió nuestro negocio y automatizó exactamente lo que necesitábamos.",
+        en: "We used to take days to process a complete order. Now the system does it in minutes. Qubesight understood our business and automated exactly what we needed.",
+      },
       name: "Roberto Vargas",
-      title: { es: "Director de Operaciones, TIM Automation", en: "Operations Director, TIM Automation" },
+      title: {
+        es: "Director de Operaciones, TIM Automation",
+        en: "Operations Director, TIM Automation",
+      },
     },
   },
   {
@@ -219,27 +303,93 @@ export const caseStudies: CaseStudy[] = [
       en: "TemTeaching, a growing English language academy, managed enrollments, language levels, grades, and parent communications through spreadsheets and emails. Teachers lost hours each week on administrative tasks instead of focusing on language instruction, and parents lacked visibility into their children's progress.",
     },
     techStack: [
-      { name: { es: "Frontend", en: "Frontend" }, rationale: { es: "React + TypeScript — Tipado seguro para formularios complejos y paneles multi-rol.", en: "React + TypeScript — Type-safe forms and complex multi-role dashboards." } },
-      { name: { es: "Backend", en: "Backend" }, rationale: { es: "Supabase — Autenticación integrada, API en tiempo real y reglas de seguridad por rol.", en: "Supabase — Built-in auth, real-time API, and role-based security rules." } },
-      { name: { es: "Base de Datos", en: "Database" }, rationale: { es: "PostgreSQL — Relaciones complejas entre cursos, estudiantes, calificaciones y asistencia.", en: "PostgreSQL — Complex relationships between courses, students, grades, and attendance." } },
-      { name: { es: "Hosting", en: "Hosting" }, rationale: { es: "Vercel — Deploy continuo con preview por branch para QA del cliente.", en: "Vercel — Continuous deployment with branch previews for client QA." } },
+      {
+        name: { es: "Frontend", en: "Frontend" },
+        rationale: {
+          es: "React + TypeScript — Tipado seguro para formularios complejos y paneles multi-rol.",
+          en: "React + TypeScript — Type-safe forms and complex multi-role dashboards.",
+        },
+      },
+      {
+        name: { es: "Backend", en: "Backend" },
+        rationale: {
+          es: "Supabase — Autenticación integrada, API en tiempo real y reglas de seguridad por rol.",
+          en: "Supabase — Built-in auth, real-time API, and role-based security rules.",
+        },
+      },
+      {
+        name: { es: "Base de Datos", en: "Database" },
+        rationale: {
+          es: "PostgreSQL — Relaciones complejas entre cursos, estudiantes, calificaciones y asistencia.",
+          en: "PostgreSQL — Complex relationships between courses, students, grades, and attendance.",
+        },
+      },
+      {
+        name: { es: "Hosting", en: "Hosting" },
+        rationale: {
+          es: "Vercel — Deploy continuo con preview por branch para QA del cliente.",
+          en: "Vercel — Continuous deployment with branch previews for client QA.",
+        },
+      },
     ],
     architectureDiagram: {
       es: "Estudiante/Profesor → Plataforma Web → API en Tiempo Real → Base de Datos → Sistema de Notificaciones",
       en: "Student/Teacher → Web Platform → Real-time API → Database → Notification System",
     },
     features: [
-      { title: { es: "Gestión Académica Completa", en: "Complete Academic Management" }, description: { es: "Registro de calificaciones, asistencia y evaluaciones con cálculo automático de promedios y reportes descargables por periodo.", en: "Grade recording, attendance, and evaluations with automatic average calculations and downloadable period reports." }, icon: "GraduationCap" },
-      { title: { es: "Biblioteca de Contenidos", en: "Content Library" }, description: { es: "Repositorio organizado por materia y nivel donde profesores comparten materiales, tareas y recursos multimedia con sus estudiantes.", en: "Repository organized by subject and level where teachers share materials, assignments, and multimedia resources with students." }, icon: "BookOpen" },
-      { title: { es: "Portal de Padres", en: "Parent Portal" }, description: { es: "Acceso en tiempo real al rendimiento académico, calendario de eventos y canal de comunicación directa con profesores.", en: "Real-time access to academic performance, event calendar, and direct communication channel with teachers." }, icon: "Users" },
+      {
+        title: { es: "Gestión Académica Completa", en: "Complete Academic Management" },
+        description: {
+          es: "Registro de calificaciones, asistencia y evaluaciones con cálculo automático de promedios y reportes descargables por periodo.",
+          en: "Grade recording, attendance, and evaluations with automatic average calculations and downloadable period reports.",
+        },
+        icon: "GraduationCap",
+      },
+      {
+        title: { es: "Biblioteca de Contenidos", en: "Content Library" },
+        description: {
+          es: "Repositorio organizado por materia y nivel donde profesores comparten materiales, tareas y recursos multimedia con sus estudiantes.",
+          en: "Repository organized by subject and level where teachers share materials, assignments, and multimedia resources with students.",
+        },
+        icon: "BookOpen",
+      },
+      {
+        title: { es: "Portal de Padres", en: "Parent Portal" },
+        description: {
+          es: "Acceso en tiempo real al rendimiento académico, calendario de eventos y canal de comunicación directa con profesores.",
+          en: "Real-time access to academic performance, event calendar, and direct communication channel with teachers.",
+        },
+        icon: "Users",
+      },
     ],
     metrics: [
-      { value: "8h", label: { es: "Horas semanales ahorradas por profesor", en: "Weekly hours saved per teacher" } },
-      { value: "92%", label: { es: "Satisfacción de padres con la plataforma", en: "Parent satisfaction with the platform" } },
-      { value: "3x", label: { es: "Velocidad de generación de reportes", en: "Report generation speed increase" } },
+      {
+        value: "8h",
+        label: {
+          es: "Horas semanales ahorradas por profesor",
+          en: "Weekly hours saved per teacher",
+        },
+      },
+      {
+        value: "92%",
+        label: {
+          es: "Satisfacción de padres con la plataforma",
+          en: "Parent satisfaction with the platform",
+        },
+      },
+      {
+        value: "3x",
+        label: {
+          es: "Velocidad de generación de reportes",
+          en: "Report generation speed increase",
+        },
+      },
     ],
     testimonial: {
-      quote: { es: "La plataforma transformó la manera en que operamos. Los profesores ahora dedican su tiempo a enseñar, no a llenar formularios. Los padres están más involucrados que nunca.", en: "The platform transformed the way we operate. Teachers now spend their time teaching, not filling out forms. Parents are more involved than ever." },
+      quote: {
+        es: "La plataforma transformó la manera en que operamos. Los profesores ahora dedican su tiempo a enseñar, no a llenar formularios. Los padres están más involucrados que nunca.",
+        en: "The platform transformed the way we operate. Teachers now spend their time teaching, not filling out forms. Parents are more involved than ever.",
+      },
       name: "Ana Lucía Herrera",
       title: { es: "Directora Académica, TemTeaching", en: "Academic Director, TemTeaching" },
     },
@@ -264,27 +414,87 @@ export const caseStudies: CaseStudy[] = [
       en: "Overstop, an urban fashion brand in Costa Rica, sold primarily through social media and WhatsApp. They had no digital catalog, customers abandoned purchases due to confusing processes, and inventory was managed manually in a notebook. They needed to professionalize their digital operation without losing closeness with customers.",
     },
     techStack: [
-      { name: { es: "Frontend", en: "Frontend" }, rationale: { es: "React + Tailwind CSS — Experiencia de compra rápida y visualmente atractiva, optimizada para móvil.", en: "React + Tailwind CSS — Fast, visually appealing shopping experience, optimized for mobile." } },
-      { name: { es: "E-commerce", en: "E-commerce" }, rationale: { es: "Arquitectura headless — Flexibilidad total de diseño sin limitaciones de plantillas.", en: "Headless architecture — Total design flexibility without template limitations." } },
-      { name: { es: "Pagos", en: "Payments" }, rationale: { es: "Stripe + SINPE Móvil — Pagos internacionales y locales para máxima cobertura en Costa Rica.", en: "Stripe + SINPE Móvil — International and local payments for maximum coverage in Costa Rica." } },
-      { name: { es: "Inventario", en: "Inventory" }, rationale: { es: "Sistema a medida — Sincronización en tiempo real entre tienda física y online.", en: "Custom system — Real-time sync between physical and online store." } },
+      {
+        name: { es: "Frontend", en: "Frontend" },
+        rationale: {
+          es: "React + Tailwind CSS — Experiencia de compra rápida y visualmente atractiva, optimizada para móvil.",
+          en: "React + Tailwind CSS — Fast, visually appealing shopping experience, optimized for mobile.",
+        },
+      },
+      {
+        name: { es: "E-commerce", en: "E-commerce" },
+        rationale: {
+          es: "Arquitectura headless — Flexibilidad total de diseño sin limitaciones de plantillas.",
+          en: "Headless architecture — Total design flexibility without template limitations.",
+        },
+      },
+      {
+        name: { es: "Pagos", en: "Payments" },
+        rationale: {
+          es: "Stripe + SINPE Móvil — Pagos internacionales y locales para máxima cobertura en Costa Rica.",
+          en: "Stripe + SINPE Móvil — International and local payments for maximum coverage in Costa Rica.",
+        },
+      },
+      {
+        name: { es: "Inventario", en: "Inventory" },
+        rationale: {
+          es: "Sistema a medida — Sincronización en tiempo real entre tienda física y online.",
+          en: "Custom system — Real-time sync between physical and online store.",
+        },
+      },
     ],
     architectureDiagram: {
       es: "Cliente → Tienda Online → Carrito → Pasarela de Pago → Sistema de Inventario → Notificaciones WhatsApp",
       en: "Customer → Online Store → Cart → Payment Gateway → Inventory System → WhatsApp Notifications",
     },
     features: [
-      { title: { es: "Catálogo Visual Inteligente", en: "Smart Visual Catalog" }, description: { es: "Galería de productos con filtros por categoría, talla y color, con zoom de alta resolución y vista rápida sin salir del catálogo.", en: "Product gallery with filters by category, size, and color, with high-res zoom and quick view without leaving the catalog." }, icon: "ShoppingCart" },
-      { title: { es: "Checkout en 2 Pasos", en: "2-Step Checkout" }, description: { es: "Proceso de compra simplificado que redujo el abandono de carrito un 40%, con soporte para múltiples métodos de pago locales.", en: "Simplified purchase process that reduced cart abandonment by 40%, with support for multiple local payment methods." }, icon: "CreditCard" },
-      { title: { es: "Gestión de Inventario en Tiempo Real", en: "Real-Time Inventory Management" }, description: { es: "Panel administrativo que muestra stock actualizado, alertas de bajo inventario y reportes de productos más vendidos.", en: "Admin panel showing updated stock, low inventory alerts, and best-selling product reports." }, icon: "Package" },
+      {
+        title: { es: "Catálogo Visual Inteligente", en: "Smart Visual Catalog" },
+        description: {
+          es: "Galería de productos con filtros por categoría, talla y color, con zoom de alta resolución y vista rápida sin salir del catálogo.",
+          en: "Product gallery with filters by category, size, and color, with high-res zoom and quick view without leaving the catalog.",
+        },
+        icon: "ShoppingCart",
+      },
+      {
+        title: { es: "Checkout en 2 Pasos", en: "2-Step Checkout" },
+        description: {
+          es: "Proceso de compra simplificado que redujo el abandono de carrito un 40%, con soporte para múltiples métodos de pago locales.",
+          en: "Simplified purchase process that reduced cart abandonment by 40%, with support for multiple local payment methods.",
+        },
+        icon: "CreditCard",
+      },
+      {
+        title: { es: "Gestión de Inventario en Tiempo Real", en: "Real-Time Inventory Management" },
+        description: {
+          es: "Panel administrativo que muestra stock actualizado, alertas de bajo inventario y reportes de productos más vendidos.",
+          en: "Admin panel showing updated stock, low inventory alerts, and best-selling product reports.",
+        },
+        icon: "Package",
+      },
     ],
     metrics: [
-      { value: "85%", label: { es: "Incremento en ventas online en 4 meses", en: "Online sales increase in 4 months" } },
-      { value: "25%", label: { es: "Reducción en abandono de carrito", en: "Reduction in cart abandonment" } },
-      { value: "2.4s", label: { es: "Tiempo de carga promedio en móvil", en: "Average mobile load time" } },
+      {
+        value: "85%",
+        label: {
+          es: "Incremento en ventas online en 4 meses",
+          en: "Online sales increase in 4 months",
+        },
+      },
+      {
+        value: "25%",
+        label: { es: "Reducción en abandono de carrito", en: "Reduction in cart abandonment" },
+      },
+      {
+        value: "2.4s",
+        label: { es: "Tiempo de carga promedio en móvil", en: "Average mobile load time" },
+      },
     ],
     testimonial: {
-      quote: { es: "Pasamos de vender por WhatsApp a tener una tienda online profesional que nuestros clientes aman. Las ventas casi se duplicaron y ahora gestionamos todo desde un solo lugar.", en: "We went from selling via WhatsApp to having a professional online store our customers love. Sales nearly doubled and now we manage everything from one place." },
+      quote: {
+        es: "Pasamos de vender por WhatsApp a tener una tienda online profesional que nuestros clientes aman. Las ventas casi se duplicaron y ahora gestionamos todo desde un solo lugar.",
+        en: "We went from selling via WhatsApp to having a professional online store our customers love. Sales nearly doubled and now we manage everything from one place.",
+      },
       name: "Daniela Rojas",
       title: { es: "Fundadora, Overstop", en: "Founder, Overstop" },
     },
@@ -310,27 +520,78 @@ export const caseStudies: CaseStudy[] = [
       en: "Qubesight needed a website that communicated credibility, professionalism, and technical capability to potential enterprise clients. Their previous online presence was a simple landing page that didn't reflect the sophistication of their solutions or build trust for high-value projects.",
     },
     techStack: [
-      { name: { es: "Frontend", en: "Frontend" }, rationale: { es: "React + Vite — Velocidad de carga excepcional con hidratación instantánea y code splitting.", en: "React + Vite — Exceptional load speed with instant hydration and code splitting." } },
-      { name: { es: "Estilo", en: "Styling" }, rationale: { es: "Tailwind CSS — Sistema de diseño consistente con tokens semánticos para dark/light mode.", en: "Tailwind CSS — Consistent design system with semantic tokens for dark/light mode." } },
-      { name: { es: "Animaciones", en: "Animations" }, rationale: { es: "Framer Motion — Micro-interacciones que guían la atención sin sacrificar rendimiento.", en: "Framer Motion — Micro-interactions that guide attention without sacrificing performance." } },
-      { name: { es: "SEO", en: "SEO" }, rationale: { es: "Meta tags dinámicos + JSON-LD — Posicionamiento orgánico optimizado para búsquedas de servicios tech.", en: "Dynamic meta tags + JSON-LD — Organic positioning optimized for tech service searches." } },
+      {
+        name: { es: "Frontend", en: "Frontend" },
+        rationale: {
+          es: "React + Vite — Velocidad de carga excepcional con hidratación instantánea y code splitting.",
+          en: "React + Vite — Exceptional load speed with instant hydration and code splitting.",
+        },
+      },
+      {
+        name: { es: "Estilo", en: "Styling" },
+        rationale: {
+          es: "Tailwind CSS — Sistema de diseño consistente con tokens semánticos para dark/light mode.",
+          en: "Tailwind CSS — Consistent design system with semantic tokens for dark/light mode.",
+        },
+      },
+      {
+        name: { es: "Animaciones", en: "Animations" },
+        rationale: {
+          es: "Framer Motion — Micro-interacciones que guían la atención sin sacrificar rendimiento.",
+          en: "Framer Motion — Micro-interactions that guide attention without sacrificing performance.",
+        },
+      },
+      {
+        name: { es: "SEO", en: "SEO" },
+        rationale: {
+          es: "Meta tags dinámicos + JSON-LD — Posicionamiento orgánico optimizado para búsquedas de servicios tech.",
+          en: "Dynamic meta tags + JSON-LD — Organic positioning optimized for tech service searches.",
+        },
+      },
     ],
     architectureDiagram: {
       es: "Visitante → CDN Global → SPA React → Componentes Interactivos → WhatsApp CTA → Analytics",
       en: "Visitor → Global CDN → React SPA → Interactive Components → WhatsApp CTA → Analytics",
     },
     features: [
-      { title: { es: "Portafolio Interactivo", en: "Interactive Portfolio" }, description: { es: "Casos de estudio detallados con arquitectura técnica, métricas de negocio y testimoniales que demuestran valor real a clientes potenciales.", en: "Detailed case studies with technical architecture, business metrics, and testimonials that demonstrate real value to potential clients." }, icon: "Globe" },
-      { title: { es: "Rendimiento Optimizado", en: "Optimized Performance" }, description: { es: "Score de 95+ en Lighthouse con lazy loading, code splitting y assets optimizados para una experiencia ultrarrápida.", en: "95+ Lighthouse score with lazy loading, code splitting, and optimized assets for an ultra-fast experience." }, icon: "Zap" },
-      { title: { es: "Bilingüe Nativo", en: "Native Bilingual" }, description: { es: "Cambio instantáneo entre español e inglés sin recarga de página, con contenido localizado para mercados latinoamericanos y globales.", en: "Instant switching between Spanish and English without page reload, with localized content for Latin American and global markets." }, icon: "Languages" },
+      {
+        title: { es: "Portafolio Interactivo", en: "Interactive Portfolio" },
+        description: {
+          es: "Casos de estudio detallados con arquitectura técnica, métricas de negocio y testimoniales que demuestran valor real a clientes potenciales.",
+          en: "Detailed case studies with technical architecture, business metrics, and testimonials that demonstrate real value to potential clients.",
+        },
+        icon: "Globe",
+      },
+      {
+        title: { es: "Rendimiento Optimizado", en: "Optimized Performance" },
+        description: {
+          es: "Score de 95+ en Lighthouse con lazy loading, code splitting y assets optimizados para una experiencia ultrarrápida.",
+          en: "95+ Lighthouse score with lazy loading, code splitting, and optimized assets for an ultra-fast experience.",
+        },
+        icon: "Zap",
+      },
+      {
+        title: { es: "Bilingüe Nativo", en: "Native Bilingual" },
+        description: {
+          es: "Cambio instantáneo entre español e inglés sin recarga de página, con contenido localizado para mercados latinoamericanos y globales.",
+          en: "Instant switching between Spanish and English without page reload, with localized content for Latin American and global markets.",
+        },
+        icon: "Languages",
+      },
     ],
     metrics: [
-      { value: "60%", label: { es: "Aumento en leads cualificados", en: "Increase in qualified leads" } },
+      {
+        value: "60%",
+        label: { es: "Aumento en leads cualificados", en: "Increase in qualified leads" },
+      },
       { value: "95+", label: { es: "Score en Google Lighthouse", en: "Google Lighthouse score" } },
       { value: "2.8min", label: { es: "Tiempo promedio en el sitio", en: "Average time on site" } },
     ],
     testimonial: {
-      quote: { es: "Nuestro nuevo sitio web no solo se ve increíble, sino que genera resultados reales. Los clientes nos dicen que el portafolio los convenció antes de la primera llamada.", en: "Our new website doesn't just look incredible — it generates real results. Clients tell us the portfolio convinced them before the first call." },
+      quote: {
+        es: "Nuestro nuevo sitio web no solo se ve increíble, sino que genera resultados reales. Los clientes nos dicen que el portafolio los convenció antes de la primera llamada.",
+        en: "Our new website doesn't just look incredible — it generates real results. Clients tell us the portfolio convinced them before the first call.",
+      },
       name: "Equipo Qubesight",
       title: { es: "Equipo Fundador", en: "Founding Team" },
     },
@@ -355,29 +616,92 @@ export const caseStudies: CaseStudy[] = [
       en: "AJHB Construction, a building company with 6 simultaneous projects, managed operations with Excel spreadsheets and WhatsApp communication. Budgets had frequent errors, construction progress tracking was inconsistent, and invoicing took weeks to consolidate. They needed a centralized system connecting all business areas.",
     },
     techStack: [
-      { name: { es: "Frontend", en: "Frontend" }, rationale: { es: "React + shadcn/ui — Interfaces profesionales con componentes accesibles y consistentes para usuarios no técnicos.", en: "React + shadcn/ui — Professional interfaces with accessible, consistent components for non-technical users." } },
-      { name: { es: "Backend", en: "Backend" }, rationale: { es: "Supabase Edge Functions — Lógica de negocio serverless con autenticación integrada y políticas de seguridad por rol.", en: "Supabase Edge Functions — Serverless business logic with built-in auth and role-based security policies." } },
-      { name: { es: "Base de Datos", en: "Database" }, rationale: { es: "PostgreSQL con RLS — Seguridad a nivel de fila para que cada usuario solo vea los datos de sus proyectos asignados.", en: "PostgreSQL with RLS — Row-level security so each user only sees data from their assigned projects." } },
-      { name: { es: "Reportería", en: "Reporting" }, rationale: { es: "Recharts + PDF export — Reportes visuales interactivos con exportación automática para reuniones con clientes.", en: "Recharts + PDF export — Interactive visual reports with automatic export for client meetings." } },
+      {
+        name: { es: "Frontend", en: "Frontend" },
+        rationale: {
+          es: "React + shadcn/ui — Interfaces profesionales con componentes accesibles y consistentes para usuarios no técnicos.",
+          en: "React + shadcn/ui — Professional interfaces with accessible, consistent components for non-technical users.",
+        },
+      },
+      {
+        name: { es: "Backend", en: "Backend" },
+        rationale: {
+          es: "Supabase Edge Functions — Lógica de negocio serverless con autenticación integrada y políticas de seguridad por rol.",
+          en: "Supabase Edge Functions — Serverless business logic with built-in auth and role-based security policies.",
+        },
+      },
+      {
+        name: { es: "Base de Datos", en: "Database" },
+        rationale: {
+          es: "PostgreSQL con RLS — Seguridad a nivel de fila para que cada usuario solo vea los datos de sus proyectos asignados.",
+          en: "PostgreSQL with RLS — Row-level security so each user only sees data from their assigned projects.",
+        },
+      },
+      {
+        name: { es: "Reportería", en: "Reporting" },
+        rationale: {
+          es: "Recharts + PDF export — Reportes visuales interactivos con exportación automática para reuniones con clientes.",
+          en: "Recharts + PDF export — Interactive visual reports with automatic export for client meetings.",
+        },
+      },
     ],
     architectureDiagram: {
       es: "Usuarios → Dashboard por Rol → API Backend → Base de Datos → Motor de Reportes → Exportación PDF",
       en: "Users → Role-based Dashboard → Backend API → Database → Reports Engine → PDF Export",
     },
     features: [
-      { title: { es: "Dashboard Multi-Proyecto", en: "Multi-Project Dashboard" }, description: { es: "Vista consolidada de todos los proyectos activos con indicadores de avance, presupuesto consumido y alertas de retrasos en tiempo real.", en: "Consolidated view of all active projects with progress indicators, consumed budget, and real-time delay alerts." }, icon: "LayoutDashboard" },
-      { title: { es: "Reportes Financieros Automáticos", en: "Automated Financial Reports" }, description: { es: "Generación automática de estados financieros por proyecto con desglose de costos, márgenes y proyecciones exportables a PDF.", en: "Automatic generation of financial statements per project with cost breakdowns, margins, and projections exportable to PDF." }, icon: "FileBarChart" },
-      { title: { es: "Control de Acceso por Rol", en: "Role-Based Access Control" }, description: { es: "Sistema de permisos granular donde gerentes, supervisores y contadores ven exactamente la información relevante para su función.", en: "Granular permission system where managers, supervisors, and accountants see exactly the information relevant to their role." }, icon: "Shield" },
+      {
+        title: { es: "Dashboard Multi-Proyecto", en: "Multi-Project Dashboard" },
+        description: {
+          es: "Vista consolidada de todos los proyectos activos con indicadores de avance, presupuesto consumido y alertas de retrasos en tiempo real.",
+          en: "Consolidated view of all active projects with progress indicators, consumed budget, and real-time delay alerts.",
+        },
+        icon: "LayoutDashboard",
+      },
+      {
+        title: { es: "Reportes Financieros Automáticos", en: "Automated Financial Reports" },
+        description: {
+          es: "Generación automática de estados financieros por proyecto con desglose de costos, márgenes y proyecciones exportables a PDF.",
+          en: "Automatic generation of financial statements per project with cost breakdowns, margins, and projections exportable to PDF.",
+        },
+        icon: "FileBarChart",
+      },
+      {
+        title: { es: "Control de Acceso por Rol", en: "Role-Based Access Control" },
+        description: {
+          es: "Sistema de permisos granular donde gerentes, supervisores y contadores ven exactamente la información relevante para su función.",
+          en: "Granular permission system where managers, supervisors, and accountants see exactly the information relevant to their role.",
+        },
+        icon: "Shield",
+      },
     ],
     metrics: [
-      { value: "45%", label: { es: "Aumento en eficiencia operativa", en: "Increase in operational efficiency" } },
-      { value: "60%", label: { es: "Reducción en errores de presupuesto", en: "Reduction in budget errors" } },
-      { value: "2 sem", label: { es: "Tiempo de facturación reducido de semanas a días", en: "Invoicing time reduced from weeks to days" } },
+      {
+        value: "45%",
+        label: { es: "Aumento en eficiencia operativa", en: "Increase in operational efficiency" },
+      },
+      {
+        value: "60%",
+        label: { es: "Reducción en errores de presupuesto", en: "Reduction in budget errors" },
+      },
+      {
+        value: "2 sem",
+        label: {
+          es: "Tiempo de facturación reducido de semanas a días",
+          en: "Invoicing time reduced from weeks to days",
+        },
+      },
     ],
     testimonial: {
-      quote: { es: "Pasamos de buscar datos en 10 archivos de Excel diferentes a tener todo en un solo sistema. Ahora tomo decisiones con información real y actualizada, no con suposiciones.", en: "We went from searching for data across 10 different Excel files to having everything in one system. Now I make decisions with real, up-to-date information, not assumptions." },
+      quote: {
+        es: "Pasamos de buscar datos en 10 archivos de Excel diferentes a tener todo en un solo sistema. Ahora tomo decisiones con información real y actualizada, no con suposiciones.",
+        en: "We went from searching for data across 10 different Excel files to having everything in one system. Now I make decisions with real, up-to-date information, not assumptions.",
+      },
       name: "Jorge Hernández B.",
-      title: { es: "Gerente General, AJHB Construcciones", en: "General Manager, AJHB Construction" },
+      title: {
+        es: "Gerente General, AJHB Construcciones",
+        en: "General Manager, AJHB Construction",
+      },
     },
     embedUrl: "https://ajhbsistemademo.lovable.app",
   },

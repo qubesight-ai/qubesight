@@ -24,12 +24,11 @@ const LogoResponsiveTest = () => {
     <div className="min-h-screen bg-background text-foreground py-10 px-4">
       <div className="max-w-6xl mx-auto space-y-8">
         <header className="space-y-2">
-          <h1 className="font-display text-3xl font-bold">
-            Logo Responsive Test
-          </h1>
+          <h1 className="font-display text-3xl font-bold">Logo Responsive Test</h1>
           <p className="text-sm text-muted-foreground">
             Visualiza el LogoCube en anchos comunes simulando el navbar (h: {NAVBAR_HEIGHT}px).
-            Verifica que el ícono mantiene su <code>aspect-square</code> y el texto colapsa por debajo de 640px (sm).
+            Verifica que el ícono mantiene su <code>aspect-square</code> y el texto colapsa por
+            debajo de 640px (sm).
           </p>
           <label className="inline-flex items-center gap-2 text-sm">
             <input
@@ -45,12 +44,8 @@ const LogoResponsiveTest = () => {
           {COMMON_WIDTHS.map(({ label, width }) => (
             <div key={width} className="space-y-2">
               <div className="flex items-baseline justify-between">
-                <h2 className="font-display text-sm font-semibold">
-                  {label}
-                </h2>
-                <span className="text-xs text-muted-foreground tabular-nums">
-                  {width}px
-                </span>
+                <h2 className="font-display text-sm font-semibold">{label}</h2>
+                <span className="text-xs text-muted-foreground tabular-nums">{width}px</span>
               </div>
 
               <div
