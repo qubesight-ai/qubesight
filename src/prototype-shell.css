@@ -199,3 +199,22 @@
 .prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) button *,
 .prototype-shell [class*="bg-primary"]:not([class*="bg-primary/"]) a[class*="bg-"] *,
 .prototype-shell .gradient-bg button *{color:#00378a!important;stroke:#00378a!important}
+
+
+/* ===== Color polish pass (light theme) ===== */
+/* Decorative ghost numerals must stay a faint wash, not solid navy. */
+.prototype-shell [class*="text-destructive/"]{color:rgba(198,30,46,.10)!important}
+.prototype-shell [class*="text-destructive/"] *{color:rgba(198,30,46,.10)!important}
+/* Real destructive accents (icons, values, badges) keep a readable signal red. */
+.prototype-shell .text-destructive,.prototype-shell [class*="text-destructive"]:not([class*="text-destructive/"]){color:#c2202f!important}
+.prototype-shell .text-destructive svg,.prototype-shell [class*="text-destructive"]:not([class*="text-destructive/"]) svg{color:#c2202f!important;stroke:#c2202f!important}
+.prototype-shell [class*="bg-destructive/10"]{background-color:#fbe9ea!important}
+.prototype-shell [class*="border-destructive/20"],.prototype-shell [class*="border-destructive/30"]{border-color:rgba(198,30,46,.28)!important}
+/* Gradient accent text: solid brand blue instead of a stripped invisible gradient. */
+.prototype-shell .gradient-text,.prototype-shell .accent-text{background-image:none!important;color:#0054c7!important}
+/* Gradient avatar chips: flat brand blue so initials stay readable. */
+.prototype-shell .rounded-full[class*="bg-gradient-to-br"]{background-image:none!important;background-color:#006AFF!important}
+.prototype-shell .rounded-full[class*="bg-gradient-to-br"] *{color:#fff!important}
+/* Softer alternating section tint: one calm tint family instead of saturated periwinkle. */
+.prototype-shell .prototype-content>section:nth-child(2n){background:#eef3fc!important}
+.prototype-shell section[class*="min-h-[170vh]"]{background:#eef3fc!important}
