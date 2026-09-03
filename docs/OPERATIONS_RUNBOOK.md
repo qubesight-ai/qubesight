@@ -6,15 +6,15 @@ Git, Lovable publication, database migration, Edge Function deployment, provider
 
 ## Release ledger
 
-| Area | Evidence |
-| --- | --- |
-| Git | PR URL, merge SHA, CI |
-| Database | Environment, migration, time, result |
-| Edge Function | Name, version/commit, JWT mode, smoke test |
-| Frontend | Published version/time and public smoke test |
-| Secrets | Names and rotation date, never values |
-| Provider | Masked resource, operation and rollback |
-| VPS | Image/service version, health and rollback artifact |
+| Area          | Evidence                                            |
+| ------------- | --------------------------------------------------- |
+| Git           | PR URL, merge SHA, CI                               |
+| Database      | Environment, migration, time, result                |
+| Edge Function | Name, version/commit, JWT mode, smoke test          |
+| Frontend      | Published version/time and public smoke test        |
+| Secrets       | Names and rotation date, never values               |
+| Provider      | Masked resource, operation and rollback             |
+| VPS           | Image/service version, health and rollback artifact |
 
 ## Repository gate
 
