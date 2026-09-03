@@ -22,16 +22,16 @@ The browser is untrusted. Provider credentials, tenant authorization, provisioni
 
 ## Current layers
 
-| Layer | Responsibility |
-| --- | --- |
-| `src/pages` | URL screens; Dashboard currently owns too many feature views |
-| `src/components` | Shared/presentational UI and some dashboard features |
-| `src/hooks` | Stateful workflows such as data loading and streaming |
-| `src/lib` | Edge Function/client adapters |
-| `src/integrations/supabase` | Client and generated database types |
-| `supabase/functions` | Trusted AI, payment and telephony boundaries |
-| `supabase/migrations` | Schema, RLS, RPCs and grants |
-| `scripts` | Architecture and repository policy checks |
+| Layer                       | Responsibility                                               |
+| --------------------------- | ------------------------------------------------------------ |
+| `src/pages`                 | URL screens; Dashboard currently owns too many feature views |
+| `src/components`            | Shared/presentational UI and some dashboard features         |
+| `src/hooks`                 | Stateful workflows such as data loading and streaming        |
+| `src/lib`                   | Edge Function/client adapters                                |
+| `src/integrations/supabase` | Client and generated database types                          |
+| `supabase/functions`        | Trusted AI, payment and telephony boundaries                 |
+| `supabase/migrations`       | Schema, RLS, RPCs and grants                                 |
+| `scripts`                   | Architecture and repository policy checks                    |
 
 ## Target dashboard structure
 
@@ -60,14 +60,14 @@ Each feature may own components, hooks, schemas, services, types and tests. Extr
 
 ## Target protected routes
 
-| Route | Purpose |
-| --- | --- |
-| `/dashboard` | Overview |
-| `/dashboard/agents` | Voice agents |
-| `/dashboard/chatbots` | Chatbots and simulator |
+| Route                  | Purpose                     |
+| ---------------------- | --------------------------- |
+| `/dashboard`           | Overview                    |
+| `/dashboard/agents`    | Voice agents                |
+| `/dashboard/chatbots`  | Chatbots and simulator      |
 | `/dashboard/telephony` | Twilio and number selection |
-| `/dashboard/calls` | Calls |
-| `/dashboard/profile` | User/organization |
+| `/dashboard/calls`     | Calls                       |
+| `/dashboard/profile`   | User/organization           |
 
 Use nested React Router routes. Direct navigation and refresh must work. Preserve onboarding for authenticated users without an organization.
 
