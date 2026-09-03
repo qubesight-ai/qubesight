@@ -20,13 +20,13 @@ Updated: 2026-09-03
 
 ## Canonical systems
 
-| Item | Location | Meaning |
-| --- | --- | --- |
-| Repository | `qubesight-ai/qubesight` | Canonical source |
-| Frontend | Lovable | Must be published separately after Git sync |
-| Database/backend | Lovable Cloud/Supabase | Migrations/functions deploy separately |
-| Voice runtimes | Hostinger VPS | Matilda and Tem; no incidental changes |
-| Provisioning | GitHub PR #21 | Proposed until merged and deployed |
+| Item             | Location                 | Meaning                                     |
+| ---------------- | ------------------------ | ------------------------------------------- |
+| Repository       | `qubesight-ai/qubesight` | Canonical source                            |
+| Frontend         | Lovable                  | Must be published separately after Git sync |
+| Database/backend | Lovable Cloud/Supabase   | Migrations/functions deploy separately      |
+| Voice runtimes   | Hostinger VPS            | Matilda and Tem; no incidental changes      |
+| Provisioning     | GitHub PR #21            | Proposed until merged and deployed          |
 
 ## Completed
 
