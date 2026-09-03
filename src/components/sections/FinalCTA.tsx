@@ -203,14 +203,14 @@ const FinalCTA = () => {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button variant="hero" size="lg" asChild className="min-h-[56px] px-8">
-              <a href="#products">
-                {t("final.cta.primary")}
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                Solicitar una demostración
                 <ArrowRight className="ml-1 h-5 w-5" />
               </a>
             </Button>
             <Button variant="heroOutline" size="lg" asChild className="min-h-[56px] px-8">
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                {t("final.cta")}
+                Participar como Early Adopter
               </a>
             </Button>
           </div>

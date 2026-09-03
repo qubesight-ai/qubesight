@@ -35,7 +35,6 @@ const Header = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
   const sectionHref = (id: string) => (isHome ? `#${id}` : `/#${id}`);
-  const registerLabel = language === "es" ? "Registrarse" : "Sign up";
   const loginLabel = language === "es" ? "Iniciar sesión" : "Log in";
   const dashboardLabel = "Dashboard";
 
@@ -46,11 +45,10 @@ const Header = () => {
 
   const navLabelKeys: Record<(typeof NAV_SECTION_IDS)[number], string> = {
     problem: "nav.problem",
-    solution: "nav.solution",
-    products: "nav.products",
-    voicebot: "nav.voicebot",
-    industries: "nav.industries",
-    pricing: "nav.pricing",
+    value: "nav.value",
+    how: "nav.how",
+    demo: "nav.demo",
+    "early-adopters": "nav.early",
     faq: "nav.faq",
   };
 
@@ -210,10 +208,10 @@ const Header = () => {
                   <Link to="/login">{loginLabel}</Link>
                 </Button>
                 <Button variant="hero" size="default" asChild className="min-h-[44px]">
-                  <Link to="/register">
-                    {registerLabel}
+                  <a href={sectionHref("early-adopters")}>
+                    {language === "es" ? "Solicitar demostración" : "Request a demo"}
                     <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
+                  </a>
                 </Button>
               </>
             )}
@@ -321,10 +319,13 @@ const Header = () => {
                   ) : (
                     <>
                       <Button variant="hero" size="lg" asChild className="w-full min-h-[48px]">
-                        <Link to="/register" onClick={() => setIsMobileMenuOpen(false)}>
-                          {registerLabel}
+                        <a
+                          href={sectionHref("early-adopters")}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {language === "es" ? "Solicitar demostración" : "Request a demo"}
                           <ArrowRight className="ml-1 h-4 w-4" />
-                        </Link>
+                        </a>
                       </Button>
                       <Button variant="outline" size="lg" asChild className="w-full min-h-[48px]">
                         <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>

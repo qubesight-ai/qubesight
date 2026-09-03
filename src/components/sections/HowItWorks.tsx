@@ -1,14 +1,26 @@
 import { motion } from "framer-motion";
 import { MessageSquare, Wrench, Users } from "lucide-react";
-import { useTranslation } from "@/hooks/useTranslation";
 
 const HowItWorks = () => {
-  const { t } = useTranslation();
-
   const steps = [
-    { icon: MessageSquare, title: t("how.s1.title"), desc: t("how.s1.desc"), n: "01" },
-    { icon: Wrench, title: t("how.s2.title"), desc: t("how.s2.desc"), n: "02" },
-    { icon: Users, title: t("how.s3.title"), desc: t("how.s3.desc"), n: "03" },
+    {
+      icon: MessageSquare,
+      title: "Conocemos tu operación",
+      desc: "Nos explicas cómo atiendes clientes, qué preguntas recibes, tus horarios y qué procesos te gustaría mejorar.",
+      n: "01",
+    },
+    {
+      icon: Wrench,
+      title: "Preparamos una demostración",
+      desc: "Configuramos un agente basado en situaciones reales de tu negocio.",
+      n: "02",
+    },
+    {
+      icon: Users,
+      title: "Lo validamos contigo",
+      desc: "Probamos la solución, escuchamos tu experiencia y evaluamos juntos dónde puede aportar mayor valor.",
+      n: "03",
+    },
   ];
 
   return (
@@ -21,9 +33,9 @@ const HowItWorks = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center mb-14"
         >
-          <span className="eyebrow mb-5 inline-flex">{t("how.badge")}</span>
+          <span className="eyebrow mb-5 inline-flex">CÓMO FUNCIONA</span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {t("how.title")} <span className="gradient-text">{t("how.titleAccent")}</span>
+            De tu negocio a una <span className="gradient-text">demostración personalizada.</span>
           </h2>
         </motion.div>
 

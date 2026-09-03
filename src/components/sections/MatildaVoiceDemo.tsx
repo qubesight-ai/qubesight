@@ -242,7 +242,7 @@ const MatildaVoiceDemo = () => {
     setPrivacy(false);
   };
   return (
-    <section id="matilda-demo" className="py-20 sm:py-28 relative">
+    <section id="demo" className="py-20 sm:py-28 relative">
       <div className="absolute inset-0 bg-grid opacity-20" />
       <div className="container relative">
         <div className="max-w-3xl mx-auto text-center mb-10">
@@ -250,11 +250,11 @@ const MatildaVoiceDemo = () => {
             <Volume2 className="h-3.5 w-3.5" /> Demo de voz
           </span>
           <h2 className="display-xl text-3xl sm:text-5xl mt-5">
-            Habla con <span className="gradient-text">Matilda</span>
+            Prueba cómo se siente conversar con un{" "}
+            <span className="gradient-text">agente de QubeSight.</span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground">
-            Prueba nuestro agente de voz con inteligencia artificial directamente desde tu
-            navegador.
+            Matilda es una demostración de nuestra tecnología de atención por voz.
           </p>
         </div>
         <div className="max-w-3xl mx-auto bezel-shell">

@@ -1,14 +1,23 @@
 import { motion } from "framer-motion";
 import { Sunrise, Sun, Moon } from "lucide-react";
-import { useTranslation } from "@/hooks/useTranslation";
 
 const Solution = () => {
-  const { t } = useTranslation();
-
   const pillars = [
-    { icon: Sunrise, title: t("solution.b1.title"), desc: t("solution.b1.desc") },
-    { icon: Sun, title: t("solution.b2.title"), desc: t("solution.b2.desc") },
-    { icon: Moon, title: t("solution.b3.title"), desc: t("solution.b3.desc") },
+    {
+      icon: Sunrise,
+      title: "ANTES",
+      desc: "Atiende consultas cuando el equipo todavía no está disponible.",
+    },
+    {
+      icon: Sun,
+      title: "DURANTE",
+      desc: "Resuelve tareas repetitivas mientras las personas atienden casos importantes.",
+    },
+    {
+      icon: Moon,
+      title: "DESPUÉS",
+      desc: "Continúa atendiendo consultas y recopilando información fuera del horario habitual.",
+    },
   ];
 
   return (
@@ -28,12 +37,15 @@ const Solution = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center mb-14"
         >
-          <span className="eyebrow mb-5 inline-flex">{t("solution.badge")}</span>
+          <span className="eyebrow mb-5 inline-flex">03 — LA SOLUCIÓN</span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {t("solution.title")} <span className="gradient-text">{t("solution.titleAccent")}</span>
+            Una recepción con inteligencia artificial{" "}
+            <span className="gradient-text">que trabaja junto a tu equipo.</span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t("solution.subtitle")}
+            QubeSight combina atención por voz y canales digitales para ayudar a responder
+            consultas, recopilar información, gestionar oportunidades y conectar al cliente con una
+            persona cuando sea necesario.
           </p>
         </motion.div>
 

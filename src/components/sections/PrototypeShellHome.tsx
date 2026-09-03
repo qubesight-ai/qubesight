@@ -1,5 +1,6 @@
 import Header from "@/components/layout/Header";
 import TrustBar from "@/components/sections/TrustBar";
+import ValueProposition from "@/components/sections/ValueProposition";
 import Problem from "@/components/sections/Problem";
 import Solution from "@/components/sections/Solution";
 import HowItWorks from "@/components/sections/HowItWorks";
@@ -10,10 +11,9 @@ import MatildaVoiceDemo from "@/components/sections/MatildaVoiceDemo";
 import Industries from "@/components/sections/Industries";
 import Benefits from "@/components/sections/Benefits";
 import SocialProof from "@/components/sections/SocialProof";
-import Testimonials from "@/components/sections/Testimonials";
 import Founders from "@/components/sections/Founders";
 import Integrations from "@/components/sections/Integrations";
-import Pricing from "@/components/sections/Pricing";
+import EarlyAdopters from "@/components/sections/EarlyAdopters";
 import FAQ from "@/components/sections/FAQ";
 import GuaranteeStrip from "@/components/sections/GuaranteeStrip";
 import FinalCTA from "@/components/sections/FinalCTA";
@@ -74,7 +74,7 @@ const PrototypeHero = () => {
       <div className="prototype-hero-bottom">
         <p>{t("hero.subhead.1")}</p>
         <div>
-          <a href="#products" className="prototype-button">
+          <a href="#early-adopters" className="prototype-button">
             {t("hero.cta.primary")} <ArrowDown className="h-4 w-4" />
           </a>
           <a href="#contact" className="prototype-text-link">
@@ -110,19 +110,17 @@ const PrototypeShellHome = () => {
         <div className="prototype-content">
           <TrustBar />
           <Problem />
+          <ValueProposition />
           <Solution />
           <HowItWorks />
           <Multichannel />
           <Products />
           <VoiceBot />
           <MatildaVoiceDemo />
-          <Industries />
           <Benefits />
-          <SocialProof />
-          <Testimonials />
           <Founders />
           <Integrations />
-          <Pricing />
+          <EarlyAdopters />
           <FAQ />
           <GuaranteeStrip />
           <FinalCTA />

@@ -27,9 +27,9 @@ function mockRect(top: number, height = 100) {
 
 describe("sectionNav — hash / anchors", () => {
   it("parses valid section hashes", () => {
-    expect(parseHashSection("#pricing")).toBe("pricing");
+    expect(parseHashSection("#early-adopters")).toBe("early-adopters");
     expect(parseHashSection("faq")).toBe("faq");
-    expect(parseHashSection("#products")).toBe("products");
+    expect(parseHashSection("#demo")).toBe("demo");
   });
 
   it("rejects empty or unknown hashes", () => {
@@ -37,18 +37,12 @@ describe("sectionNav — hash / anchors", () => {
     expect(parseHashSection("#")).toBeNull();
     expect(parseHashSection("#unknown")).toBeNull();
     expect(parseHashSection("#hero")).toBeNull();
+    expect(parseHashSection("#pricing")).toBeNull();
+    expect(parseHashSection("#products")).toBeNull();
   });
 
   it("exposes the landing nav section ids", () => {
-    expect(NAV_SECTION_IDS).toEqual([
-      "problem",
-      "solution",
-      "products",
-      "voicebot",
-      "industries",
-      "pricing",
-      "faq",
-    ]);
+    expect(NAV_SECTION_IDS).toEqual(["problem", "value", "how", "demo", "early-adopters", "faq"]);
   });
 });
 

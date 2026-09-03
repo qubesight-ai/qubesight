@@ -1,28 +1,22 @@
 import { motion } from "framer-motion";
 import { Clock, MoonStar, Activity, TrendingDown } from "lucide-react";
-import { useTranslation } from "@/hooks/useTranslation";
 
 const Problem = () => {
-  const { t } = useTranslation();
-
   const stats = [
     {
       icon: Clock,
-      value: "78%",
-      title: t("problem.p1.title"),
-      desc: t("problem.p1.desc"),
+      title: "Consultas repetitivas",
+      desc: "Horarios, precios, disponibilidad y preguntas frecuentes consumen tiempo todos los días.",
     },
     {
       icon: MoonStar,
-      value: "62%",
-      title: t("problem.p2.title"),
-      desc: t("problem.p2.desc"),
+      title: "Clientes fuera de horario",
+      desc: "Las personas siguen consultando aunque el equipo esté ocupado o el negocio haya cerrado.",
     },
     {
       icon: Activity,
-      value: "5x",
-      title: t("problem.p3.title"),
-      desc: t("problem.p3.desc"),
+      title: "Oportunidades que requieren seguimiento",
+      desc: "Cuando responder, registrar información y dar seguimiento depende completamente de tareas manuales, algunas oportunidades pueden quedar atrás.",
     },
   ];
 
@@ -47,12 +41,16 @@ const Problem = () => {
         >
           <span className="inline-flex items-center gap-2 px-3 py-1.5 mb-5 text-xs font-semibold uppercase tracking-wider rounded-full bg-destructive/10 text-destructive border border-destructive/20">
             <TrendingDown className="h-3.5 w-3.5" />
-            {t("problem.badge")}
+            01 — EL PROBLEMA
           </span>
           <h2 className="text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {t("problem.title")} <span className="gradient-text">{t("problem.titleAccent")}</span>
+            Atender cada consulta se vuelve difícil{" "}
+            <span className="gradient-text">cuando el negocio está creciendo.</span>
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground">{t("problem.subtitle")}</p>
+          <p className="mt-6 text-lg text-muted-foreground">
+            Las llamadas, mensajes, preguntas frecuentes, solicitudes de información y coordinación
+            de citas compiten constantemente por la atención del equipo.
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -65,17 +63,9 @@ const Problem = () => {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="relative glass-card rounded-2xl p-8 hover:border-destructive/30 transition-all hover:-translate-y-1 overflow-hidden group"
             >
-              {/* Decorative XL stat */}
-              <div className="absolute -top-4 -right-2 text-[7rem] font-display font-black text-destructive/[0.07] leading-none select-none pointer-events-none group-hover:text-destructive/[0.12] transition-colors">
-                {item.value}
-              </div>
-
               <div className="relative">
                 <div className="h-12 w-12 rounded-xl bg-destructive/10 text-destructive flex items-center justify-center mb-5">
                   <item.icon className="h-6 w-6" />
-                </div>
-                <div className="text-4xl sm:text-5xl font-bold font-display text-destructive mb-3 leading-none">
-                  {item.value}
                 </div>
                 <h3 className="text-lg font-semibold font-display mb-2 leading-snug">
                   {item.title}
@@ -85,20 +75,6 @@ const Problem = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Bottom emphasis line */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 text-center"
-        >
-          <p className="text-base sm:text-lg text-muted-foreground">
-            <span className="text-foreground font-bold">{t("problem.cta.lead")}</span>{" "}
-            {t("problem.cta.tail")}
-          </p>
-        </motion.div>
       </div>
     </section>
   );

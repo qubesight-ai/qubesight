@@ -17,6 +17,10 @@ export const translations: Translations = {
   "nav.pricing": { es: "Precios", en: "Pricing" },
   "nav.faq": { es: "FAQ", en: "FAQ" },
   "nav.contact": { es: "Empezar", en: "Get Started" },
+  "nav.value": { es: "Propuesta de valor", en: "Value proposition" },
+  "nav.how": { es: "Cómo funciona", en: "How it works" },
+  "nav.demo": { es: "Demo", en: "Demo" },
+  "nav.early": { es: "Early Adopters", en: "Early Adopters" },
 
   // Voice Bot — teammate framing
   "voicebot.badge": { es: "Voice Bot · Asistente de voz", en: "Voice Bot · Voice assistant" },

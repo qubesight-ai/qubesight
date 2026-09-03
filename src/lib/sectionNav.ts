@@ -1,11 +1,10 @@
 /** Section IDs linked from the main landing nav. */
 export const NAV_SECTION_IDS = [
   "problem",
-  "solution",
-  "products",
-  "voicebot",
-  "industries",
-  "pricing",
+  "value",
+  "how",
+  "demo",
+  "early-adopters",
   "faq",
 ] as const;
 

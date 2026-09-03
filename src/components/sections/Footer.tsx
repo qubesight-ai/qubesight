@@ -10,8 +10,11 @@ const Footer = () => {
   const whatsappUrl = "https://wa.me/50646009140";
 
   const productLinks = [
-    { href: "#products", label: t("nav.products") },
-    { href: "#pricing", label: t("nav.pricing") },
+    { href: "#solution", label: language === "es" ? "Solución" : "Solution" },
+    {
+      href: "#early-adopters",
+      label: language === "es" ? "Programa Early Adopter" : "Early Adopter program",
+    },
     { href: "#faq", label: t("nav.faq") },
     { href: "/register", label: language === "es" ? "Registrarse" : "Sign up" },
     { href: "/login", label: language === "es" ? "Iniciar sesión" : "Log in" },
