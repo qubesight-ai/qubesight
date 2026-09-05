@@ -7,6 +7,12 @@ interface Translations {
 }
 
 export const translations: Translations = {
+  // Matilda voice demo
+  "matilda.demoLatencyDisclaimer": {
+    es: "Demo web: Puede existir una breve demora adicional por el procesamiento de audio en el navegador. Las implementaciones telefónicas de QubeSight están diseñadas para conversaciones de voz en tiempo real con respuestas fluidas y de baja latencia.",
+    en: "Web demo: You may notice a small additional delay due to browser-based audio processing. QubeSight phone deployments are designed for real-time voice conversations with smooth, low-latency responses.",
+  },
+
   // Header
   "nav.problem": { es: "Problema", en: "Problem" },
   "nav.solution": { es: "Solución", en: "Solution" },
@@ -48,7 +54,10 @@ export const translations: Translations = {
   "voicebot.row.cost.bot": { es: "Agenda y confirma", en: "Books and confirms" },
   "voicebot.row.savings": { es: "Resultado", en: "Outcome" },
   "voicebot.year": { es: "año", en: "year" },
-  "voicebot.benefit.latency": { es: "Conversación natural <1s", en: "Natural talk <1s" },
+  "voicebot.benefit.latency": {
+    es: "Conversaciones de voz fluidas",
+    en: "Smooth voice conversations",
+  },
   "voicebot.benefit.orders": { es: "Pedidos y consultas por voz", en: "Voice orders & inquiries" },
   "voicebot.benefit.payments": { es: "Cobros asistidos por voz", en: "Voice-assisted payments" },
   "voicebot.benefit.calendar": { es: "Agenda en Google Calendar", en: "Books to Google Calendar" },
@@ -72,7 +81,8 @@ export const translations: Translations = {
   "hero.cta.primary": { es: "Ver cómo potencia a tu equipo", en: "See how it empowers your team" },
   "hero.cta.secondary": { es: "Hablar con un experto", en: "Talk to an expert" },
   "hero.proof.messages": { es: "consultas atendidas", en: "inquiries handled" },
-  "hero.proof.time": { es: "tiempo de respuesta", en: "response time" },
+  "hero.proof.time.value": { es: "IA conversacional", en: "Conversational AI" },
+  "hero.proof.time": { es: "para tu equipo", en: "for your team" },
   "hero.proof.conversion": { es: "clientes que no se pierden", en: "customers retained" },
 
   // Problem
@@ -921,8 +931,8 @@ export const translations: Translations = {
 
   // Social proof stats
   "social.badge": { es: "Resultados", en: "Results" },
-  "social.s1.value": { es: "< 3s", en: "< 3s" },
-  "social.s1.label": { es: "tiempo de respuesta promedio", en: "average response time" },
+  "social.s1.value": { es: "IA conversacional", en: "Conversational AI" },
+  "social.s1.label": { es: "para tu equipo", en: "for your team" },
   "social.s2.value": { es: "24/7", en: "24/7" },
   "social.s2.label": {
     es: "cobertura cuando el equipo descansa",

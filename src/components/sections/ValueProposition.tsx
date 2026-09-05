@@ -1,26 +1,35 @@
 import { motion } from "framer-motion";
 import { MessageCircle, Repeat2, Users } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const ValueProposition = () => {
+  const { language } = useTranslation();
+  const es = language === "es";
   const benefits = [
     [
       MessageCircle,
-      "Más oportunidades atendidas",
-      "QubeSight puede ayudar a responder consultas cuando el equipo está ocupado o fuera de horario.",
+      es ? "Más oportunidades atendidas" : "More opportunities handled",
+      es
+        ? "Ayuda a mantener la atención disponible cuando el equipo está ocupado o fuera de horario."
+        : "Helps keep service available while the team is busy or after hours.",
     ],
     [
       Repeat2,
-      "Menos trabajo repetitivo",
-      "Preguntas frecuentes, recopilación inicial de datos y otras tareas rutinarias pueden ser atendidas automáticamente.",
+      es ? "Menos tareas repetitivas" : "Fewer repetitive tasks",
+      es
+        ? "Consultas frecuentes y recopilación inicial de información pueden ser atendidas automáticamente."
+        : "Common questions and initial information gathering can be handled automatically.",
     ],
     [
       Users,
-      "Personas donde aportan más valor",
-      "Cuando una situación requiere negociación, criterio o atención especial, el proceso puede pasar a una persona.",
+      es ? "Personas donde aportan más valor" : "People where they add most value",
+      es
+        ? "Los casos que requieren criterio, negociación o atención especial pueden pasar a una persona."
+        : "Cases requiring judgment, negotiation, or special attention can go to a person.",
     ],
   ] as const;
   return (
-    <section id="value" className="py-20 sm:py-28 relative overflow-hidden">
+    <section id="value-proposition" className="py-20 sm:py-28 relative overflow-hidden">
       <div className="container relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -28,15 +37,18 @@ const ValueProposition = () => {
           viewport={{ once: true }}
           className="max-w-3xl mx-auto text-center mb-14"
         >
-          <span className="eyebrow mb-5 inline-flex">02 — PROPUESTA DE VALOR</span>
+          <span className="eyebrow mb-5 inline-flex">
+            {es ? "PROPUESTA DE VALOR" : "VALUE PROPOSITION"}
+          </span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            Más capacidad de atención{" "}
-            <span className="gradient-text">sin llenar de tareas repetitivas a tu equipo.</span>
+            {es
+              ? "Más capacidad de atención sin aumentar la carga repetitiva de tu equipo."
+              : "More capacity to serve customers without increasing your team's repetitive workload."}
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Queremos que las empresas puedan responder más oportunidades y mantener una atención
-            constante mientras las personas se concentran en las conversaciones y decisiones que
-            realmente requieren criterio humano.
+            {es
+              ? "QubeSight busca ayudar a que los negocios puedan responder más oportunidades y mantener una atención constante mientras las personas se concentran en las conversaciones y decisiones que realmente requieren criterio humano."
+              : "QubeSight aims to help businesses respond to more opportunities and maintain consistent service while people focus on conversations and decisions that need human judgment."}
           </p>
         </motion.div>
         <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">

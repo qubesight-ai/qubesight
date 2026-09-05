@@ -15,7 +15,7 @@ const Hero = () => {
 
   const stats = [
     { icon: Phone, value: <AnimatedCounter to={2847} />, label: t("hero.proof.messages") },
-    { icon: Zap, value: "< 3s", label: t("hero.proof.time") },
+    { icon: Zap, value: t("hero.proof.time.value"), label: t("hero.proof.time") },
     { icon: TrendingUp, value: "94%", label: t("hero.proof.conversion") },
   ];
 

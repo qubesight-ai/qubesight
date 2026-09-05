@@ -224,7 +224,7 @@ const UNIVERSAL_FLOWS = [
       "habla",
     ],
     response: (niche: Niche) =>
-      `🎙️ ASISTENTE DE VOZ IA\n\nNuestro asistente de voz puede llamarte ahora mismo y:\n\n• Contestar tus preguntas en tiempo real\n• Agendar tu ${niche.bookingLabel} en el calendario\n• Enviarte la *cotización por SMS* al terminar\n• Interpretar la llamada *español ↔ inglés* en vivo\n\n📞 Línea demo: ${niche.phone}\nO escribe *"agendar"* y te llamamos en menos de 1 minuto.`,
+      `🎙️ ASISTENTE DE VOZ IA\n\nNuestro asistente de voz puede llamarte ahora mismo y:\n\n• Contestar tus preguntas en tiempo real\n• Agendar tu ${niche.bookingLabel} en el calendario\n• Enviarte la *cotización por SMS* al terminar\n• Interpretar la llamada *español ↔ inglés* en vivo\n\n📞 Línea demo: ${niche.phone}\nO escribe *"agendar"* y te contactamos para coordinarlo.`,
   },
   {
     key: "interprete",
@@ -244,7 +244,7 @@ const UNIVERSAL_FLOWS = [
       "bilingüe",
     ],
     response: (_niche: Niche) =>
-      `🌐 INTERPRETACIÓN EN VIVO\n\nWe also speak English! 🇺🇸🇪🇸\n\nNuestro asistente IA traduce la llamada en tiempo real:\n• Español ↔ English ↔ Português\n• Latencia < 1 segundo\n• Sin operador humano de por medio\n\nEscribe *"llamada"* para probarlo o *"agendar"* y te contactamos en tu idioma.`,
+      `🌐 INTERPRETACIÓN EN VIVO\n\nWe also speak English! 🇺🇸🇪🇸\n\nNuestro asistente IA traduce la llamada en tiempo real:\n• Español ↔ English ↔ Português\n• Conversación de voz fluida\n• Sin operador humano de por medio\n\nEscribe *"llamada"* para probarlo o *"agendar"* y te contactamos en tu idioma.`,
   },
   {
     key: "cotizar",

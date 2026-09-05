@@ -1,22 +1,31 @@
 import { motion } from "framer-motion";
 import { Clock, MoonStar, Activity, TrendingDown } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Problem = () => {
+  const { language } = useTranslation();
+  const es = language === "es";
   const stats = [
     {
       icon: Clock,
-      title: "Consultas repetitivas",
-      desc: "Horarios, precios, disponibilidad y preguntas frecuentes consumen tiempo todos los días.",
+      title: es ? "Consultas mientras el equipo está ocupado" : "Inquiries while the team is busy",
+      desc: es
+        ? "Las consultas pueden llegar mientras las personas atienden otras tareas importantes."
+        : "Inquiries can arrive while people are handling other important tasks.",
     },
     {
       icon: MoonStar,
-      title: "Clientes fuera de horario",
-      desc: "Las personas siguen consultando aunque el equipo esté ocupado o el negocio haya cerrado.",
+      title: es ? "Preguntas repetitivas" : "Repeated questions",
+      desc: es
+        ? "Las mismas dudas consumen tiempo que el equipo necesita para casos más importantes."
+        : "The same questions take time the team needs for more important cases.",
     },
     {
       icon: Activity,
-      title: "Oportunidades que requieren seguimiento",
-      desc: "Cuando responder, registrar información y dar seguimiento depende completamente de tareas manuales, algunas oportunidades pueden quedar atrás.",
+      title: es ? "Oportunidades fuera de horario" : "After-hours opportunities",
+      desc: es
+        ? "Llamadas y mensajes pueden acumularse cuando el negocio ya no está atendiendo."
+        : "Calls and messages can build up when the business is no longer open.",
     },
   ];
 
@@ -41,15 +50,20 @@ const Problem = () => {
         >
           <span className="inline-flex items-center gap-2 px-3 py-1.5 mb-5 text-xs font-semibold uppercase tracking-wider rounded-full bg-destructive/10 text-destructive border border-destructive/20">
             <TrendingDown className="h-3.5 w-3.5" />
-            01 — EL PROBLEMA
+            {es ? "EL PROBLEMA" : "THE PROBLEM"}
           </span>
           <h2 className="text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            Atender cada consulta se vuelve difícil{" "}
-            <span className="gradient-text">cuando el negocio está creciendo.</span>
+            {es
+              ? "Atender cada consulta se vuelve difícil "
+              : "Handling every inquiry becomes difficult "}
+            <span className="gradient-text">
+              {es ? "cuando el negocio está creciendo." : "as the business grows."}
+            </span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
-            Las llamadas, mensajes, preguntas frecuentes, solicitudes de información y coordinación
-            de citas compiten constantemente por la atención del equipo.
+            {es
+              ? "Llamadas, mensajes, preguntas repetitivas y consultas fuera de horario pueden acumularse mientras el equipo está ocupado atendiendo otras tareas."
+              : "Calls, messages, repeated questions, and after-hours inquiries can build up while the team is busy with other work."}
           </p>
         </motion.div>
 

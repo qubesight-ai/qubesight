@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Instagram, Facebook, ArrowUp } from "lucide-react";
+import { MessageCircle, Linkedin, ArrowUp } from "lucide-react";
 import LogoCube from "@/components/LogoCube";
 import { useTranslation } from "@/hooks/useTranslation";
 import { getScrollBehavior } from "@/lib/sectionNav";
@@ -10,12 +10,18 @@ const Footer = () => {
   const whatsappUrl = "https://wa.me/50646009140";
 
   const productLinks = [
+    {
+      href: "#value-proposition",
+      label: language === "es" ? "Propuesta de valor" : "Value proposition",
+    },
     { href: "#solution", label: language === "es" ? "Solución" : "Solution" },
+    { href: "#how-it-works", label: language === "es" ? "Cómo funciona" : "How it works" },
+    { href: "#demo", label: language === "es" ? "Demo" : "Demo" },
     {
       href: "#early-adopters",
       label: language === "es" ? "Programa Early Adopter" : "Early Adopter program",
     },
-    { href: "#faq", label: t("nav.faq") },
+    { href: "#contacto", label: language === "es" ? "Contacto" : "Contact" },
     { href: "/register", label: language === "es" ? "Registrarse" : "Sign up" },
     { href: "/login", label: language === "es" ? "Iniciar sesión" : "Log in" },
   ];
@@ -52,17 +58,10 @@ const Footer = () => {
               </a>
               <a
                 href="#"
-                aria-label="Instagram"
+                aria-label="LinkedIn"
                 className="h-10 w-10 rounded-xl glass-card flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
               >
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="h-10 w-10 rounded-xl glass-card flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Facebook className="h-5 w-5" />
+                <Linkedin className="h-5 w-5" />
               </a>
             </div>
           </motion.div>

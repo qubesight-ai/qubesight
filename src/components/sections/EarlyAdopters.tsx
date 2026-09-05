@@ -1,22 +1,17 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Handshake, Lightbulb, MessageSquare, FlaskConical } from "lucide-react";
+import { ArrowRight, Check, Handshake, Lightbulb, MessageSquare } from "lucide-react";
 
 const steps = [
   [
     MessageSquare,
-    "CONOCEMOS TU NEGOCIO",
-    "Conversamos contigo para entender cómo atiendes actualmente a tus clientes.",
+    "CONOCEMOS TU PROCESO",
+    "Conversamos brevemente sobre cómo atiendes actualmente a tus clientes.",
   ],
+  [Lightbulb, "TE MOSTRAMOS QUBESIGHT", "Preparamos una demostración relevante para tu negocio."],
   [
-    Lightbulb,
-    "PREPARAMOS TU DEMO",
-    "Configuramos una demostración basada en procesos reales de tu operación.",
-  ],
-  [Handshake, "LA PROBAMOS JUNTOS", "Te mostramos la solución y recopilamos tu retroalimentación."],
-  [
-    FlaskConical,
-    "PILOTO REAL",
-    "Si existe un buen encaje, podemos invitarte a participar en una prueba bajo las condiciones del programa.",
+    Handshake,
+    "EVALUAMOS UN PILOTO",
+    "Si la solución encaja con tu operación, podemos coordinar una prueba real.",
   ],
 ] as const;
 const EarlyAdopters = () => (
@@ -25,15 +20,16 @@ const EarlyAdopters = () => (
       <div className="max-w-3xl mx-auto text-center mb-14">
         <span className="eyebrow mb-5 inline-flex">PROGRAMA EARLY ADOPTER</span>
         <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight">
-          Ayúdanos a construir QubeSight{" "}
-          <span className="gradient-text">con problemas reales de tu negocio.</span>
+          Estamos buscando empresas que quieran probar QubeSight{" "}
+          <span className="gradient-text">con nosotros.</span>
         </h2>
         <p className="mt-5 text-lg text-muted-foreground">
-          Estamos seleccionando un grupo pequeño de empresas interesadas en probar QubeSight en
-          situaciones reales y compartirnos su experiencia.
+          Durante esta etapa estamos trabajando con un pequeño grupo de negocios para utilizar
+          QubeSight en situaciones reales, conocer su experiencia y mejorar el producto antes de
+          ampliar su comercialización.
         </p>
       </div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {steps.map(([Icon, title, desc]) => (
           <article key={title} className="glass-card rounded-2xl p-6">
             <Icon className="h-6 w-6 text-primary mb-5" />
@@ -55,8 +51,6 @@ const EarlyAdopters = () => (
             "qué tareas vale la pena automatizar",
             "qué necesita una empresa para confiar en un agente de IA",
             "qué funciones son realmente importantes",
-            "cómo debería estructurarse el servicio",
-            "qué modelo de pago tiene sentido para el mercado",
           ].map((item) => (
             <li key={item} className="flex gap-2">
               <Check className="h-5 w-5 text-primary shrink-0" />
@@ -69,10 +63,10 @@ const EarlyAdopters = () => (
             href="#contacto"
             className="inline-flex items-center gap-2 text-sm font-bold text-primary"
           >
-            Quiero participar como Early Adopter <ArrowRight className="h-4 w-4" />
+            Quiero participar <ArrowRight className="h-4 w-4" />
           </a>
           <p className="mt-3 text-xs text-muted-foreground">
-            Participar en la evaluación inicial no obliga a contratar un plan comercial.
+            Participar en la demostración no obliga a contratar QubeSight.
           </p>
         </div>
       </motion.div>

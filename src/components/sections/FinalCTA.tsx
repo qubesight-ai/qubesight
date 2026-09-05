@@ -97,10 +97,12 @@ const FinalCTA = () => {
           </span>
 
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-display leading-tight mb-6 text-balance">
-            {t("final.title")} <span className="gradient-text">{t("final.titleAccent")}</span>
+            {language === "es" ? "Cuéntanos sobre tu negocio." : "Tell us about your business."}
           </h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            {t("final.description")}
+            {language === "es"
+              ? "Si llamadas, mensajes o tareas repetitivas están consumiendo tiempo de tu equipo, queremos conocer tu caso."
+              : "If calls, messages, or repetitive tasks are taking up your team's time, we want to learn about your situation."}
           </p>
 
           <ul className="grid sm:grid-cols-2 gap-3 max-w-2xl mx-auto mb-10 text-left">
@@ -204,13 +206,13 @@ const FinalCTA = () => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button variant="hero" size="lg" asChild className="min-h-[56px] px-8">
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                Solicitar una demostración
+                {language === "es" ? "Solicitar una demostración" : "Request a demo"}
                 <ArrowRight className="ml-1 h-5 w-5" />
               </a>
             </Button>
             <Button variant="heroOutline" size="lg" asChild className="min-h-[56px] px-8">
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                Participar como Early Adopter
+                {language === "es" ? "Participar como Early Adopter" : "Join as an Early Adopter"}
               </a>
             </Button>
           </div>

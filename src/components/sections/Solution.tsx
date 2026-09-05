@@ -1,22 +1,31 @@
 import { motion } from "framer-motion";
 import { Sunrise, Sun, Moon } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Solution = () => {
+  const { language } = useTranslation();
+  const es = language === "es";
   const pillars = [
     {
       icon: Sunrise,
-      title: "ANTES",
-      desc: "Atiende consultas cuando el equipo todavía no está disponible.",
+      title: es ? "ATIENDE" : "SERVES",
+      desc: es
+        ? "Responde llamadas y consultas digitales."
+        : "Answers calls and digital inquiries.",
     },
     {
       icon: Sun,
-      title: "DURANTE",
-      desc: "Resuelve tareas repetitivas mientras las personas atienden casos importantes.",
+      title: es ? "ENTIENDE" : "UNDERSTANDS",
+      desc: es
+        ? "Identifica qué necesita el cliente y recopila la información necesaria."
+        : "Identifies what the customer needs and gathers the necessary information.",
     },
     {
       icon: Moon,
-      title: "DESPUÉS",
-      desc: "Continúa atendiendo consultas y recopilando información fuera del horario habitual.",
+      title: es ? "ACTÚA" : "ACTS",
+      desc: es
+        ? "Puede ayudar con citas, seguimiento, información del negocio o transferencia a una persona."
+        : "Can help with appointments, follow-up, business information, or a handoff to a person.",
     },
   ];
 
@@ -37,15 +46,17 @@ const Solution = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center mb-14"
         >
-          <span className="eyebrow mb-5 inline-flex">03 — LA SOLUCIÓN</span>
+          <span className="eyebrow mb-5 inline-flex">{es ? "LA SOLUCIÓN" : "THE SOLUTION"}</span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            Una recepción con inteligencia artificial{" "}
-            <span className="gradient-text">que trabaja junto a tu equipo.</span>
+            {es ? "Una recepción con inteligencia artificial " : "An AI reception service "}
+            <span className="gradient-text">
+              {es ? "que trabaja junto a tu equipo." : "that works alongside your team."}
+            </span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
-            QubeSight combina atención por voz y canales digitales para ayudar a responder
-            consultas, recopilar información, gestionar oportunidades y conectar al cliente con una
-            persona cuando sea necesario.
+            {es
+              ? "QubeSight combina atención por voz y canales digitales para ayudar a responder consultas, recopilar información, gestionar oportunidades y conectar al cliente con una persona cuando sea necesario."
+              : "QubeSight combines voice service and digital channels to help answer inquiries, gather information, manage opportunities, and connect customers with a person when needed."}
           </p>
         </motion.div>
 
