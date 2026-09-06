@@ -14,6 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
+      agent_provisioning_operations: {
+        Row: {
+          action: string
+          created_at: string
+          error_message: string | null
+          finished_at: string | null
+          id: string
+          idempotency_key: string
+          organization_id: string
+          requested_by: string | null
+          requested_revision: number
+          result: Json | null
+          started_at: string | null
+          status: string
+          voice_agent_id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          error_message?: string | null
+          finished_at?: string | null
+          id?: string
+          idempotency_key: string
+          organization_id: string
+          requested_by?: string | null
+          requested_revision: number
+          result?: Json | null
+          started_at?: string | null
+          status?: string
+          voice_agent_id: string
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          error_message?: string | null
+          finished_at?: string | null
+          id?: string
+          idempotency_key?: string
+          organization_id?: string
+          requested_by?: string | null
+          requested_revision?: number
+          result?: Json | null
+          started_at?: string | null
+          status?: string
+          voice_agent_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agent_provisioning_operations_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agent_provisioning_operations_voice_agent_id_fkey"
+            columns: ["voice_agent_id"]
+            isOneToOne: false
+            referencedRelation: "voice_agents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       calls: {
         Row: {
           caller_phone: string | null
@@ -414,12 +477,20 @@ export type Database = {
       voice_agents: {
         Row: {
           created_at: string
+          deployed_revision: number | null
+          deployment_revision: number
           greeting: string
           id: string
           language: string
+          last_deployed_at: string | null
+          last_health_at: string | null
+          last_provisioning_error: string | null
           name: string
           objective: string
           organization_id: string
+          provisioning_status: string
+          runtime_service: string | null
+          runtime_url: string | null
           status: Database["public"]["Enums"]["resource_status"]
           system_prompt: string
           twilio_phone: string | null
@@ -428,12 +499,20 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          deployed_revision?: number | null
+          deployment_revision?: number
           greeting?: string
           id?: string
           language?: string
+          last_deployed_at?: string | null
+          last_health_at?: string | null
+          last_provisioning_error?: string | null
           name: string
           objective?: string
           organization_id: string
+          provisioning_status?: string
+          runtime_service?: string | null
+          runtime_url?: string | null
           status?: Database["public"]["Enums"]["resource_status"]
           system_prompt?: string
           twilio_phone?: string | null
@@ -442,12 +521,20 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          deployed_revision?: number | null
+          deployment_revision?: number
           greeting?: string
           id?: string
           language?: string
+          last_deployed_at?: string | null
+          last_health_at?: string | null
+          last_provisioning_error?: string | null
           name?: string
           objective?: string
           organization_id?: string
+          provisioning_status?: string
+          runtime_service?: string | null
+          runtime_url?: string | null
           status?: Database["public"]["Enums"]["resource_status"]
           system_prompt?: string
           twilio_phone?: string | null
