@@ -4,21 +4,16 @@ import { toast } from "sonner";
 import { manageAgent, type ProvisioningAction } from "@/lib/agentProvisioning";
 import type { Agent } from "@/types/dashboard";
 
-const labels = {
-  not_deployed: "Sin desplegar",
-  provisioning: "Desplegando",
-  running: "En ejecución",
-  degraded: "Degradado",
-  stopped: "Detenido",
-  error: "Error",
-} as const;
+import { provisioningLabels as labels } from "@/features/agents/provisioningStatus";
 
 export default function AgentRuntimeActions({
   agent,
   onChanged,
+  showLabels = false,
 }: {
   agent: Agent;
   onChanged: () => void;
+  showLabels?: boolean;
 }) {
   const [busy, setBusy] = useState<ProvisioningAction | null>(null);
   const stale = agent.deployed_revision !== agent.deployment_revision;
@@ -56,9 +51,9 @@ export default function AgentRuntimeActions({
         {labels[agent.provisioning_status]}
         {stale && agent.provisioning_status === "running" ? " · cambios pendientes" : ""}
       </span>
-      <div className="flex flex-wrap gap-1">
+      <div className={showLabels ? "grid grid-cols-2 gap-2 w-full" : "flex flex-wrap gap-1"}>
         <button
-          className="icon-action"
+          className={showLabels ? "icon-action w-full justify-center gap-2 px-2" : "icon-action"}
           title={agent.provisioning_status === "running" && !stale ? "Reconciliar" : "Desplegar"}
           disabled={working || agent.status !== "active"}
           onClick={() => run("reconcile")}
@@ -68,9 +63,10 @@ export default function AgentRuntimeActions({
           ) : (
             <Play size={16} />
           )}
+          {showLabels && <span className="text-xs">Desplegar</span>}
         </button>
         <button
-          className="icon-action"
+          className={showLabels ? "icon-action w-full justify-center gap-2 px-2" : "icon-action"}
           title="Reiniciar"
           disabled={working || agent.provisioning_status === "not_deployed"}
           onClick={() => run("restart")}
@@ -80,9 +76,10 @@ export default function AgentRuntimeActions({
           ) : (
             <RefreshCw size={16} />
           )}
+          {showLabels && <span className="text-xs">Reiniciar</span>}
         </button>
         <button
-          className="icon-action"
+          className={showLabels ? "icon-action w-full justify-center gap-2 px-2" : "icon-action"}
           title="Comprobar estado real"
           disabled={working || agent.provisioning_status === "not_deployed"}
           onClick={() => run("status")}
@@ -92,14 +89,16 @@ export default function AgentRuntimeActions({
           ) : (
             <Activity size={16} />
           )}
+          {showLabels && <span className="text-xs">Estado</span>}
         </button>
         <button
-          className="icon-action"
+          className={showLabels ? "icon-action w-full justify-center gap-2 px-2" : "icon-action"}
           title="Detener"
           disabled={working || ["not_deployed", "stopped"].includes(agent.provisioning_status)}
           onClick={() => run("stop")}
         >
           {busy === "stop" ? <Loader2 className="animate-spin" size={16} /> : <Square size={16} />}
+          {showLabels && <span className="text-xs">Detener</span>}
         </button>
       </div>
     </div>
