@@ -26,7 +26,7 @@ const Products = () => {
       tag: t("products.assistant.tag"),
       desc: t("products.assistant.desc"),
       forWhom: t("products.assistant.for"),
-      href: "#early-adopters",
+      href: "#pricing",
     },
     {
       key: "voice",
@@ -35,7 +35,7 @@ const Products = () => {
       tag: t("products.voice.tag"),
       desc: t("products.voice.desc"),
       forWhom: t("products.voice.for"),
-      href: "#early-adopters",
+      href: "#pricing",
     },
     {
       key: "suite",
@@ -44,7 +44,7 @@ const Products = () => {
       tag: t("products.suite.tag"),
       desc: t("products.suite.desc"),
       forWhom: t("products.suite.for"),
-      href: "#early-adopters",
+      href: "#pricing",
       featured: true,
     },
   ];
@@ -196,7 +196,7 @@ const Products = () => {
                 <span className="font-semibold text-primary">{selectedProduct.name}</span>
               </p>
               <a
-                href="#early-adopters"
+                href="#pricing"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-brand-soft transition-colors"
               >
                 {t("products.selector.cta")}

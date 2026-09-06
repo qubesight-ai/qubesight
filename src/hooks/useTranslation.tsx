@@ -9,8 +9,8 @@ interface Translations {
 export const translations: Translations = {
   // Matilda voice demo
   "matilda.demoLatencyDisclaimer": {
-    es: "Demo web: Puede existir una breve demora adicional por el procesamiento de audio en el navegador. Las implementaciones telefónicas de QubeSight están diseñadas para conversaciones de voz en tiempo real con respuestas fluidas y de baja latencia.",
-    en: "Web demo: You may notice a small additional delay due to browser-based audio processing. QubeSight phone deployments are designed for real-time voice conversations with smooth, low-latency responses.",
+    es: "Demo en desarrollo: estamos optimizando continuamente la experiencia de voz en tiempo real.",
+    en: "Demo in development: we are continuously optimizing the real-time voice experience.",
   },
 
   // Header
@@ -492,8 +492,8 @@ export const translations: Translations = {
 
   // Footer
   "footer.tagline": {
-    es: "IA que potencia equipos humanos: menos tareas repetitivas, mejor atención, más ventas.",
-    en: "AI that empowers human teams: less repetitive work, better service, more sales.",
+    es: "Recepción con IA para ayudar a tu equipo a atender llamadas, mensajes y oportunidades.",
+    en: "AI reception to help your team handle calls, messages, and opportunities.",
   },
   "footer.product": { es: "Producto", en: "Product" },
   "footer.company": { es: "Compañía", en: "Company" },

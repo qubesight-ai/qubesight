@@ -22,7 +22,6 @@ const Footer = () => {
       label: language === "es" ? "Programa Early Adopter" : "Early Adopter program",
     },
     { href: "#contacto", label: language === "es" ? "Contacto" : "Contact" },
-    { href: "/register", label: language === "es" ? "Registrarse" : "Sign up" },
     { href: "/login", label: language === "es" ? "Iniciar sesión" : "Log in" },
   ];
 
