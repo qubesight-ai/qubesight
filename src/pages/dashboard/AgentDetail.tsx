@@ -178,7 +178,7 @@ export default function AgentDetail() {
 
             <div className="border-t pt-4">
               <p className="text-[10px] tracking-widest text-slate-400 mb-2">ACCIONES</p>
-              <AgentRuntimeActions agent={agent} onChanged={load} />
+              <AgentRuntimeActions agent={agent} onChanged={load} showLabels />
             </div>
           </aside>
         )}
