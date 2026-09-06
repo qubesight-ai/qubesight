@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useMatildaDemo, type MatildaStatus } from "@/hooks/useMatildaDemo";
 import { canStartMatildaRecording, type MatildaVerificationState } from "@/lib/matildaTurnstile";
+import { useTranslation } from "@/hooks/useTranslation";
 
 type TurnstileApi = {
   render: (container: HTMLElement, options: Record<string, unknown>) => string;
@@ -45,6 +46,7 @@ const mime = () =>
 const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 
 const MatildaVoiceDemo = () => {
+  const { t } = useTranslation();
   const [privacy, setPrivacy] = useState(false);
   const [recording, setRecording] = useState(false);
   const [seconds, setSeconds] = useState(0);
@@ -242,7 +244,7 @@ const MatildaVoiceDemo = () => {
     setPrivacy(false);
   };
   return (
-    <section id="matilda-demo" className="py-20 sm:py-28 relative">
+    <section id="demo" className="py-20 sm:py-28 relative">
       <div className="absolute inset-0 bg-grid opacity-20" />
       <div className="container relative">
         <div className="max-w-3xl mx-auto text-center mb-10">
@@ -250,11 +252,10 @@ const MatildaVoiceDemo = () => {
             <Volume2 className="h-3.5 w-3.5" /> Demo de voz
           </span>
           <h2 className="display-xl text-3xl sm:text-5xl mt-5">
-            Habla con <span className="gradient-text">Matilda</span>
+            Conversa con un <span className="gradient-text">agente de QubeSight.</span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground">
-            Prueba nuestro agente de voz con inteligencia artificial directamente desde tu
-            navegador.
+            Matilda es una demostración de nuestra tecnología de atención por voz.
           </p>
         </div>
         <div className="max-w-3xl mx-auto bezel-shell">
@@ -404,6 +405,9 @@ const MatildaVoiceDemo = () => {
                 {demo.error}
               </p>
             )}
+            <p className="mx-auto mt-5 max-w-2xl px-2 text-center text-xs leading-relaxed text-muted-foreground/70 sm:px-4">
+              {t("matilda.demoLatencyDisclaimer")}
+            </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Button type="button" variant="ghost" onClick={resetConversation}>
                 <RefreshCw />
@@ -419,8 +423,8 @@ const MatildaVoiceDemo = () => {
                   )
                 }
               >
-                <a href="#contact">
-                  Obtén tu propio agente de voz <CheckCircle2 />
+                <a href="#early-adopters">
+                  Quiero ver cómo funcionaría en mi negocio <CheckCircle2 />
                 </a>
               </Button>
             </div>

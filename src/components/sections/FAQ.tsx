@@ -8,40 +8,44 @@ import {
 import { useTranslation } from "@/hooks/useTranslation";
 
 const FAQ = () => {
-  const { t } = useTranslation();
-
-  const groups = [
-    {
-      title: t("faq.group.chat"),
-      items: [
-        { q: "faq.c1.q", a: "faq.c1.a" },
-        { q: "faq.c2.q", a: "faq.c2.a" },
-        { q: "faq.c3.q", a: "faq.c3.a" },
-        { q: "faq.c4.q", a: "faq.c4.a" },
-      ],
-    },
-    {
-      title: t("faq.group.voice"),
-      items: [
-        { q: "faq.v1.q", a: "faq.v1.a" },
-        { q: "faq.v2.q", a: "faq.v2.a" },
-        { q: "faq.v3.q", a: "faq.v3.a" },
-        { q: "faq.v4.q", a: "faq.v4.a" },
-      ],
-    },
-    {
-      title: t("faq.group.general"),
-      items: [
-        { q: "faq.q1", a: "faq.a1" },
-        { q: "faq.q2", a: "faq.a2" },
-        { q: "faq.q3", a: "faq.a3" },
-        { q: "faq.q4", a: "faq.a4" },
-        { q: "faq.q5", a: "faq.a5" },
-        { q: "faq.q6", a: "faq.a6" },
-        { q: "faq.q7", a: "faq.a7" },
-      ],
-    },
-  ];
+  const { language } = useTranslation();
+  const es = language === "es";
+  const items = es
+    ? [
+        [
+          "¿Qué es QubeSight?",
+          "Una solución de recepción con inteligencia artificial diseñada para ayudar a negocios a atender llamadas y consultas digitales.",
+        ],
+        [
+          "¿QubeSight reemplaza a mi personal?",
+          "No. Está pensado principalmente para apoyar al equipo en tareas repetitivas y permitir que una persona intervenga cuando sea necesario.",
+        ],
+        [
+          "¿Necesito conocimientos técnicos?",
+          "No. Nuestro objetivo es encargarnos de la configuración técnica.",
+        ],
+        ["¿La demostración tiene costo?", "No. La demostración inicial no tiene costo."],
+        [
+          "¿Qué significa participar como Early Adopter?",
+          "Significa probar QubeSight durante una etapa temprana y compartirnos tu experiencia para ayudarnos a mejorar el producto.",
+        ],
+      ]
+    : [
+        [
+          "What is QubeSight?",
+          "An AI reception solution designed to help businesses handle calls and digital inquiries.",
+        ],
+        [
+          "Does QubeSight replace my staff?",
+          "No. It is designed to support the team with repetitive tasks and let a person step in when needed.",
+        ],
+        ["Do I need technical knowledge?", "No. Our goal is to take care of the technical setup."],
+        ["Is the demo free?", "Yes. The initial demonstration is free."],
+        [
+          "What does being an Early Adopter mean?",
+          "It means trying QubeSight in an early stage and sharing your experience to help us improve the product.",
+        ],
+      ];
 
   return (
     <section id="faq" className="py-20 sm:py-28 relative">
@@ -53,9 +57,12 @@ const FAQ = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <span className="eyebrow mb-5 inline-flex">{t("faq.badge")}</span>
+          <span className="eyebrow mb-5 inline-flex">
+            {es ? "PREGUNTAS FRECUENTES" : "FREQUENTLY ASKED QUESTIONS"}
+          </span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {t("faq.title")} <span className="gradient-text">{t("faq.titleAccent")}</span>
+            {es ? "Lo esencial antes de una " : "The essentials before a "}
+            <span className="gradient-text">{es ? "demostración." : "demo."}</span>
           </h2>
         </motion.div>
 
@@ -65,25 +72,18 @@ const FAQ = () => {
           viewport={{ once: true }}
           className="space-y-10"
         >
-          {groups.map((group, gi) => (
-            <div key={gi}>
-              <h3 className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">
-                {group.title}
-              </h3>
-              <Accordion type="single" collapsible className="w-full">
-                {group.items.map((item, i) => (
-                  <AccordionItem key={i} value={`item-${gi}-${i}`} className="border-white/8 px-1">
-                    <AccordionTrigger className="text-left text-base font-medium hover:no-underline hover:text-primary py-5">
-                      {t(item.q)}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground text-sm leading-relaxed pb-5">
-                      {t(item.a)}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
-          ))}
+          <Accordion type="single" collapsible className="w-full">
+            {items.map(([question, answer], i) => (
+              <AccordionItem key={question} value={`item-${i}`} className="border-white/8 px-1">
+                <AccordionTrigger className="text-left text-base font-medium hover:no-underline hover:text-primary py-5">
+                  {question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground text-sm leading-relaxed pb-5">
+                  {answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </motion.div>
       </div>
     </section>

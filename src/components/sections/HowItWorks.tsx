@@ -3,16 +3,37 @@ import { MessageSquare, Wrench, Users } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const HowItWorks = () => {
-  const { t } = useTranslation();
-
+  const { language } = useTranslation();
+  const es = language === "es";
   const steps = [
-    { icon: MessageSquare, title: t("how.s1.title"), desc: t("how.s1.desc"), n: "01" },
-    { icon: Wrench, title: t("how.s2.title"), desc: t("how.s2.desc"), n: "02" },
-    { icon: Users, title: t("how.s3.title"), desc: t("how.s3.desc"), n: "03" },
+    {
+      icon: MessageSquare,
+      title: es ? "Conocemos tu negocio" : "We learn about your business",
+      desc: es
+        ? "Nos explicas cómo atiendes actualmente a tus clientes y qué proceso te gustaría mejorar."
+        : "You tell us how you currently serve customers and which process you would like to improve.",
+      n: "01",
+    },
+    {
+      icon: Wrench,
+      title: es ? "Preparamos una demostración" : "We prepare a demo",
+      desc: es
+        ? "Configuramos QubeSight con información y situaciones relevantes para tu operación."
+        : "We configure QubeSight with information and situations relevant to your operation.",
+      n: "02",
+    },
+    {
+      icon: Users,
+      title: es ? "Lo pruebas con nosotros" : "You try it with us",
+      desc: es
+        ? "Te mostramos cómo funcionaría y recopilamos tu retroalimentación."
+        : "We show you how it would work and gather your feedback.",
+      n: "03",
+    },
   ];
 
   return (
-    <section id="how" className="py-20 sm:py-28 relative">
+    <section id="how-it-works" className="py-20 sm:py-28 relative">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -21,9 +42,10 @@ const HowItWorks = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center mb-14"
         >
-          <span className="eyebrow mb-5 inline-flex">{t("how.badge")}</span>
+          <span className="eyebrow mb-5 inline-flex">{es ? "CÓMO FUNCIONA" : "HOW IT WORKS"}</span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {t("how.title")} <span className="gradient-text">{t("how.titleAccent")}</span>
+            {es ? "Así empezamos a " : "How we start "}
+            <span className="gradient-text">{es ? "trabajar contigo." : "working with you."}</span>
           </h2>
         </motion.div>
 

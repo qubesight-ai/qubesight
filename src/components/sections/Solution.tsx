@@ -3,12 +3,30 @@ import { Sunrise, Sun, Moon } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const Solution = () => {
-  const { t } = useTranslation();
-
+  const { language } = useTranslation();
+  const es = language === "es";
   const pillars = [
-    { icon: Sunrise, title: t("solution.b1.title"), desc: t("solution.b1.desc") },
-    { icon: Sun, title: t("solution.b2.title"), desc: t("solution.b2.desc") },
-    { icon: Moon, title: t("solution.b3.title"), desc: t("solution.b3.desc") },
+    {
+      icon: Sunrise,
+      title: es ? "ATIENDE" : "SERVES",
+      desc: es
+        ? "Responde llamadas y consultas digitales."
+        : "Answers calls and digital inquiries.",
+    },
+    {
+      icon: Sun,
+      title: es ? "ENTIENDE" : "UNDERSTANDS",
+      desc: es
+        ? "Identifica qué necesita el cliente y recopila la información necesaria."
+        : "Identifies what the customer needs and gathers the necessary information.",
+    },
+    {
+      icon: Moon,
+      title: es ? "ACTÚA" : "ACTS",
+      desc: es
+        ? "Puede ayudar con citas, seguimiento, información del negocio o transferencia a una persona."
+        : "Can help with appointments, follow-up, business information, or a handoff to a person.",
+    },
   ];
 
   return (
@@ -28,12 +46,17 @@ const Solution = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center mb-14"
         >
-          <span className="eyebrow mb-5 inline-flex">{t("solution.badge")}</span>
+          <span className="eyebrow mb-5 inline-flex">{es ? "LA SOLUCIÓN" : "THE SOLUTION"}</span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {t("solution.title")} <span className="gradient-text">{t("solution.titleAccent")}</span>
+            {es ? "Una recepción con inteligencia artificial " : "An AI reception service "}
+            <span className="gradient-text">
+              {es ? "que trabaja junto a tu equipo." : "that works alongside your team."}
+            </span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t("solution.subtitle")}
+            {es
+              ? "QubeSight combina atención por voz y canales digitales para ayudar a responder consultas, recopilar información, gestionar oportunidades y conectar al cliente con una persona cuando sea necesario."
+              : "QubeSight combines voice service and digital channels to help answer inquiries, gather information, manage opportunities, and connect customers with a person when needed."}
           </p>
         </motion.div>
 

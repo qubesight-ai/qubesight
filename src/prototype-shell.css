@@ -40,7 +40,7 @@
   min-height: calc(100vh - 80px);
   position: relative;
   overflow: hidden;
-  padding: 11vh 4.5vw 7vh;
+  padding: clamp(8.5rem, 14vh, 10.5rem) 4.5vw clamp(3.5rem, 6vh, 5.5rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -59,15 +59,19 @@
 .prototype-hero h1 {
   position: relative;
   z-index: 1;
-  max-width: 1100px;
-  margin: 8vh 0;
-  font-size: clamp(3.8rem, 9.3vw, 9.5rem);
-  line-height: 0.86;
+  max-width: min(100%, 1280px);
+  margin: clamp(3rem, 5vh, 4.5rem) 0;
+  font-size: clamp(3.5rem, 5.4vw, 4.75rem);
+  line-height: 0.98;
   font-weight: 700;
-  letter-spacing: -0.095em;
+  letter-spacing: -0.075em;
 }
 .prototype-hero h1 em {
+  display: block;
+  margin-top: 0.18em;
   font-family: Georgia, serif;
+  font-size: 0.7em;
+  line-height: 1.05;
   font-weight: 400;
 }
 .prototype-hero-bottom {
@@ -181,11 +185,18 @@
 }
 @media (max-width: 760px) {
   .prototype-hero {
-    padding: 8vh 20px 40px;
+    padding: 8.5rem 20px 3rem;
   }
   .prototype-hero h1 {
-    font-size: 15vw;
-    margin: 60px 0;
+    max-width: 100%;
+    margin: 3rem 0;
+    font-size: clamp(2.8rem, 12vw, 4rem);
+    line-height: 1;
+  }
+  .prototype-hero h1 em {
+    margin-top: 0.24em;
+    font-size: 0.74em;
+    line-height: 1.08;
   }
   .prototype-hero-bottom {
     display: block;

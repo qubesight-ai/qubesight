@@ -7,6 +7,12 @@ interface Translations {
 }
 
 export const translations: Translations = {
+  // Matilda voice demo
+  "matilda.demoLatencyDisclaimer": {
+    es: "Demo en desarrollo: estamos optimizando continuamente la experiencia de voz en tiempo real.",
+    en: "Demo in development: we are continuously optimizing the real-time voice experience.",
+  },
+
   // Header
   "nav.problem": { es: "Problema", en: "Problem" },
   "nav.solution": { es: "Solución", en: "Solution" },
@@ -17,6 +23,10 @@ export const translations: Translations = {
   "nav.pricing": { es: "Precios", en: "Pricing" },
   "nav.faq": { es: "FAQ", en: "FAQ" },
   "nav.contact": { es: "Empezar", en: "Get Started" },
+  "nav.value": { es: "Propuesta de valor", en: "Value proposition" },
+  "nav.how": { es: "Cómo funciona", en: "How it works" },
+  "nav.demo": { es: "Demo", en: "Demo" },
+  "nav.early": { es: "Early Adopters", en: "Early Adopters" },
 
   // Voice Bot — teammate framing
   "voicebot.badge": { es: "Voice Bot · Asistente de voz", en: "Voice Bot · Voice assistant" },
@@ -44,7 +54,10 @@ export const translations: Translations = {
   "voicebot.row.cost.bot": { es: "Agenda y confirma", en: "Books and confirms" },
   "voicebot.row.savings": { es: "Resultado", en: "Outcome" },
   "voicebot.year": { es: "año", en: "year" },
-  "voicebot.benefit.latency": { es: "Conversación natural <1s", en: "Natural talk <1s" },
+  "voicebot.benefit.latency": {
+    es: "Conversaciones de voz fluidas",
+    en: "Smooth voice conversations",
+  },
   "voicebot.benefit.orders": { es: "Pedidos y consultas por voz", en: "Voice orders & inquiries" },
   "voicebot.benefit.payments": { es: "Cobros asistidos por voz", en: "Voice-assisted payments" },
   "voicebot.benefit.calendar": { es: "Agenda en Google Calendar", en: "Books to Google Calendar" },
@@ -68,7 +81,8 @@ export const translations: Translations = {
   "hero.cta.primary": { es: "Ver cómo potencia a tu equipo", en: "See how it empowers your team" },
   "hero.cta.secondary": { es: "Hablar con un experto", en: "Talk to an expert" },
   "hero.proof.messages": { es: "consultas atendidas", en: "inquiries handled" },
-  "hero.proof.time": { es: "tiempo de respuesta", en: "response time" },
+  "hero.proof.time.value": { es: "IA conversacional", en: "Conversational AI" },
+  "hero.proof.time": { es: "para tu equipo", en: "for your team" },
   "hero.proof.conversion": { es: "clientes que no se pierden", en: "customers retained" },
 
   // Problem
@@ -478,8 +492,8 @@ export const translations: Translations = {
 
   // Footer
   "footer.tagline": {
-    es: "IA que potencia equipos humanos: menos tareas repetitivas, mejor atención, más ventas.",
-    en: "AI that empowers human teams: less repetitive work, better service, more sales.",
+    es: "Recepción con IA para ayudar a tu equipo a atender llamadas, mensajes y oportunidades.",
+    en: "AI reception to help your team handle calls, messages, and opportunities.",
   },
   "footer.product": { es: "Producto", en: "Product" },
   "footer.company": { es: "Compañía", en: "Company" },
@@ -917,8 +931,8 @@ export const translations: Translations = {
 
   // Social proof stats
   "social.badge": { es: "Resultados", en: "Results" },
-  "social.s1.value": { es: "< 3s", en: "< 3s" },
-  "social.s1.label": { es: "tiempo de respuesta promedio", en: "average response time" },
+  "social.s1.value": { es: "IA conversacional", en: "Conversational AI" },
+  "social.s1.label": { es: "para tu equipo", en: "for your team" },
   "social.s2.value": { es: "24/7", en: "24/7" },
   "social.s2.label": {
     es: "cobertura cuando el equipo descansa",
