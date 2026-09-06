@@ -13,8 +13,11 @@ dist-ssr
 *.local
 __pycache__/
 *.py[cod]
-.env
-.env.*
+# .env committed intentionally: only public VITE_* publishable config
+# (project URL + anon key) that ships in the browser bundle anyway.
+# The publish pipeline builds from the repo without injecting these vars.
+.env.local
+.env.*.local
 !.env.example
 
 # Editor directories and files
