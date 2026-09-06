@@ -291,12 +291,26 @@ export type Database = {
       voice_agents: {
         Row: {
           created_at: string
+          deployed_revision: number | null
+          deployment_revision: number
           greeting: string
           id: string
           language: string
+          last_deployed_at: string | null
+          last_health_at: string | null
+          last_provisioning_error: string | null
           name: string
           objective: string
           organization_id: string
+          provisioning_status:
+            | "not_deployed"
+            | "provisioning"
+            | "running"
+            | "degraded"
+            | "stopped"
+            | "error"
+          runtime_service: string | null
+          runtime_url: string | null
           status: Database["public"]["Enums"]["resource_status"]
           system_prompt: string
           twilio_phone: string | null
@@ -305,12 +319,26 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          deployed_revision?: number | null
+          deployment_revision?: number
           greeting?: string
           id?: string
           language?: string
+          last_deployed_at?: string | null
+          last_health_at?: string | null
+          last_provisioning_error?: string | null
           name: string
           objective?: string
           organization_id: string
+          provisioning_status?:
+            | "not_deployed"
+            | "provisioning"
+            | "running"
+            | "degraded"
+            | "stopped"
+            | "error"
+          runtime_service?: string | null
+          runtime_url?: string | null
           status?: Database["public"]["Enums"]["resource_status"]
           system_prompt?: string
           twilio_phone?: string | null
@@ -319,12 +347,26 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          deployed_revision?: number | null
+          deployment_revision?: number
           greeting?: string
           id?: string
           language?: string
+          last_deployed_at?: string | null
+          last_health_at?: string | null
+          last_provisioning_error?: string | null
           name?: string
           objective?: string
           organization_id?: string
+          provisioning_status?:
+            | "not_deployed"
+            | "provisioning"
+            | "running"
+            | "degraded"
+            | "stopped"
+            | "error"
+          runtime_service?: string | null
+          runtime_url?: string | null
           status?: Database["public"]["Enums"]["resource_status"]
           system_prompt?: string
           twilio_phone?: string | null

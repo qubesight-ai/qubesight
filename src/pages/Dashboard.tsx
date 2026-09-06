@@ -26,6 +26,7 @@ import { useChatStream } from "@/hooks/useChatStream";
 import { useDashboardData } from "@/hooks/useDashboardData";
 import type { Agent, Call, Chatbot, DashboardSection as Section } from "@/types/dashboard";
 import TelephonySettings from "@/components/dashboard/TelephonySettings";
+import AgentRuntimeActions from "@/components/dashboard/AgentRuntimeActions";
 
 const emptyAgent = {
   id: "",
@@ -37,6 +38,14 @@ const emptyAgent = {
   objective: "",
   greeting: "",
   system_prompt: "",
+  deployment_revision: 1,
+  deployed_revision: null,
+  provisioning_status: "not_deployed" as const,
+  runtime_service: null,
+  runtime_url: null,
+  last_health_at: null,
+  last_deployed_at: null,
+  last_provisioning_error: null,
 };
 const emptyChatbot: Chatbot = {
   id: "",
@@ -172,6 +181,7 @@ export default function Dashboard() {
               agents={agents}
               onEdit={setEditing}
               onNew={() => setEditing(emptyAgent as Agent)}
+              onChanged={load}
             />
           )}{" "}
           {section === "chatbots" && (
@@ -351,10 +361,12 @@ function Agents({
   agents,
   onEdit,
   onNew,
+  onChanged,
 }: {
   agents: Agent[];
   onEdit: (a: Agent) => void;
   onNew: () => void;
+  onChanged: () => void;
 }) {
   return (
     <div className="admin-panel">
@@ -386,6 +398,7 @@ function Agents({
               </div>
               <Data label="VOZ E IDIOMA" value={`${a.voice_name} · ${a.language}`} />
               <Data label="NÚMERO TWILIO" value={a.twilio_phone || "Sin asignar"} />
+              <AgentRuntimeActions agent={a} onChanged={onChanged} />
               <button className="icon-action" onClick={() => onEdit(a)}>
                 <Settings2 size={17} />
               </button>
@@ -884,7 +897,9 @@ function AgentEditor({
         <h2 className="text-2xl font-semibold mt-1 mb-1">
           {agent.id ? `Editar ${agent.name}` : "Crear agente de voz"}
         </h2>
-        <p className="text-sm text-slate-500 mb-6">Los cambios se aplicarán a llamadas nuevas.</p>
+        <p className="text-sm text-slate-500 mb-6">
+          Guarda la configuración y luego pulsa Desplegar para aplicarla en el VPS.
+        </p>
         <div className="editor-grid">
           <label>
             Nombre

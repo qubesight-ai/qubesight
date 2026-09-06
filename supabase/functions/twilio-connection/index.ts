@@ -23,6 +23,7 @@ type TwilioNumber = {
   capabilities?: Record<string, boolean>;
   voice_url?: string | null;
 };
+type TwilioCredentials = { apiKeySecret: string; authToken: string | null };
 
 class HttpError extends Error {
   status: number;
@@ -184,14 +185,26 @@ async function getConnection(organizationId: string) {
   return data;
 }
 
-async function readSecret(secretId: string) {
+async function readCredentials(secretId: string): Promise<TwilioCredentials> {
   const { data, error } = await admin.rpc("vault_read_twilio_secret", {
     p_secret_id: secretId,
   });
   if (error || typeof data !== "string" || !data) {
     throw new HttpError(500, "La credencial cifrada no está disponible.");
   }
-  return data;
+  try {
+    const parsed = JSON.parse(data) as { api_key_secret?: unknown; auth_token?: unknown };
+    if (typeof parsed.api_key_secret === "string" && parsed.api_key_secret) {
+      return {
+        apiKeySecret: parsed.api_key_secret,
+        authToken: typeof parsed.auth_token === "string" ? parsed.auth_token : null,
+      };
+    }
+  } catch {
+    // Backwards compatibility: connections created before provisioning stored
+    // only the API Key Secret. Reconnecting upgrades the Vault payload.
+  }
+  return { apiKeySecret: data, authToken: null };
 }
 
 async function syncNumbers(organizationId: string, connectionId: string, numbers: TwilioNumber[]) {
@@ -251,6 +264,7 @@ async function responseState(organizationId: string) {
     .order("phone_number");
   if (error) throw new HttpError(500, "No se pudieron consultar los números.");
 
+  const credentials = await readCredentials(connection.vault_secret_id);
   return {
     connection: {
       id: connection.id,
@@ -259,6 +273,7 @@ async function responseState(organizationId: string) {
       account_sid_masked: mask(connection.account_sid),
       api_key_sid_masked: mask(connection.api_key_sid),
       verified_at: connection.verified_at,
+      webhook_validation_configured: Boolean(credentials.authToken),
     },
     numbers: numbers ?? [],
   };
@@ -285,10 +300,12 @@ serve(async (req) => {
       const accountSid = text(body.account_sid, 34);
       const apiKeySid = text(body.api_key_sid, 34);
       const apiKeySecret = text(body.api_key_secret, 512);
+      const authToken = text(body.auth_token, 64);
       if (
         !/^AC[0-9A-Fa-f]{32}$/.test(accountSid) ||
         !/^SK[0-9A-Fa-f]{32}$/.test(apiKeySid) ||
-        apiKeySecret.length < 8
+        apiKeySecret.length < 8 ||
+        !/^[0-9A-Fa-f]{32}$/.test(authToken)
       ) {
         throw new HttpError(400, "Formato de credenciales inválido.");
       }
@@ -296,7 +313,7 @@ serve(async (req) => {
       const numbers = await twilioRequest(accountSid, apiKeySid, apiKeySecret);
       const existing = await getConnection(organizationId);
       const { data: secretId, error: vaultError } = await admin.rpc("vault_store_twilio_secret", {
-        p_secret: apiKeySecret,
+        p_secret: JSON.stringify({ api_key_secret: apiKeySecret, auth_token: authToken }),
         p_existing_id: existing?.vault_secret_id ?? null,
         p_name: `twilio-${organizationId}`,
       });
@@ -330,8 +347,12 @@ serve(async (req) => {
     if (!connection) throw new HttpError(404, "No existe una conexión de Twilio.");
 
     if (action === "refresh") {
-      const secret = await readSecret(connection.vault_secret_id);
-      const numbers = await twilioRequest(connection.account_sid, connection.api_key_sid, secret);
+      const credentials = await readCredentials(connection.vault_secret_id);
+      const numbers = await twilioRequest(
+        connection.account_sid,
+        connection.api_key_sid,
+        credentials.apiKeySecret,
+      );
       await syncNumbers(organizationId, connection.id, numbers);
       return json(await responseState(organizationId));
     }
