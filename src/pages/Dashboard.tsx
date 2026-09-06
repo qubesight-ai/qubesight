@@ -867,7 +867,6 @@ function AgentEditor({
   const submit = async () => {
     setBusy(true);
     const payload = {
-      organization_id: orgId,
       name: form.name,
       status: form.status,
       twilio_phone: form.twilio_phone || null,
@@ -879,7 +878,7 @@ function AgentEditor({
     };
     const { error } = agent.id
       ? await supabase.from("voice_agents").update(payload).eq("id", agent.id)
-      : await supabase.from("voice_agents").insert(payload);
+      : await supabase.from("voice_agents").insert({ ...payload, organization_id: orgId });
     setBusy(false);
     if (error) return toast.error(error.message);
     toast.success(agent.id ? "Agente actualizado" : "Agente creado");
