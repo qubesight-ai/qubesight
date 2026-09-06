@@ -87,7 +87,7 @@ export function useDashboardData(userId?: string) {
       ]);
       if (agentsResult.error) throw agentsResult.error;
       if (callsResult.error) throw callsResult.error;
-      setAgents((agentsResult.data ?? []) as Agent[]);
+      setAgents((agentsResult.data ?? []) as unknown as Agent[]);
       setChatbots(chatbotRows.map(normalizeChatbot));
       setCalls((callsResult.data ?? []) as Call[]);
     } catch (cause) {
