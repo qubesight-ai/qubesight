@@ -86,7 +86,7 @@ export default function Dashboard() {
       <aside className={`admin-sidebar ${mobile ? "open" : ""}`}>
         <div className="p-5 flex items-center justify-between">
           <span className="flex h-10 w-[10.75rem] items-center text-white">
-            <LogoCube />
+            <LogoCube className="[&_.logo-text-mobile]:!text-white" />
           </span>
           <button className="md:hidden text-slate-400" onClick={() => setMobile(false)}>
             <X />
