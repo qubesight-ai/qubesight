@@ -28,6 +28,7 @@ import { useDashboardData } from "@/hooks/useDashboardData";
 import type { Agent, Call, Chatbot, DashboardSection as Section } from "@/types/dashboard";
 import TelephonySettings from "@/components/dashboard/TelephonySettings";
 import AgentRuntimeActions from "@/components/dashboard/AgentRuntimeActions";
+import LogoCube from "@/components/LogoCube";
 import { hasPendingDeploy } from "@/features/agents/provisioningStatus";
 
 const emptyChatbot: Chatbot = {
@@ -84,11 +85,8 @@ export default function Dashboard() {
     <div className="min-h-screen bg-[#f4f7fb] text-slate-900 flex">
       <aside className={`admin-sidebar ${mobile ? "open" : ""}`}>
         <div className="p-5 flex items-center justify-between">
-          <span className="flex items-center gap-3 text-white font-semibold text-lg">
-            <i className="w-9 h-9 rounded-xl bg-blue-500 grid place-items-center">
-              <Mic2 size={18} />
-            </i>
-            QubeSight
+          <span className="flex h-10 w-[10.75rem] items-center text-white">
+            <LogoCube className="[&_.logo-text-mobile]:!text-white" />
           </span>
           <button className="md:hidden text-slate-400" onClick={() => setMobile(false)}>
             <X />
