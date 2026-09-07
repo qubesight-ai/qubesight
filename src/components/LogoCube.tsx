@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import qubeSightMark from "@/assets/qubesight-mark.png.asset.json";
+import qubeSightMark from "@/assets/qubesight-mark.webp";
 
 interface LogoCubeProps {
   className?: string;
@@ -19,7 +19,7 @@ const LogoCube = ({ className = "" }: LogoCubeProps) => {
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
         <img
-          src={qubeSightMark.url}
+          src={qubeSightMark}
           alt=""
           aria-hidden="true"
           className="block h-full w-full object-contain"
