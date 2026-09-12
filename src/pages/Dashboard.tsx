@@ -28,6 +28,7 @@ import { useDashboardData } from "@/hooks/useDashboardData";
 import type { Agent, Call, Chatbot, DashboardSection as Section } from "@/types/dashboard";
 import TelephonySettings from "@/components/dashboard/TelephonySettings";
 import AgentRuntimeActions from "@/components/dashboard/AgentRuntimeActions";
+import DashboardLayout from "@/components/dashboard/DashboardLayout";
 
 const emptyAgent = {
   id: "",
@@ -96,7 +97,6 @@ export default function Dashboard() {
     error,
     reload: load,
   } = useDashboardData(user?.id);
-  const [mobile, setMobile] = useState(false);
   const [editing, setEditing] = useState<Agent | null>(null);
   const [editingBot, setEditingBot] = useState<Chatbot | null>(null);
   useEffect(() => {
@@ -109,115 +109,38 @@ export default function Dashboard() {
       </div>
     );
   if (!org) return <Onboarding userName={profile?.full_name || ""} done={load} />;
-  const nav: [Section, string, typeof LayoutDashboard][] = [
-    ["overview", "Resumen", LayoutDashboard],
-    ["agents", "Agentes de voz", Mic2],
-    ["chatbots", "Chatbots", Bot],
-    ["telephony", "Telefonía", Radio],
-    ["calls", "Llamadas", PhoneCall],
-    ["profile", "Perfil", UserRound],
-  ];
   return (
-    <div className="min-h-screen bg-[#f4f7fb] text-slate-900 flex">
-      <aside className={`admin-sidebar ${mobile ? "open" : ""}`}>
-        <div className="p-5 flex items-center justify-between">
-          <span className="flex items-center gap-3 text-white font-semibold text-lg">
-            <i className="w-9 h-9 rounded-xl bg-blue-500 grid place-items-center">
-              <Mic2 size={18} />
-            </i>
-            QubeSight
-          </span>
-          <button className="md:hidden text-slate-400" onClick={() => setMobile(false)}>
-            <X />
-          </button>
-        </div>
-        <p className="px-6 mt-5 mb-2 text-[10px] tracking-[.2em] text-slate-500">
-          AUTOMATION ADMIN
-        </p>
-        <nav className="px-3 space-y-1">
-          {nav.map(([id, label, Icon]) => (
-            <button
-              key={id}
-              onClick={() => {
-                navigateToSection(id);
-                setMobile(false);
-              }}
-              className={section === id ? "active" : ""}
-            >
-              <Icon size={18} />
-              {label}
-            </button>
-          ))}
-        </nav>
-        <div className="mt-auto p-4 border-t border-white/10">
-          <div className="flex items-center gap-3 mb-3">
-            <span className="h-9 w-9 rounded-full bg-blue-100 text-blue-700 grid place-items-center text-xs font-bold">
-              {(profile?.full_name || user?.email || "U").slice(0, 2).toUpperCase()}
-            </span>
-            <span className="min-w-0">
-              <strong className="block text-white text-xs truncate">
-                {profile?.full_name || "Usuario"}
-              </strong>
-              <small className="text-slate-500 block truncate">{org.name}</small>
-            </span>
-          </div>
-          <button
-            onClick={signOut}
-            className="w-full text-slate-400 hover:text-white flex items-center gap-2 text-xs p-2"
-          >
-            <LogOut size={15} />
-            Cerrar sesión
-          </button>
-        </div>
-      </aside>
-      {mobile && (
-        <div
-          className="fixed inset-0 bg-black/40 z-30 md:hidden"
-          onClick={() => setMobile(false)}
-        />
-      )}
-      <main className="flex-1 md:ml-60 min-w-0">
-        <header className="h-20 bg-white border-b flex items-center justify-between px-5 md:px-8">
-          <div className="flex items-center gap-3">
-            <button className="md:hidden" onClick={() => setMobile(true)}>
-              <Menu />
-            </button>
-            <div>
-              <p className="text-[10px] tracking-[.15em] text-slate-400">CENTRO DE OPERACIONES</p>
-              <h1 className="text-xl font-semibold">{nav.find((n) => n[0] === section)?.[1]}</h1>
-            </div>
-          </div>
-          <span className="hidden sm:flex items-center gap-2 text-xs text-slate-500 border rounded-full px-3 py-2">
-            <i className="w-2 h-2 rounded-full bg-emerald-500" />
-            Sistema disponible
-          </span>
-        </header>
-        <div className="p-5 md:p-8">
-          {section === "overview" && (
-            <Overview agents={agents} calls={calls} onSection={navigateToSection} />
-          )}{" "}
-          {section === "agents" && (
-            <Agents
-              agents={agents}
-              onEdit={setEditing}
-              onNew={() => setEditing(emptyAgent as Agent)}
-              onChanged={load}
-            />
-          )}{" "}
-          {section === "chatbots" && (
-            <Chatbots
-              bots={chatbots}
-              onEdit={setEditingBot}
-              onNew={() => setEditingBot(emptyChatbot)}
-            />
-          )}{" "}
-          {section === "telephony" && <TelephonySettings />}{" "}
-          {section === "calls" && <Calls calls={calls} />}{" "}
-          {section === "profile" && (
-            <Profile profile={profile} email={user?.email || ""} org={org} />
-          )}
-        </div>
-      </main>
+    <>
+      <DashboardLayout
+        section={section}
+        profileName={profile?.full_name || ""}
+        email={user?.email || ""}
+        organizationName={org.name}
+        onNavigate={navigateToSection}
+        onSignOut={signOut}
+      >
+        {section === "overview" && (
+          <Overview agents={agents} calls={calls} onSection={navigateToSection} />
+        )}
+        {section === "agents" && (
+          <Agents
+            agents={agents}
+            onEdit={setEditing}
+            onNew={() => setEditing(emptyAgent as Agent)}
+            onChanged={load}
+          />
+        )}
+        {section === "chatbots" && (
+          <Chatbots
+            bots={chatbots}
+            onEdit={setEditingBot}
+            onNew={() => setEditingBot(emptyChatbot)}
+          />
+        )}
+        {section === "telephony" && <TelephonySettings />}
+        {section === "calls" && <Calls calls={calls} />}
+        {section === "profile" && <Profile profile={profile} email={user?.email || ""} org={org} />}
+      </DashboardLayout>
       {editing && (
         <AgentEditor
           agent={editing}
@@ -240,7 +163,7 @@ export default function Dashboard() {
           }}
         />
       )}
-    </div>
+    </>
   );
 }
 
