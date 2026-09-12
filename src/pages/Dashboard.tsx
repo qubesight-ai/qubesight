@@ -83,6 +83,10 @@ export default function Dashboard() {
 
   const section = sectionFromPath();
 
+  const agentId = location.pathname.startsWith("/dashboard/agents/")
+    ? location.pathname.split("/")[3] || null
+    : null;
+
   const navigateToSection = (nextSection: Section) => {
     const target = nextSection === "overview" ? "/dashboard" : `/dashboard/${nextSection}`;
 
@@ -98,7 +102,9 @@ export default function Dashboard() {
     error,
     reload: load,
   } = useDashboardData(user?.id);
-  const [editing, setEditing] = useState<Agent | null>(null);
+
+  const selectedAgent = agentId ? (agents.find((agent) => agent.id === agentId) ?? null) : null;
+
   const [editingBot, setEditingBot] = useState<Chatbot | null>(null);
   useEffect(() => {
     if (error) toast.error("No se pudo cargar el dashboard");
@@ -123,13 +129,49 @@ export default function Dashboard() {
         {section === "overview" && (
           <Overview agents={agents} calls={calls} onSection={navigateToSection} />
         )}
-        {section === "agents" && (
+        {section === "agents" && !agentId && (
           <AgentsPanel
             agents={agents}
-            onEdit={setEditing}
-            onNew={() => setEditing(emptyAgent as Agent)}
+            onEdit={(agent) => navigate(`/dashboard/agents/${agent.id}`)}
+            onNew={() => navigate("/dashboard/agents/new")}
             onChanged={load}
           />
+        )}
+
+        {section === "agents" && agentId === "new" && (
+          <AgentEditor
+            agent={emptyAgent as Agent}
+            orgId={org.id}
+            close={() => navigate("/dashboard/agents")}
+            saved={() => {
+              load();
+              navigate("/dashboard/agents");
+            }}
+          />
+        )}
+
+        {section === "agents" && agentId && agentId !== "new" && selectedAgent && (
+          <AgentEditor
+            agent={selectedAgent}
+            orgId={org.id}
+            close={() => navigate("/dashboard/agents")}
+            saved={() => {
+              load();
+              navigate("/dashboard/agents");
+            }}
+          />
+        )}
+
+        {section === "agents" && agentId && agentId !== "new" && !selectedAgent && (
+          <div className="admin-panel p-6">
+            <h2 className="text-lg font-semibold">Agente no encontrado</h2>
+            <p className="text-sm text-slate-500 mt-2">
+              Este agente no existe o no pertenece a tu organización.
+            </p>
+            <button className="admin-primary mt-4" onClick={() => navigate("/dashboard/agents")}>
+              Volver a agentes
+            </button>
+          </div>
         )}
         {section === "chatbots" && (
           <Chatbots
@@ -142,17 +184,6 @@ export default function Dashboard() {
         {section === "calls" && <Calls calls={calls} />}
         {section === "profile" && <Profile profile={profile} email={user?.email || ""} org={org} />}
       </DashboardLayout>
-      {editing && (
-        <AgentEditor
-          agent={editing}
-          orgId={org.id}
-          close={() => setEditing(null)}
-          saved={() => {
-            setEditing(null);
-            load();
-          }}
-        />
-      )}
       {editingBot && (
         <ChatbotEditor
           chatbot={editingBot}
