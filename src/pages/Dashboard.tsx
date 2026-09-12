@@ -27,7 +27,8 @@ import { useChatStream } from "@/hooks/useChatStream";
 import { useDashboardData } from "@/hooks/useDashboardData";
 import type { Agent, Call, Chatbot, DashboardSection as Section } from "@/types/dashboard";
 import TelephonySettings from "@/components/dashboard/TelephonySettings";
-import AgentRuntimeActions from "@/components/dashboard/AgentRuntimeActions";
+import AgentsPanel from "@/components/dashboard/AgentsPanel";
+import AgentEditor from "@/components/dashboard/AgentEditor";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 
 const emptyAgent = {
@@ -123,7 +124,7 @@ export default function Dashboard() {
           <Overview agents={agents} calls={calls} onSection={navigateToSection} />
         )}
         {section === "agents" && (
-          <Agents
+          <AgentsPanel
             agents={agents}
             onEdit={setEditing}
             onNew={() => setEditing(emptyAgent as Agent)}
@@ -298,58 +299,6 @@ function Stat({
       <strong className="text-3xl block mt-2">{value}</strong>
       <small className="text-slate-400">{detail}</small>
     </article>
-  );
-}
-function Agents({
-  agents,
-  onEdit,
-  onNew,
-  onChanged,
-}: {
-  agents: Agent[];
-  onEdit: (a: Agent) => void;
-  onNew: () => void;
-  onChanged: () => void;
-}) {
-  return (
-    <div className="admin-panel">
-      <div className="panel-head">
-        <div>
-          <h2>Agentes de voz</h2>
-          <p>Prompt, voz, número y comportamiento por cliente</p>
-        </div>
-        <button className="admin-primary" onClick={onNew}>
-          <Plus size={15} />
-          Nuevo agente
-        </button>
-      </div>
-      {agents.length === 0 ? (
-        <Empty icon={Mic2} title="Aún no tienes agentes" action="Crea el primero para comenzar" />
-      ) : (
-        <div className="divide-y">
-          {agents.map((a) => (
-            <article key={a.id} className="agent-row">
-              <span className="agent-icon">
-                <Mic2 />
-              </span>
-              <div>
-                <span className={a.status === "active" ? "status-pill" : "status-pill inactive"}>
-                  {a.status === "active" ? "Activo" : "Inactivo"}
-                </span>
-                <h3>{a.name}</h3>
-                <p>{a.objective || "Sin objetivo configurado"}</p>
-              </div>
-              <Data label="VOZ E IDIOMA" value={`${a.voice_name} · ${a.language}`} />
-              <Data label="NÚMERO TWILIO" value={a.twilio_phone || "Sin asignar"} />
-              <AgentRuntimeActions agent={a} onChanged={onChanged} />
-              <button className="icon-action" onClick={() => onEdit(a)}>
-                <Settings2 size={17} />
-              </button>
-            </article>
-          ))}
-        </div>
-      )}
-    </div>
   );
 }
 const Data = ({ label, value }: { label: string; value: string }) => (
@@ -790,118 +739,6 @@ function Empty({
       <Icon className="mx-auto text-slate-300 mb-4" size={38} />
       <h3 className="font-semibold">{title}</h3>
       <p className="text-sm text-slate-400">{action}</p>
-    </div>
-  );
-}
-function AgentEditor({
-  agent,
-  orgId,
-  close,
-  saved,
-}: {
-  agent: Agent;
-  orgId: string;
-  close: () => void;
-  saved: () => void;
-}) {
-  const [form, setForm] = useState(agent);
-  const [busy, setBusy] = useState(false);
-  const set = (key: keyof Agent, value: string) => setForm((f) => ({ ...f, [key]: value }));
-  const submit = async () => {
-    setBusy(true);
-    const payload = {
-      organization_id: orgId,
-      name: form.name,
-      status: form.status,
-      twilio_phone: form.twilio_phone || null,
-      voice_name: form.voice_name,
-      language: form.language,
-      objective: form.objective,
-      greeting: form.greeting,
-      system_prompt: form.system_prompt,
-    };
-    const { error } = agent.id
-      ? await supabase.from("voice_agents").update(payload).eq("id", agent.id)
-      : await supabase.from("voice_agents").insert(payload);
-    setBusy(false);
-    if (error) return toast.error(error.message);
-    toast.success(agent.id ? "Agente actualizado" : "Agente creado");
-    saved();
-  };
-  return (
-    <div className="modal-layer" onMouseDown={close}>
-      <div className="editor" onMouseDown={(e) => e.stopPropagation()}>
-        <button className="editor-close" onClick={close}>
-          <X />
-        </button>
-        <p className="text-[10px] tracking-widest text-blue-600">
-          {agent.id ? "EDITAR CONFIGURACIÓN" : "NUEVO AGENTE"}
-        </p>
-        <h2 className="text-2xl font-semibold mt-1 mb-1">
-          {agent.id ? `Editar ${agent.name}` : "Crear agente de voz"}
-        </h2>
-        <p className="text-sm text-slate-500 mb-6">
-          Guarda la configuración y luego pulsa Desplegar para aplicarla en el VPS.
-        </p>
-        <div className="editor-grid">
-          <label>
-            Nombre
-            <input value={form.name} onChange={(e) => set("name", e.target.value)} />
-          </label>
-          <label>
-            Estado
-            <select value={form.status} onChange={(e) => set("status", e.target.value)}>
-              <option value="active">Activo</option>
-              <option value="inactive">Inactivo</option>
-            </select>
-          </label>
-          <label>
-            Voz
-            <input value={form.voice_name} onChange={(e) => set("voice_name", e.target.value)} />
-          </label>
-          <label>
-            Idioma
-            <input value={form.language} onChange={(e) => set("language", e.target.value)} />
-          </label>
-          <label className="wide">
-            Número Twilio
-            <input
-              value={form.twilio_phone || ""}
-              onChange={(e) => set("twilio_phone", e.target.value)}
-            />
-          </label>
-          <label className="wide">
-            Objetivo
-            <input value={form.objective} onChange={(e) => set("objective", e.target.value)} />
-          </label>
-          <label className="wide">
-            Mensaje de bienvenida
-            <textarea
-              rows={2}
-              value={form.greeting}
-              onChange={(e) => set("greeting", e.target.value)}
-            />
-          </label>
-          <label className="wide">
-            Prompt del sistema
-            <textarea
-              rows={6}
-              value={form.system_prompt}
-              onChange={(e) => set("system_prompt", e.target.value)}
-            />
-          </label>
-        </div>
-        <footer>
-          <button onClick={close}>Cancelar</button>
-          <button
-            className="admin-primary"
-            disabled={busy || !form.name || !form.system_prompt}
-            onClick={submit}
-          >
-            {busy && <Loader2 className="animate-spin" size={16} />}Guardar cambios
-          </button>
-        </footer>
-      </div>
     </div>
   );
 }
