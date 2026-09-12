@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Activity,
   Bot,
@@ -65,7 +66,26 @@ const emptyChatbot: Chatbot = {
 
 export default function Dashboard() {
   const { user, signOut } = useAuth();
-  const [section, setSection] = useState<Section>("overview");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const sectionFromPath = (): Section => {
+    const segment = location.pathname.replace(/^\/dashboard\/?/, "").split("/")[0];
+
+    const sections: Section[] = ["overview", "agents", "chatbots", "telephony", "calls", "profile"];
+
+    if (!segment) return "overview";
+
+    return sections.includes(segment as Section) ? (segment as Section) : "overview";
+  };
+
+  const section = sectionFromPath();
+
+  const navigateToSection = (nextSection: Section) => {
+    const target = nextSection === "overview" ? "/dashboard" : `/dashboard/${nextSection}`;
+
+    navigate(target);
+  };
   const {
     organization: org,
     profile,
@@ -119,7 +139,7 @@ export default function Dashboard() {
             <button
               key={id}
               onClick={() => {
-                setSection(id);
+                navigateToSection(id);
                 setMobile(false);
               }}
               className={section === id ? "active" : ""}
@@ -174,7 +194,7 @@ export default function Dashboard() {
         </header>
         <div className="p-5 md:p-8">
           {section === "overview" && (
-            <Overview agents={agents} calls={calls} onSection={setSection} />
+            <Overview agents={agents} calls={calls} onSection={navigateToSection} />
           )}{" "}
           {section === "agents" && (
             <Agents
