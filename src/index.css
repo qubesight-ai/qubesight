@@ -773,3 +773,37 @@ html {
     grid-template-columns: 2.7rem 1fr 2.2rem;
   }
 }
+
+/* Agent configuration page */
+.agent-config-form label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 650;
+  color: #596c7b;
+}
+
+.agent-config-form input,
+.agent-config-form select,
+.agent-config-form textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.4rem;
+  border: 1px solid #dfe7ed;
+  border-radius: 0.55rem;
+  padding: 0.7rem 0.8rem;
+  background: white;
+  color: #172b3d;
+  font: inherit;
+  outline: none;
+}
+
+.agent-config-form input:focus,
+.agent-config-form select:focus,
+.agent-config-form textarea:focus {
+  border-color: #65a8ee;
+  box-shadow: 0 0 0 3px #e8f3ff;
+}
+
+.agent-config-form textarea {
+  resize: vertical;
+}

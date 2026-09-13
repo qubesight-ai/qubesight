@@ -142,6 +142,7 @@ export default function Dashboard() {
           <AgentEditor
             agent={emptyAgent as Agent}
             orgId={org.id}
+            onRuntimeChanged={load}
             close={() => navigate("/dashboard/agents")}
             saved={() => {
               load();
@@ -154,6 +155,7 @@ export default function Dashboard() {
           <AgentEditor
             agent={selectedAgent}
             orgId={org.id}
+            onRuntimeChanged={load}
             close={() => navigate("/dashboard/agents")}
             saved={() => {
               load();
