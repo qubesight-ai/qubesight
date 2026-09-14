@@ -16,6 +16,7 @@ export const translations: Translations = {
   // Header
   "nav.problem": { es: "Problema", en: "Problem" },
   "nav.solution": { es: "Solución", en: "Solution" },
+  "nav.problem": { es: "Problema", en: "Problem" },
   "nav.products": { es: "Productos", en: "Products" },
   "nav.assistant": { es: "Asistente", en: "Assistant" },
   "nav.voicebot": { es: "Voice Bot", en: "Voice Bot" },

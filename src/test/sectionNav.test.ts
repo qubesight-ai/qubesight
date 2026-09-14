@@ -43,6 +43,7 @@ describe("sectionNav — hash / anchors", () => {
 
   it("exposes the landing nav section ids", () => {
     expect(NAV_SECTION_IDS).toEqual([
+      "problem",
       "value-proposition",
       "solution",
       "how-it-works",
