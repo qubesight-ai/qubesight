@@ -1,5 +1,14 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Repeat2, Users } from "lucide-react";
+import {
+  Clock4,
+  Zap,
+  ClipboardCheck,
+  Filter,
+  CalendarCheck,
+  Repeat2,
+  UserCheck,
+  Plug,
+} from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const ValueProposition = () => {
@@ -7,25 +16,46 @@ const ValueProposition = () => {
   const es = language === "es";
   const benefits = [
     [
-      MessageCircle,
-      es ? "Más oportunidades atendidas" : "More opportunities handled",
-      es
-        ? "Ayuda a mantener la atención disponible cuando el equipo está ocupado o fuera de horario."
-        : "Helps keep service available while the team is busy or after hours.",
+      Clock4,
+      es ? "24/7" : "24/7",
+      es ? "Atención continua." : "Continuous availability.",
+    ],
+    [
+      Zap,
+      es ? "Respuesta rápida" : "Fast response",
+      es ? "Atención inmediata a llamadas y mensajes." : "Immediate attention to calls and messages.",
+    ],
+    [
+      ClipboardCheck,
+      es ? "Captura" : "Capture",
+      es ? "Información estructurada de cada contacto." : "Structured information from every contact.",
+    ],
+    [
+      Filter,
+      es ? "Calificación" : "Qualification",
+      es ? "Identificación y clasificación de prospectos." : "Identifying and classifying prospects.",
+    ],
+    [
+      CalendarCheck,
+      es ? "Agenda" : "Scheduling",
+      es ? "Gestión automatizada de citas." : "Automated appointment management.",
     ],
     [
       Repeat2,
-      es ? "Menos tareas repetitivas" : "Fewer repetitive tasks",
-      es
-        ? "Consultas frecuentes y recopilación inicial de información pueden ser atendidas automáticamente."
-        : "Common questions and initial information gathering can be handled automatically.",
+      es ? "Seguimiento" : "Follow-up",
+      es ? "Acciones posteriores a la interacción." : "Actions after each interaction.",
     ],
     [
-      Users,
-      es ? "Personas donde aportan más valor" : "People where they add most value",
+      UserCheck,
+      es ? "Transferencia humana" : "Human handoff",
       es
-        ? "Los casos que requieren criterio, negociación o atención especial pueden pasar a una persona."
-        : "Cases requiring judgment, negotiation, or special attention can go to a person.",
+        ? "Escalamiento cuando una persona debe intervenir."
+        : "Escalation when a person needs to step in.",
+    ],
+    [
+      Plug,
+      es ? "Integraciones" : "Integrations",
+      es ? "Conexión con las herramientas del negocio." : "Connection with the business's tools.",
     ],
   ] as const;
   return (
@@ -41,24 +71,30 @@ const ValueProposition = () => {
             {es ? "PROPUESTA DE VALOR" : "VALUE PROPOSITION"}
           </span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {es
-              ? "Más capacidad de atención sin aumentar la carga repetitiva de tu equipo."
-              : "More capacity to serve customers without increasing your team's repetitive workload."}
+            {es ? "Una recepción digital con IA que atiende, captura, califica, " : "A digital AI reception that answers, captures, qualifies, "}
+            <span className="gradient-text">
+              {es ? "agenda y da seguimiento." : "schedules, and follows up."}
+            </span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
             {es
-              ? "QubeSight busca ayudar a que los negocios puedan responder más oportunidades y mantener una atención constante mientras las personas se concentran en las conversaciones y decisiones que realmente requieren criterio humano."
-              : "QubeSight aims to help businesses respond to more opportunities and maintain consistent service while people focus on conversations and decisions that need human judgment."}
+              ? "QubeSight permite a una PyME disponer de una capacidad de atención digital impulsada por inteligencia artificial que responde llamadas y mensajes, captura información, califica prospectos, agenda citas, da seguimiento y transfiere a una persona cuando es necesario."
+              : "QubeSight gives an SMB an AI-powered digital service capability that answers calls and messages, captures information, qualifies prospects, books appointments, follows up, and transfers to a person when needed."}
+          </p>
+          <p className="mt-4 text-base text-muted-foreground max-w-2xl mx-auto">
+            {es
+              ? "Sin que la empresa tenga que construir ni administrar directamente una infraestructura compleja de IA."
+              : "Without the company having to build or directly manage complex AI infrastructure."}
           </p>
         </motion.div>
-        <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
           {benefits.map(([Icon, title, desc], i) => (
             <motion.article
               key={title}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
+              transition={{ delay: (i % 4) * 0.08 }}
               className="glass-card rounded-2xl p-7 text-center hover:border-primary/30 transition-colors"
             >
               <div className="h-12 w-12 mx-auto rounded-xl bg-primary/10 text-primary border border-primary/20 grid place-items-center mb-5">
