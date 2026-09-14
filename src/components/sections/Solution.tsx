@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Sunrise, Sun, Moon } from "lucide-react";
+import { PhoneCall, MessageCircle, Workflow, Plug, LifeBuoy } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const Solution = () => {
@@ -7,25 +7,39 @@ const Solution = () => {
   const es = language === "es";
   const pillars = [
     {
-      icon: Sunrise,
-      title: es ? "ATIENDE" : "SERVES",
+      icon: PhoneCall,
+      title: es ? "Voice Bot" : "Voice Bot",
       desc: es
-        ? "Responde llamadas y consultas digitales."
-        : "Answers calls and digital inquiries.",
+        ? "Agentes de voz con IA que atienden llamadas, responden preguntas, capturan información, califican prospectos, agendan citas y transfieren a una persona cuando corresponde."
+        : "AI voice agents that answer calls, respond to questions, capture information, qualify prospects, book appointments, and hand off to a person when appropriate.",
     },
     {
-      icon: Sun,
-      title: es ? "ENTIENDE" : "UNDERSTANDS",
+      icon: MessageCircle,
+      title: es ? "Chat y atención digital" : "Chat and digital service",
       desc: es
-        ? "Identifica qué necesita el cliente y recopila la información necesaria."
-        : "Identifies what the customer needs and gathers the necessary information.",
+        ? "Automatiza conversaciones en WhatsApp, web, Instagram, Messenger y otros canales digitales desde una misma lógica de atención."
+        : "Automate conversations on WhatsApp, web, Instagram, Messenger, and other digital channels from a single service logic.",
     },
     {
-      icon: Moon,
-      title: es ? "ACTÚA" : "ACTS",
+      icon: Workflow,
+      title: es ? "Automatización de procesos" : "Process automation",
       desc: es
-        ? "Puede ayudar con citas, seguimiento, información del negocio o transferencia a una persona."
-        : "Can help with appointments, follow-up, business information, or a handoff to a person.",
+        ? "Ejecuta acciones después de cada conversación: agendar, notificar, actualizar información y activar otros procesos."
+        : "Runs actions after each conversation: scheduling, notifications, information updates, and other downstream processes.",
+    },
+    {
+      icon: Plug,
+      title: es ? "Integraciones empresariales" : "Business integrations",
+      desc: es
+        ? "Conecta QubeSight con calendarios, CRM, bases de datos y otras herramientas utilizadas por el negocio."
+        : "Connects QubeSight with calendars, CRM, databases, and other tools the business already uses.",
+    },
+    {
+      icon: LifeBuoy,
+      title: es ? "Implementación y soporte" : "Implementation and support",
+      desc: es
+        ? "QubeSight se implementa y configura para el negocio sin que el cliente tenga que administrar directamente una infraestructura compleja de IA."
+        : "QubeSight is implemented and configured for the business, so the client doesn't have to manage complex AI infrastructure.",
     },
   ];
 
@@ -48,15 +62,15 @@ const Solution = () => {
         >
           <span className="eyebrow mb-5 inline-flex">{es ? "LA SOLUCIÓN" : "THE SOLUTION"}</span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {es ? "Una recepción con inteligencia artificial " : "An AI reception service "}
+            {es ? "Una capa de atención " : "An automated service layer "}
             <span className="gradient-text">
-              {es ? "que trabaja junto a tu equipo." : "that works alongside your team."}
+              {es ? "automatizada para tu negocio." : "for your business."}
             </span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
             {es
-              ? "QubeSight combina atención por voz y canales digitales para ayudar a responder consultas, recopilar información, gestionar oportunidades y conectar al cliente con una persona cuando sea necesario."
-              : "QubeSight combines voice service and digital channels to help answer inquiries, gather information, manage opportunities, and connect customers with a person when needed."}
+              ? "QubeSight combina agentes de voz, chatbots e integraciones empresariales para automatizar gran parte de la atención inicial al cliente, manteniendo la posibilidad de intervención humana cuando sea necesaria."
+              : "QubeSight combines voice agents, chatbots, and business integrations to automate much of the initial customer service, while keeping human intervention available when needed."}
           </p>
         </motion.div>
 
@@ -67,7 +81,7 @@ const Solution = () => {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
+              transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
               className="glass-card rounded-2xl p-7 text-center hover:border-primary/30 transition-colors"
             >
               <div className="h-12 w-12 mx-auto rounded-xl bg-primary/10 text-primary border border-primary/20 grid place-items-center mb-5">
@@ -78,6 +92,20 @@ const Solution = () => {
             </motion.div>
           ))}
         </div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 text-center text-xl sm:text-2xl font-display font-semibold text-balance max-w-3xl mx-auto"
+        >
+          {es ? "La IA atiende lo repetitivo. " : "AI handles the repetitive work. "}
+          <span className="gradient-text">
+            {es
+              ? "Tu equipo entra cuando realmente hace falta."
+              : "Your team steps in when it really matters."}
+          </span>
+        </motion.p>
       </div>
     </section>
   );
