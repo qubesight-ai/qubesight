@@ -60,8 +60,16 @@ const Header = () => {
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     if (!isHome) return;
     e.preventDefault();
-    navigateToSection(id, { instant: e.altKey });
-    setIsMobileMenuOpen(false);
+    const instant = e.altKey;
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+      requestAnimationFrame(() => {
+        navigateToSection(id, { instant });
+        requestAnimationFrame(() => refreshActive());
+      });
+      return;
+    }
+    navigateToSection(id, { instant });
     requestAnimationFrame(() => refreshActive());
   };
 
