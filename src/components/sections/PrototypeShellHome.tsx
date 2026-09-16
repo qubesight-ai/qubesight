@@ -21,68 +21,39 @@ const PrototypeHero = () => {
   const spanish = language === "es";
   return (
     <section id="hero" className="prototype-hero">
-      <div className="prototype-cube prototype-cube-a" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <i>
-          <b />
-          <b />
-          <b />
-          <b />
-          <b />
-          <b />
-        </i>
-      </div>
-      <div className="prototype-cube prototype-cube-b" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <i>
-          <b />
-          <b />
-          <b />
-          <b />
-          <b />
-          <b />
-        </i>
-      </div>
-      <div className="prototype-eyebrow">
-        ● {spanish ? "RECEPCIÓN CON IA PARA NEGOCIOS" : "AI RECEPTION FOR BUSINESSES"}
-      </div>
-      <h1>
-        {spanish ? "Tus clientes quieren respuestas" : "Your customers want answers"}
-        <br />
-        {spanish ? "cuando las necesitan." : "when they need them."}
-        <br />
-        <em>
-          {spanish
-            ? "QubeSight ayuda a que tu negocio pueda atenderlos."
-            : "QubeSight helps your business be there for them."}
-        </em>
-      </h1>
-      <div className="prototype-hero-bottom">
-        <p>
-          {spanish
-            ? "QubeSight es una recepción con inteligencia artificial para atender llamadas y consultas digitales, responder preguntas frecuentes y gestionar oportunidades cuando tu equipo está ocupado."
-            : "QubeSight is an AI reception service for calls and digital inquiries, answering common questions and managing opportunities while your team is busy."}
-        </p>
-        <div>
-          <a href="#early-adopters" className="prototype-button">
-            {spanish ? "Solicitar una demostración" : "Request a demo"}{" "}
-            <ArrowDown className="h-4 w-4" />
-          </a>
-          <a href="#demo" className="prototype-text-link">
-            {spanish ? "Ver demo" : "See demo"} <ArrowUpRight className="inline h-4 w-4" />
-          </a>
+      <div className="prototype-hero-copy">
+        <div className="prototype-eyebrow">
+          ● {spanish ? "RECEPCIÓN CON IA PARA NEGOCIOS" : "AI RECEPTION FOR BUSINESSES"}
+        </div>
+        <h1>
+          {spanish ? "Tus clientes quieren respuestas" : "Your customers want answers"}
+          <br />
+          {spanish ? "cuando las necesitan." : "when they need them."}
+          <br />
+          <em>
+            {spanish
+              ? "QubeSight ayuda a que tu negocio pueda atenderlos."
+              : "QubeSight helps your business be there for them."}
+          </em>
+        </h1>
+        <div className="prototype-hero-bottom">
+          <p>
+            {spanish
+              ? "QubeSight es una recepción con inteligencia artificial para atender llamadas y consultas digitales, responder preguntas frecuentes y gestionar oportunidades cuando tu equipo está ocupado."
+              : "QubeSight is an AI reception service for calls and digital inquiries, answering common questions and managing opportunities while your team is busy."}
+          </p>
+          <div>
+            <a href="#early-adopters" className="prototype-button">
+              {spanish ? "Solicitar una demostración" : "Request a demo"}{" "}
+              <ArrowDown className="h-4 w-4" />
+            </a>
+            <a href="#demo" className="prototype-text-link">
+              {spanish ? "Ver demo" : "See demo"} <ArrowUpRight className="inline h-4 w-4" />
+            </a>
+          </div>
         </div>
       </div>
+      <MatildaVoiceDemo placement="hero" />
     </section>
   );
 };
@@ -102,7 +73,6 @@ const PrototypeShellHome = () => {
           <Metrics />
           <Implementation />
           <HowItWorks />
-          <MatildaVoiceDemo />
           <EarlyAdopters />
           <FAQ />
           <FinalCTA />

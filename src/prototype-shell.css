@@ -40,11 +40,17 @@
   min-height: calc(100vh - 80px);
   position: relative;
   overflow: hidden;
-  padding: clamp(8.5rem, 14vh, 10.5rem) 4.5vw clamp(3.5rem, 6vh, 5.5rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding: clamp(7rem, 11vh, 8.5rem) 4.5vw clamp(3rem, 5vh, 4.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.95fr);
+  gap: clamp(2.5rem, 5vw, 6rem);
+  align-items: center;
   background: #f4f4f0;
+}
+.prototype-hero-copy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
 }
 .prototype-eyebrow {
   position: relative;
@@ -60,8 +66,8 @@
   position: relative;
   z-index: 1;
   max-width: min(100%, 1280px);
-  margin: clamp(3rem, 5vh, 4.5rem) 0;
-  font-size: clamp(3.5rem, 5.4vw, 4.75rem);
+  margin: clamp(2.5rem, 4vh, 3.5rem) 0;
+  font-size: clamp(3.25rem, 5vw, 4.65rem);
   line-height: 0.98;
   font-weight: 700;
   letter-spacing: -0.075em;
@@ -78,11 +84,12 @@
   position: relative;
   z-index: 1;
   display: flex;
-  gap: 60px;
-  align-items: end;
+  gap: 30px;
+  align-items: flex-start;
+  flex-direction: column;
 }
 .prototype-hero-bottom p {
-  max-width: 375px;
+  max-width: 560px;
   font-size: 17px;
   line-height: 1.4;
   margin: 0;
@@ -104,6 +111,32 @@
 }
 .prototype-text-link svg {
   color: #2864ff;
+}
+.prototype-hero-demo {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  scroll-margin-top: 96px;
+}
+.prototype-hero-demo-heading {
+  margin-bottom: 20px;
+}
+.prototype-hero-demo-heading h2 {
+  max-width: 560px;
+  line-height: 1;
+}
+.prototype-hero-demo-panel {
+  width: 100%;
+  max-width: 620px;
+}
+.prototype-hero-demo .bezel-inner,
+.prototype-hero-demo .bento-tile {
+  background: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border-color: hsl(var(--border));
+}
+.prototype-hero-demo .bento-tile::before {
+  display: none;
 }
 .prototype-orb {
   position: absolute;
@@ -186,6 +219,7 @@
 @media (max-width: 760px) {
   .prototype-hero {
     padding: 8.5rem 20px 3rem;
+    display: block;
   }
   .prototype-hero h1 {
     max-width: 100%;
@@ -203,6 +237,15 @@
   }
   .prototype-hero-bottom p {
     margin-bottom: 28px;
+  }
+  .prototype-hero-demo {
+    margin-top: 64px;
+  }
+  .prototype-hero-demo-heading {
+    margin-bottom: 18px;
+  }
+  .prototype-hero-demo-heading h2 {
+    font-size: 2rem;
   }
   .prototype-statement {
     display: block;

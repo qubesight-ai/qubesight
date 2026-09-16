@@ -45,7 +45,11 @@ const mime = () =>
   );
 const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 
-const MatildaVoiceDemo = () => {
+type MatildaVoiceDemoProps = {
+  placement?: "section" | "hero";
+};
+
+const MatildaVoiceDemo = ({ placement = "section" }: MatildaVoiceDemoProps) => {
   const { t } = useTranslation();
   const [privacy, setPrivacy] = useState(false);
   const [recording, setRecording] = useState(false);
@@ -235,6 +239,7 @@ const MatildaVoiceDemo = () => {
   );
 
   const unavailable = !turnstileSiteKey;
+  const isHero = placement === "hero";
   const resetConversation = () => {
     finish(true);
     stopAudio();
@@ -244,22 +249,40 @@ const MatildaVoiceDemo = () => {
     setPrivacy(false);
   };
   return (
-    <section id="demo" className="py-20 sm:py-28 relative">
-      <div className="absolute inset-0 bg-grid opacity-20" />
-      <div className="container relative">
-        <div className="max-w-3xl mx-auto text-center mb-10">
+    <section id="demo" className={isHero ? "prototype-hero-demo" : "py-20 sm:py-28 relative"}>
+      {!isHero && <div className="absolute inset-0 bg-grid opacity-20" />}
+      <div className={isHero ? "relative" : "container relative"}>
+        <div
+          className={
+            isHero ? "prototype-hero-demo-heading text-left" : "max-w-3xl mx-auto text-center mb-10"
+          }
+        >
           <span className="eyebrow">
             <Volume2 className="h-3.5 w-3.5" /> Demo de voz
           </span>
-          <h2 className="display-xl text-3xl sm:text-5xl mt-5">
+          <h2
+            className={isHero ? "display-xl text-3xl mt-4" : "display-xl text-3xl sm:text-5xl mt-5"}
+          >
             Conversa con un <span className="gradient-text">agente de QubeSight.</span>
           </h2>
-          <p className="mt-5 text-lg text-muted-foreground">
+          <p
+            className={
+              isHero ? "mt-3 text-sm text-muted-foreground" : "mt-5 text-lg text-muted-foreground"
+            }
+          >
             Matilda es una demostración de nuestra tecnología de atención por voz.
           </p>
         </div>
-        <div className="max-w-3xl mx-auto bezel-shell">
-          <div className="bezel-inner bento-tile p-5 sm:p-8">
+        <div
+          className={
+            isHero ? "prototype-hero-demo-panel bezel-shell" : "max-w-3xl mx-auto bezel-shell"
+          }
+        >
+          <div
+            className={
+              isHero ? "bezel-inner bento-tile p-4 sm:p-5" : "bezel-inner bento-tile p-5 sm:p-8"
+            }
+          >
             <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-5">
               <div className="flex items-center gap-3">
                 <div className="h-12 w-12 rounded-2xl bg-primary/15 text-primary border border-primary/30 grid place-items-center">
@@ -284,7 +307,10 @@ const MatildaVoiceDemo = () => {
                 </p>
               </div>
             </div>
-            <div className="min-h-48 py-6 space-y-3" aria-live="polite">
+            <div
+              className={isHero ? "min-h-28 py-4 space-y-3" : "min-h-48 py-6 space-y-3"}
+              aria-live="polite"
+            >
               {demo.messages.length ? (
                 demo.messages.map((item) => (
                   <div
@@ -298,7 +324,13 @@ const MatildaVoiceDemo = () => {
                   </div>
                 ))
               ) : (
-                <div className="min-h-40 grid place-items-center text-center text-sm text-muted-foreground">
+                <div
+                  className={
+                    isHero
+                      ? "min-h-24 grid place-items-center text-center text-sm text-muted-foreground"
+                      : "min-h-40 grid place-items-center text-center text-sm text-muted-foreground"
+                  }
+                >
                   Matilda está preparada para escucharte.
                   <br />
                   Activa la demostración y presiona el micrófono para comenzar.
