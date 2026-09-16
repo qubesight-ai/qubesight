@@ -1,6 +1,7 @@
 /** Section IDs linked from the main landing nav. */
 export const NAV_SECTION_IDS = [
   "problem",
+  "value-proposition",
   "solution",
   "capabilities",
   "metrics",
