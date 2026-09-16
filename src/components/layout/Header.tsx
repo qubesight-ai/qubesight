@@ -28,6 +28,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileDemosOpen, setIsMobileDemosOpen] = useState(false);
+  const [pendingMobileSection, setPendingMobileSection] = useState<string | null>(null);
   const desktopLinkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const { t, language } = useTranslation();
@@ -45,11 +46,10 @@ const Header = () => {
 
   const navLabelKeys: Record<(typeof NAV_SECTION_IDS)[number], string> = {
     problem: "nav.problem",
-    "value-proposition": "nav.value",
     solution: "nav.solution",
-    "how-it-works": "nav.how",
-    demo: "nav.demo",
-    "early-adopters": "nav.early",
+    capabilities: "nav.capabilities",
+    metrics: "nav.metrics",
+    implementation: "nav.implementation",
   };
 
   const navLinks = NAV_SECTION_IDS.map((id) => ({
@@ -61,8 +61,13 @@ const Header = () => {
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     if (!isHome) return;
     e.preventDefault();
-    navigateToSection(id, { instant: e.altKey });
-    setIsMobileMenuOpen(false);
+    const instant = e.altKey;
+    if (isMobileMenuOpen) {
+      setPendingMobileSection(id);
+      setIsMobileMenuOpen(false);
+      return;
+    }
+    navigateToSection(id, { instant });
     requestAnimationFrame(() => refreshActive());
   };
 
@@ -232,7 +237,14 @@ const Header = () => {
           </div>
         </nav>
 
-        <AnimatePresence>
+        <AnimatePresence
+          onExitComplete={() => {
+            if (!pendingMobileSection) return;
+            navigateToSection(pendingMobileSection, { instant: false });
+            setPendingMobileSection(null);
+            requestAnimationFrame(() => refreshActive());
+          }}
+        >
           {isMobileMenuOpen && (
             <motion.div
               id="mobile-nav-panel"

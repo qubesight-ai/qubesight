@@ -1,45 +1,61 @@
 import { motion } from "framer-motion";
-import { PhoneCall, MessageCircle, Workflow, Plug, LifeBuoy } from "lucide-react";
+import {
+  Clock,
+  MessageCircleQuestion,
+  MoonStar,
+  PhoneMissed,
+  Repeat2,
+  Share2,
+  UserRoundCheck,
+  Workflow,
+} from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const Solution = () => {
   const { language } = useTranslation();
   const es = language === "es";
-  const pillars = [
+  const responses = [
     {
-      icon: PhoneCall,
-      title: es ? "Voice Bot" : "Voice Bot",
-      desc: es
-        ? "Agentes de voz con IA que atienden llamadas, responden preguntas, capturan información, califican prospectos, agendan citas y transfieren a una persona cuando corresponde."
-        : "AI voice agents that answer calls, respond to questions, capture information, qualify prospects, book appointments, and hand off to a person when appropriate.",
+      icon: PhoneMissed,
+      problem: es ? "Llamadas sin responder" : "Unanswered calls",
+      response: es ? "Voice Bot atiende automáticamente." : "Voice Bot answers automatically.",
     },
     {
-      icon: MessageCircle,
-      title: es ? "Chat y atención digital" : "Chat and digital service",
-      desc: es
-        ? "Automatiza conversaciones en WhatsApp, web, Instagram, Messenger y otros canales digitales desde una misma lógica de atención."
-        : "Automate conversations on WhatsApp, web, Instagram, Messenger, and other digital channels from a single service logic.",
+      icon: Clock,
+      problem: es ? "Respuesta tardía" : "Slow response",
+      response: es ? "Atención automatizada inmediata." : "Immediate automated service.",
+    },
+    {
+      icon: MoonStar,
+      problem: es ? "Contactos fuera de horario" : "After-hours contacts",
+      response: es ? "Disponibilidad continua." : "Continuous availability.",
+    },
+    {
+      icon: MessageCircleQuestion,
+      problem: es ? "Preguntas repetitivas" : "Repetitive questions",
+      response: es ? "Automatización de respuestas." : "Automated responses.",
+    },
+    {
+      icon: Repeat2,
+      problem: es ? "Leads sin seguimiento" : "Leads without follow-up",
+      response: es ? "Flujos automatizados de seguimiento." : "Automated follow-up workflows.",
+    },
+    {
+      icon: Share2,
+      problem: es ? "Múltiples canales" : "Multiple channels",
+      response: es ? "Voz, chat e integraciones." : "Voice, chat, and integrations.",
     },
     {
       icon: Workflow,
-      title: es ? "Automatización de procesos" : "Process automation",
-      desc: es
-        ? "Ejecuta acciones después de cada conversación: agendar, notificar, actualizar información y activar otros procesos."
-        : "Runs actions after each conversation: scheduling, notifications, information updates, and other downstream processes.",
+      problem: es ? "Procesos manuales" : "Manual processes",
+      response: es ? "Automatización de agenda y flujos." : "Automated scheduling and workflows.",
     },
     {
-      icon: Plug,
-      title: es ? "Integraciones empresariales" : "Business integrations",
-      desc: es
-        ? "Conecta QubeSight con calendarios, CRM, bases de datos y otras herramientas utilizadas por el negocio."
-        : "Connects QubeSight with calendars, CRM, databases, and other tools the business already uses.",
-    },
-    {
-      icon: LifeBuoy,
-      title: es ? "Implementación y soporte" : "Implementation and support",
-      desc: es
-        ? "QubeSight se implementa y configura para el negocio sin que el cliente tenga que administrar directamente una infraestructura compleja de IA."
-        : "QubeSight is implemented and configured for the business, so the client doesn't have to manage complex AI infrastructure.",
+      icon: UserRoundCheck,
+      problem: es ? "Sobrecarga del personal" : "Staff overload",
+      response: es
+        ? "Escalamiento a una persona cuando corresponde."
+        : "Escalation to a person when appropriate.",
     },
   ];
 
@@ -69,26 +85,26 @@ const Solution = () => {
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
             {es
-              ? "QubeSight combina agentes de voz, chatbots e integraciones empresariales para automatizar gran parte de la atención inicial al cliente, manteniendo la posibilidad de intervención humana cuando sea necesaria."
-              : "QubeSight combines voice agents, chatbots, and business integrations to automate much of the initial customer service, while keeping human intervention available when needed."}
+              ? "QubeSight conecta cada reto de atención con una respuesta automatizada y permite la intervención humana cuando es necesaria."
+              : "QubeSight connects each service challenge with an automated response and enables human intervention when needed."}
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
-          {pillars.map((item, i) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+          {responses.map((item, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-              className="glass-card rounded-2xl p-7 text-center hover:border-primary/30 transition-colors"
+              transition={{ duration: 0.5, delay: (i % 4) * 0.08 }}
+              className="glass-card rounded-2xl p-7 hover:border-primary/30 transition-colors"
             >
-              <div className="h-12 w-12 mx-auto rounded-xl bg-primary/10 text-primary border border-primary/20 grid place-items-center mb-5">
+              <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary border border-primary/20 grid place-items-center mb-5">
                 <item.icon className="h-5 w-5" strokeWidth={1.75} />
               </div>
-              <h3 className="text-lg font-semibold font-display mb-2">{item.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              <h3 className="text-base font-semibold font-display mb-2">{item.problem}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{item.response}</p>
             </motion.div>
           ))}
         </div>

@@ -8,6 +8,7 @@ import {
   Repeat2,
   UserCheck,
   Plug,
+  Wrench,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -15,25 +16,27 @@ const ValueProposition = () => {
   const { language } = useTranslation();
   const es = language === "es";
   const benefits = [
-    [
-      Clock4,
-      es ? "24/7" : "24/7",
-      es ? "Atención continua." : "Continuous availability.",
-    ],
+    [Clock4, es ? "24/7" : "24/7", es ? "Atención continua." : "Continuous availability."],
     [
       Zap,
       es ? "Respuesta rápida" : "Fast response",
-      es ? "Atención inmediata a llamadas y mensajes." : "Immediate attention to calls and messages.",
+      es
+        ? "Atención inmediata a llamadas y mensajes."
+        : "Immediate attention to calls and messages.",
     ],
     [
       ClipboardCheck,
       es ? "Captura" : "Capture",
-      es ? "Información estructurada de cada contacto." : "Structured information from every contact.",
+      es
+        ? "Información estructurada de cada contacto."
+        : "Structured information from every contact.",
     ],
     [
       Filter,
       es ? "Calificación" : "Qualification",
-      es ? "Identificación y clasificación de prospectos." : "Identifying and classifying prospects.",
+      es
+        ? "Identificación y clasificación de prospectos."
+        : "Identifying and classifying prospects.",
     ],
     [
       CalendarCheck,
@@ -54,8 +57,17 @@ const ValueProposition = () => {
     ],
     [
       Plug,
-      es ? "Integraciones" : "Integrations",
-      es ? "Conexión con las herramientas del negocio." : "Connection with the business's tools.",
+      es ? "Canales e integraciones" : "Channels and integrations",
+      es
+        ? "Conexión según disponibilidad y configuración."
+        : "Connections based on availability and configuration.",
+    ],
+    [
+      Wrench,
+      es ? "Implementación acompañada" : "Guided implementation",
+      es
+        ? "Configuración y puesta en marcha junto a tu equipo."
+        : "Configuration and activation alongside your team.",
     ],
   ] as const;
   return (
@@ -71,7 +83,9 @@ const ValueProposition = () => {
             {es ? "PROPUESTA DE VALOR" : "VALUE PROPOSITION"}
           </span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {es ? "Una recepción digital con IA que atiende, captura, califica, " : "A digital AI reception that answers, captures, qualifies, "}
+            {es
+              ? "Una recepción digital con IA que atiende, captura, califica, "
+              : "A digital AI reception that answers, captures, qualifies, "}
             <span className="gradient-text">
               {es ? "agenda y da seguimiento." : "schedules, and follows up."}
             </span>
@@ -87,7 +101,7 @@ const ValueProposition = () => {
               : "Without the company having to build or directly manage complex AI infrastructure."}
           </p>
         </motion.div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {benefits.map(([Icon, title, desc], i) => (
             <motion.article
               key={title}
