@@ -7,7 +7,6 @@ import {
   PhoneMissed,
   Repeat2,
   MessagesSquare,
-  ClipboardList,
   Coins,
   UserRoundX,
 } from "lucide-react";
