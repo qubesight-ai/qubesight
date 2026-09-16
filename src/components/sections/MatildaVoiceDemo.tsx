@@ -254,9 +254,7 @@ const MatildaVoiceDemo = ({ placement = "section" }: MatildaVoiceDemoProps) => {
       <div className={isHero ? "relative" : "container relative"}>
         <div
           className={
-            isHero
-              ? "prototype-hero-demo-heading text-left"
-              : "max-w-3xl mx-auto text-center mb-10"
+            isHero ? "prototype-hero-demo-heading text-left" : "max-w-3xl mx-auto text-center mb-10"
           }
         >
           <span className="eyebrow">
@@ -268,16 +266,22 @@ const MatildaVoiceDemo = ({ placement = "section" }: MatildaVoiceDemoProps) => {
             Conversa con un <span className="gradient-text">agente de QubeSight.</span>
           </h2>
           <p
-            className={isHero ? "mt-3 text-sm text-muted-foreground" : "mt-5 text-lg text-muted-foreground"}
+            className={
+              isHero ? "mt-3 text-sm text-muted-foreground" : "mt-5 text-lg text-muted-foreground"
+            }
           >
             Matilda es una demostración de nuestra tecnología de atención por voz.
           </p>
         </div>
         <div
-          className={isHero ? "prototype-hero-demo-panel bezel-shell" : "max-w-3xl mx-auto bezel-shell"}
+          className={
+            isHero ? "prototype-hero-demo-panel bezel-shell" : "max-w-3xl mx-auto bezel-shell"
+          }
         >
           <div
-            className={isHero ? "bezel-inner bento-tile p-4 sm:p-5" : "bezel-inner bento-tile p-5 sm:p-8"}
+            className={
+              isHero ? "bezel-inner bento-tile p-4 sm:p-5" : "bezel-inner bento-tile p-5 sm:p-8"
+            }
           >
             <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-5">
               <div className="flex items-center gap-3">
