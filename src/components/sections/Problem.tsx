@@ -8,8 +8,8 @@ import {
   Repeat2,
   MessagesSquare,
   ClipboardList,
-  ShieldCheck,
   Coins,
+  UserRoundX,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -19,7 +19,7 @@ const Problem = () => {
   const stats = [
     {
       icon: PhoneMissed,
-      title: es ? "Llamadas y consultas sin responder" : "Unanswered calls and inquiries",
+      title: es ? "Llamadas no atendidas" : "Unanswered calls",
       desc: es
         ? "Consultas y oportunidades que pueden perderse cuando nadie está disponible para atender."
         : "Inquiries and opportunities that can be lost when nobody is available to respond.",
@@ -40,10 +40,10 @@ const Problem = () => {
     },
     {
       icon: Repeat2,
-      title: es ? "Trabajo repetitivo" : "Repetitive work",
+      title: es ? "Preguntas repetitivas" : "Repetitive questions",
       desc: es
-        ? "El personal dedica tiempo a preguntas frecuentes, agendas y tareas que pueden automatizarse."
-        : "Staff spend time on common questions, scheduling, and tasks that can be automated.",
+        ? "El personal dedica tiempo a responder una y otra vez las mismas consultas."
+        : "Staff spend time answering the same inquiries again and again.",
     },
     {
       icon: MessagesSquare,
@@ -53,22 +53,15 @@ const Problem = () => {
         : "Phone, WhatsApp, web, and other channels all require simultaneous attention.",
     },
     {
-      icon: ClipboardList,
-      title: es ? "Procesos manuales" : "Manual processes",
+      icon: UserRoundX,
+      title: es ? "Leads sin seguimiento" : "Leads without follow-up",
       desc: es
-        ? "Agenda, captura de información y seguimiento todavía dependen muchas veces de intervención humana."
-        : "Scheduling, data capture, and follow-up still often depend on human intervention.",
-    },
-    {
-      icon: ShieldCheck,
-      title: es ? "Cobertura 24/7" : "24/7 coverage",
-      desc: es
-        ? "Mantener disponibilidad continua con personal humano puede resultar costoso para una PyME."
-        : "Keeping continuous availability with human staff can be costly for an SMB.",
+        ? "Los contactos pueden enfriarse cuando el seguimiento depende de tareas manuales."
+        : "Contacts can go cold when follow-up depends on manual tasks.",
     },
     {
       icon: Coins,
-      title: es ? "Escalabilidad de costos" : "Cost scalability",
+      title: es ? "Costos crecientes de atención" : "Growing service costs",
       desc: es
         ? "El costo de soluciones de IA internacionales puede crecer rápidamente conforme aumenta el volumen de uso."
         : "The cost of international AI solutions can grow quickly as usage volume increases.",
@@ -108,17 +101,17 @@ const Problem = () => {
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
             {es
-              ? "Las PyMEs que reciben llamadas, mensajes, leads o solicitudes de citas pueden perder oportunidades cuando no consiguen responder oportunamente, atender fuera de horario o dar seguimiento de forma consistente."
-              : "SMBs that receive calls, messages, leads, or appointment requests can lose opportunities when they can't reply promptly, cover after-hours, or follow up consistently."}
+              ? "Las empresas con un volumen recurrente de llamadas, mensajes, leads o citas enfrentan dificultades para responder oportunamente, atender fuera de horario, procesar preguntas repetitivas y dar seguimiento a clientes y prospectos."
+              : "Businesses with recurring calls, messages, leads, or appointments can struggle to respond promptly, provide after-hours service, process repetitive questions, and follow up with customers and prospects."}
           </p>
           <p className="mt-4 text-base text-muted-foreground">
             {es
-              ? "QubeSight está pensado para negocios de servicios con atención recurrente, como clínicas, consultorios de fisioterapia, inmobiliarias, restaurantes, gimnasios, salones de belleza, estéticas, barberías y otros negocios con volumen frecuente de llamadas o mensajes."
-              : "QubeSight is designed for service businesses with recurring customer contact: clinics, physiotherapy practices, real estate agencies, restaurants, gyms, beauty salons, aesthetics studios, barbershops, and other businesses with frequent calls or messages."}
+              ? "Este reto es común en PyMEs de servicios que necesitan atender clientes y prospectos de forma constante."
+              : "This challenge is common among service SMBs that need to assist customers and prospects consistently."}
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {stats.map((item, i) => (
             <motion.div
               key={i}

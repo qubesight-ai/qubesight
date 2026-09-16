@@ -45,11 +45,10 @@ const Header = () => {
 
   const navLabelKeys: Record<(typeof NAV_SECTION_IDS)[number], string> = {
     problem: "nav.problem",
-    "value-proposition": "nav.value",
     solution: "nav.solution",
-    "how-it-works": "nav.how",
-    demo: "nav.demo",
-    "early-adopters": "nav.early",
+    capabilities: "nav.capabilities",
+    metrics: "nav.metrics",
+    implementation: "nav.implementation",
   };
 
   const navLinks = NAV_SECTION_IDS.map((id) => ({

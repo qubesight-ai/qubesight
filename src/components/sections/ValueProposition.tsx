@@ -8,6 +8,7 @@ import {
   Repeat2,
   UserCheck,
   Plug,
+  Wrench,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -54,8 +55,13 @@ const ValueProposition = () => {
     ],
     [
       Plug,
-      es ? "Integraciones" : "Integrations",
-      es ? "Conexión con las herramientas del negocio." : "Connection with the business's tools.",
+      es ? "Canales e integraciones" : "Channels and integrations",
+      es ? "Conexión según disponibilidad y configuración." : "Connections based on availability and configuration.",
+    ],
+    [
+      Wrench,
+      es ? "Implementación acompañada" : "Guided implementation",
+      es ? "Configuración y puesta en marcha junto a tu equipo." : "Configuration and activation alongside your team.",
     ],
   ] as const;
   return (
@@ -87,7 +93,7 @@ const ValueProposition = () => {
               : "Without the company having to build or directly manage complex AI infrastructure."}
           </p>
         </motion.div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {benefits.map(([Icon, title, desc], i) => (
             <motion.article
               key={title}
