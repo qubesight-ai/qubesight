@@ -46,6 +46,7 @@ const Header = () => {
 
   const navLabelKeys: Record<(typeof NAV_SECTION_IDS)[number], string> = {
     problem: "nav.problem",
+    "value-proposition": "nav.value",
     solution: "nav.solution",
     capabilities: "nav.capabilities",
     metrics: "nav.metrics",
