@@ -50,7 +50,7 @@ const PrototypeHero = () => {
             <a href="#demo" className="prototype-text-link">
               {spanish ? "Ver demo" : "See demo"} <ArrowUpRight className="inline h-4 w-4" />
             </a>
-          </a>
+          </div>
         </div>
       </div>
       <MatildaVoiceDemo placement="hero" />
