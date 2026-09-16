@@ -16,25 +16,27 @@ const ValueProposition = () => {
   const { language } = useTranslation();
   const es = language === "es";
   const benefits = [
-    [
-      Clock4,
-      es ? "24/7" : "24/7",
-      es ? "Atención continua." : "Continuous availability.",
-    ],
+    [Clock4, es ? "24/7" : "24/7", es ? "Atención continua." : "Continuous availability."],
     [
       Zap,
       es ? "Respuesta rápida" : "Fast response",
-      es ? "Atención inmediata a llamadas y mensajes." : "Immediate attention to calls and messages.",
+      es
+        ? "Atención inmediata a llamadas y mensajes."
+        : "Immediate attention to calls and messages.",
     ],
     [
       ClipboardCheck,
       es ? "Captura" : "Capture",
-      es ? "Información estructurada de cada contacto." : "Structured information from every contact.",
+      es
+        ? "Información estructurada de cada contacto."
+        : "Structured information from every contact.",
     ],
     [
       Filter,
       es ? "Calificación" : "Qualification",
-      es ? "Identificación y clasificación de prospectos." : "Identifying and classifying prospects.",
+      es
+        ? "Identificación y clasificación de prospectos."
+        : "Identifying and classifying prospects.",
     ],
     [
       CalendarCheck,
@@ -56,12 +58,16 @@ const ValueProposition = () => {
     [
       Plug,
       es ? "Canales e integraciones" : "Channels and integrations",
-      es ? "Conexión según disponibilidad y configuración." : "Connections based on availability and configuration.",
+      es
+        ? "Conexión según disponibilidad y configuración."
+        : "Connections based on availability and configuration.",
     ],
     [
       Wrench,
       es ? "Implementación acompañada" : "Guided implementation",
-      es ? "Configuración y puesta en marcha junto a tu equipo." : "Configuration and activation alongside your team.",
+      es
+        ? "Configuración y puesta en marcha junto a tu equipo."
+        : "Configuration and activation alongside your team.",
     ],
   ] as const;
   return (
@@ -77,7 +83,9 @@ const ValueProposition = () => {
             {es ? "PROPUESTA DE VALOR" : "VALUE PROPOSITION"}
           </span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {es ? "Una recepción digital con IA que atiende, captura, califica, " : "A digital AI reception that answers, captures, qualifies, "}
+            {es
+              ? "Una recepción digital con IA que atiende, captura, califica, "
+              : "A digital AI reception that answers, captures, qualifies, "}
             <span className="gradient-text">
               {es ? "agenda y da seguimiento." : "schedules, and follows up."}
             </span>

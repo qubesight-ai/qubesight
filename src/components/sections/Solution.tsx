@@ -53,7 +53,9 @@ const Solution = () => {
     {
       icon: UserRoundCheck,
       problem: es ? "Sobrecarga del personal" : "Staff overload",
-      response: es ? "Escalamiento a una persona cuando corresponde." : "Escalation to a person when appropriate.",
+      response: es
+        ? "Escalamiento a una persona cuando corresponde."
+        : "Escalation to a person when appropriate.",
     },
   ];
 

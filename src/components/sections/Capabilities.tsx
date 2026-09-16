@@ -1,12 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  CalendarCheck,
-  Database,
-  MessageCircle,
-  Mic,
-  Network,
-  Workflow,
-} from "lucide-react";
+import { CalendarCheck, Database, MessageCircle, Mic, Network, Workflow } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const Capabilities = () => {
@@ -50,8 +43,18 @@ const Capabilities = () => {
         ? "Ejecuta acciones posteriores a una interacción mediante flujos configurables."
         : "Runs actions after an interaction through configurable workflows.",
       items: es
-        ? ["Agenda y notificaciones", "Seguimiento", "Flujos de atención", "Procesamiento de información"]
-        : ["Scheduling and notifications", "Follow-up", "Service workflows", "Information processing"],
+        ? [
+            "Agenda y notificaciones",
+            "Seguimiento",
+            "Flujos de atención",
+            "Procesamiento de información",
+          ]
+        : [
+            "Scheduling and notifications",
+            "Follow-up",
+            "Service workflows",
+            "Information processing",
+          ],
     },
     {
       icon: Network,
@@ -60,7 +63,12 @@ const Capabilities = () => {
         ? "Conecta la atención con herramientas empresariales según disponibilidad e integración."
         : "Connect service with business tools depending on availability and integration.",
       items: es
-        ? ["Calendarios y CRM", "Bases de datos", "Sistemas de notificación", "Registro de interacciones"]
+        ? [
+            "Calendarios y CRM",
+            "Bases de datos",
+            "Sistemas de notificación",
+            "Registro de interacciones",
+          ]
         : ["Calendars and CRM", "Databases", "Notification systems", "Interaction records"],
     },
   ];
@@ -79,7 +87,9 @@ const Capabilities = () => {
           </span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
             {es ? "Una plataforma, " : "One platform, "}
-            <span className="gradient-text">{es ? "varias capacidades." : "multiple capabilities."}</span>
+            <span className="gradient-text">
+              {es ? "varias capacidades." : "multiple capabilities."}
+            </span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
             {es
