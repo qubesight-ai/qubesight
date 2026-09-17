@@ -67,8 +67,6 @@ const PrototypeShellHome = () => {
           <Problem />
           <ValueProposition />
           <Solution />
-          <Capabilities />
-          <Metrics />
           <Implementation />
           <HowItWorks />
           <EarlyAdopters />
