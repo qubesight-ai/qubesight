@@ -26,9 +26,9 @@ export const translations: Translations = {
   "nav.pricing": { es: "Precios", en: "Pricing" },
   "nav.faq": { es: "FAQ", en: "FAQ" },
   "nav.contact": { es: "Empezar", en: "Get Started" },
-  "nav.value": { es: "Propuesta de valor", en: "Value proposition" },
+  "nav.value": { es: "Propuesta de Valor", en: "Value Proposition" },
   "nav.how": { es: "Cómo funciona", en: "How it works" },
-  "nav.demo": { es: "Demo", en: "Demo" },
+  "nav.demo": { es: "Demo en vivo", en: "Live demo" },
   "nav.early": { es: "Early Adopters", en: "Early Adopters" },
 
   // Voice Bot — teammate framing

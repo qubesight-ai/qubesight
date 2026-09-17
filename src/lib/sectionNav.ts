@@ -3,9 +3,8 @@ export const NAV_SECTION_IDS = [
   "problem",
   "value-proposition",
   "solution",
-  "capabilities",
-  "metrics",
   "implementation",
+  "demo",
 ] as const;
 
 export type NavSectionId = (typeof NAV_SECTION_IDS)[number];

@@ -48,9 +48,8 @@ const Header = () => {
     problem: "nav.problem",
     "value-proposition": "nav.value",
     solution: "nav.solution",
-    capabilities: "nav.capabilities",
-    metrics: "nav.metrics",
     implementation: "nav.implementation",
+    demo: "nav.demo",
   };
 
   const navLinks = NAV_SECTION_IDS.map((id) => ({
