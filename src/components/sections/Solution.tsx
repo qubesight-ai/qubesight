@@ -10,6 +10,8 @@ import {
   Workflow,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import Capabilities from "@/components/sections/Capabilities";
+import Metrics from "@/components/sections/Metrics";
 
 const Solution = () => {
   const { language } = useTranslation();
@@ -122,6 +124,9 @@ const Solution = () => {
               : "Your team steps in when it really matters."}
           </span>
         </motion.p>
+
+        <Capabilities />
+        <Metrics />
       </div>
     </section>
   );
