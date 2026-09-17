@@ -16,7 +16,13 @@ const ValueProposition = () => {
   const { language } = useTranslation();
   const es = language === "es";
   const benefits = [
-    [Clock4, es ? "24/7" : "24/7", es ? "Atención continua." : "Continuous availability."],
+    [
+      Clock4,
+      es ? "24/7" : "24/7",
+      es
+        ? "Atención continua y posibilidad de operación 24/7."
+        : "Continuous service with 24/7 operation.",
+    ],
     [
       Zap,
       es ? "Respuesta rápida" : "Fast response",
