@@ -2,8 +2,6 @@ import Header from "@/components/layout/Header";
 import ValueProposition from "@/components/sections/ValueProposition";
 import Problem from "@/components/sections/Problem";
 import Solution from "@/components/sections/Solution";
-import Capabilities from "@/components/sections/Capabilities";
-import Metrics from "@/components/sections/Metrics";
 import Implementation from "@/components/sections/Implementation";
 import HowItWorks from "@/components/sections/HowItWorks";
 import MatildaVoiceDemo from "@/components/sections/MatildaVoiceDemo";
@@ -69,8 +67,6 @@ const PrototypeShellHome = () => {
           <Problem />
           <ValueProposition />
           <Solution />
-          <Capabilities />
-          <Metrics />
           <Implementation />
           <HowItWorks />
           <EarlyAdopters />

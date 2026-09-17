@@ -10,6 +10,8 @@ import {
   Workflow,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import Capabilities from "@/components/sections/Capabilities";
+import Metrics from "@/components/sections/Metrics";
 
 const Solution = () => {
   const { language } = useTranslation();
@@ -85,8 +87,8 @@ const Solution = () => {
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
             {es
-              ? "QubeSight conecta cada reto de atención con una respuesta automatizada y permite la intervención humana cuando es necesaria."
-              : "QubeSight connects each service challenge with an automated response and enables human intervention when needed."}
+              ? "Nuestra solución se orienta a resolver los dolores de nuestros clientes."
+              : "Our solution is designed to resolve our customers' pain points."}
           </p>
         </motion.div>
 
@@ -122,6 +124,9 @@ const Solution = () => {
               : "Your team steps in when it really matters."}
           </span>
         </motion.p>
+
+        <Capabilities />
+        <Metrics />
       </div>
     </section>
   );

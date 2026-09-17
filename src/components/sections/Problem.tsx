@@ -100,14 +100,12 @@ const Problem = () => {
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
             {es
-              ? "Las empresas con un volumen recurrente de llamadas, mensajes, leads o citas enfrentan dificultades para responder oportunamente, atender fuera de horario, procesar preguntas repetitivas y dar seguimiento a clientes y prospectos."
+              ? "Las empresas con volumen recurrente de llamadas, mensajes, leads o citas enfrentan dificultades para responder oportunamente, atender fuera de horario, procesar preguntas repetitivas y dar seguimiento a clientes y prospectos."
               : "Businesses with recurring calls, messages, leads, or appointments can struggle to respond promptly, provide after-hours service, process repetitive questions, and follow up with customers and prospects."}
           </p>
-          <p className="mt-4 text-base text-muted-foreground">
-            {es
-              ? "Este reto es común en PyMEs de servicios que necesitan atender clientes y prospectos de forma constante."
-              : "This challenge is common among service SMBs that need to assist customers and prospects consistently."}
-          </p>
+          <h3 className="mt-8 text-xl sm:text-2xl font-semibold font-display">
+            {es ? "Principales dolores identificados." : "Main pain points identified."}
+          </h3>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">

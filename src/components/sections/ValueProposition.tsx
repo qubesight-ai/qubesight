@@ -16,7 +16,13 @@ const ValueProposition = () => {
   const { language } = useTranslation();
   const es = language === "es";
   const benefits = [
-    [Clock4, es ? "24/7" : "24/7", es ? "Atención continua." : "Continuous availability."],
+    [
+      Clock4,
+      es ? "24/7" : "24/7",
+      es
+        ? "Atención continua y posibilidad de operación 24/7."
+        : "Continuous service with 24/7 operation.",
+    ],
     [
       Zap,
       es ? "Respuesta rápida" : "Fast response",
@@ -84,22 +90,15 @@ const ValueProposition = () => {
           </span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
             {es
-              ? "Una recepción digital con IA que atiende, captura, califica, "
+              ? "Una recepción digital con AI que atiende, captura, califica, "
               : "A digital AI reception that answers, captures, qualifies, "}
             <span className="gradient-text">
               {es ? "agenda y da seguimiento." : "schedules, and follows up."}
             </span>
           </h2>
-          <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
-            {es
-              ? "QubeSight permite a una PyME disponer de una capacidad de atención digital impulsada por inteligencia artificial que responde llamadas y mensajes, captura información, califica prospectos, agenda citas, da seguimiento y transfiere a una persona cuando es necesario."
-              : "QubeSight gives an SMB an AI-powered digital service capability that answers calls and messages, captures information, qualifies prospects, books appointments, follows up, and transfers to a person when needed."}
-          </p>
-          <p className="mt-4 text-base text-muted-foreground max-w-2xl mx-auto">
-            {es
-              ? "Sin que la empresa tenga que construir ni administrar directamente una infraestructura compleja de IA."
-              : "Without the company having to build or directly manage complex AI infrastructure."}
-          </p>
+          <h3 className="mt-8 text-xl sm:text-2xl font-semibold font-display">
+            {es ? "Elementos de valor." : "Value elements."}
+          </h3>
         </motion.div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {benefits.map(([Icon, title, desc], i) => (
