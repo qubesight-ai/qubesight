@@ -476,19 +476,29 @@ export type Database = {
       }
       voice_agents: {
         Row: {
+          agent_type: string | null
+          assistant_description: string
+          behavior: Json
+          business_description: string
+          business_name: string
+          capabilities: Json
+          configuration_status: string
           created_at: string
           deployed_revision: number | null
           deployment_revision: number
+          escalation_rules: Json
           greeting: string
           id: string
           language: string
           last_deployed_at: string | null
           last_health_at: string | null
           last_provisioning_error: string | null
+          lead_fields: Json
           name: string
           objective: string
           organization_id: string
           provisioning_status: string
+          published_at: string | null
           runtime_service: string | null
           runtime_url: string | null
           status: Database["public"]["Enums"]["resource_status"]
@@ -498,19 +508,29 @@ export type Database = {
           voice_name: string
         }
         Insert: {
+          agent_type?: string | null
+          assistant_description?: string
+          behavior?: Json
+          business_description?: string
+          business_name?: string
+          capabilities?: Json
+          configuration_status?: string
           created_at?: string
           deployed_revision?: number | null
           deployment_revision?: number
+          escalation_rules?: Json
           greeting?: string
           id?: string
           language?: string
           last_deployed_at?: string | null
           last_health_at?: string | null
           last_provisioning_error?: string | null
+          lead_fields?: Json
           name: string
           objective?: string
           organization_id: string
           provisioning_status?: string
+          published_at?: string | null
           runtime_service?: string | null
           runtime_url?: string | null
           status?: Database["public"]["Enums"]["resource_status"]
@@ -520,19 +540,29 @@ export type Database = {
           voice_name?: string
         }
         Update: {
+          agent_type?: string | null
+          assistant_description?: string
+          behavior?: Json
+          business_description?: string
+          business_name?: string
+          capabilities?: Json
+          configuration_status?: string
           created_at?: string
           deployed_revision?: number | null
           deployment_revision?: number
+          escalation_rules?: Json
           greeting?: string
           id?: string
           language?: string
           last_deployed_at?: string | null
           last_health_at?: string | null
           last_provisioning_error?: string | null
+          lead_fields?: Json
           name?: string
           objective?: string
           organization_id?: string
           provisioning_status?: string
+          published_at?: string | null
           runtime_service?: string | null
           runtime_url?: string | null
           status?: Database["public"]["Enums"]["resource_status"]
