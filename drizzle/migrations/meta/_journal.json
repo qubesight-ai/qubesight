@@ -8,6 +8,13 @@
       "when": 1789763854355,
       "tag": "0000_voice_agent_product_model",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789833265251,
+      "tag": "0001_voice_agent_generation_lifecycle",
+      "breakpoints": true
     }
   ]
 }
