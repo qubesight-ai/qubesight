@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import {
   Activity,
   Bot,
@@ -26,27 +27,10 @@ import { useChatStream } from "@/hooks/useChatStream";
 import { useDashboardData } from "@/hooks/useDashboardData";
 import type { Agent, Call, Chatbot, DashboardSection as Section } from "@/types/dashboard";
 import TelephonySettings from "@/components/dashboard/TelephonySettings";
-import AgentRuntimeActions from "@/components/dashboard/AgentRuntimeActions";
-
-const emptyAgent = {
-  id: "",
-  name: "",
-  status: "active" as const,
-  twilio_phone: "",
-  voice_name: "Sofia",
-  language: "Español",
-  objective: "",
-  greeting: "",
-  system_prompt: "",
-  deployment_revision: 1,
-  deployed_revision: null,
-  provisioning_status: "not_deployed" as const,
-  runtime_service: null,
-  runtime_url: null,
-  last_health_at: null,
-  last_deployed_at: null,
-  last_provisioning_error: null,
-};
+import AgentsPage from "@/features/voice-agents/pages/AgentsPage";
+import CreateAgentPage from "@/features/voice-agents/pages/CreateAgentPage";
+import AgentDetailPage from "@/features/voice-agents/pages/AgentDetailPage";
+import { dashboardPath, dashboardSectionFromPath } from "@/routes/dashboardRoutes";
 const emptyChatbot: Chatbot = {
   id: "",
   name: "",
@@ -65,7 +49,8 @@ const emptyChatbot: Chatbot = {
 
 export default function Dashboard() {
   const { user, signOut } = useAuth();
-  const [section, setSection] = useState<Section>("overview");
+  const location = useLocation();
+  const navigate = useNavigate();
   const {
     organization: org,
     profile,
@@ -77,8 +62,12 @@ export default function Dashboard() {
     reload: load,
   } = useDashboardData(user?.id);
   const [mobile, setMobile] = useState(false);
-  const [editing, setEditing] = useState<Agent | null>(null);
   const [editingBot, setEditingBot] = useState<Chatbot | null>(null);
+  const section = useMemo<Section>(
+    () => dashboardSectionFromPath(location.pathname),
+    [location.pathname],
+  );
+  const openSection = (next: Section) => navigate(dashboardPath(next));
   useEffect(() => {
     if (error) toast.error("No se pudo cargar el dashboard");
   }, [error]);
@@ -119,7 +108,7 @@ export default function Dashboard() {
             <button
               key={id}
               onClick={() => {
-                setSection(id);
+                openSection(id);
                 setMobile(false);
               }}
               className={section === id ? "active" : ""}
@@ -173,42 +162,40 @@ export default function Dashboard() {
           </span>
         </header>
         <div className="p-5 md:p-8">
-          {section === "overview" && (
-            <Overview agents={agents} calls={calls} onSection={setSection} />
-          )}{" "}
-          {section === "agents" && (
-            <Agents
-              agents={agents}
-              onEdit={setEditing}
-              onNew={() => setEditing(emptyAgent as Agent)}
-              onChanged={load}
+          <Routes>
+            <Route
+              index
+              element={<Overview agents={agents} calls={calls} onSection={openSection} />}
             />
-          )}{" "}
-          {section === "chatbots" && (
-            <Chatbots
-              bots={chatbots}
-              onEdit={setEditingBot}
-              onNew={() => setEditingBot(emptyChatbot)}
+            <Route path="agents" element={<AgentsPage agents={agents} />} />
+            <Route
+              path="agents/new"
+              element={<CreateAgentPage organizationId={org.id} onChanged={load} />}
             />
-          )}{" "}
-          {section === "telephony" && <TelephonySettings />}{" "}
-          {section === "calls" && <Calls calls={calls} />}{" "}
-          {section === "profile" && (
-            <Profile profile={profile} email={user?.email || ""} org={org} />
-          )}
+            <Route
+              path="agents/:agentId"
+              element={<AgentDetailPage agents={agents} organizationId={org.id} onChanged={load} />}
+            />
+            <Route
+              path="chatbots"
+              element={
+                <Chatbots
+                  bots={chatbots}
+                  onEdit={setEditingBot}
+                  onNew={() => setEditingBot(emptyChatbot)}
+                />
+              }
+            />
+            <Route path="telephony" element={<TelephonySettings />} />
+            <Route path="calls" element={<Calls calls={calls} />} />
+            <Route
+              path="profile"
+              element={<Profile profile={profile} email={user?.email || ""} org={org} />}
+            />
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          </Routes>
         </div>
       </main>
-      {editing && (
-        <AgentEditor
-          agent={editing}
-          orgId={org.id}
-          close={() => setEditing(null)}
-          saved={() => {
-            setEditing(null);
-            load();
-          }}
-        />
-      )}
       {editingBot && (
         <ChatbotEditor
           chatbot={editingBot}
@@ -355,58 +342,6 @@ function Stat({
       <strong className="text-3xl block mt-2">{value}</strong>
       <small className="text-slate-400">{detail}</small>
     </article>
-  );
-}
-function Agents({
-  agents,
-  onEdit,
-  onNew,
-  onChanged,
-}: {
-  agents: Agent[];
-  onEdit: (a: Agent) => void;
-  onNew: () => void;
-  onChanged: () => void;
-}) {
-  return (
-    <div className="admin-panel">
-      <div className="panel-head">
-        <div>
-          <h2>Agentes de voz</h2>
-          <p>Prompt, voz, número y comportamiento por cliente</p>
-        </div>
-        <button className="admin-primary" onClick={onNew}>
-          <Plus size={15} />
-          Nuevo agente
-        </button>
-      </div>
-      {agents.length === 0 ? (
-        <Empty icon={Mic2} title="Aún no tienes agentes" action="Crea el primero para comenzar" />
-      ) : (
-        <div className="divide-y">
-          {agents.map((a) => (
-            <article key={a.id} className="agent-row">
-              <span className="agent-icon">
-                <Mic2 />
-              </span>
-              <div>
-                <span className={a.status === "active" ? "status-pill" : "status-pill inactive"}>
-                  {a.status === "active" ? "Activo" : "Inactivo"}
-                </span>
-                <h3>{a.name}</h3>
-                <p>{a.objective || "Sin objetivo configurado"}</p>
-              </div>
-              <Data label="VOZ E IDIOMA" value={`${a.voice_name} · ${a.language}`} />
-              <Data label="NÚMERO TWILIO" value={a.twilio_phone || "Sin asignar"} />
-              <AgentRuntimeActions agent={a} onChanged={onChanged} />
-              <button className="icon-action" onClick={() => onEdit(a)}>
-                <Settings2 size={17} />
-              </button>
-            </article>
-          ))}
-        </div>
-      )}
-    </div>
   );
 }
 const Data = ({ label, value }: { label: string; value: string }) => (
@@ -847,118 +782,6 @@ function Empty({
       <Icon className="mx-auto text-slate-300 mb-4" size={38} />
       <h3 className="font-semibold">{title}</h3>
       <p className="text-sm text-slate-400">{action}</p>
-    </div>
-  );
-}
-function AgentEditor({
-  agent,
-  orgId,
-  close,
-  saved,
-}: {
-  agent: Agent;
-  orgId: string;
-  close: () => void;
-  saved: () => void;
-}) {
-  const [form, setForm] = useState(agent);
-  const [busy, setBusy] = useState(false);
-  const set = (key: keyof Agent, value: string) => setForm((f) => ({ ...f, [key]: value }));
-  const submit = async () => {
-    setBusy(true);
-    const payload = {
-      organization_id: orgId,
-      name: form.name,
-      status: form.status,
-      twilio_phone: form.twilio_phone || null,
-      voice_name: form.voice_name,
-      language: form.language,
-      objective: form.objective,
-      greeting: form.greeting,
-      system_prompt: form.system_prompt,
-    };
-    const { error } = agent.id
-      ? await supabase.from("voice_agents").update(payload).eq("id", agent.id)
-      : await supabase.from("voice_agents").insert(payload);
-    setBusy(false);
-    if (error) return toast.error(error.message);
-    toast.success(agent.id ? "Agente actualizado" : "Agente creado");
-    saved();
-  };
-  return (
-    <div className="modal-layer" onMouseDown={close}>
-      <div className="editor" onMouseDown={(e) => e.stopPropagation()}>
-        <button className="editor-close" onClick={close}>
-          <X />
-        </button>
-        <p className="text-[10px] tracking-widest text-blue-600">
-          {agent.id ? "EDITAR CONFIGURACIÓN" : "NUEVO AGENTE"}
-        </p>
-        <h2 className="text-2xl font-semibold mt-1 mb-1">
-          {agent.id ? `Editar ${agent.name}` : "Crear agente de voz"}
-        </h2>
-        <p className="text-sm text-slate-500 mb-6">
-          Guarda la configuración y luego pulsa Desplegar para aplicarla en el VPS.
-        </p>
-        <div className="editor-grid">
-          <label>
-            Nombre
-            <input value={form.name} onChange={(e) => set("name", e.target.value)} />
-          </label>
-          <label>
-            Estado
-            <select value={form.status} onChange={(e) => set("status", e.target.value)}>
-              <option value="active">Activo</option>
-              <option value="inactive">Inactivo</option>
-            </select>
-          </label>
-          <label>
-            Voz
-            <input value={form.voice_name} onChange={(e) => set("voice_name", e.target.value)} />
-          </label>
-          <label>
-            Idioma
-            <input value={form.language} onChange={(e) => set("language", e.target.value)} />
-          </label>
-          <label className="wide">
-            Número Twilio
-            <input
-              value={form.twilio_phone || ""}
-              onChange={(e) => set("twilio_phone", e.target.value)}
-            />
-          </label>
-          <label className="wide">
-            Objetivo
-            <input value={form.objective} onChange={(e) => set("objective", e.target.value)} />
-          </label>
-          <label className="wide">
-            Mensaje de bienvenida
-            <textarea
-              rows={2}
-              value={form.greeting}
-              onChange={(e) => set("greeting", e.target.value)}
-            />
-          </label>
-          <label className="wide">
-            Prompt del sistema
-            <textarea
-              rows={6}
-              value={form.system_prompt}
-              onChange={(e) => set("system_prompt", e.target.value)}
-            />
-          </label>
-        </div>
-        <footer>
-          <button onClick={close}>Cancelar</button>
-          <button
-            className="admin-primary"
-            disabled={busy || !form.name || !form.system_prompt}
-            onClick={submit}
-          >
-            {busy && <Loader2 className="animate-spin" size={16} />}Guardar cambios
-          </button>
-        </footer>
-      </div>
     </div>
   );
 }

@@ -88,7 +88,7 @@ const App = () => (
                 <Route path="/register" element={<Auth mode="register" />} />
                 <Route path="/forgot-password" element={<Auth mode="forgot" />} />
                 <Route element={<ProtectedRoute />}>
-                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/dashboard/*" element={<Dashboard />} />
                 </Route>
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
