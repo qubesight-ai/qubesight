@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Agent, Call, Chatbot, Organization, Profile } from "@/types/dashboard";
+import { normalizeAgent } from "@/features/voice-agents/agentModel";
 
 function normalizeChatbot(bot: Awaited<ReturnType<typeof loadChatbots>>[number]): Chatbot {
   return {
@@ -87,7 +88,7 @@ export function useDashboardData(userId?: string) {
       ]);
       if (agentsResult.error) throw agentsResult.error;
       if (callsResult.error) throw callsResult.error;
-      setAgents(agentsResult.data ?? []);
+      setAgents((agentsResult.data ?? []).map(normalizeAgent));
       setChatbots(chatbotRows.map(normalizeChatbot));
       setCalls((callsResult.data ?? []) as Call[]);
     } catch (cause) {

@@ -1,9 +1,21 @@
 export type ResourceStatus = "active" | "inactive" | "suspended";
+export type AgentType = "customer_service" | "sales_prospecting" | "marketing";
+export type AgentConfigurationStatus = "draft" | "generated" | "published";
 export type ProvisioningStatus =
   "not_deployed" | "provisioning" | "running" | "degraded" | "stopped" | "error";
 
 export type Agent = {
   id: string;
+  agent_type: AgentType | null;
+  business_name: string;
+  business_description: string;
+  assistant_description: string;
+  configuration_status: AgentConfigurationStatus;
+  capabilities: unknown;
+  behavior: unknown;
+  lead_fields: unknown;
+  escalation_rules: unknown;
+  published_at: string | null;
   name: string;
   status: ResourceStatus;
   twilio_phone: string | null;

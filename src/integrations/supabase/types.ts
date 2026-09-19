@@ -290,18 +290,27 @@ export type Database = {
       }
       voice_agents: {
         Row: {
+          agent_type: string | null
+          assistant_description: string
+          behavior: Json
+          business_description: string
+          business_name: string
+          capabilities: Json
+          configuration_status: string
           created_at: string
           deployed_revision: number | null
           deployment_revision: number
           greeting: string
           id: string
           language: string
+          lead_fields: Json
           last_deployed_at: string | null
           last_health_at: string | null
           last_provisioning_error: string | null
           name: string
           objective: string
           organization_id: string
+          published_at: string | null
           provisioning_status:
             | "not_deployed"
             | "provisioning"
@@ -316,20 +325,30 @@ export type Database = {
           twilio_phone: string | null
           updated_at: string
           voice_name: string
+          escalation_rules: Json
         }
         Insert: {
+          agent_type?: string | null
+          assistant_description?: string
+          behavior?: Json
+          business_description?: string
+          business_name?: string
+          capabilities?: Json
+          configuration_status?: string
           created_at?: string
           deployed_revision?: number | null
           deployment_revision?: number
           greeting?: string
           id?: string
           language?: string
+          lead_fields?: Json
           last_deployed_at?: string | null
           last_health_at?: string | null
           last_provisioning_error?: string | null
           name: string
           objective?: string
           organization_id: string
+          published_at?: string | null
           provisioning_status?:
             | "not_deployed"
             | "provisioning"
@@ -344,20 +363,30 @@ export type Database = {
           twilio_phone?: string | null
           updated_at?: string
           voice_name?: string
+          escalation_rules?: Json
         }
         Update: {
+          agent_type?: string | null
+          assistant_description?: string
+          behavior?: Json
+          business_description?: string
+          business_name?: string
+          capabilities?: Json
+          configuration_status?: string
           created_at?: string
           deployed_revision?: number | null
           deployment_revision?: number
           greeting?: string
           id?: string
           language?: string
+          lead_fields?: Json
           last_deployed_at?: string | null
           last_health_at?: string | null
           last_provisioning_error?: string | null
           name?: string
           objective?: string
           organization_id?: string
+          published_at?: string | null
           provisioning_status?:
             | "not_deployed"
             | "provisioning"
@@ -372,6 +401,7 @@ export type Database = {
           twilio_phone?: string | null
           updated_at?: string
           voice_name?: string
+          escalation_rules?: Json
         }
         Relationships: [
           {
