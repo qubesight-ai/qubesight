@@ -89,7 +89,7 @@ const EarlyAdopters = () => {
           </ul>
           <div className="mt-8 text-center sm:text-left">
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-              <a href="#contacto" className="prototype-button">
+              <a href="#contacto" className="prototype-button whitespace-nowrap">
                 {es ? "Únete como Early Adopter" : "Join as an Early Adopter"}{" "}
                 <ArrowRight className="h-4 w-4" />
               </a>
