@@ -5,6 +5,7 @@ export const NAV_SECTION_IDS = [
   "solution",
   "implementation",
   "demo",
+  "faq",
 ] as const;
 
 export type NavSectionId = (typeof NAV_SECTION_IDS)[number];

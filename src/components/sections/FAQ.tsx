@@ -21,24 +21,6 @@ const FAQ = () => {
   const items: FaqItem[] = es
     ? [
         {
-          question: "¿Qué es QubeSight?",
-          answer:
-            "Una solución de recepción con inteligencia artificial diseñada para ayudar a negocios a atender llamadas y consultas digitales.",
-        },
-        {
-          question: "¿QubeSight reemplaza a mi personal?",
-          answer:
-            "No. Está pensado principalmente para apoyar al equipo en tareas repetitivas y permitir que una persona intervenga cuando sea necesario.",
-        },
-        {
-          question: "¿Necesito conocimientos técnicos?",
-          answer: "No. Nuestro objetivo es encargarnos de la configuración técnica.",
-        },
-        {
-          question: "¿La demostración tiene costo?",
-          answer: "No. La demostración inicial no tiene costo.",
-        },
-        {
           question: "¿Qué significa participar como Early Adopter?",
           answer:
             "Significa probar QubeSight durante una etapa temprana y compartirnos tu experiencia para ayudarnos a mejorar el producto.",
@@ -118,24 +100,6 @@ const FAQ = () => {
         },
       ]
     : [
-        {
-          question: "What is QubeSight?",
-          answer:
-            "An AI reception solution designed to help businesses handle calls and digital inquiries.",
-        },
-        {
-          question: "Does QubeSight replace my staff?",
-          answer:
-            "No. It is designed to support the team with repetitive tasks and let a person step in when needed.",
-        },
-        {
-          question: "Do I need technical knowledge?",
-          answer: "No. Our goal is to take care of the technical setup.",
-        },
-        {
-          question: "Is the demo free?",
-          answer: "Yes. The initial demonstration is free.",
-        },
         {
           question: "What does being an Early Adopter mean?",
           answer:
