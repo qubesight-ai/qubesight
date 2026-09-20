@@ -49,6 +49,7 @@ describe("sectionNav — hash / anchors", () => {
       "solution",
       "implementation",
       "demo",
+      "faq",
     ]);
   });
 });

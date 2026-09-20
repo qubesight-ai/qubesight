@@ -50,6 +50,7 @@ const Header = () => {
     solution: "nav.solution",
     implementation: "nav.implementation",
     demo: "nav.demo",
+    faq: "nav.faq",
   };
 
   const navLinks = NAV_SECTION_IDS.map((id) => ({
