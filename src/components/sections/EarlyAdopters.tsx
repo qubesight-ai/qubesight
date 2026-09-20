@@ -87,14 +87,18 @@ const EarlyAdopters = () => {
               </li>
             ))}
           </ul>
-          <div className="mt-8">
-            <a
-              href="#contacto"
-              className="inline-flex items-center gap-2 text-sm font-bold text-primary"
-            >
-              {es ? "Quiero participar" : "I want to participate"}{" "}
-              <ArrowRight className="h-4 w-4" />
-            </a>
+          <div className="mt-8 text-center sm:text-left">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <a href="#contacto" className="prototype-button">
+                {es ? "Únete como Early Adopter" : "Join as an Early Adopter"}{" "}
+                <ArrowRight className="h-4 w-4" />
+              </a>
+              <p className="text-xs text-muted-foreground">
+                {es
+                  ? "Sin costo ni compromiso: conversamos, te mostramos la demo y decidimos juntos si hay un piloto."
+                  : "No cost, no commitment: we talk, show you the demo, and decide together whether a pilot makes sense."}
+              </p>
+            </div>
             <p className="mt-3 text-xs text-muted-foreground">
               {es
                 ? "Participar en la demostración no obliga a contratar QubeSight."
