@@ -8,6 +8,7 @@ import CallFlowSummary from "../components/CallFlowSummary";
 import CapabilitiesSettings from "../components/CapabilitiesSettings";
 import GenerateAgentCard from "../components/GenerateAgentCard";
 import GeneratedPlanSummary from "../components/GeneratedPlanSummary";
+import TestCallCard from "../components/TestCallCard";
 
 type AgentDetailPageProps = {
   agents: Agent[];
@@ -71,6 +72,8 @@ export default function AgentDetailPage({
       <GenerateAgentCard agent={agent} onGenerated={onChanged} />
 
       <GeneratedPlanSummary agent={agent} />
+
+      <TestCallCard agent={agent} />
 
       <div className="grid xl:grid-cols-2 gap-6 items-start">
         <CapabilitiesSettings agent={agent} onSaved={onChanged} />
