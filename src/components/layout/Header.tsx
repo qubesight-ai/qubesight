@@ -120,7 +120,7 @@ const Header = () => {
     requestAnimationFrame(() => refreshActive());
   }, [isMobileMenuOpen, refreshActive]);
 
-  const demosLabel = language === "es" ? "Demos en vivo" : "Live demos";
+  const demosLabel = language === "es" ? "Demos de chatbots" : "Chatbot demos";
   const navAriaLabel = language === "es" ? "Secciones principales" : "Main sections";
 
   return (
@@ -181,9 +181,7 @@ const Header = () => {
                 <ChevronDown className="h-3.5 w-3.5 transition-transform group-data-[state=open]:rotate-180" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-64 glass-card border-white/10 mt-2">
-                <p className="px-3 pt-3 pb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  {language === "es" ? "Demos de chatbots" : "Chatbot demos"}
-                </p>
+
                 {demoLinks.map((d) => (
                   <DropdownMenuItem key={d.to} asChild className="cursor-pointer">
                     <Link to={d.to} className="flex items-center gap-3 py-2.5 px-3 text-sm">
@@ -304,9 +302,7 @@ const Header = () => {
                       className="overflow-hidden"
                     >
                       <div className="pl-4 space-y-1 pt-1">
-                        <p className="px-4 pb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                          {language === "es" ? "Demos de chatbots" : "Chatbot demos"}
-                        </p>
+
                         {demoLinks.map((d) => (
                           <Link
                             key={d.to}
