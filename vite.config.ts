@@ -23,6 +23,13 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks(id) {
           if (!id.includes("node_modules")) return undefined;
+          if (
+            id.includes("@livekit") ||
+            id.includes("livekit-client") ||
+            id.includes("@bufbuild/protobuf")
+          ) {
+            return "vendor-livekit";
+          }
           if (id.includes("three") || id.includes("@react-three") || id.includes("@splinetool")) {
             return "vendor-3d";
           }
