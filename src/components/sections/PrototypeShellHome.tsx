@@ -10,49 +10,99 @@ import FinalCTA from "@/components/sections/FinalCTA";
 import Footer from "@/components/sections/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  CalendarDays,
+  Globe2,
+  MessageCircleMore,
+  PhoneCall,
+  Sparkles,
+  Wifi,
+} from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const PrototypeHero = () => {
   const { language } = useTranslation();
   const spanish = language === "es";
+
+  const widgets = [
+    {
+      icon: PhoneCall,
+      title: spanish ? "Llamadas" : "Calls",
+      value: spanish ? "Atención 24/7" : "24/7 coverage",
+      className: "aero-widget-cyan",
+    },
+    {
+      icon: MessageCircleMore,
+      title: "WhatsApp",
+      value: spanish ? "Respuestas al instante" : "Instant replies",
+      className: "aero-widget-green",
+    },
+    {
+      icon: CalendarDays,
+      title: spanish ? "Agenda" : "Calendar",
+      value: spanish ? "Citas organizadas" : "Appointments organized",
+      className: "aero-widget-blue",
+    },
+  ];
+
   return (
     <section id="hero" className="prototype-hero">
+      <div className="aero-sun" aria-hidden="true" />
+      <div className="aero-cloud aero-cloud-one" aria-hidden="true" />
+      <div className="aero-cloud aero-cloud-two" aria-hidden="true" />
+      <div className="aero-cloud aero-cloud-three" aria-hidden="true" />
+
+      <div className="aero-hill aero-hill-back" aria-hidden="true" />
+      <div className="aero-hill aero-hill-mid" aria-hidden="true" />
+      <div className="aero-hill aero-hill-front" aria-hidden="true" />
+      <div className="aero-lake" aria-hidden="true" />
+
+      <div className="aero-flower aero-flower-one" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <i />
+      </div>
+      <div className="aero-flower aero-flower-two" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <i />
+      </div>
+
       <div className="prototype-cube prototype-cube-a" aria-hidden="true">
         <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <i>
-          <b />
-          <b />
-          <b />
-          <b />
-          <b />
-          <b />
-        </i>
       </div>
       <div className="prototype-cube prototype-cube-b" aria-hidden="true">
         <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <i>
-          <b />
-          <b />
-          <b />
-          <b />
-          <b />
-          <b />
-        </i>
       </div>
+      <div className="aero-droplet aero-droplet-one" aria-hidden="true" />
+      <div className="aero-droplet aero-droplet-two" aria-hidden="true" />
+      <div className="aero-droplet aero-droplet-three" aria-hidden="true" />
+
+      <div className="aero-globe" aria-hidden="true">
+        <span className="aero-globe-shine" />
+        <span className="aero-globe-ring" />
+        <span className="aero-globe-q">Q</span>
+      </div>
+
+      <div className="aero-connectivity" aria-hidden="true">
+        <Wifi className="h-4 w-4" />
+        <span>{spanish ? "Conectado" : "Connected"}</span>
+        <Globe2 className="h-4 w-4" />
+      </div>
+
       <div className="prototype-eyebrow">
-        ● {spanish ? "RECEPCIÓN CON IA PARA NEGOCIOS" : "AI RECEPTION FOR BUSINESSES"}
+        <Sparkles className="h-3.5 w-3.5" />
+        {spanish ? "RECEPCIÓN CON IA PARA NEGOCIOS" : "AI RECEPTION FOR BUSINESSES"}
       </div>
+
       <h1>
         {spanish ? "Tus clientes quieren respuestas" : "Your customers want answers"}
         <br />
@@ -64,6 +114,22 @@ const PrototypeHero = () => {
             : "QubeSight helps your business be there for them."}
         </em>
       </h1>
+
+      <div className="aero-widget-dock" aria-label={spanish ? "Capacidades de QubeSight" : "QubeSight capabilities"}>
+        {widgets.map(({ icon: Icon, title, value, className }) => (
+          <div className={`aero-widget ${className}`} key={title}>
+            <div className="aero-widget-icon">
+              <Icon className="h-5 w-5" />
+            </div>
+            <div>
+              <strong>{title}</strong>
+              <span>{value}</span>
+            </div>
+            <i aria-hidden="true" />
+          </div>
+        ))}
+      </div>
+
       <div className="prototype-hero-bottom">
         <p>
           {spanish
@@ -86,11 +152,21 @@ const PrototypeHero = () => {
 
 const PrototypeShellHome = () => {
   useScrollReveal();
+
   return (
     <div className="prototype-shell">
       <Header />
       <main>
         <PrototypeHero />
+        <div className="aero-transition-band" aria-hidden="true">
+          <div className="aero-bubble-row">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
         <div className="prototype-content">
           <Problem />
           <ValueProposition />
@@ -107,4 +183,5 @@ const PrototypeShellHome = () => {
     </div>
   );
 };
+
 export default PrototypeShellHome;
