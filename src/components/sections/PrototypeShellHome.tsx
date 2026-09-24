@@ -15,7 +15,7 @@ import {
   ArrowUpRight,
   CalendarDays,
   Globe2,
-  MessageCircleMore,
+  MessageCircle,
   PhoneCall,
   Sparkles,
   Wifi,
@@ -34,7 +34,7 @@ const PrototypeHero = () => {
       className: "aero-widget-cyan",
     },
     {
-      icon: MessageCircleMore,
+      icon: MessageCircle,
       title: "WhatsApp",
       value: spanish ? "Respuestas al instante" : "Instant replies",
       className: "aero-widget-green",
