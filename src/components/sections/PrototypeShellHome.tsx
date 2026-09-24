@@ -14,11 +14,10 @@ import {
   ArrowDown,
   ArrowUpRight,
   CalendarDays,
-  Globe2,
   MessageCircle,
   PhoneCall,
+  ShieldCheck,
   Sparkles,
-  Wifi,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -31,71 +30,45 @@ const PrototypeHero = () => {
       icon: PhoneCall,
       title: spanish ? "Llamadas" : "Calls",
       value: spanish ? "Atención 24/7" : "24/7 coverage",
-      className: "aero-widget-cyan",
     },
     {
       icon: MessageCircle,
       title: "WhatsApp",
       value: spanish ? "Respuestas al instante" : "Instant replies",
-      className: "aero-widget-green",
     },
     {
       icon: CalendarDays,
       title: spanish ? "Agenda" : "Calendar",
       value: spanish ? "Citas organizadas" : "Appointments organized",
-      className: "aero-widget-blue",
     },
   ];
 
   return (
     <section id="hero" className="prototype-hero">
-      <div className="aero-sun" aria-hidden="true" />
-      <div className="aero-cloud aero-cloud-one" aria-hidden="true" />
-      <div className="aero-cloud aero-cloud-two" aria-hidden="true" />
-      <div className="aero-cloud aero-cloud-three" aria-hidden="true" />
+      <div className="aero-ambient aero-ambient-left" aria-hidden="true" />
+      <div className="aero-ambient aero-ambient-right" aria-hidden="true" />
+      <div className="aero-horizon" aria-hidden="true" />
 
-      <div className="aero-hill aero-hill-back" aria-hidden="true" />
-      <div className="aero-hill aero-hill-mid" aria-hidden="true" />
-      <div className="aero-hill aero-hill-front" aria-hidden="true" />
-      <div className="aero-lake" aria-hidden="true" />
+      <div className="aero-orbit aero-orbit-large" aria-hidden="true" />
+      <div className="aero-orbit aero-orbit-small" aria-hidden="true" />
 
-      <div className="aero-flower aero-flower-one" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <i />
-      </div>
-      <div className="aero-flower aero-flower-two" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <i />
-      </div>
-
-      <div className="prototype-cube prototype-cube-a" aria-hidden="true">
-        <span />
-      </div>
-      <div className="prototype-cube prototype-cube-b" aria-hidden="true">
-        <span />
-      </div>
-      <div className="aero-droplet aero-droplet-one" aria-hidden="true" />
-      <div className="aero-droplet aero-droplet-two" aria-hidden="true" />
-      <div className="aero-droplet aero-droplet-three" aria-hidden="true" />
-
-      <div className="aero-globe" aria-hidden="true">
-        <span className="aero-globe-shine" />
-        <span className="aero-globe-ring" />
-        <span className="aero-globe-q">Q</span>
-      </div>
-
-      <div className="aero-connectivity" aria-hidden="true">
-        <Wifi className="h-4 w-4" />
-        <span>{spanish ? "Conectado" : "Connected"}</span>
-        <Globe2 className="h-4 w-4" />
+      <div className="aero-hero-panel" aria-hidden="true">
+        <div className="aero-panel-topline">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className="aero-panel-content">
+          <div className="aero-panel-stat">
+            <span>{spanish ? "Recepción IA" : "AI reception"}</span>
+            <strong>24/7</strong>
+          </div>
+          <div className="aero-panel-rule" />
+          <div className="aero-panel-stat">
+            <span>{spanish ? "Canales" : "Channels"}</span>
+            <strong>Voice + Chat</strong>
+          </div>
+        </div>
       </div>
 
       <div className="prototype-eyebrow">
@@ -115,9 +88,21 @@ const PrototypeHero = () => {
         </em>
       </h1>
 
-      <div className="aero-widget-dock" aria-label={spanish ? "Capacidades de QubeSight" : "QubeSight capabilities"}>
-        {widgets.map(({ icon: Icon, title, value, className }) => (
-          <div className={`aero-widget ${className}`} key={title}>
+      <div className="aero-trustline">
+        <ShieldCheck className="h-4 w-4" />
+        <span>
+          {spanish
+            ? "Automatización clara, profesional y diseñada para negocios reales."
+            : "Clear, professional automation designed for real businesses."}
+        </span>
+      </div>
+
+      <div
+        className="aero-widget-dock"
+        aria-label={spanish ? "Capacidades de QubeSight" : "QubeSight capabilities"}
+      >
+        {widgets.map(({ icon: Icon, title, value }) => (
+          <div className="aero-widget" key={title}>
             <div className="aero-widget-icon">
               <Icon className="h-5 w-5" />
             </div>
@@ -125,7 +110,6 @@ const PrototypeHero = () => {
               <strong>{title}</strong>
               <span>{value}</span>
             </div>
-            <i aria-hidden="true" />
           </div>
         ))}
       </div>
@@ -158,15 +142,6 @@ const PrototypeShellHome = () => {
       <Header />
       <main>
         <PrototypeHero />
-        <div className="aero-transition-band" aria-hidden="true">
-          <div className="aero-bubble-row">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-        </div>
         <div className="prototype-content">
           <Problem />
           <ValueProposition />
