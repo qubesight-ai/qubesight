@@ -580,3 +580,275 @@
     padding-right: 16px;
   }
 }
+
+
+/* =========================================================
+   GLASS AERO + SKEUOMORPHIC CORPORATE REFINEMENT
+   ========================================================= */
+
+.prototype-shell .glass-nav,
+.prototype-shell header[data-site-header] {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.78), rgba(230,244,249,.62)) !important;
+  border-bottom: 1px solid rgba(255,255,255,.72) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.92),
+    inset 0 -1px 0 rgba(105,165,190,.18),
+    0 12px 34px rgba(20,76,101,.10) !important;
+  backdrop-filter: blur(24px) saturate(155%) !important;
+}
+
+.prototype-eyebrow,
+.aero-hero-panel,
+.prototype-hero-bottom,
+.aero-widget,
+.prototype-content > section,
+.prototype-shell .glass-card,
+.prototype-shell .bento-tile,
+.prototype-shell [class*="bg-card"],
+.prototype-shell [class*="bg-background"],
+.prototype-shell [class*="bg-white/"] {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(22px) saturate(150%);
+}
+
+.prototype-eyebrow::before,
+.aero-hero-panel::before,
+.prototype-hero-bottom::before,
+.aero-widget::before,
+.prototype-content > section::before,
+.prototype-shell .glass-card::before,
+.prototype-shell .bento-tile::before,
+.prototype-shell [class*="bg-card"]::before,
+.prototype-shell [class*="bg-background"]::before,
+.prototype-shell [class*="bg-white/"]::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 52% 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.58),
+    rgba(255,255,255,.18),
+    rgba(255,255,255,0)
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.prototype-eyebrow > *,
+.aero-hero-panel > *,
+.prototype-hero-bottom > *,
+.aero-widget > *,
+.prototype-content > section > *,
+.prototype-shell .glass-card > *,
+.prototype-shell .bento-tile > *,
+.prototype-shell [class*="bg-card"] > *,
+.prototype-shell [class*="bg-background"] > *,
+.prototype-shell [class*="bg-white/"] > * {
+  position: relative;
+  z-index: 1;
+}
+
+.aero-hero-panel {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.76), rgba(233,246,250,.58)) !important;
+  border: 1px solid rgba(255,255,255,.86) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -1px 0 rgba(98,154,178,.14),
+    0 26px 56px rgba(20,83,108,.14),
+    0 2px 0 rgba(255,255,255,.34) !important;
+}
+
+.prototype-hero-bottom {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.74), rgba(238,248,250,.60)) !important;
+  border: 1px solid rgba(255,255,255,.82) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.96),
+    inset 0 -1px 0 rgba(95,150,174,.10),
+    0 18px 42px rgba(22,82,106,.10) !important;
+}
+
+.prototype-content > section,
+.prototype-shell .glass-card,
+.prototype-shell .bento-tile,
+.prototype-shell [class*="bg-card"],
+.prototype-shell [class*="bg-background"],
+.prototype-shell [class*="bg-white/"] {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.90), rgba(244,249,250,.86)) !important;
+  border: 1px solid rgba(255,255,255,.84) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.96),
+    inset 0 -1px 0 rgba(97,155,179,.10),
+    0 18px 40px rgba(20,77,101,.08) !important;
+}
+
+.prototype-content > section::after,
+.prototype-shell .glass-card::after,
+.prototype-shell .bento-tile::after,
+.prototype-shell [class*="bg-card"]::after,
+.prototype-shell [class*="bg-background"]::after,
+.prototype-shell [class*="bg-white/"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.28),
+    inset 0 -10px 20px rgba(120,164,184,.04);
+}
+
+.aero-widget {
+  min-height: 78px;
+  border-radius: 18px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(239,247,249,.82)) !important;
+  border: 1px solid rgba(255,255,255,.84) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.96),
+    inset 0 -1px 0 rgba(90,149,173,.08),
+    0 12px 24px rgba(23,82,106,.08) !important;
+}
+
+.aero-widget-icon {
+  position: relative;
+  border-radius: 14px !important;
+  background:
+    linear-gradient(180deg, #71c9e4 0%, #3196bd 58%, #247fa3 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.72),
+    inset 0 -1px 0 rgba(9,74,101,.18),
+    0 6px 12px rgba(24,88,113,.14) !important;
+}
+
+.aero-widget-icon::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: 4px;
+  height: 38%;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,0));
+  pointer-events: none;
+}
+
+.aero-widget strong {
+  color: #17445f !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.7);
+}
+
+.aero-widget span {
+  color: #6a808d !important;
+}
+
+.prototype-button,
+.prototype-shell a[class*="bg-primary"],
+.prototype-shell button[class*="bg-primary"],
+.prototype-shell .gradient-bg {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px !important;
+  border: 1px solid #207ea8 !important;
+  background:
+    linear-gradient(
+      180deg,
+      #7fd5ec 0%,
+      #52b9da 22%,
+      #2d97bf 54%,
+      #247fa3 100%
+    ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.78),
+    inset 0 -1px 0 rgba(12,75,100,.25),
+    0 1px 0 rgba(255,255,255,.18),
+    0 8px 16px rgba(27,97,123,.18) !important;
+  text-shadow: 0 -1px 0 rgba(18,87,113,.45);
+}
+
+.prototype-button::before,
+.prototype-shell a[class*="bg-primary"]::before,
+.prototype-shell button[class*="bg-primary"]::before,
+.prototype-shell .gradient-bg::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 4px;
+  height: 42%;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,.56), rgba(255,255,255,0));
+  pointer-events: none;
+}
+
+.prototype-button:hover,
+.prototype-shell a[class*="bg-primary"]:hover,
+.prototype-shell button[class*="bg-primary"]:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03) saturate(1.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.82),
+    inset 0 -1px 0 rgba(12,75,100,.25),
+    0 10px 20px rgba(27,97,123,.22) !important;
+}
+
+.prototype-button:active,
+.prototype-shell a[class*="bg-primary"]:active,
+.prototype-shell button[class*="bg-primary"]:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 2px 6px rgba(18,74,97,.22),
+    0 3px 8px rgba(27,97,123,.12) !important;
+}
+
+.prototype-shell button:not([class*="bg-primary"]):not([class*="gradient-bg"]),
+.prototype-shell a[class*="border"]:not([class*="bg-primary"]) {
+  border: 1px solid rgba(255,255,255,.82) !important;
+  border-radius: 12px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.94), rgba(239,247,249,.84)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.96),
+    inset 0 -1px 0 rgba(95,151,175,.08),
+    0 5px 12px rgba(25,79,101,.06) !important;
+}
+
+.prototype-shell input,
+.prototype-shell textarea,
+.prototype-shell select {
+  border: 1px solid #b8d1db !important;
+  border-radius: 12px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.98), rgba(246,250,251,.96)) !important;
+  box-shadow:
+    inset 0 2px 6px rgba(30,84,102,.06),
+    inset 0 1px 0 rgba(255,255,255,.84),
+    0 1px 0 rgba(255,255,255,.45) !important;
+}
+
+.prototype-shell input:focus,
+.prototype-shell textarea:focus,
+.prototype-shell select:focus {
+  border-color: #7bb9cf !important;
+  box-shadow:
+    inset 0 2px 6px rgba(30,84,102,.05),
+    0 0 0 3px rgba(97,177,205,.16) !important;
+}
+
+.prototype-hero {
+  background:
+    radial-gradient(circle at 76% 18%, rgba(102,213,236,.22), transparent 26%),
+    radial-gradient(circle at 15% 12%, rgba(255,255,255,.96), transparent 24%),
+    linear-gradient(180deg, #e8f8fc 0%, #f8fbfc 60%, #eef7f2 100%) !important;
+}
+
+.prototype-content {
+  background:
+    radial-gradient(circle at 10% 8%, rgba(173,225,237,.10), transparent 20%),
+    radial-gradient(circle at 86% 18%, rgba(160,216,197,.08), transparent 20%),
+    linear-gradient(180deg, #f7fbfc 0%, #f7faf8 100%) !important;
+}
