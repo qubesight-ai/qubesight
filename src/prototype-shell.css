@@ -852,3 +852,106 @@
     radial-gradient(circle at 86% 18%, rgba(160,216,197,.08), transparent 20%),
     linear-gradient(180deg, #f7fbfc 0%, #f7faf8 100%) !important;
 }
+
+
+/* =========================================================
+   HERO LAYOUT CORRECTION
+   Restore right-side glass panel and rebalance desktop scale.
+   ========================================================= */
+
+.aero-hero-panel {
+  position: absolute !important;
+  right: clamp(2rem, 7vw, 8rem) !important;
+  left: auto !important;
+  top: 50% !important;
+  transform: translateY(-54%) !important;
+  width: min(360px, 28vw) !important;
+  z-index: 4 !important;
+}
+
+.prototype-hero {
+  min-height: 820px !important;
+  padding-left: clamp(3rem, 5.2vw, 6rem) !important;
+  padding-right: clamp(3rem, 5.2vw, 6rem) !important;
+  padding-top: 8.5rem !important;
+  padding-bottom: 4.5rem !important;
+  align-items: flex-start !important;
+}
+
+.prototype-hero h1 {
+  width: min(760px, calc(100% - 430px)) !important;
+  max-width: 760px !important;
+  margin: 2rem 0 1.35rem !important;
+  font-size: clamp(3.15rem, 4.7vw, 5.25rem) !important;
+  line-height: .98 !important;
+}
+
+.prototype-hero h1 em {
+  max-width: 700px;
+  font-size: .48em !important;
+  line-height: 1.14 !important;
+}
+
+.aero-trustline,
+.aero-widget-dock,
+.prototype-hero-bottom {
+  max-width: 760px !important;
+}
+
+.aero-widget-dock {
+  width: min(760px, calc(100% - 430px)) !important;
+}
+
+.prototype-hero-bottom {
+  width: min(760px, calc(100% - 430px)) !important;
+}
+
+.aero-orbit-large {
+  right: clamp(2rem, 7vw, 8rem) !important;
+  top: 22% !important;
+}
+
+.aero-orbit-small {
+  right: clamp(6rem, 13vw, 14rem) !important;
+  top: 38% !important;
+}
+
+@media (max-width: 1180px) {
+  .aero-hero-panel {
+    width: 300px !important;
+    right: 2rem !important;
+  }
+
+  .prototype-hero h1,
+  .aero-widget-dock,
+  .prototype-hero-bottom {
+    width: calc(100% - 350px) !important;
+  }
+
+  .prototype-hero h1 {
+    font-size: clamp(3rem, 4.5vw, 4.6rem) !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .prototype-hero {
+    min-height: auto !important;
+    padding: 8rem 20px 4rem !important;
+  }
+
+  .aero-hero-panel,
+  .aero-orbit {
+    display: none !important;
+  }
+
+  .prototype-hero h1,
+  .aero-widget-dock,
+  .prototype-hero-bottom {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .prototype-hero h1 {
+    font-size: clamp(2.65rem, 10vw, 4.2rem) !important;
+  }
+}
