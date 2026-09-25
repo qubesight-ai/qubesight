@@ -52,21 +52,51 @@ const PrototypeHero = () => {
       <div className="aero-orbit aero-orbit-large" aria-hidden="true" />
       <div className="aero-orbit aero-orbit-small" aria-hidden="true" />
 
-      <div className="aero-hero-panel" aria-hidden="true">
-        <div className="aero-panel-topline">
+      <div
+        className="aero-hero-panel hero-matilda-card"
+        aria-label={spanish ? "Demo de Matilda" : "Matilda demo"}
+      >
+        <div className="aero-panel-topline hero-matilda-topline">
           <span />
           <span />
           <span />
+          <strong>{spanish ? "Demo de Matilda" : "Matilda demo"}</strong>
         </div>
-        <div className="aero-panel-content">
-          <div className="aero-panel-stat">
-            <span>{spanish ? "Recepción IA" : "AI reception"}</span>
-            <strong>24/7</strong>
+        <div className="hero-matilda-body">
+          <div className="hero-matilda-header">
+            <div className="hero-matilda-avatar">M</div>
+            <div className="hero-matilda-meta">
+              <h3>Matilda</h3>
+              <p>
+                {spanish
+                  ? "Recepcionista IA para llamadas y consultas"
+                  : "AI receptionist for calls and inquiries"}
+              </p>
+            </div>
           </div>
-          <div className="aero-panel-rule" />
-          <div className="aero-panel-stat">
-            <span>{spanish ? "Canales" : "Channels"}</span>
-            <strong>Voice + Chat</strong>
+          <div className="hero-matilda-wave" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="hero-matilda-bubble">
+            {spanish
+              ? "Hola, soy Matilda. Puedo atender clientes, responder preguntas y ayudarte a agendar una demostración."
+              : "Hi, I’m Matilda. I can answer customers, handle questions, and help schedule a demo."}
+          </div>
+          <div className="hero-matilda-actions">
+            <a href="#demo" className="hero-matilda-primary">
+              {spanish ? "Probar a Matilda" : "Try Matilda"}
+            </a>
+            <a href="#early-adopters" className="hero-matilda-secondary">
+              {spanish ? "Solicitar demo" : "Request demo"}
+            </a>
           </div>
         </div>
       </div>
