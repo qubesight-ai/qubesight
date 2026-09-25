@@ -35,10 +35,17 @@ export function parseConfigurationStatus(value: unknown): AgentConfigurationStat
     : "draft";
 }
 
+export function parseProvisioningStatus(value: unknown): ProvisioningStatus {
+  return typeof value === "string" && provisioningStatuses.has(value as ProvisioningStatus)
+    ? (value as ProvisioningStatus)
+    : "not_deployed";
+}
+
 export function normalizeAgent(row: VoiceAgentRow): Agent {
   return {
     ...row,
     agent_type: parseAgentType(row.agent_type),
+    provisioning_status: parseProvisioningStatus(row.provisioning_status),
     business_name: row.business_name ?? "",
     business_description: row.business_description ?? "",
     assistant_description: row.assistant_description ?? row.objective,
