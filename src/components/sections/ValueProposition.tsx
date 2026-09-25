@@ -1,15 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  Clock4,
-  Zap,
-  ClipboardCheck,
-  Filter,
-  CalendarCheck,
-  Repeat2,
-  UserCheck,
-  Plug,
-  Wrench,
-} from "lucide-react";
+import { MessageCircle, Repeat2, Users } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const ValueProposition = () => {
@@ -17,63 +7,25 @@ const ValueProposition = () => {
   const es = language === "es";
   const benefits = [
     [
-      Clock4,
-      es ? "24/7" : "24/7",
+      MessageCircle,
+      es ? "Más oportunidades atendidas" : "More opportunities handled",
       es
-        ? "Atención continua y posibilidad de operación 24/7."
-        : "Continuous service with 24/7 operation.",
-    ],
-    [
-      Zap,
-      es ? "Respuesta rápida" : "Fast response",
-      es
-        ? "Atención inmediata a llamadas y mensajes."
-        : "Immediate attention to calls and messages.",
-    ],
-    [
-      ClipboardCheck,
-      es ? "Captura" : "Capture",
-      es
-        ? "Información estructurada de cada contacto."
-        : "Structured information from every contact.",
-    ],
-    [
-      Filter,
-      es ? "Calificación" : "Qualification",
-      es
-        ? "Identificación y clasificación de prospectos."
-        : "Identifying and classifying prospects.",
-    ],
-    [
-      CalendarCheck,
-      es ? "Agenda" : "Scheduling",
-      es ? "Gestión automatizada de citas." : "Automated appointment management.",
+        ? "Ayuda a mantener la atención disponible cuando el equipo está ocupado o fuera de horario."
+        : "Helps keep service available while the team is busy or after hours.",
     ],
     [
       Repeat2,
-      es ? "Seguimiento" : "Follow-up",
-      es ? "Acciones posteriores a la interacción." : "Actions after each interaction.",
+      es ? "Menos tareas repetitivas" : "Fewer repetitive tasks",
+      es
+        ? "Consultas frecuentes y recopilación inicial de información pueden ser atendidas automáticamente."
+        : "Common questions and initial information gathering can be handled automatically.",
     ],
     [
-      UserCheck,
-      es ? "Transferencia humana" : "Human handoff",
+      Users,
+      es ? "Personas donde aportan más valor" : "People where they add most value",
       es
-        ? "Escalamiento cuando una persona debe intervenir."
-        : "Escalation when a person needs to step in.",
-    ],
-    [
-      Plug,
-      es ? "Canales e integraciones" : "Channels and integrations",
-      es
-        ? "Conexión según disponibilidad y configuración."
-        : "Connections based on availability and configuration.",
-    ],
-    [
-      Wrench,
-      es ? "Implementación acompañada" : "Guided implementation",
-      es
-        ? "Configuración y puesta en marcha junto a tu equipo."
-        : "Configuration and activation alongside your team.",
+        ? "Los casos que requieren criterio, negociación o atención especial pueden pasar a una persona."
+        : "Cases requiring judgment, negotiation, or special attention can go to a person.",
     ],
   ] as const;
   return (
@@ -90,24 +42,23 @@ const ValueProposition = () => {
           </span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
             {es
-              ? "Una recepción digital con AI que atiende, captura, califica, "
-              : "A digital AI reception that answers, captures, qualifies, "}
-            <span className="gradient-text">
-              {es ? "agenda y da seguimiento." : "schedules, and follows up."}
-            </span>
+              ? "Más capacidad de atención sin aumentar la carga repetitiva de tu equipo."
+              : "More capacity to serve customers without increasing your team's repetitive workload."}
           </h2>
-          <h3 className="mt-8 text-xl sm:text-2xl font-semibold font-display">
-            {es ? "Elementos de valor." : "Value elements."}
-          </h3>
+          <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
+            {es
+              ? "QubeSight busca ayudar a que los negocios puedan responder más oportunidades y mantener una atención constante mientras las personas se concentran en las conversaciones y decisiones que realmente requieren criterio humano."
+              : "QubeSight aims to help businesses respond to more opportunities and maintain consistent service while people focus on conversations and decisions that need human judgment."}
+          </p>
         </motion.div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {benefits.map(([Icon, title, desc], i) => (
             <motion.article
               key={title}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: (i % 4) * 0.08 }}
+              transition={{ delay: i * 0.08 }}
               className="glass-card rounded-2xl p-7 text-center hover:border-primary/30 transition-colors"
             >
               <div className="h-12 w-12 mx-auto rounded-xl bg-primary/10 text-primary border border-primary/20 grid place-items-center mb-5">

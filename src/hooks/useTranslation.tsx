@@ -16,9 +16,6 @@ export const translations: Translations = {
   // Header
   "nav.problem": { es: "Problema", en: "Problem" },
   "nav.solution": { es: "Solución", en: "Solution" },
-  "nav.capabilities": { es: "Capacidades", en: "Capabilities" },
-  "nav.metrics": { es: "Métricas", en: "Metrics" },
-  "nav.implementation": { es: "Implementación", en: "Implementation" },
   "nav.products": { es: "Productos", en: "Products" },
   "nav.assistant": { es: "Asistente", en: "Assistant" },
   "nav.voicebot": { es: "Voice Bot", en: "Voice Bot" },
@@ -26,9 +23,9 @@ export const translations: Translations = {
   "nav.pricing": { es: "Precios", en: "Pricing" },
   "nav.faq": { es: "FAQ", en: "FAQ" },
   "nav.contact": { es: "Empezar", en: "Get Started" },
-  "nav.value": { es: "Propuesta de Valor", en: "Value Proposition" },
+  "nav.value": { es: "Propuesta de valor", en: "Value proposition" },
   "nav.how": { es: "Cómo funciona", en: "How it works" },
-  "nav.demo": { es: "Demo en vivo", en: "Live demo" },
+  "nav.demo": { es: "Demo", en: "Demo" },
   "nav.early": { es: "Early Adopters", en: "Early Adopters" },
 
   // Voice Bot — teammate framing

@@ -1,63 +1,31 @@
 import { motion } from "framer-motion";
-import {
-  Clock,
-  MessageCircleQuestion,
-  MoonStar,
-  PhoneMissed,
-  Repeat2,
-  Share2,
-  UserRoundCheck,
-  Workflow,
-} from "lucide-react";
+import { Sunrise, Sun, Moon } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
-import Capabilities from "@/components/sections/Capabilities";
-import Metrics from "@/components/sections/Metrics";
 
 const Solution = () => {
   const { language } = useTranslation();
   const es = language === "es";
-  const responses = [
+  const pillars = [
     {
-      icon: PhoneMissed,
-      problem: es ? "Llamadas sin responder" : "Unanswered calls",
-      response: es ? "Voice Bot atiende automáticamente." : "Voice Bot answers automatically.",
+      icon: Sunrise,
+      title: es ? "ATIENDE" : "SERVES",
+      desc: es
+        ? "Responde llamadas y consultas digitales."
+        : "Answers calls and digital inquiries.",
     },
     {
-      icon: Clock,
-      problem: es ? "Respuesta tardía" : "Slow response",
-      response: es ? "Atención automatizada inmediata." : "Immediate automated service.",
+      icon: Sun,
+      title: es ? "ENTIENDE" : "UNDERSTANDS",
+      desc: es
+        ? "Identifica qué necesita el cliente y recopila la información necesaria."
+        : "Identifies what the customer needs and gathers the necessary information.",
     },
     {
-      icon: MoonStar,
-      problem: es ? "Contactos fuera de horario" : "After-hours contacts",
-      response: es ? "Disponibilidad continua." : "Continuous availability.",
-    },
-    {
-      icon: MessageCircleQuestion,
-      problem: es ? "Preguntas repetitivas" : "Repetitive questions",
-      response: es ? "Automatización de respuestas." : "Automated responses.",
-    },
-    {
-      icon: Repeat2,
-      problem: es ? "Leads sin seguimiento" : "Leads without follow-up",
-      response: es ? "Flujos automatizados de seguimiento." : "Automated follow-up workflows.",
-    },
-    {
-      icon: Share2,
-      problem: es ? "Múltiples canales" : "Multiple channels",
-      response: es ? "Voz, chat e integraciones." : "Voice, chat, and integrations.",
-    },
-    {
-      icon: Workflow,
-      problem: es ? "Procesos manuales" : "Manual processes",
-      response: es ? "Automatización de agenda y flujos." : "Automated scheduling and workflows.",
-    },
-    {
-      icon: UserRoundCheck,
-      problem: es ? "Sobrecarga del personal" : "Staff overload",
-      response: es
-        ? "Escalamiento a una persona cuando corresponde."
-        : "Escalation to a person when appropriate.",
+      icon: Moon,
+      title: es ? "ACTÚA" : "ACTS",
+      desc: es
+        ? "Puede ayudar con citas, seguimiento, información del negocio o transferencia a una persona."
+        : "Can help with appointments, follow-up, business information, or a handoff to a person.",
     },
   ];
 
@@ -80,53 +48,36 @@ const Solution = () => {
         >
           <span className="eyebrow mb-5 inline-flex">{es ? "LA SOLUCIÓN" : "THE SOLUTION"}</span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {es ? "Una capa de atención " : "An automated service layer "}
+            {es ? "Una recepción con inteligencia artificial " : "An AI reception service "}
             <span className="gradient-text">
-              {es ? "automatizada para tu negocio." : "for your business."}
+              {es ? "que trabaja junto a tu equipo." : "that works alongside your team."}
             </span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
             {es
-              ? "Nuestra solución se orienta a resolver los dolores de nuestros clientes."
-              : "Our solution is designed to resolve our customers' pain points."}
+              ? "QubeSight combina atención por voz y canales digitales para ayudar a responder consultas, recopilar información, gestionar oportunidades y conectar al cliente con una persona cuando sea necesario."
+              : "QubeSight combines voice service and digital channels to help answer inquiries, gather information, manage opportunities, and connect customers with a person when needed."}
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
-          {responses.map((item, i) => (
+        <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+          {pillars.map((item, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (i % 4) * 0.08 }}
-              className="glass-card rounded-2xl p-7 hover:border-primary/30 transition-colors"
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="glass-card rounded-2xl p-7 text-center hover:border-primary/30 transition-colors"
             >
-              <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary border border-primary/20 grid place-items-center mb-5">
+              <div className="h-12 w-12 mx-auto rounded-xl bg-primary/10 text-primary border border-primary/20 grid place-items-center mb-5">
                 <item.icon className="h-5 w-5" strokeWidth={1.75} />
               </div>
-              <h3 className="text-base font-semibold font-display mb-2">{item.problem}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{item.response}</p>
+              <h3 className="text-lg font-semibold font-display mb-2">{item.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
         </div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center text-xl sm:text-2xl font-display font-semibold text-balance max-w-3xl mx-auto"
-        >
-          {es ? "La IA atiende lo repetitivo. " : "AI handles the repetitive work. "}
-          <span className="gradient-text">
-            {es
-              ? "Tu equipo entra cuando realmente hace falta."
-              : "Your team steps in when it really matters."}
-          </span>
-        </motion.p>
-
-        <Capabilities />
-        <Metrics />
       </div>
     </section>
   );

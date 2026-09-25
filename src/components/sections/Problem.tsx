@@ -1,15 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  Clock,
-  MoonStar,
-  Activity,
-  TrendingDown,
-  PhoneMissed,
-  Repeat2,
-  MessagesSquare,
-  Coins,
-  UserRoundX,
-} from "lucide-react";
+import { Clock, MoonStar, Activity, TrendingDown } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const Problem = () => {
@@ -17,53 +7,25 @@ const Problem = () => {
   const es = language === "es";
   const stats = [
     {
-      icon: PhoneMissed,
-      title: es ? "Llamadas no atendidas" : "Unanswered calls",
+      icon: Clock,
+      title: es ? "Consultas mientras el equipo está ocupado" : "Inquiries while the team is busy",
       desc: es
-        ? "Consultas y oportunidades que pueden perderse cuando nadie está disponible para atender."
-        : "Inquiries and opportunities that can be lost when nobody is available to respond.",
+        ? "Las consultas pueden llegar mientras las personas atienden otras tareas importantes."
+        : "Inquiries can arrive while people are handling other important tasks.",
     },
     {
       icon: MoonStar,
-      title: es ? "Atención fuera de horario" : "After-hours service",
+      title: es ? "Preguntas repetitivas" : "Repeated questions",
       desc: es
-        ? "Clientes y prospectos que contactan cuando el negocio está cerrado y no reciben respuesta."
-        : "Customers and prospects who reach out when the business is closed and get no reply.",
+        ? "Las mismas dudas consumen tiempo que el equipo necesita para casos más importantes."
+        : "The same questions take time the team needs for more important cases.",
     },
     {
-      icon: Clock,
-      title: es ? "Respuestas tardías" : "Slow responses",
+      icon: Activity,
+      title: es ? "Oportunidades fuera de horario" : "After-hours opportunities",
       desc: es
-        ? "Un prospecto puede perder interés mientras espera una respuesta."
-        : "A prospect can lose interest while waiting for an answer.",
-    },
-    {
-      icon: Repeat2,
-      title: es ? "Preguntas repetitivas" : "Repetitive questions",
-      desc: es
-        ? "El personal dedica tiempo a responder una y otra vez las mismas consultas."
-        : "Staff spend time answering the same inquiries again and again.",
-    },
-    {
-      icon: MessagesSquare,
-      title: es ? "Múltiples canales" : "Multiple channels",
-      desc: es
-        ? "Teléfono, WhatsApp, web y otros canales requieren atención simultánea."
-        : "Phone, WhatsApp, web, and other channels all require simultaneous attention.",
-    },
-    {
-      icon: UserRoundX,
-      title: es ? "Leads sin seguimiento" : "Leads without follow-up",
-      desc: es
-        ? "Los contactos pueden enfriarse cuando el seguimiento depende de tareas manuales."
-        : "Contacts can go cold when follow-up depends on manual tasks.",
-    },
-    {
-      icon: Coins,
-      title: es ? "Costos crecientes de atención" : "Growing service costs",
-      desc: es
-        ? "El costo de soluciones de IA internacionales puede crecer rápidamente conforme aumenta el volumen de uso."
-        : "The cost of international AI solutions can grow quickly as usage volume increases.",
+        ? "Llamadas y mensajes pueden acumularse cuando el negocio ya no está atendiendo."
+        : "Calls and messages can build up when the business is no longer open.",
     },
   ];
 
@@ -91,31 +53,28 @@ const Problem = () => {
             {es ? "EL PROBLEMA" : "THE PROBLEM"}
           </span>
           <h2 className="text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {es ? "Tus clientes esperan respuesta. " : "Your customers expect an answer. "}
+            {es
+              ? "Atender cada consulta se vuelve difícil "
+              : "Handling every inquiry becomes difficult "}
             <span className="gradient-text">
-              {es
-                ? "Tu negocio no siempre puede estar disponible."
-                : "Your business can't always be available."}
+              {es ? "cuando el negocio está creciendo." : "as the business grows."}
             </span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
             {es
-              ? "Las empresas con volumen recurrente de llamadas, mensajes, leads o citas enfrentan dificultades para responder oportunamente, atender fuera de horario, procesar preguntas repetitivas y dar seguimiento a clientes y prospectos."
-              : "Businesses with recurring calls, messages, leads, or appointments can struggle to respond promptly, provide after-hours service, process repetitive questions, and follow up with customers and prospects."}
+              ? "Llamadas, mensajes, preguntas repetitivas y consultas fuera de horario pueden acumularse mientras el equipo está ocupado atendiendo otras tareas."
+              : "Calls, messages, repeated questions, and after-hours inquiries can build up while the team is busy with other work."}
           </p>
-          <h3 className="mt-8 text-xl sm:text-2xl font-semibold font-display">
-            {es ? "Principales dolores identificados." : "Main pain points identified."}
-          </h3>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6">
           {stats.map((item, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (i % 4) * 0.1 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
               className="relative glass-card rounded-2xl p-8 hover:border-destructive/30 transition-all hover:-translate-y-1 overflow-hidden group"
             >
               <div className="relative">
@@ -130,12 +89,6 @@ const Problem = () => {
             </motion.div>
           ))}
         </div>
-
-        <p className="mt-10 text-center text-xs text-muted-foreground/80 max-w-2xl mx-auto">
-          {es
-            ? "Estos problemas forman parte de las hipótesis iniciales de QubeSight y se continúan validando directamente con los segmentos objetivo."
-            : "These problems are part of QubeSight's initial hypotheses and continue to be validated directly with target segments."}
-        </p>
       </div>
     </section>
   );

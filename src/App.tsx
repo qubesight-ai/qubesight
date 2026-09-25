@@ -23,7 +23,6 @@ const LogoResponsiveTest = lazy(() => import("./pages/LogoResponsiveTest"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
-const AgentDetail = lazy(() => import("./pages/dashboard/AgentDetail"));
 
 const PageFallback = () => (
   <div className="min-h-screen grid place-items-center text-sm text-slate-500">
@@ -89,8 +88,7 @@ const App = () => (
                 <Route path="/register" element={<Auth mode="register" />} />
                 <Route path="/forgot-password" element={<Auth mode="forgot" />} />
                 <Route element={<ProtectedRoute />}>
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/dashboard/agents/:id" element={<AgentDetail />} />
+                  <Route path="/dashboard/*" element={<Dashboard />} />
                 </Route>
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
