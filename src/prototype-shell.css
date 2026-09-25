@@ -3032,3 +3032,61 @@
     object-position: center 38% !important;
   }
 }
+
+
+/* =========================================================
+   CHATBOT DEMOS DROPDOWN — LEGIBILITY + AERO GLASS
+   ========================================================= */
+
+.chatbot-demos-dropdown {
+  width: 16rem !important;
+  margin-top: .6rem !important;
+  padding: .45rem !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(255,255,255,.82) !important;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255,255,255,.65), transparent 32%),
+    linear-gradient(180deg, rgba(241,250,253,.96), rgba(216,239,247,.93)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -1px 0 rgba(76,138,163,.10),
+    0 18px 38px rgba(25,83,107,.18) !important;
+  backdrop-filter: blur(24px) saturate(175%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(175%) !important;
+}
+
+.chatbot-demos-dropdown [role="menuitem"] {
+  border-radius: 14px !important;
+  color: #244f69 !important;
+  font-weight: 750 !important;
+}
+
+.chatbot-demos-dropdown [role="menuitem"]:hover,
+.chatbot-demos-dropdown [role="menuitem"][data-highlighted] {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.78), rgba(220,241,247,.62)) !important;
+  color: #103d59 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.88),
+    0 6px 14px rgba(24,82,105,.07) !important;
+}
+
+.chatbot-demos-item {
+  color: inherit !important;
+  font-weight: 750 !important;
+}
+
+.chatbot-demos-item span {
+  color: #244f69 !important;
+}
+
+.chatbot-demos-item:hover span,
+.chatbot-demos-dropdown [data-highlighted] .chatbot-demos-item span {
+  color: #103d59 !important;
+}
+
+.chatbot-demos-arrow {
+  opacity: .55 !important;
+  color: #5b8196 !important;
+  stroke: #5b8196 !important;
+}
