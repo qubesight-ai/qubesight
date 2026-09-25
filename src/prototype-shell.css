@@ -2478,3 +2478,73 @@
     display: none !important;
   }
 }
+
+
+/* =========================================================
+   CONTACT SECTION STRUCTURAL COMPACTION
+   ========================================================= */
+
+.contact-compact-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 2.5rem 0 3.5rem !important;
+  display: block !important;
+  align-items: initial !important;
+  justify-content: initial !important;
+}
+
+.contact-compact-container {
+  position: relative;
+  min-height: 0 !important;
+  height: auto !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.contact-compact-card {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  transform: none !important;
+}
+
+.contact-aero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  opacity: .28;
+}
+
+.contact-aero-glow-left {
+  width: 280px;
+  height: 280px;
+  left: 4%;
+  top: 2rem;
+  background: rgba(117, 211, 234, .18);
+}
+
+.contact-aero-glow-right {
+  width: 260px;
+  height: 260px;
+  right: 6%;
+  bottom: 1rem;
+  background: rgba(133, 210, 172, .14);
+}
+
+/* Hard reset any inherited section sizing on this block */
+.prototype-content > section#contacto.contact-compact-section {
+  min-height: 0 !important;
+  height: auto !important;
+  padding-top: 2.5rem !important;
+  padding-bottom: 3.5rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 2rem !important;
+}
+
+@media (max-width: 900px) {
+  .contact-compact-section {
+    padding: 1.75rem 0 2.5rem !important;
+  }
+}
