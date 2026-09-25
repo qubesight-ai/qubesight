@@ -20,6 +20,7 @@ import {
   ShieldCheck,
   Sparkles,
   Volume2,
+  Linkedin,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -194,6 +195,79 @@ const PrototypeHero = () => {
   );
 };
 
+
+const WhoWeAre = () => {
+  const { language } = useTranslation();
+  const spanish = language === "es";
+
+  const founders = [
+    {
+      name: "Ernesto Libby Lugo",
+      role: spanish ? "Fundador" : "Founder",
+      description: spanish
+        ? "Lidera la visión de QubeSight, el desarrollo de producto y la estrategia tecnológica."
+        : "Leads QubeSight's vision, product development, and technology strategy.",
+      image: "/team/ernesto-libby.jpg",
+      linkedin: "https://www.linkedin.com/in/ernestolibby25/",
+    },
+    {
+      name: "Juan Carlos Barboza González",
+      role: spanish ? "Co-Fundador" : "Co-Founder",
+      description: spanish
+        ? "Impulsa la estrategia de negocio, el desarrollo comercial y el crecimiento de QubeSight."
+        : "Drives QubeSight's business strategy, commercial development, and growth.",
+      image: "/team/juan-carlos-barboza.jpg",
+      linkedin: "https://www.linkedin.com/in/juan-carlos-barboza-gonz%C3%A1lez-%D7%97%D7%95%D7%90%D7%9F-8492511a2/",
+    },
+  ];
+
+  return (
+    <section id="quienes-somos" className="founders-aero-section">
+      <div className="container founders-aero-container">
+        <div className="founders-aero-heading">
+          <span className="founders-aero-eyebrow">
+            <Sparkles className="h-3.5 w-3.5" />
+            {spanish ? "QUIÉNES SOMOS" : "ABOUT US"}
+          </span>
+          <h2>{spanish ? "Las personas detrás de QubeSight" : "The people behind QubeSight"}</h2>
+          <p>
+            {spanish
+              ? "Tecnología y negocio trabajando juntos para construir experiencias de atención con IA útiles para empresas reales."
+              : "Technology and business working together to build useful AI customer experiences for real companies."}
+          </p>
+        </div>
+
+        <div className="founders-aero-grid">
+          {founders.map((founder) => (
+            <article className="founder-aero-card" key={founder.name}>
+              <div className="founder-aero-photo-shell">
+                <img src={founder.image} alt={founder.name} className="founder-aero-photo" loading="lazy" />
+                <span className="founder-aero-photo-shine" aria-hidden="true" />
+              </div>
+
+              <div className="founder-aero-body">
+                <span className="founder-aero-role">{founder.role}</span>
+                <h3>{founder.name}</h3>
+                <p>{founder.description}</p>
+
+                <a
+                  href={founder.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="founder-aero-linkedin"
+                >
+                  <Linkedin className="h-4 w-4" />
+                  <span>LinkedIn</span>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const PrototypeShellHome = () => {
   useScrollReveal();
 
@@ -207,6 +281,7 @@ const PrototypeShellHome = () => {
           <ValueProposition />
           <Solution />
           <HowItWorks />
+          <WhoWeAre />
           <MatildaVoiceDemo />
           <EarlyAdopters />
           <FAQ />
