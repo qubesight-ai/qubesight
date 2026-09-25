@@ -15,9 +15,11 @@ import {
   ArrowUpRight,
   CalendarDays,
   MessageCircle,
+  Mic,
   PhoneCall,
   ShieldCheck,
   Sparkles,
+  Volume2,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -54,49 +56,77 @@ const PrototypeHero = () => {
 
       <div
         className="aero-hero-panel hero-matilda-card"
-        aria-label={spanish ? "Demo de Matilda" : "Matilda demo"}
+        aria-label={spanish ? "Hablar con Matilda" : "Talk to Matilda"}
       >
         <div className="aero-panel-topline hero-matilda-topline">
           <span />
           <span />
           <span />
-          <strong>{spanish ? "Demo de Matilda" : "Matilda demo"}</strong>
+          <strong>{spanish ? "DEMO DE VOZ EN VIVO" : "LIVE VOICE DEMO"}</strong>
         </div>
+
         <div className="hero-matilda-body">
           <div className="hero-matilda-header">
             <div className="hero-matilda-avatar">M</div>
             <div className="hero-matilda-meta">
-              <h3>Matilda</h3>
+              <div className="hero-matilda-name-row">
+                <h3>Matilda</h3>
+                <span className="hero-matilda-online">
+                  <i />
+                  {spanish ? "En línea" : "Online"}
+                </span>
+              </div>
               <p>
                 {spanish
-                  ? "Recepcionista IA para llamadas y consultas"
-                  : "AI receptionist for calls and inquiries"}
+                  ? "Recepcionista de voz con IA de QubeSight"
+                  : "QubeSight AI voice receptionist"}
               </p>
             </div>
           </div>
-          <div className="hero-matilda-wave" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="hero-matilda-bubble">
-            {spanish
-              ? "Hola, soy Matilda. Puedo atender clientes, responder preguntas y ayudarte a agendar una demostración."
-              : "Hi, I’m Matilda. I can answer customers, handle questions, and help schedule a demo."}
-          </div>
-          <div className="hero-matilda-actions">
-            <a href="#demo" className="hero-matilda-primary">
-              {spanish ? "Probar a Matilda" : "Try Matilda"}
+
+          <div className="hero-matilda-console">
+            <div className="hero-matilda-console-top">
+              <Volume2 className="h-4 w-4" />
+              <span>{spanish ? "Matilda está lista para escucharte" : "Matilda is ready to listen"}</span>
+            </div>
+
+            <div className="hero-matilda-wave" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+
+            <div className="hero-matilda-bubble">
+              {spanish
+                ? "Podés hablar conmigo como si llamaras a una recepción real. Preguntame por servicios, horarios o una demostración."
+                : "Talk to me like you would with a real receptionist. Ask about services, hours, or a demo."}
+            </div>
+
+            <a href="#demo" className="hero-matilda-talk">
+              <span className="hero-matilda-mic">
+                <Mic className="h-5 w-5" />
+              </span>
+              <span>
+                <strong>{spanish ? "Hablar con Matilda" : "Talk to Matilda"}</strong>
+                <small>{spanish ? "Demo de voz interactiva" : "Interactive voice demo"}</small>
+              </span>
+              <ArrowDown className="ml-auto h-4 w-4" />
             </a>
-            <a href="#early-adopters" className="hero-matilda-secondary">
-              {spanish ? "Solicitar demo" : "Request demo"}
-            </a>
+          </div>
+
+          <div className="hero-matilda-footnote">
+            <ShieldCheck className="h-3.5 w-3.5" />
+            <span>
+              {spanish ? "Demo segura · hasta 5 turnos de conversación" : "Secure demo · up to 5 conversation turns"}
+            </span>
           </div>
         </div>
       </div>
