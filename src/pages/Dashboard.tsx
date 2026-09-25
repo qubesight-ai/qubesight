@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import {
   Activity,
   Bot,
@@ -18,7 +19,6 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -27,10 +27,10 @@ import { useChatStream } from "@/hooks/useChatStream";
 import { useDashboardData } from "@/hooks/useDashboardData";
 import type { Agent, Call, Chatbot, DashboardSection as Section } from "@/types/dashboard";
 import TelephonySettings from "@/components/dashboard/TelephonySettings";
-import AgentRuntimeActions from "@/components/dashboard/AgentRuntimeActions";
-import LogoCube from "@/components/LogoCube";
-import { hasPendingDeploy } from "@/features/agents/provisioningStatus";
-
+import AgentsPage from "@/features/voice-agents/pages/AgentsPage";
+import CreateAgentPage from "@/features/voice-agents/pages/CreateAgentPage";
+import AgentDetailPage from "@/features/voice-agents/pages/AgentDetailPage";
+import { dashboardPath, dashboardSectionFromPath } from "@/routes/dashboardRoutes";
 const emptyChatbot: Chatbot = {
   id: "",
   name: "",
@@ -49,7 +49,8 @@ const emptyChatbot: Chatbot = {
 
 export default function Dashboard() {
   const { user, signOut } = useAuth();
-  const [section, setSection] = useState<Section>("overview");
+  const location = useLocation();
+  const navigate = useNavigate();
   const {
     organization: org,
     profile,
@@ -60,9 +61,13 @@ export default function Dashboard() {
     error,
     reload: load,
   } = useDashboardData(user?.id);
-  const navigate = useNavigate();
   const [mobile, setMobile] = useState(false);
   const [editingBot, setEditingBot] = useState<Chatbot | null>(null);
+  const section = useMemo<Section>(
+    () => dashboardSectionFromPath(location.pathname),
+    [location.pathname],
+  );
+  const openSection = (next: Section) => navigate(dashboardPath(next));
   useEffect(() => {
     if (error) toast.error("No se pudo cargar el dashboard");
   }, [error]);
@@ -85,8 +90,11 @@ export default function Dashboard() {
     <div className="min-h-screen bg-[#f4f7fb] text-slate-900 flex">
       <aside className={`admin-sidebar ${mobile ? "open" : ""}`}>
         <div className="p-5 flex items-center justify-between">
-          <span className="flex h-10 w-[10.75rem] items-center text-white">
-            <LogoCube className="[&_.logo-text-mobile]:!text-white" />
+          <span className="flex items-center gap-3 text-white font-semibold text-lg">
+            <i className="w-9 h-9 rounded-xl bg-blue-500 grid place-items-center">
+              <Mic2 size={18} />
+            </i>
+            QubeSight
           </span>
           <button className="md:hidden text-slate-400" onClick={() => setMobile(false)}>
             <X />
@@ -100,7 +108,7 @@ export default function Dashboard() {
             <button
               key={id}
               onClick={() => {
-                setSection(id);
+                openSection(id);
                 setMobile(false);
               }}
               className={section === id ? "active" : ""}
@@ -154,29 +162,38 @@ export default function Dashboard() {
           </span>
         </header>
         <div className="p-5 md:p-8">
-          {section === "overview" && (
-            <Overview agents={agents} calls={calls} onSection={setSection} />
-          )}{" "}
-          {section === "agents" && (
-            <Agents
-              agents={agents}
-              onOpen={(agentId) => navigate(`/dashboard/agents/${agentId}`)}
-              onNew={() => navigate("/dashboard/agents/new")}
-              onChanged={load}
+          <Routes>
+            <Route
+              index
+              element={<Overview agents={agents} calls={calls} onSection={openSection} />}
             />
-          )}{" "}
-          {section === "chatbots" && (
-            <Chatbots
-              bots={chatbots}
-              onEdit={setEditingBot}
-              onNew={() => setEditingBot(emptyChatbot)}
+            <Route path="agents" element={<AgentsPage agents={agents} />} />
+            <Route
+              path="agents/new"
+              element={<CreateAgentPage organizationId={org.id} onChanged={load} />}
             />
-          )}{" "}
-          {section === "telephony" && <TelephonySettings />}{" "}
-          {section === "calls" && <Calls calls={calls} />}{" "}
-          {section === "profile" && (
-            <Profile profile={profile} email={user?.email || ""} org={org} />
-          )}
+            <Route
+              path="agents/:agentId"
+              element={<AgentDetailPage agents={agents} organizationId={org.id} onChanged={load} />}
+            />
+            <Route
+              path="chatbots"
+              element={
+                <Chatbots
+                  bots={chatbots}
+                  onEdit={setEditingBot}
+                  onNew={() => setEditingBot(emptyChatbot)}
+                />
+              }
+            />
+            <Route path="telephony" element={<TelephonySettings />} />
+            <Route path="calls" element={<Calls calls={calls} />} />
+            <Route
+              path="profile"
+              element={<Profile profile={profile} email={user?.email || ""} org={org} />}
+            />
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          </Routes>
         </div>
       </main>
       {editingBot && (
@@ -325,65 +342,6 @@ function Stat({
       <strong className="text-3xl block mt-2">{value}</strong>
       <small className="text-slate-400">{detail}</small>
     </article>
-  );
-}
-function Agents({
-  agents,
-  onOpen,
-  onNew,
-  onChanged,
-}: {
-  agents: Agent[];
-  onOpen: (agentId: string) => void;
-  onNew: () => void;
-  onChanged: () => void;
-}) {
-  return (
-    <div className="admin-panel">
-      <div className="panel-head">
-        <div>
-          <h2>Agentes de voz</h2>
-          <p>Prompt, voz, número y comportamiento por cliente</p>
-        </div>
-        <button className="admin-primary" onClick={onNew}>
-          <Plus size={15} />
-          Nuevo agente
-        </button>
-      </div>
-      {agents.length === 0 ? (
-        <Empty icon={Mic2} title="Aún no tienes agentes" action="Crea el primero para comenzar" />
-      ) : (
-        <div className="divide-y">
-          {agents.map((a) => (
-            <article key={a.id} className="agent-row">
-              <span className="agent-icon">
-                <Mic2 />
-              </span>
-              <div>
-                <span className={a.status === "active" ? "status-pill" : "status-pill inactive"}>
-                  {a.status === "active" ? "Activo" : "Inactivo"}
-                </span>
-                <h3>{a.name}</h3>
-                <p>{a.objective || "Sin objetivo configurado"}</p>
-                {hasPendingDeploy(a) && (
-                  <small className="text-amber-600 font-medium">Cambios sin desplegar</small>
-                )}
-              </div>
-              <Data label="VOZ E IDIOMA" value={`${a.voice_name} · ${a.language}`} />
-              <Data label="NÚMERO TWILIO" value={a.twilio_phone || "Sin asignar"} />
-              <AgentRuntimeActions agent={a} onChanged={onChanged} />
-              <button
-                className="icon-action"
-                onClick={() => onOpen(a.id)}
-                aria-label={`Abrir ${a.name}`}
-              >
-                <Settings2 size={17} />
-              </button>
-            </article>
-          ))}
-        </div>
-      )}
-    </div>
   );
 }
 const Data = ({ label, value }: { label: string; value: string }) => (

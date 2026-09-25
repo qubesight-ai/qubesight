@@ -28,7 +28,6 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileDemosOpen, setIsMobileDemosOpen] = useState(false);
-  const [pendingMobileSection, setPendingMobileSection] = useState<string | null>(null);
   const desktopLinkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const { t, language } = useTranslation();
@@ -45,12 +44,11 @@ const Header = () => {
   );
 
   const navLabelKeys: Record<(typeof NAV_SECTION_IDS)[number], string> = {
-    problem: "nav.problem",
     "value-proposition": "nav.value",
     solution: "nav.solution",
-    implementation: "nav.implementation",
+    "how-it-works": "nav.how",
     demo: "nav.demo",
-    faq: "nav.faq",
+    "early-adopters": "nav.early",
   };
 
   const navLinks = NAV_SECTION_IDS.map((id) => ({
@@ -62,13 +60,8 @@ const Header = () => {
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     if (!isHome) return;
     e.preventDefault();
-    const instant = e.altKey;
-    if (isMobileMenuOpen) {
-      setPendingMobileSection(id);
-      setIsMobileMenuOpen(false);
-      return;
-    }
-    navigateToSection(id, { instant });
+    navigateToSection(id, { instant: e.altKey });
+    setIsMobileMenuOpen(false);
     requestAnimationFrame(() => refreshActive());
   };
 
@@ -120,7 +113,7 @@ const Header = () => {
     requestAnimationFrame(() => refreshActive());
   }, [isMobileMenuOpen, refreshActive]);
 
-  const demosLabel = language === "es" ? "Demos de chatbots" : "Chatbot demos";
+  const demosLabel = language === "es" ? "Demos en vivo" : "Live demos";
   const navAriaLabel = language === "es" ? "Secciones principales" : "Main sections";
 
   return (
@@ -181,7 +174,6 @@ const Header = () => {
                 <ChevronDown className="h-3.5 w-3.5 transition-transform group-data-[state=open]:rotate-180" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-64 glass-card border-white/10 mt-2">
-
                 {demoLinks.map((d) => (
                   <DropdownMenuItem key={d.to} asChild className="cursor-pointer">
                     <Link to={d.to} className="flex items-center gap-3 py-2.5 px-3 text-sm">
@@ -239,14 +231,7 @@ const Header = () => {
           </div>
         </nav>
 
-        <AnimatePresence
-          onExitComplete={() => {
-            if (!pendingMobileSection) return;
-            navigateToSection(pendingMobileSection, { instant: false });
-            setPendingMobileSection(null);
-            requestAnimationFrame(() => refreshActive());
-          }}
-        >
+        <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
               id="mobile-nav-panel"
@@ -302,7 +287,6 @@ const Header = () => {
                       className="overflow-hidden"
                     >
                       <div className="pl-4 space-y-1 pt-1">
-
                         {demoLinks.map((d) => (
                           <Link
                             key={d.to}
