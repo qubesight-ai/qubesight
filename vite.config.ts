@@ -18,31 +18,6 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (!id.includes("node_modules")) return undefined;
-          if (
-            id.includes("@livekit") ||
-            id.includes("livekit-client") ||
-            id.includes("@bufbuild/protobuf")
-          ) {
-            return "vendor-livekit";
-          }
-          if (id.includes("three") || id.includes("@react-three") || id.includes("@splinetool")) {
-            return "vendor-3d";
-          }
-          if (id.includes("recharts") || id.includes("d3-")) return "vendor-charts";
-          if (id.includes("@radix-ui") || id.includes("cmdk") || id.includes("vaul")) {
-            return "vendor-ui";
-          }
-          if (id.includes("@supabase")) return "vendor-supabase";
-          if (id.includes("framer-motion")) return "vendor-motion";
-          if (id.includes("react") || id.includes("scheduler")) return "vendor-react";
-          return "vendor";
-        },
-      },
-    },
-  },
+  // No manualChunks: custom vendor splitting created circular chunk imports
+  // where React-dependent code ran before React initialized (blank production page).
 }));
