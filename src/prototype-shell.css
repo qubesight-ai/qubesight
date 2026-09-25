@@ -2935,3 +2935,74 @@
     min-height: 0 !important;
   }
 }
+
+
+/* =========================================================
+   FOUNDERS PHOTO — FULL BLEED ROUNDED CROP
+   ========================================================= */
+
+.founder-aero-photo-shell {
+  position: relative !important;
+  aspect-ratio: 4 / 5 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  border-radius: 22px !important;
+  display: block !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.28), rgba(214,239,247,.10)) !important;
+}
+
+.founder-aero-photo {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: inherit !important;
+  background: transparent !important;
+}
+
+/* Ernesto — keep face comfortably framed while filling the glass frame */
+.founder-aero-card:first-child .founder-aero-photo {
+  object-fit: cover !important;
+  object-position: center 18% !important;
+}
+
+/* Juan Carlos — slightly lower crop so head and shoulders stay balanced */
+.founder-aero-card:nth-child(2) .founder-aero-photo {
+  object-fit: cover !important;
+  object-position: center 22% !important;
+}
+
+.founder-aero-photo-shine {
+  border-radius: inherit !important;
+}
+
+@media (max-width: 1080px) {
+  .founder-aero-photo-shell {
+    aspect-ratio: 4 / 5 !important;
+    min-height: 0 !important;
+  }
+
+  .founder-aero-photo {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    object-fit: cover !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .founder-aero-photo-shell {
+    aspect-ratio: 4 / 5 !important;
+    min-height: 0 !important;
+    border-radius: 18px !important;
+  }
+
+  .founder-aero-photo {
+    object-fit: cover !important;
+  }
+}
