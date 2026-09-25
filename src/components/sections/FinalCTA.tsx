@@ -70,7 +70,7 @@ const FinalCTA = () => {
       ];
 
   return (
-    <section id="contacto" className="contact-compact-section">
+    <div id="contacto" className="contact-compact-section">
       <div className="contact-aero-glow contact-aero-glow-left" aria-hidden="true" />
       <div className="contact-aero-glow contact-aero-glow-right" aria-hidden="true" />
       <div className="container contact-compact-container">
@@ -203,7 +203,7 @@ const FinalCTA = () => {
           </p>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 };
 
