@@ -1,5 +1,10 @@
 import type { Database } from "@/integrations/supabase/types";
-import type { Agent, AgentConfigurationStatus, AgentType } from "@/types/dashboard";
+import type {
+  Agent,
+  AgentConfigurationStatus,
+  AgentType,
+  ProvisioningStatus,
+} from "@/types/dashboard";
 
 type VoiceAgentRow = Database["public"]["Tables"]["voice_agents"]["Row"];
 
@@ -8,6 +13,14 @@ const configurationStatuses = new Set<AgentConfigurationStatus>([
   "draft",
   "generated",
   "published",
+]);
+const provisioningStatuses = new Set<ProvisioningStatus>([
+  "not_deployed",
+  "provisioning",
+  "running",
+  "degraded",
+  "stopped",
+  "error",
 ]);
 
 export function parseAgentType(value: unknown): AgentType | null {
