@@ -2258,3 +2258,223 @@
     height: 36px;
   }
 }
+
+
+/* =========================================================
+   MATILDA PREMIUM DEMO + CONTACT SPACING FIX
+   ========================================================= */
+
+.hero-matilda-card {
+  width: min(430px, 31vw) !important;
+}
+
+.hero-matilda-name-row {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  flex-wrap: wrap;
+}
+
+.hero-matilda-online {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .2rem .5rem;
+  border-radius: 999px;
+  font-size: .68rem;
+  font-weight: 800;
+  color: #2e7250 !important;
+  border: 1px solid rgba(106, 191, 145, .34);
+  background: linear-gradient(180deg, rgba(255,255,255,.52), rgba(218,244,229,.28));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+.hero-matilda-online i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #39b66e;
+  box-shadow: 0 0 0 3px rgba(57,182,110,.12), 0 0 10px rgba(57,182,110,.4);
+}
+
+.hero-matilda-console {
+  display: grid;
+  gap: .85rem;
+  padding: .9rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.76);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255,255,255,.52), transparent 34%),
+    linear-gradient(180deg, rgba(255,255,255,.22), rgba(212,239,246,.08));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    inset 0 -1px 0 rgba(79,144,169,.05),
+    0 16px 34px rgba(21,82,107,.08);
+}
+
+.hero-matilda-console-top {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  color: #477188;
+  font-size: .76rem;
+  font-weight: 700;
+}
+
+.hero-matilda-console-top svg {
+  stroke: #398bad !important;
+}
+
+.hero-matilda-talk {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  min-height: 58px;
+  padding: .72rem .85rem;
+  border-radius: 16px;
+  color: #fff !important;
+  text-decoration: none;
+  border: 1px solid rgba(20,103,139,.96);
+  background:
+    linear-gradient(180deg, #95e3f4 0%, #68c8e1 18%, #43accd 44%, #2e8fb5 62%, #216f95 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    inset 0 -1px 0 rgba(8,62,85,.28),
+    0 10px 22px rgba(28,104,136,.2);
+}
+
+.hero-matilda-talk:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03) saturate(1.05);
+}
+
+.hero-matilda-talk strong,
+.hero-matilda-talk small,
+.hero-matilda-talk svg {
+  color: #fff !important;
+  stroke: #fff !important;
+}
+
+.hero-matilda-talk strong {
+  display: block;
+  font-size: .86rem;
+  line-height: 1.1;
+}
+
+.hero-matilda-talk small {
+  display: block;
+  margin-top: .18rem;
+  font-size: .67rem;
+  opacity: .82;
+}
+
+.hero-matilda-mic {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  background: rgba(255,255,255,.15);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.34),
+    inset 0 -1px 0 rgba(0,0,0,.08);
+}
+
+.hero-matilda-footnote {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: .68rem;
+  color: #6a808d;
+}
+
+.hero-matilda-footnote svg {
+  stroke: #5b9a78 !important;
+}
+
+.hero-matilda-wave {
+  height: 46px;
+}
+
+.hero-matilda-wave span:nth-child(10) { height: 22px; }
+.hero-matilda-wave span:nth-child(11) { height: 14px; }
+
+/* Contact section: remove the oversized dead zone around the form */
+.prototype-content > #contacto,
+#contacto {
+  padding-top: 3.5rem !important;
+  padding-bottom: 4rem !important;
+  min-height: auto !important;
+}
+
+#contacto .container {
+  min-height: 0 !important;
+}
+
+#contacto .glass-card.depth-card {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#contacto .glass-card.depth-card > h2 {
+  margin-bottom: 1rem !important;
+}
+
+#contacto .glass-card.depth-card > p:first-of-type {
+  margin-top: 0 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+#contacto .glass-card.depth-card ul {
+  margin-bottom: 1.75rem !important;
+}
+
+#contacto .max-w-2xl.mx-auto.mb-8.text-left {
+  margin-top: 0 !important;
+  margin-bottom: 1.75rem !important;
+}
+
+/* WhatsApp floating button: icon + explicit text */
+.whatsapp-aero-button {
+  padding-right: 1rem !important;
+}
+
+.whatsapp-aero-icon svg {
+  fill: #fff !important;
+  color: #fff !important;
+  stroke: none !important;
+}
+
+.whatsapp-aero-label {
+  display: inline-block !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+}
+
+@media (max-width: 1180px) {
+  .hero-matilda-card {
+    width: 320px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-matilda-card {
+    display: none !important;
+  }
+
+  #contacto {
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.75rem !important;
+  }
+
+  #contacto .glass-card.depth-card {
+    padding: 2rem 1.15rem !important;
+  }
+
+  .whatsapp-aero-label {
+    display: none !important;
+  }
+}
