@@ -10,49 +10,132 @@ import FinalCTA from "@/components/sections/FinalCTA";
 import Footer from "@/components/sections/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  CalendarDays,
+  MessageCircle,
+  Mic,
+  PhoneCall,
+  ShieldCheck,
+  Sparkles,
+  Volume2,
+} from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const PrototypeHero = () => {
   const { language } = useTranslation();
   const spanish = language === "es";
+
+  const widgets = [
+    {
+      icon: PhoneCall,
+      title: spanish ? "Llamadas" : "Calls",
+      value: spanish ? "Atención 24/7" : "24/7 coverage",
+    },
+    {
+      icon: MessageCircle,
+      title: "WhatsApp",
+      value: spanish ? "Respuestas al instante" : "Instant replies",
+    },
+    {
+      icon: CalendarDays,
+      title: spanish ? "Agenda" : "Calendar",
+      value: spanish ? "Citas organizadas" : "Appointments organized",
+    },
+  ];
+
   return (
     <section id="hero" className="prototype-hero">
-      <div className="prototype-cube prototype-cube-a" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <i>
-          <b />
-          <b />
-          <b />
-          <b />
-          <b />
-          <b />
-        </i>
+      <div className="aero-ambient aero-ambient-left" aria-hidden="true" />
+      <div className="aero-ambient aero-ambient-right" aria-hidden="true" />
+      <div className="aero-horizon" aria-hidden="true" />
+
+      <div className="aero-orbit aero-orbit-large" aria-hidden="true" />
+      <div className="aero-orbit aero-orbit-small" aria-hidden="true" />
+
+      <div
+        className="aero-hero-panel hero-matilda-card"
+        aria-label={spanish ? "Hablar con Matilda" : "Talk to Matilda"}
+      >
+        <div className="aero-panel-topline hero-matilda-topline">
+          <span />
+          <span />
+          <span />
+          <strong>{spanish ? "DEMO DE VOZ EN VIVO" : "LIVE VOICE DEMO"}</strong>
+        </div>
+
+        <div className="hero-matilda-body">
+          <div className="hero-matilda-header">
+            <div className="hero-matilda-avatar">M</div>
+            <div className="hero-matilda-meta">
+              <div className="hero-matilda-name-row">
+                <h3>Matilda</h3>
+                <span className="hero-matilda-online">
+                  <i />
+                  {spanish ? "En línea" : "Online"}
+                </span>
+              </div>
+              <p>
+                {spanish
+                  ? "Recepcionista de voz con IA de QubeSight"
+                  : "QubeSight AI voice receptionist"}
+              </p>
+            </div>
+          </div>
+
+          <div className="hero-matilda-console">
+            <div className="hero-matilda-console-top">
+              <Volume2 className="h-4 w-4" />
+              <span>{spanish ? "Matilda está lista para escucharte" : "Matilda is ready to listen"}</span>
+            </div>
+
+            <div className="hero-matilda-wave" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+
+            <div className="hero-matilda-bubble">
+              {spanish
+                ? "Podés hablar conmigo como si llamaras a una recepción real. Preguntame por servicios, horarios o una demostración."
+                : "Talk to me like you would with a real receptionist. Ask about services, hours, or a demo."}
+            </div>
+
+            <a href="#demo" className="hero-matilda-talk">
+              <span className="hero-matilda-mic">
+                <Mic className="h-5 w-5" />
+              </span>
+              <span>
+                <strong>{spanish ? "Hablar con Matilda" : "Talk to Matilda"}</strong>
+                <small>{spanish ? "Demo de voz interactiva" : "Interactive voice demo"}</small>
+              </span>
+              <ArrowDown className="ml-auto h-4 w-4" />
+            </a>
+          </div>
+
+          <div className="hero-matilda-footnote">
+            <ShieldCheck className="h-3.5 w-3.5" />
+            <span>
+              {spanish ? "Demo segura · hasta 5 turnos de conversación" : "Secure demo · up to 5 conversation turns"}
+            </span>
+          </div>
+        </div>
       </div>
-      <div className="prototype-cube prototype-cube-b" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <i>
-          <b />
-          <b />
-          <b />
-          <b />
-          <b />
-          <b />
-        </i>
-      </div>
+
       <div className="prototype-eyebrow">
-        ● {spanish ? "RECEPCIÓN CON IA PARA NEGOCIOS" : "AI RECEPTION FOR BUSINESSES"}
+        <Sparkles className="h-3.5 w-3.5" />
+        {spanish ? "RECEPCIÓN CON IA PARA NEGOCIOS" : "AI RECEPTION FOR BUSINESSES"}
       </div>
+
       <h1>
         {spanish ? "Tus clientes quieren respuestas" : "Your customers want answers"}
         <br />
@@ -64,6 +147,33 @@ const PrototypeHero = () => {
             : "QubeSight helps your business be there for them."}
         </em>
       </h1>
+
+      <div className="aero-trustline">
+        <ShieldCheck className="h-4 w-4" />
+        <span>
+          {spanish
+            ? "Automatización clara, profesional y diseñada para negocios reales."
+            : "Clear, professional automation designed for real businesses."}
+        </span>
+      </div>
+
+      <div
+        className="aero-widget-dock"
+        aria-label={spanish ? "Capacidades de QubeSight" : "QubeSight capabilities"}
+      >
+        {widgets.map(({ icon: Icon, title, value }) => (
+          <div className="aero-widget" key={title}>
+            <div className="aero-widget-icon">
+              <Icon className="h-5 w-5" />
+            </div>
+            <div>
+              <strong>{title}</strong>
+              <span>{value}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <div className="prototype-hero-bottom">
         <p>
           {spanish
@@ -86,6 +196,7 @@ const PrototypeHero = () => {
 
 const PrototypeShellHome = () => {
   useScrollReveal();
+
   return (
     <div className="prototype-shell">
       <Header />
@@ -107,4 +218,5 @@ const PrototypeShellHome = () => {
     </div>
   );
 };
+
 export default PrototypeShellHome;
