@@ -3006,3 +3006,29 @@
     object-fit: cover !important;
   }
 }
+
+
+/* =========================================================
+   JUAN CARLOS PORTRAIT — TIGHTER PREMIUM CROP
+   ========================================================= */
+
+.founder-aero-card:nth-child(2) .founder-aero-photo {
+  object-fit: cover !important;
+  object-position: center 38% !important;
+  transform: scale(1.42) !important;
+  transform-origin: center 42% !important;
+}
+
+@media (max-width: 1080px) {
+  .founder-aero-card:nth-child(2) .founder-aero-photo {
+    transform: scale(1.36) !important;
+    object-position: center 38% !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .founder-aero-card:nth-child(2) .founder-aero-photo {
+    transform: scale(1.30) !important;
+    object-position: center 38% !important;
+  }
+}
