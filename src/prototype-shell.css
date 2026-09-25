@@ -2012,3 +2012,249 @@
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* =========================================================
+   MATILDA HERO CARD + WHATSAPP AERO BUTTON
+   ========================================================= */
+
+.hero-matilda-card {
+  padding: 0 !important;
+}
+
+.hero-matilda-topline {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+}
+
+.hero-matilda-topline strong {
+  margin-left: .45rem;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  color: #2d627f;
+}
+
+.hero-matilda-body {
+  padding: 1rem 1rem 1.1rem;
+  display: grid;
+  gap: .9rem;
+}
+
+.hero-matilda-header {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+
+.hero-matilda-avatar {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: #fff;
+  background:
+    linear-gradient(180deg, #98e2f4 0%, #6ecbe4 22%, #44abcf 50%, #2f8db1 72%, #236b8d 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.88),
+    inset 0 -1px 0 rgba(10,64,86,.28),
+    0 8px 16px rgba(21,87,113,.18);
+  text-shadow: 0 -1px 0 rgba(12,75,100,.45);
+}
+
+.hero-matilda-meta h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  color: #153f59;
+}
+
+.hero-matilda-meta p {
+  margin: .16rem 0 0;
+  font-size: .78rem;
+  line-height: 1.4;
+  color: #6b7f8c !important;
+}
+
+.hero-matilda-wave {
+  height: 42px;
+  padding: 0 .45rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .34rem;
+  border: 1px solid rgba(255,255,255,.68);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.22), rgba(216,240,247,.08));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.82),
+    0 10px 24px rgba(25,84,108,.06);
+  backdrop-filter: blur(24px) saturate(165%);
+  -webkit-backdrop-filter: blur(24px) saturate(165%);
+}
+
+.hero-matilda-wave span {
+  width: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #75cfe7, #2e91b6);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45);
+}
+.hero-matilda-wave span:nth-child(1) { height: 10px; }
+.hero-matilda-wave span:nth-child(2) { height: 18px; }
+.hero-matilda-wave span:nth-child(3) { height: 28px; }
+.hero-matilda-wave span:nth-child(4) { height: 20px; }
+.hero-matilda-wave span:nth-child(5) { height: 34px; }
+.hero-matilda-wave span:nth-child(6) { height: 24px; }
+.hero-matilda-wave span:nth-child(7) { height: 30px; }
+.hero-matilda-wave span:nth-child(8) { height: 18px; }
+.hero-matilda-wave span:nth-child(9) { height: 12px; }
+
+.hero-matilda-bubble {
+  padding: .9rem 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.72);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255,255,255,.58), transparent 30%),
+    linear-gradient(180deg, rgba(255,255,255,.26), rgba(223,242,247,.10));
+  color: #244c63;
+  font-size: .86rem;
+  line-height: 1.52;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.90),
+    0 14px 28px rgba(25,84,108,.08);
+}
+
+.hero-matilda-actions {
+  display: flex;
+  gap: .65rem;
+  flex-wrap: wrap;
+}
+
+.hero-matilda-primary,
+.hero-matilda-secondary {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .72rem .92rem;
+  border-radius: 13px;
+  font-size: .82rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.hero-matilda-primary {
+  color: #fff !important;
+  border: 1px solid rgba(20,103,139,.95);
+  background:
+    linear-gradient(180deg, #8de1f5 0%, #6ac9e3 18%, #42adcf 44%, #2d90b7 60%, #216f95 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.90),
+    inset 0 -1px 0 rgba(10,63,85,.28),
+    0 10px 22px rgba(28,104,136,.18);
+}
+
+.hero-matilda-secondary {
+  color: #2f617c !important;
+  border: 1px solid rgba(255,255,255,.78);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.42), rgba(231,245,248,.14)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.92),
+    inset 0 -1px 0 rgba(98,152,175,.06),
+    0 6px 12px rgba(25,79,101,.06);
+}
+
+.whatsapp-aero-button {
+  position: fixed !important;
+  right: 22px !important;
+  bottom: 22px !important;
+  z-index: 80 !important;
+  min-height: 58px;
+  min-width: 58px;
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  padding: .72rem .95rem .72rem .72rem;
+  border-radius: 999px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.58);
+  background:
+    linear-gradient(180deg, #54e58a 0%, #2dca6e 34%, #1daa5b 68%, #158346 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.42),
+    inset 0 -1px 0 rgba(8,88,42,.24),
+    0 16px 34px rgba(13,96,45,.24);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+
+.whatsapp-aero-highlight {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: 4px;
+  height: 44%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,0));
+  pointer-events: none;
+}
+
+.whatsapp-aero-icon,
+.whatsapp-aero-label {
+  position: relative;
+  z-index: 1;
+}
+
+.whatsapp-aero-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.34),
+    inset 0 -1px 0 rgba(0,0,0,.08);
+}
+
+.whatsapp-aero-icon svg {
+  stroke: #fff !important;
+}
+
+.whatsapp-aero-label {
+  color: #fff !important;
+  font-size: .82rem;
+  font-weight: 800;
+  text-shadow: 0 -1px 0 rgba(7,80,38,.35);
+}
+
+@media (max-width: 900px) {
+  .hero-matilda-card {
+    display: none !important;
+  }
+
+  .whatsapp-aero-button {
+    width: 56px;
+    min-width: 56px;
+    height: 56px;
+    min-height: 56px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .whatsapp-aero-label {
+    display: none;
+  }
+
+  .whatsapp-aero-icon {
+    width: 36px;
+    height: 36px;
+  }
+}
