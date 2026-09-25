@@ -2865,3 +2865,73 @@
     padding: .4rem .2rem .35rem;
   }
 }
+
+
+/* =========================================================
+   FOUNDERS PHOTO FRAMING FIX
+   ========================================================= */
+
+.founder-aero-photo-shell {
+  aspect-ratio: 4 / 5 !important;
+  min-height: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255,255,255,.72), transparent 42%),
+    linear-gradient(180deg, rgba(224,242,247,.56), rgba(202,229,238,.32)) !important;
+}
+
+.founder-aero-photo {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  display: block !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  background: transparent !important;
+}
+
+.founder-aero-card:first-child .founder-aero-photo {
+  object-fit: contain !important;
+  object-position: center center !important;
+}
+
+.founder-aero-card:nth-child(2) .founder-aero-photo {
+  object-fit: contain !important;
+  object-position: center center !important;
+}
+
+.founder-aero-photo-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.20),
+    inset 0 -18px 30px rgba(40,91,111,.05);
+}
+
+@media (max-width: 1080px) {
+  .founder-aero-photo-shell {
+    min-height: 0 !important;
+    aspect-ratio: 4 / 5 !important;
+  }
+
+  .founder-aero-photo {
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .founder-aero-photo-shell {
+    min-height: 0 !important;
+    aspect-ratio: 4 / 5 !important;
+  }
+
+  .founder-aero-photo {
+    min-height: 0 !important;
+  }
+}
