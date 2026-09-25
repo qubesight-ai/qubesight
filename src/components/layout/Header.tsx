@@ -113,7 +113,7 @@ const Header = () => {
     requestAnimationFrame(() => refreshActive());
   }, [isMobileMenuOpen, refreshActive]);
 
-  const demosLabel = language === "es" ? "Demos en vivo" : "Live demos";
+  const demosLabel = "ChatBot Demos";
   const navAriaLabel = language === "es" ? "Secciones principales" : "Main sections";
 
   return (
@@ -173,13 +173,13 @@ const Header = () => {
                 {demosLabel}
                 <ChevronDown className="h-3.5 w-3.5 transition-transform group-data-[state=open]:rotate-180" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-64 glass-card border-white/10 mt-2">
+              <DropdownMenuContent align="end" className="chatbot-demos-dropdown w-64 mt-2">
                 {demoLinks.map((d) => (
                   <DropdownMenuItem key={d.to} asChild className="cursor-pointer">
-                    <Link to={d.to} className="flex items-center gap-3 py-2.5 px-3 text-sm">
+                    <Link to={d.to} className="chatbot-demos-item flex items-center gap-3 py-2.5 px-3 text-sm">
                       <span className="text-lg">{d.emoji}</span>
                       <span className="flex-1">{d.label}</span>
-                      <ArrowRight className="h-3.5 w-3.5 opacity-50" />
+                      <ArrowRight className="chatbot-demos-arrow h-3.5 w-3.5" />
                     </Link>
                   </DropdownMenuItem>
                 ))}
