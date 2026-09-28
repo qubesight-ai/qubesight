@@ -2,6 +2,7 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.58.0";
 import { z } from "https://esm.sh/zod@3.25.76";
 import { AccessToken, LiveKitAPI } from "npm:livekit-server-sdk@2.19.1";
+import { issueVoiceAgentRuntimeToken } from "../_shared/voiceAgentRuntimeToken.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -153,10 +154,17 @@ serve(async (req) => {
 
     const roomName = `qs-test-${agent.id}-${crypto.randomUUID()}`;
     const participantIdentity = `dashboard-${userId}-${crypto.randomUUID()}`;
+    const runtimeToken = await issueVoiceAgentRuntimeToken({
+      sub: agent.id,
+      organization_id: agent.organization_id,
+      room_name: roomName,
+      mode: "browser_test",
+    });
     const metadata = JSON.stringify({
       agent_id: agent.id,
       organization_id: agent.organization_id,
       mode: "browser_test",
+      runtime_token: runtimeToken,
     });
 
     const api = new LiveKitAPI({

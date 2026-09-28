@@ -1,5 +1,8 @@
 dist
 node_modules
+.pytest_cache
+.ruff_cache
+.venv
 .agents
 package-lock.json
 bun.lock
