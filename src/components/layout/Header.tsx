@@ -28,6 +28,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileDemosOpen, setIsMobileDemosOpen] = useState(false);
+  const [pendingMobileSection, setPendingMobileSection] = useState<string | null>(null);
   const desktopLinkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const { t, language } = useTranslation();
@@ -44,11 +45,13 @@ const Header = () => {
   );
 
   const navLabelKeys: Record<(typeof NAV_SECTION_IDS)[number], string> = {
+    problem: "nav.problem",
     "value-proposition": "nav.value",
     solution: "nav.solution",
     "how-it-works": "nav.how",
     demo: "nav.demo",
     "early-adopters": "nav.early",
+    faq: "nav.faq",
   };
 
   const navLinks = NAV_SECTION_IDS.map((id) => ({
@@ -60,6 +63,11 @@ const Header = () => {
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     if (!isHome) return;
     e.preventDefault();
+    if (isMobileMenuOpen) {
+      setPendingMobileSection(id);
+      setIsMobileMenuOpen(false);
+      return;
+    }
     navigateToSection(id, { instant: e.altKey });
     setIsMobileMenuOpen(false);
     requestAnimationFrame(() => refreshActive());
@@ -136,7 +144,7 @@ const Header = () => {
             <LogoCube />
           </Link>
 
-          <div className="hidden lg:flex items-center gap-4 xl:gap-7 whitespace-nowrap">
+          <div className="hidden 2xl:flex items-center gap-4 xl:gap-7 whitespace-nowrap">
             {navLinks.map((link, index) => {
               const isActive = activeSection === link.id;
               return (
@@ -187,7 +195,7 @@ const Header = () => {
             </DropdownMenu>
           </div>
 
-          <div className="hidden lg:flex items-center gap-2 shrink-0">
+          <div className="hidden 2xl:flex items-center gap-2 shrink-0">
             <LanguageSwitcher />
             {user ? (
               <Button variant="hero" size="default" asChild className="min-h-[44px]">
@@ -216,7 +224,7 @@ const Header = () => {
             )}
           </div>
 
-          <div className="lg:hidden flex items-center gap-2">
+          <div className="2xl:hidden flex items-center gap-2">
             <LanguageSwitcher />
             <button
               type="button"
@@ -231,7 +239,12 @@ const Header = () => {
           </div>
         </nav>
 
-        <AnimatePresence>
+        <AnimatePresence onExitComplete={() => {
+          if (pendingMobileSection) {
+            navigateToSection(pendingMobileSection);
+            setPendingMobileSection(null);
+          }
+        }}>
           {isMobileMenuOpen && (
             <motion.div
               id="mobile-nav-panel"
@@ -239,7 +252,7 @@ const Header = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden overflow-hidden glass-nav border-t border-white/10"
+              className="2xl:hidden overflow-y-auto glass-nav border-t border-white/10 max-h-[calc(100dvh-5rem)]"
             >
               <div className="py-4 space-y-1">
                 {navLinks.map((link) => {

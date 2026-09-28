@@ -1,10 +1,12 @@
 /** Section IDs linked from the main landing nav. */
 export const NAV_SECTION_IDS = [
+  "problem",
   "value-proposition",
   "solution",
   "how-it-works",
   "demo",
   "early-adopters",
+  "faq",
 ] as const;
 
 export type NavSectionId = (typeof NAV_SECTION_IDS)[number];

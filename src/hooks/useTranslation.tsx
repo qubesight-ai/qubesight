@@ -23,10 +23,10 @@ export const translations: Translations = {
   "nav.pricing": { es: "Precios", en: "Pricing" },
   "nav.faq": { es: "FAQ", en: "FAQ" },
   "nav.contact": { es: "Empezar", en: "Get Started" },
-  "nav.value": { es: "Propuesta de valor", en: "Value proposition" },
-  "nav.how": { es: "Cómo funciona", en: "How it works" },
-  "nav.demo": { es: "Demo", en: "Demo" },
-  "nav.early": { es: "Early Adopters", en: "Early Adopters" },
+  "nav.value": { es: "Propuesta de Valor", en: "Value Proposition" },
+  "nav.how": { es: "Implementación", en: "Implementation" },
+  "nav.demo": { es: "Demo en vivo", en: "Live demo" },
+  "nav.early": { es: "Participa como Early Adopter", en: "Join as an Early Adopter" },
 
   // Voice Bot — teammate framing
   "voicebot.badge": { es: "Voice Bot · Asistente de voz", en: "Voice Bot · Voice assistant" },
