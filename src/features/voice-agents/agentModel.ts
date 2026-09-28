@@ -1,5 +1,5 @@
 import type { Database } from "@/integrations/supabase/types";
-import type { Agent, AgentConfigurationStatus, AgentType } from "@/types/dashboard";
+import type { Agent, AgentConfigurationStatus, AgentType, ProvisioningStatus } from "@/types/dashboard";
 
 type VoiceAgentRow = Database["public"]["Tables"]["voice_agents"]["Row"];
 
@@ -8,6 +8,14 @@ const configurationStatuses = new Set<AgentConfigurationStatus>([
   "draft",
   "generated",
   "published",
+]);
+const provisioningStatuses = new Set<ProvisioningStatus>([
+  "not_deployed",
+  "provisioning",
+  "running",
+  "degraded",
+  "stopped",
+  "error",
 ]);
 
 export function parseAgentType(value: unknown): AgentType | null {
@@ -22,6 +30,12 @@ export function parseConfigurationStatus(value: unknown): AgentConfigurationStat
     : "draft";
 }
 
+export function parseProvisioningStatus(value: unknown): ProvisioningStatus {
+  return typeof value === "string" && provisioningStatuses.has(value as ProvisioningStatus)
+    ? (value as ProvisioningStatus)
+    : "not_deployed";
+}
+
 export function normalizeAgent(row: VoiceAgentRow): Agent {
   return {
     ...row,
@@ -30,6 +44,7 @@ export function normalizeAgent(row: VoiceAgentRow): Agent {
     business_description: row.business_description ?? "",
     assistant_description: row.assistant_description ?? row.objective,
     configuration_status: parseConfigurationStatus(row.configuration_status),
+    provisioning_status: parseProvisioningStatus(row.provisioning_status),
     capabilities: row.capabilities ?? {},
     behavior: row.behavior ?? {},
     lead_fields: row.lead_fields ?? [],
