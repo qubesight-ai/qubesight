@@ -15,24 +15,25 @@ export default defineConfig(({ mode }) => {
   const url = env.VITE_SUPABASE_URL || PUBLIC_SUPABASE_URL;
   const key = env.VITE_SUPABASE_PUBLISHABLE_KEY || PUBLIC_SUPABASE_KEY;
   return {
-  define: {
-    "import.meta.env.VITE_SUPABASE_URL": JSON.stringify(url),
-    "import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(key),
-  },
-  server: {
-    host: "::",
-    port: 8080,
-    hmr: {
-      overlay: false,
+    define: {
+      "import.meta.env.VITE_SUPABASE_URL": JSON.stringify(url),
+      "import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(key),
     },
-  },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+    server: {
+      host: "::",
+      port: 8080,
+      hmr: {
+        overlay: false,
+      },
     },
-  },
-  // Keep Vite's default chunking. Custom manualChunks caused circular vendor
-  // dependencies in production, making React-dependent code execute before
-  // React initialized and resulting in a black screen.
-}));
+    plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
+    // Keep Vite's default chunking. Custom manualChunks caused circular vendor
+    // dependencies in production, making React-dependent code execute before
+    // React initialized and resulting in a black screen.
+  };
+});
