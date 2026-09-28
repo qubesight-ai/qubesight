@@ -87,3 +87,5 @@ Repository work does not authorize operations in Lovable, Supabase production, T
 ## Required handoff
 
 Finish with repository, branch/base/result SHA; completed and excluded scope; changed files; exact validations; migrations created/applied; required secret names only; deployments performed/pending; risks; rollback; and one recommended next action.
+
+- vite.config.ts defines public VITE_SUPABASE_* fallbacks because .gitignore (read-only in Lovable) excludes .env, which otherwise breaks builds with "supabaseUrl is required".
