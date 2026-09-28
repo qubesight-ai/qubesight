@@ -252,7 +252,7 @@ const Header = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="2xl:hidden overflow-hidden glass-nav border-t border-white/10"
+              className="2xl:hidden overflow-y-auto glass-nav border-t border-white/10 max-h-[calc(100dvh-5rem)]"
             >
               <div className="py-4 space-y-1">
                 {navLinks.map((link) => {
