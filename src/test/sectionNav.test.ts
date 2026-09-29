@@ -32,6 +32,7 @@ describe("sectionNav — hash / anchors", () => {
     expect(parseHashSection("#faq")).toBe("faq");
     expect(parseHashSection("value-proposition")).toBe("value-proposition");
     expect(parseHashSection("#demo")).toBe("demo");
+    expect(parseHashSection("#quienes-somos")).toBe("quienes-somos");
   });
 
   it("rejects empty or unknown hashes", () => {
@@ -49,6 +50,7 @@ describe("sectionNav — hash / anchors", () => {
       "value-proposition",
       "solution",
       "how-it-works",
+      "quienes-somos",
       "demo",
       "early-adopters",
       "faq",

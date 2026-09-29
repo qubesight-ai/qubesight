@@ -4,6 +4,7 @@ export const NAV_SECTION_IDS = [
   "value-proposition",
   "solution",
   "how-it-works",
+  "quienes-somos",
   "demo",
   "early-adopters",
   "faq",
