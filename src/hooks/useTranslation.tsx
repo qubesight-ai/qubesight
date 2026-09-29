@@ -25,6 +25,7 @@ export const translations: Translations = {
   "nav.contact": { es: "Empezar", en: "Get Started" },
   "nav.value": { es: "Propuesta de Valor", en: "Value Proposition" },
   "nav.how": { es: "Implementación", en: "Implementation" },
+  "nav.about": { es: "Quiénes somos", en: "About us" },
   "nav.demo": { es: "Demo en vivo", en: "Live demo" },
   "nav.early": { es: "Participa como Early Adopter", en: "Join as an Early Adopter" },
 
