@@ -1,32 +1,20 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Repeat2, Users } from "lucide-react";
+import { Clock3, MessageCircle, Repeat2, ClipboardList, UserCheck, CalendarDays, Network, Users, Wrench } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const ValueProposition = () => {
   const { language } = useTranslation();
   const es = language === "es";
   const benefits = [
-    [
-      MessageCircle,
-      es ? "Más oportunidades atendidas" : "More opportunities handled",
-      es
-        ? "Ayuda a mantener la atención disponible cuando el equipo está ocupado o fuera de horario."
-        : "Helps keep service available while the team is busy or after hours.",
-    ],
-    [
-      Repeat2,
-      es ? "Menos tareas repetitivas" : "Fewer repetitive tasks",
-      es
-        ? "Consultas frecuentes y recopilación inicial de información pueden ser atendidas automáticamente."
-        : "Common questions and initial information gathering can be handled automatically.",
-    ],
-    [
-      Users,
-      es ? "Personas donde aportan más valor" : "People where they add most value",
-      es
-        ? "Los casos que requieren criterio, negociación o atención especial pueden pasar a una persona."
-        : "Cases requiring judgment, negotiation, or special attention can go to a person.",
-    ],
+    [Clock3, "Atención continua y posibilidad de operación 24/7.", "Continuous service with the possibility of 24/7 operation."],
+    [MessageCircle, "Respuesta rápida a llamadas y mensajes.", "Fast responses to calls and messages."],
+    [Repeat2, "Reducción de tareas repetitivas.", "Fewer repetitive tasks."],
+    [ClipboardList, "Captura estructurada de información.", "Structured information capture."],
+    [UserCheck, "Calificación de prospectos.", "Lead qualification."],
+    [CalendarDays, "Agenda y seguimiento.", "Scheduling and follow-up."],
+    [Network, "Integración de diferentes canales.", "Integration across different channels."],
+    [Users, "Transferencia a atención humana.", "Handoff to a person."],
+    [Wrench, "Implementación gestionada.", "Managed implementation."],
   ] as const;
   return (
     <section id="value-proposition" className="py-20 sm:py-28 relative overflow-hidden">
@@ -42,19 +30,19 @@ const ValueProposition = () => {
           </span>
           <h2 className="display-xl text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
             {es
-              ? "Más capacidad de atención sin aumentar la carga repetitiva de tu equipo."
-              : "More capacity to serve customers without increasing your team's repetitive workload."}
+              ? "Una recepción digital con AI que atiende, captura, califica, agenda y da seguimiento."
+              : "A digital AI receptionist that serves, captures, qualifies, schedules, and follows up."}
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
             {es
-              ? "QubeSight busca ayudar a que los negocios puedan responder más oportunidades y mantener una atención constante mientras las personas se concentran en las conversaciones y decisiones que realmente requieren criterio humano."
-              : "QubeSight aims to help businesses respond to more opportunities and maintain consistent service while people focus on conversations and decisions that need human judgment."}
+              ? "Elementos de valor."
+              : "Elements of value."}
           </p>
         </motion.div>
         <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
-          {benefits.map(([Icon, title, desc], i) => (
+          {benefits.map(([Icon, titleEs, titleEn], i) => (
             <motion.article
-              key={title}
+              key={titleEs}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -64,8 +52,7 @@ const ValueProposition = () => {
               <div className="h-12 w-12 mx-auto rounded-xl bg-primary/10 text-primary border border-primary/20 grid place-items-center mb-5">
                 <Icon className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-semibold font-display mb-2">{title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+              <h3 className="text-lg font-semibold font-display mb-2">{es ? titleEs : titleEn}</h3>
             </motion.article>
           ))}
         </div>

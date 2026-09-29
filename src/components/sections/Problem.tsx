@@ -1,33 +1,19 @@
 import { motion } from "framer-motion";
-import { Clock, MoonStar, Activity, TrendingDown } from "lucide-react";
+import { PhoneMissed, Timer, MoonStar, Repeat2, UserRoundX, MessagesSquare, Coins, TrendingDown } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const Problem = () => {
   const { language } = useTranslation();
   const es = language === "es";
   const stats = [
-    {
-      icon: Clock,
-      title: es ? "Consultas mientras el equipo está ocupado" : "Inquiries while the team is busy",
-      desc: es
-        ? "Las consultas pueden llegar mientras las personas atienden otras tareas importantes."
-        : "Inquiries can arrive while people are handling other important tasks.",
-    },
-    {
-      icon: MoonStar,
-      title: es ? "Preguntas repetitivas" : "Repeated questions",
-      desc: es
-        ? "Las mismas dudas consumen tiempo que el equipo necesita para casos más importantes."
-        : "The same questions take time the team needs for more important cases.",
-    },
-    {
-      icon: Activity,
-      title: es ? "Oportunidades fuera de horario" : "After-hours opportunities",
-      desc: es
-        ? "Llamadas y mensajes pueden acumularse cuando el negocio ya no está atendiendo."
-        : "Calls and messages can build up when the business is no longer open.",
-    },
-  ];
+    [PhoneMissed, "Llamadas no atendidas", "Missed calls"],
+    [Timer, "Respuesta tardía", "Delayed replies"],
+    [MoonStar, "Atención fuera de horario", "After-hours service"],
+    [Repeat2, "Preguntas repetitivas", "Repeated questions"],
+    [UserRoundX, "Leads sin seguimiento", "Leads without follow-up"],
+    [MessagesSquare, "Múltiples canales", "Multiple channels"],
+    [Coins, "Costo de atención", "Service costs"],
+  ] as const;
 
   return (
     <section id="problem" className="py-16 sm:py-24 relative overflow-hidden">
@@ -53,24 +39,19 @@ const Problem = () => {
             {es ? "EL PROBLEMA" : "THE PROBLEM"}
           </span>
           <h2 className="text-3xl sm:text-5xl font-bold font-display leading-tight text-balance">
-            {es
-              ? "Atender cada consulta se vuelve difícil "
-              : "Handling every inquiry becomes difficult "}
-            <span className="gradient-text">
-              {es ? "cuando el negocio está creciendo." : "as the business grows."}
-            </span>
+            {es ? "Principales dolores identificados." : "Key challenges identified."}
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
             {es
-              ? "Llamadas, mensajes, preguntas repetitivas y consultas fuera de horario pueden acumularse mientras el equipo está ocupado atendiendo otras tareas."
-              : "Calls, messages, repeated questions, and after-hours inquiries can build up while the team is busy with other work."}
+              ? "Las empresas con volumen recurrente de llamadas, mensajes, leads o citas enfrentan dificultades para responder oportunamente, atender fuera de horario, procesar preguntas repetitivas y dar seguimiento a clientes y prospectos."
+              : "Businesses with recurring calls, messages, leads, or appointments struggle to respond promptly, serve customers after hours, handle repeated questions, and follow up with customers and prospects."}
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {stats.map((item, i) => (
+          {stats.map(([Icon, titleEs, titleEn], i) => (
             <motion.div
-              key={i}
+              key={titleEs}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -79,12 +60,11 @@ const Problem = () => {
             >
               <div className="relative">
                 <div className="h-12 w-12 rounded-xl bg-destructive/10 text-destructive flex items-center justify-center mb-5">
-                  <item.icon className="h-6 w-6" />
+                  <Icon className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-semibold font-display mb-2 leading-snug">
-                  {item.title}
+                  {es ? titleEs : titleEn}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
               </div>
             </motion.div>
           ))}
