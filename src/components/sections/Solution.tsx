@@ -1,10 +1,61 @@
 import { motion } from "framer-motion";
 import { Sunrise, Sun, Moon } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import ProductServices from "@/components/sections/ProductServices";
 
 const Solution = () => {
   const { language } = useTranslation();
   const es = language === "es";
+  const solutions = [
+    [
+      "Llamadas sin responder",
+      "Voice Bot responde automáticamente",
+      "Unanswered calls",
+      "Voice Bot answers automatically",
+    ],
+    [
+      "Respuesta tardía",
+      "Atención automatizada inmediata",
+      "Delayed replies",
+      "Immediate automated service",
+    ],
+    [
+      "Contactos fuera de horario",
+      "Disponibilidad continua",
+      "After-hours contacts",
+      "Continuous availability",
+    ],
+    [
+      "Preguntas repetitivas",
+      "Automatización de respuestas",
+      "Repeated questions",
+      "Automated answers",
+    ],
+    [
+      "Leads sin seguimiento",
+      "Flujos automatizados de seguimiento",
+      "Leads without follow-up",
+      "Automated follow-up workflows",
+    ],
+    [
+      "Múltiples canales",
+      "Chatbot + Voice Bot + integraciones",
+      "Multiple channels",
+      "Chatbot + Voice Bot + integrations",
+    ],
+    [
+      "Procesos manuales",
+      "Automatización de agenda y flujos",
+      "Manual processes",
+      "Scheduling and workflow automation",
+    ],
+    [
+      "Sobrecarga del personal",
+      "Transferencia a humanos solo cuando corresponde",
+      "Staff overload",
+      "Human handoff when appropriate",
+    ],
+  ];
   const pillars = [
     {
       icon: Sunrise,
@@ -78,6 +129,45 @@ const Solution = () => {
             </motion.div>
           ))}
         </div>
+        <div className="max-w-5xl mx-auto mt-12">
+          <h3 className="text-2xl font-semibold font-display text-center mb-6">
+            {es
+              ? "Nuestra solución se orienta a resolver los dolores de nuestros clientes."
+              : "Our solution addresses our customers' challenges."}
+          </h3>
+          <div className="glass-card rounded-2xl overflow-x-auto">
+            <table className="w-full text-sm text-left">
+              <caption className="sr-only">
+                {es
+                  ? "Dolores y soluciones de QubeSight"
+                  : "Customer challenges and QubeSight solutions"}
+              </caption>
+              <thead className="bg-primary/10">
+                <tr>
+                  <th scope="col" className="p-4 font-semibold">
+                    {es ? "Dolor" : "Challenge"}
+                  </th>
+                  <th scope="col" className="p-4 font-semibold">
+                    {es ? "¿Cómo QubeSight puede resolver?" : "How can QubeSight help?"}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {solutions.map(([painEs, solutionEs, painEn, solutionEn]) => (
+                  <tr key={painEs} className="border-t border-primary/10">
+                    <th scope="row" className="p-4 font-medium align-top">
+                      {es ? painEs : painEn}
+                    </th>
+                    <td className="p-4 text-muted-foreground align-top">
+                      {es ? solutionEs : solutionEn}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <ProductServices />
       </div>
     </section>
   );

@@ -99,6 +99,7 @@ const Header = () => {
         break;
       case "Enter":
       case " ":
+        if (!isHome) return;
         e.preventDefault();
         navigateToSection(navLinks[index].id, { instant: e.altKey });
         setIsMobileMenuOpen(false);
@@ -167,7 +168,7 @@ const Header = () => {
                         : `${link.label}, current section`
                       : link.label
                   }
-                   className={`text-xs font-medium transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm ${
+                  className={`text-xs font-medium transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm ${
                     isActive ? "text-foreground" : "text-muted-foreground"
                   }`}
                 >
@@ -185,7 +186,10 @@ const Header = () => {
               <DropdownMenuContent align="end" className="chatbot-demos-dropdown w-64 mt-2">
                 {demoLinks.map((d) => (
                   <DropdownMenuItem key={d.to} asChild className="cursor-pointer">
-                    <Link to={d.to} className="chatbot-demos-item flex items-center gap-3 py-2.5 px-3 text-sm">
+                    <Link
+                      to={d.to}
+                      className="chatbot-demos-item flex items-center gap-3 py-2.5 px-3 text-sm"
+                    >
                       <span className="text-lg">{d.emoji}</span>
                       <span className="flex-1">{d.label}</span>
                       <ArrowRight className="chatbot-demos-arrow h-3.5 w-3.5" />
@@ -196,7 +200,7 @@ const Header = () => {
             </DropdownMenu>
           </div>
 
-           <div className="hidden lg:flex items-center gap-2 shrink-0">
+          <div className="hidden lg:flex items-center gap-2 shrink-0">
             <LanguageSwitcher />
             {user ? (
               <Button variant="hero" size="default" asChild className="min-h-[44px]">
@@ -211,7 +215,7 @@ const Header = () => {
                   variant="ghost"
                   size="default"
                   asChild
-                   className="hidden 2xl:inline-flex min-h-[44px] text-muted-foreground hover:text-foreground"
+                  className="min-h-[44px] text-muted-foreground hover:text-foreground"
                 >
                   <Link to="/login">{loginLabel}</Link>
                 </Button>
@@ -225,7 +229,7 @@ const Header = () => {
             )}
           </div>
 
-           <div className="lg:hidden flex items-center gap-2">
+          <div className="lg:hidden flex items-center gap-2">
             <LanguageSwitcher />
             <button
               type="button"
@@ -240,7 +244,10 @@ const Header = () => {
           </div>
         </nav>
 
-        <nav className="hidden lg:flex 2xl:hidden items-center gap-5 overflow-x-auto whitespace-nowrap pb-3" aria-label={navAriaLabel}>
+        <nav
+          className="hidden lg:flex 2xl:hidden items-center gap-5 overflow-x-auto whitespace-nowrap pb-3"
+          aria-label={navAriaLabel}
+        >
           {navLinks.map((link) => (
             <a
               key={link.id}
@@ -255,13 +262,19 @@ const Header = () => {
           ))}
           <DropdownMenu>
             <DropdownMenuTrigger className="shrink-0 inline-flex items-center gap-1 text-sm font-semibold text-primary">
-              <Sparkles className="h-3.5 w-3.5" /> {demosLabel} <ChevronDown className="h-3.5 w-3.5" />
+              <Sparkles className="h-3.5 w-3.5" /> {demosLabel}{" "}
+              <ChevronDown className="h-3.5 w-3.5" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="chatbot-demos-dropdown w-64 mt-2">
               {demoLinks.map((d) => (
                 <DropdownMenuItem key={d.to} asChild className="cursor-pointer">
-                  <Link to={d.to} className="chatbot-demos-item flex items-center gap-3 py-2.5 px-3 text-sm">
-                    <span className="text-lg">{d.emoji}</span><span className="flex-1">{d.label}</span><ArrowRight className="chatbot-demos-arrow h-3.5 w-3.5" />
+                  <Link
+                    to={d.to}
+                    className="chatbot-demos-item flex items-center gap-3 py-2.5 px-3 text-sm"
+                  >
+                    <span className="text-lg">{d.emoji}</span>
+                    <span className="flex-1">{d.label}</span>
+                    <ArrowRight className="chatbot-demos-arrow h-3.5 w-3.5" />
                   </Link>
                 </DropdownMenuItem>
               ))}
@@ -269,12 +282,14 @@ const Header = () => {
           </DropdownMenu>
         </nav>
 
-        <AnimatePresence onExitComplete={() => {
-          if (pendingMobileSection) {
-            navigateToSection(pendingMobileSection);
-            setPendingMobileSection(null);
-          }
-        }}>
+        <AnimatePresence
+          onExitComplete={() => {
+            if (pendingMobileSection) {
+              navigateToSection(pendingMobileSection);
+              setPendingMobileSection(null);
+            }
+          }}
+        >
           {isMobileMenuOpen && (
             <motion.div
               id="mobile-nav-panel"
@@ -282,7 +297,7 @@ const Header = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-               className="lg:hidden overflow-y-auto glass-nav border-t border-white/10 max-h-[calc(100dvh-5rem)]"
+              className="lg:hidden overflow-y-auto glass-nav border-t border-white/10 max-h-[calc(100dvh-5rem)]"
             >
               <div className="py-4 space-y-1">
                 {navLinks.map((link) => {
