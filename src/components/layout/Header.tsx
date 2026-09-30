@@ -221,7 +221,7 @@ const Header = () => {
                 </Button>
                 <Button variant="hero" size="default" asChild className="min-h-[44px]">
                   <a href={sectionHref("early-adopters")}>
-                    {language === "es" ? "Solicitar demostración" : "Request a demo"}
+                    {language === "es" ? "Solicitar presentación" : "Request a demo"}
                     <ArrowRight className="ml-1 h-4 w-4" />
                   </a>
                 </Button>
@@ -380,7 +380,7 @@ const Header = () => {
                           href={sectionHref("early-adopters")}
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
-                          {language === "es" ? "Solicitar demostración" : "Request a demo"}
+                          {language === "es" ? "Solicitar presentación" : "Request a demo"}
                           <ArrowRight className="ml-1 h-4 w-4" />
                         </a>
                       </Button>
