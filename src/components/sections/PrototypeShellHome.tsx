@@ -183,7 +183,7 @@ const PrototypeHero = () => {
         </p>
         <div>
           <a href="#early-adopters" className="prototype-button">
-            {spanish ? "Solicitar una demostración" : "Request a demo"}{" "}
+            {spanish ? "Solicitar una presentación" : "Request a demo"}{" "}
             <ArrowDown className="h-4 w-4" />
           </a>
           <a href="#demo" className="prototype-text-link">

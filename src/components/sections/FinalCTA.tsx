@@ -37,7 +37,7 @@ const FinalCTA = () => {
     const lines = es
       ? [
           purpose === "demo"
-            ? "Hola, quiero solicitar una demostración de QubeSight."
+            ? "Hola, quiero solicitar una presentación de QubeSight."
             : "Hola, me interesa participar como Early Adopter de QubeSight.",
           `Me interesa: ${selectedLabel}.`,
           name.trim() && `Nombre: ${name.trim()}`,
@@ -175,7 +175,7 @@ const FinalCTA = () => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button variant="hero" size="lg" asChild className="min-h-[56px] px-8">
               <a href={whatsappUrl("demo")} target="_blank" rel="noopener noreferrer">
-                {es ? "Solicitar una demostración" : "Request a demo"}
+                {es ? "Solicitar una presentación" : "Request a demo"}
                 <ArrowRight className="ml-1 h-5 w-5" />
               </a>
             </Button>
