@@ -203,7 +203,7 @@ serve(async (req) => {
     }
     console.error(
       "voice-agent-test-session error",
-      error instanceof Error ? error.name : "unknown_error",
+      error instanceof Error ? `${error.name}: ${error.message}` : "unknown_error",
     );
     return json({ error: "No se pudo preparar la prueba de llamada." }, 500);
   }
