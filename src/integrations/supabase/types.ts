@@ -369,6 +369,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          active_organization_id: string | null
           avatar_url: string | null
           created_at: string
           full_name: string
@@ -378,6 +379,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          active_organization_id?: string | null
           avatar_url?: string | null
           created_at?: string
           full_name?: string
@@ -387,6 +389,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          active_organization_id?: string | null
           avatar_url?: string | null
           created_at?: string
           full_name?: string
@@ -395,7 +398,15 @@ export type Database = {
           role?: Database["public"]["Enums"]["app_role"]
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "profiles_active_organization_id_fkey"
+            columns: ["active_organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       rate_limit_counters: {
         Row: {
@@ -607,6 +618,10 @@ export type Database = {
       is_org_member: { Args: { target_org: string }; Returns: boolean }
       is_org_owner: { Args: { target_org: string }; Returns: boolean }
       purge_rate_limit_counters: { Args: never; Returns: undefined }
+      set_active_organization: {
+        Args: { target_org: string }
+        Returns: undefined
+      }
       select_twilio_phone_number: {
         Args: { p_organization_id: string; p_provider_number_sid: string }
         Returns: undefined
