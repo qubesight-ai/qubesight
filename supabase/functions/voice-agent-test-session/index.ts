@@ -162,6 +162,7 @@ serve(async (req) => {
       mode: "browser_test",
     });
     const metadata = JSON.stringify({
+      voice_agent_id: agent.id,
       agent_id: agent.id,
       organization_id: agent.organization_id,
       mode: "browser_test",
