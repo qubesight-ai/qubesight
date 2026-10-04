@@ -60,6 +60,10 @@ export type Chatbot = {
 };
 
 export type Organization = { id: string; name: string; industry: string | null };
-export type Profile = { full_name: string; role: string; active_organization_id: string | null };
+export type Profile = {
+  full_name: string;
+  role: string;
+  active_organization_id: string | null;
+};
 export type DashboardSection =
   "overview" | "agents" | "chatbots" | "telephony" | "calls" | "profile";
