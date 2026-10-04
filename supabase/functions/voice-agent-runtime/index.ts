@@ -62,7 +62,7 @@ serve(async (req) => {
       const { data: agent, error } = await admin
         .from("voice_agents")
         .select(
-          "id,organization_id,name,language,voice_name,greeting,system_prompt,capabilities,behavior,lead_fields,escalation_rules,configuration_status,deployment_revision",
+          "id,organization_id,name,agent_type,business_name,business_description,assistant_description,language,voice_name,greeting,system_prompt,capabilities,behavior,lead_fields,escalation_rules,configuration_status,deployment_revision",
         )
         .eq("id", claims.sub)
         .eq("organization_id", claims.organization_id)
@@ -81,6 +81,10 @@ serve(async (req) => {
         agent: {
           id: agent.id,
           name: agent.name,
+          agent_type: agent.agent_type,
+          business_name: agent.business_name,
+          business_description: agent.business_description,
+          assistant_description: agent.assistant_description,
           language: agent.language,
           voice_name: agent.voice_name,
           greeting: agent.greeting,

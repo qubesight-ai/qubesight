@@ -86,3 +86,22 @@ def test_completion_sends_only_bounded_runtime_contract() -> None:
             "transcript": [{"role": "user", "text": "Hola"}],
         },
     )
+
+
+def test_voice_agent_id_selects_agent_and_builds_its_own_instructions() -> None:
+    agent_id = str(uuid4())
+    room_name = f"qs-test-{agent_id}-{uuid4()}"
+    raw = json.dumps({"voice_agent_id": agent_id, "organization_id": str(uuid4()),
+                      "mode": "browser_test", "runtime_token": "a" * 64})
+    metadata = DispatchMetadata.parse(raw, room_name)
+    assert metadata.agent_id == agent_id
+    config = AgentRuntimeConfig.parse({
+        "agent": {"id": agent_id, "name": "Lucía", "language": "Español", "voice_name": "Sofia",
+                  "greeting": "Hola, soy Lucía", "system_prompt": "Atiende a clientes de la clínica.",
+                  "revision": 1, "business_name": "Clínica Sol",
+                  "escalation_rules": {"emergency": True}},
+        "session": {"room_name": room_name},
+    }, metadata)
+    text = config.instructions()
+    assert "Lucía" in text and "Clínica Sol" in text and "emergency" in text
+    assert "Matilda" not in text

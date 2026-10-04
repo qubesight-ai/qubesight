@@ -35,6 +35,14 @@ def _text(value: object, field: str, maximum: int, *, minimum: int = 1) -> str:
     return cleaned
 
 
+def _optional(value: object, maximum: int) -> str:
+    return value.strip()[:maximum] if isinstance(value, str) else ""
+
+
+def _mapping(value: object) -> dict[str, Any] | None:
+    return value if isinstance(value, dict) and value else None
+
+
 @dataclass(frozen=True)
 class DispatchMetadata:
     agent_id: str
@@ -54,7 +62,7 @@ class DispatchMetadata:
         if not normalized_room.startswith("qs-test-"):
             raise RuntimeContractError("room_name is invalid")
         return cls(
-            agent_id=_uuid(data.get("agent_id"), "agent_id"),
+            agent_id=_uuid(data.get("voice_agent_id") or data.get("agent_id"), "voice_agent_id"),
             organization_id=_uuid(data.get("organization_id"), "organization_id"),
             room_name=normalized_room,
             runtime_token=_text(data.get("runtime_token"), "runtime_token", 4096, minimum=32),
@@ -70,6 +78,13 @@ class AgentRuntimeConfig:
     greeting: str
     system_prompt: str
     revision: int
+    agent_type: str = ""
+    business_name: str = ""
+    business_description: str = ""
+    assistant_description: str = ""
+    capabilities: dict[str, Any] | None = None
+    behavior: dict[str, Any] | None = None
+    escalation_rules: dict[str, Any] | None = None
 
     @classmethod
     def parse(cls, payload: object, metadata: DispatchMetadata) -> AgentRuntimeConfig:
@@ -95,7 +110,32 @@ class AgentRuntimeConfig:
                 agent.get("system_prompt"), "agent.system_prompt", 6000, minimum=20
             ),
             revision=revision,
+            agent_type=_optional(agent.get("agent_type"), 80),
+            business_name=_optional(agent.get("business_name"), 200),
+            business_description=_optional(agent.get("business_description"), 2000),
+            assistant_description=_optional(agent.get("assistant_description"), 2000),
+            capabilities=_mapping(agent.get("capabilities")),
+            behavior=_mapping(agent.get("behavior")),
+            escalation_rules=_mapping(agent.get("escalation_rules")),
         )
+
+    def instructions(self) -> str:
+        sections = [self.system_prompt, f"Tu nombre es {self.name}."]
+        labeled = [
+            ("Tipo de agente", self.agent_type),
+            ("Negocio", self.business_name),
+            ("Descripción del negocio", self.business_description),
+            ("Rol del asistente", self.assistant_description),
+        ]
+        sections += [f"{label}: {value}" for label, value in labeled if value]
+        for label, value in (
+            ("Capacidades", self.capabilities),
+            ("Comportamiento", self.behavior),
+            ("Reglas de escalamiento", self.escalation_rules),
+        ):
+            if value:
+                sections.append(f"{label}: {json.dumps(value, ensure_ascii=False)[:2000]}")
+        return "\n".join(sections)
 
 
 class RuntimeClient:

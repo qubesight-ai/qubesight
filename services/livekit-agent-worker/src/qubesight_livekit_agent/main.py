@@ -17,7 +17,7 @@ load_dotenv(".env.local")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger("qubesight-livekit-agent")
 
-AGENT_NAME = os.environ.get("LIVEKIT_AGENT_NAME", "qubesight-voice-agent")
+AGENT_NAME = os.environ.get("LIVEKIT_AGENT_NAME", "matilda-realtime-agent")
 STT_MODEL = os.environ.get("LIVEKIT_STT_MODEL", "deepgram/nova-3")
 LLM_MODEL = os.environ.get("LIVEKIT_LLM_MODEL", "google/gemma-4-31b-it")
 TTS_MODEL = os.environ.get("LIVEKIT_TTS_MODEL", "cartesia/sonic-3")
@@ -98,7 +98,7 @@ async def qubesight_voice_agent(ctx: agents.JobContext) -> None:
         outcome["status"] = "failed"
         logger.error("LiveKit agent session reported an error")
 
-    await session.start(room=ctx.room, agent=QubeSightAssistant(config.system_prompt))
+    await session.start(room=ctx.room, agent=QubeSightAssistant(config.instructions()))
     await session.say(config.greeting, allow_interruptions=True)
     outcome["status"] = "completed"
 
