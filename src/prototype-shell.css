@@ -4719,3 +4719,13 @@
   stroke: currentColor !important;
   opacity: 1 !important;
 }
+
+/* Live LiveKit voice call control inside the hero Matilda card */
+.prototype-shell .qs-live-call {
+  margin-top: 0.75rem;
+  text-align: center;
+}
+.prototype-shell .qs-live-call > button {
+  width: 100%;
+  border-radius: 9999px;
+}

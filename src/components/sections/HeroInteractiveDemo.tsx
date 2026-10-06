@@ -1,6 +1,8 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { CalendarDays, CircleUserRound, MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import MatildaLiveCallButton from "@/components/MatildaLiveCallButton";
+import { useMatildaLiveCall } from "@/hooks/useMatildaLiveCall";
 
 type HeroInteractiveDemoProps = { spanish: boolean };
 type DemoMessage = { id: number; sender: "user" | "assistant"; text: string };
@@ -31,6 +33,7 @@ const replies = {
 const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
   const nextId = useRef(3);
   const replyTimer = useRef<number | null>(null);
+  const call = useMatildaLiveCall();
   const [draft, setDraft] = useState("");
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState<DemoMessage[]>([
@@ -118,6 +121,18 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
             </div>
           ),
         )}
+        {call.lines.map((line) =>
+          line.speaker === "user" ? (
+            <div key={line.id} className="qs-message qs-message-user">
+              {line.text}
+            </div>
+          ) : (
+            <div key={line.id} className="qs-message-row">
+              <div className="hero-matilda-avatar qs-avatar-small">M</div>
+              <div className="qs-message">{line.text}</div>
+            </div>
+          ),
+        )}
         {typing && (
           <div
             className="qs-message-row"
@@ -132,6 +147,7 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
           </div>
         )}
       </div>
+      <MatildaLiveCallButton call={call} spanish={spanish} className="qs-live-call" />
       <div className="qs-quick-actions">
         <Button
           type="button"

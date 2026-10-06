@@ -12,7 +12,7 @@ Read this file before editing code, migrations, infrastructure, or documentation
 
 ## Product boundary
 
-QubeSight is a multi-tenant React/TypeScript dashboard backed by Lovable Cloud/Supabase. It includes authentication, organizations and RLS, voice-agent configuration, calls, chatbot configuration/Groq streaming, and a secure Twilio connection MVP.
+QubeSight is a multi-tenant React/TypeScript dashboard on Lovable Cloud/Supabase: auth, organizations/RLS, voice agents, calls, chatbots (Groq streaming) and a secure Twilio MVP.
 
 A `voice_agents` row is desired configuration, not proof of a running agent. Runtime provisioning is a separate security-sensitive system.
 
@@ -41,7 +41,7 @@ A `voice_agents` row is desired configuration, not proof of a running agent. Run
 - Application code is TypeScript; isolate the landing chat simulation from backend voice-demo logic.
 - Routes are centralized; pages correspond to URLs; feature modules own domain UI, hooks, schemas, types and services.
 - `src/pages/Dashboard.tsx` is still too large. New work must not enlarge it; extract a feature before extending it.
-- Browser code calls only QubeSight/Supabase boundaries, never Groq, OpenRouter, ElevenLabs, Twilio administrative APIs, the provisioner or VPS directly.
+- Browser code calls only QubeSight/Supabase boundaries, never AI providers, Twilio admin APIs, the provisioner or VPS.
 - Validate every server boundary with Zod or an equivalent strict schema.
 - Authorize in PostgreSQL/Edge Functions, not only UI. Resolve tenant membership server-side; never trust browser-supplied `organization_id` alone.
 - Tenant tables require `organization_id` and tested RLS.
@@ -51,7 +51,7 @@ A `voice_agents` row is desired configuration, not proof of a running agent. Run
 
 ## Secrets
 
-Never place credentials, JWTs, service-role keys, Twilio secrets, HMAC keys, private URLs or production `.env` values in source, issues, PR text, tests, logs, screenshots or chat.
+Never put credentials, JWTs, service-role/Twilio/HMAC keys, private URLs or production `.env` values in source, PRs, tests, logs, screenshots or chat.
 
 - `VITE_*` is public browser configuration only.
 - Server secrets belong in Lovable Cloud/Supabase Secrets.
@@ -88,4 +88,5 @@ Repository work does not authorize operations in Lovable, Supabase production, T
 
 Finish with repository, branch/base/result SHA; completed and excluded scope; changed files; exact validations; migrations created/applied; required secret names only; deployments performed/pending; risks; rollback; and one recommended next action.
 
-- vite.config.ts defines public VITE_SUPABASE_* fallbacks because .gitignore (read-only in Lovable) excludes .env, which otherwise breaks builds with "supabaseUrl is required".
+- vite.config.ts holds public VITE_SUPABASE_* fallbacks because read-only .gitignore excludes .env (else "supabaseUrl is required").
+- Public voice demo: `voice-demo-session` (anon, rate-limited, 2-min cap) dispatches `PUBLIC_DEMO_VOICE_AGENT_ID` via the worker's browser_test contract; avoids worker changes.

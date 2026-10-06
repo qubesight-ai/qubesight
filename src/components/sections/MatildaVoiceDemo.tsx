@@ -1,261 +1,34 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  Bot,
-  CheckCircle2,
-  Mic,
-  Play,
-  RefreshCw,
-  ShieldCheck,
-  Square,
-  Volume2,
-  X,
-} from "lucide-react";
+import { Bot, CheckCircle2, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useMatildaDemo, type MatildaStatus } from "@/hooks/useMatildaDemo";
-import { canStartMatildaRecording, type MatildaVerificationState } from "@/lib/matildaTurnstile";
+import MatildaLiveCallButton from "@/components/MatildaLiveCallButton";
+import { useMatildaLiveCall } from "@/hooks/useMatildaLiveCall";
 import { useTranslation } from "@/hooks/useTranslation";
 
-type TurnstileApi = {
-  render: (container: HTMLElement, options: Record<string, unknown>) => string;
-  reset: (widgetId?: string) => void;
-  remove: (widgetId: string) => void;
-};
-declare global {
-  interface Window {
-    turnstile?: TurnstileApi;
-  }
-}
-
-const labels: Record<MatildaStatus, string> = {
-  ready: "Listo para conversar",
-  "requesting-permission": "Solicitando permiso del micrófono…",
-  listening: "Escuchando…",
-  sending: "Enviando audio…",
-  transcribing: "Transcribiendo…",
-  thinking: "Matilda está pensando…",
-  "preparing-voice": "Preparando voz…",
-  playing: "Matilda está hablando…",
-  unavailable: "Servicio temporalmente no disponible",
-  "limit-reached": "Límite alcanzado",
-  error: "Algo no salió como esperábamos",
-};
-const mime = () =>
-  ["audio/webm;codecs=opus", "audio/webm", "audio/ogg;codecs=opus"].find((item) =>
-    MediaRecorder.isTypeSupported(item),
-  );
-const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
-
+/** Landing voice demo: real-time call with Matilda via LiveKit (matilda-realtime-agent). */
 const MatildaVoiceDemo = () => {
-  const { t } = useTranslation();
-  const [privacy, setPrivacy] = useState(false);
-  const [recording, setRecording] = useState(false);
-  const [seconds, setSeconds] = useState(0);
-  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [verification, setVerification] = useState<MatildaVerificationState>("waiting");
-  const demo = useMatildaDemo();
-  const { audioUrl, setStatus } = demo;
-  const recorder = useRef<MediaRecorder | null>(null);
-  const stream = useRef<MediaStream | null>(null);
-  const timer = useRef<number | null>(null);
-  const chunks = useRef<Blob[]>([]);
-  const player = useRef<HTMLAudioElement | null>(null);
-  const turnstileElement = useRef<HTMLDivElement | null>(null);
-  const turnstileWidget = useRef<string | null>(null);
-  const startRef = useRef(demo.start);
-  const resetDemoRef = useRef(demo.reset);
-  const hadSession = useRef(false);
-  startRef.current = demo.start;
-  resetDemoRef.current = demo.reset;
-  const busy = [
-    "requesting-permission",
-    "listening",
-    "sending",
-    "transcribing",
-    "thinking",
-    "preparing-voice",
-  ].includes(demo.status);
-  const resetTurnstile = useCallback(() => {
-    setTurnstileToken(null);
-    setVerification("waiting");
-    if (turnstileWidget.current) window.turnstile?.reset(turnstileWidget.current);
-  }, []);
-  const cleanRecording = useCallback(() => {
-    if (timer.current) window.clearInterval(timer.current);
-    timer.current = null;
-    stream.current?.getTracks().forEach((track) => track.stop());
-    stream.current = null;
-  }, []);
-  const stopAudio = useCallback(() => {
-    player.current?.pause();
-    if (player.current) player.current.currentTime = 0;
-    setStatus("ready");
-  }, [setStatus]);
-  const finish = (cancel = false) => {
-    if (cancel) chunks.current = [];
-    if (recorder.current?.state === "recording") recorder.current.stop();
-    else {
-      cleanRecording();
-      setRecording(false);
-      demo.setStatus("ready");
-    }
-  };
-  const record = async () => {
-    if (
-      !canStartMatildaRecording(privacy, verification, !!demo.session) ||
-      !navigator.mediaDevices?.getUserMedia ||
-      !window.MediaRecorder
-    ) {
-      demo.setStatus("error");
-      return;
-    }
-    demo.setStatus("requesting-permission");
-    try {
-      stream.current = await navigator.mediaDevices.getUserMedia({ audio: true });
-      chunks.current = [];
-      recorder.current = new MediaRecorder(
-        stream.current,
-        mime() ? { mimeType: mime() } : undefined,
-      );
-      recorder.current.ondataavailable = (event) => {
-        if (event.data.size) chunks.current.push(event.data);
-      };
-      recorder.current.onstop = () => {
-        const audio = new Blob(chunks.current, {
-          type: recorder.current?.mimeType || "audio/webm",
-        });
-        cleanRecording();
-        setRecording(false);
-        setSeconds(0);
-        if (audio.size) void demo.sendAudio(audio);
-        else demo.setStatus("ready");
-      };
-      recorder.current.start();
-      setRecording(true);
-      demo.setStatus("listening");
-      const started = Date.now();
-      timer.current = window.setInterval(() => {
-        const elapsed = Math.min(30, Math.ceil((Date.now() - started) / 1000));
-        setSeconds(elapsed);
-        if (elapsed >= 30) finish();
-      }, 250);
-    } catch {
-      cleanRecording();
-      demo.setStatus("error");
-    }
-  };
-  const play = useCallback(async () => {
-    if (!audioUrl) return;
-    stopAudio();
-    const audio = new Audio(audioUrl);
-    player.current = audio;
-    audio.onended = () => setStatus("ready");
-    try {
-      await audio.play();
-      setAutoplayBlocked(false);
-      setStatus("playing");
-    } catch {
-      setAutoplayBlocked(true);
-      setStatus("ready");
-    }
-  }, [audioUrl, setStatus, stopAudio]);
+  const { t, language } = useTranslation();
+  const spanish = language === "es";
+  const call = useMatildaLiveCall();
+  const live = call.status === "live";
 
-  useEffect(() => {
-    if (!privacy || !turnstileSiteKey || !turnstileElement.current) return;
-    let disposed = false;
-    const render = () => {
-      if (disposed || !turnstileElement.current || turnstileWidget.current || !window.turnstile)
-        return;
-      turnstileWidget.current = window.turnstile.render(turnstileElement.current, {
-        sitekey: turnstileSiteKey,
-        action: "matilda-demo-session",
-        callback: async (token: string) => {
-          setTurnstileToken(token);
-          setVerification("verifying");
-          const session = await startRef.current(token);
-          if (session) {
-            setTurnstileToken(null);
-            setVerification("ready");
-          } else {
-            setTurnstileToken(null);
-            setVerification("error");
-            window.turnstile?.reset(turnstileWidget.current ?? undefined);
-          }
-        },
-        "expired-callback": () => {
-          setTurnstileToken(null);
-          setVerification("error");
-          resetDemoRef.current();
-        },
-        "error-callback": () => {
-          setTurnstileToken(null);
-          setVerification("error");
-          resetDemoRef.current();
-        },
-      });
-    };
-    if (window.turnstile) render();
-    else {
-      const existing = document.querySelector<HTMLScriptElement>(
-        'script[data-matilda-turnstile="true"]',
-      );
-      const script = existing ?? document.createElement("script");
-      if (!existing) {
-        script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-        script.async = true;
-        script.defer = true;
-        script.dataset.matildaTurnstile = "true";
-        document.head.appendChild(script);
-      }
-      script.addEventListener("load", render);
-      return () => {
-        disposed = true;
-        script.removeEventListener("load", render);
-      };
-    }
-    return () => {
-      disposed = true;
-    };
-  }, [privacy]);
-  useEffect(() => {
-    if (hadSession.current && !demo.session && privacy) resetTurnstile();
-    hadSession.current = !!demo.session;
-  }, [demo.session, privacy, resetTurnstile]);
-  useEffect(() => {
-    if (audioUrl) void play();
-    return stopAudio;
-  }, [audioUrl, play, stopAudio]);
-  useEffect(
-    () => () => {
-      cleanRecording();
-      stopAudio();
-      if (turnstileWidget.current) window.turnstile?.remove(turnstileWidget.current);
-    },
-    [cleanRecording, stopAudio],
-  );
-
-  const unavailable = !turnstileSiteKey;
-  const resetConversation = () => {
-    finish(true);
-    stopAudio();
-    demo.reset();
-    setTurnstileToken(null);
-    setVerification("waiting");
-    setPrivacy(false);
-  };
   return (
     <section id="demo" className="py-20 sm:py-28 relative">
       <div className="absolute inset-0 bg-grid opacity-20" />
       <div className="container relative">
         <div className="max-w-3xl mx-auto text-center mb-10">
           <span className="eyebrow">
-            <Volume2 className="h-3.5 w-3.5" /> Demo de voz
+            <Volume2 className="h-3.5 w-3.5" /> {spanish ? "Demo de voz" : "Voice demo"}
           </span>
           <h2 className="display-xl text-3xl sm:text-5xl mt-5">
-            Conversa con un <span className="gradient-text">agente de QubeSight.</span>
+            {spanish ? "Conversa con un " : "Talk to a "}
+            <span className="gradient-text">
+              {spanish ? "agente de QubeSight." : "QubeSight agent."}
+            </span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground">
-            Matilda es una demostración de nuestra tecnología de atención por voz.
+            {spanish
+              ? "Llama a Matilda en tiempo real desde tu navegador y escucha cómo atiende a tus clientes."
+              : "Call Matilda in real time from your browser and hear how she serves your customers."}
           </p>
         </div>
         <div className="max-w-3xl mx-auto bezel-shell">
@@ -268,163 +41,52 @@ const MatildaVoiceDemo = () => {
                 <div>
                   <h3 className="text-lg font-semibold">Matilda</h3>
                   <p className="text-sm text-muted-foreground flex items-center gap-1.5">
-                    <span
-                      className={`h-2 w-2 rounded-full ${demo.status === "unavailable" ? "bg-destructive" : "bg-emerald-400"}`}
-                    />
-                    {demo.status === "unavailable" ? "No disponible" : "En línea"}
+                    <span className={`h-2 w-2 rounded-full ${live ? "bg-primary" : "bg-emerald-400"}`} />
+                    {live ? (spanish ? "En llamada" : "On a call") : spanish ? "En línea" : "Online"}
                   </p>
                 </div>
               </div>
-              <div className="text-right">
-                <p className="text-[10px] uppercase tracking-[.16em] text-muted-foreground">
-                  Turnos restantes
-                </p>
-                <p className="text-xl font-semibold tabular-nums">
-                  {demo.session?.remaining_turns ?? "—"} / 5
-                </p>
-              </div>
             </div>
             <div className="min-h-48 py-6 space-y-3" aria-live="polite">
-              {demo.messages.length ? (
-                demo.messages.map((item) => (
+              {call.lines.length ? (
+                call.lines.map((item) => (
                   <div
                     key={item.id}
-                    className={`max-w-[88%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${item.role === "visitor" ? "ml-auto bubble-out" : "bubble-in"}`}
+                    className={`max-w-[88%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${item.speaker === "user" ? "ml-auto bubble-out" : "bubble-in"}`}
                   >
                     <span className="block text-[10px] uppercase tracking-wider opacity-70 mb-1">
-                      {item.role === "visitor" ? "Tú" : "Matilda"}
+                      {item.speaker === "user" ? (spanish ? "Tú" : "You") : "Matilda"}
                     </span>
-                    {item.content}
+                    {item.text}
                   </div>
                 ))
               ) : (
                 <div className="min-h-40 grid place-items-center text-center text-sm text-muted-foreground">
-                  Matilda está preparada para escucharte.
-                  <br />
-                  Activa la demostración y presiona el micrófono para comenzar.
+                  {live
+                    ? spanish
+                      ? "Matilda te saludará en un momento…"
+                      : "Matilda will greet you in a moment…"
+                    : spanish
+                      ? "Presiona el botón y habla con Matilda como si llamaras a un negocio."
+                      : "Press the button and talk to Matilda as if calling a business."}
                 </div>
               )}
             </div>
-            {!privacy ? (
-              <div className="rounded-xl border border-primary/25 bg-primary/10 p-4 text-sm text-muted-foreground">
-                <div className="flex gap-3">
-                  <ShieldCheck className="h-5 w-5 text-primary shrink-0" />
-                  <p>
-                    Esta demostración procesa temporalmente tu voz para transcribirla y generar una
-                    respuesta. No compartas información confidencial. El audio temporal se elimina
-                    automáticamente.
-                  </p>
-                </div>
-                <Button
-                  type="button"
-                  variant="hero"
-                  className="mt-4"
-                  onClick={() => setPrivacy(true)}
-                >
-                  Entiendo y quiero activar el micrófono
-                </Button>
-              </div>
-            ) : (
-              <div className="border-t border-white/10 pt-5 text-center">
-                <div
-                  ref={turnstileElement}
-                  className="mx-auto mb-4 flex justify-center"
-                  aria-label="Verificación de seguridad"
-                />
-                {unavailable ? (
-                  <p className="mb-4 text-sm text-destructive" role="alert">
-                    La verificación de seguridad no está configurada.
-                  </p>
-                ) : (
-                  <p className="text-sm text-muted-foreground mb-4" role="status">
-                    {verification === "verifying"
-                      ? "Verificando seguridad…"
-                      : verification === "ready"
-                        ? "Verificación completada. Ya puedes grabar."
-                        : verification === "error"
-                          ? "La verificación venció o falló. Complétala de nuevo."
-                          : "Completa la verificación de seguridad para iniciar."}
-                  </p>
-                )}
-                <p className="text-sm text-muted-foreground mb-4" role="status">
-                  {labels[demo.status]}
-                  {recording && ` ${seconds}s / 30s`}
-                </p>
-                <Button
-                  type="button"
-                  size="icon"
-                  variant="hero"
-                  disabled={
-                    busy ||
-                    !canStartMatildaRecording(privacy, verification, !!demo.session) ||
-                    unavailable ||
-                    demo.status === "unavailable" ||
-                    demo.status === "limit-reached"
-                  }
-                  onClick={record}
-                  className="h-20 w-20 rounded-full"
-                  aria-label="Comenzar a grabar"
-                >
-                  <Mic className="h-8 w-8" />
-                </Button>
-                <p className="mt-3 text-xs text-muted-foreground">Máximo 30 segundos</p>
-                {recording && (
-                  <div className="mt-4 flex flex-wrap justify-center gap-2">
-                    <Button type="button" variant="outline" onClick={() => finish()}>
-                      <Square />
-                      Enviar grabación
-                    </Button>
-                    <Button type="button" variant="ghost" onClick={() => finish(true)}>
-                      <X />
-                      Cancelar
-                    </Button>
-                  </div>
-                )}
-                {demo.audioUrl && (
-                  <div className="mt-4 flex flex-wrap justify-center gap-2">
-                    <Button type="button" variant="outline" onClick={play}>
-                      <Play />
-                      {autoplayBlocked ? "Reproducir respuesta" : "Reproducir de nuevo"}
-                    </Button>
-                    <Button type="button" variant="ghost" onClick={stopAudio}>
-                      <Square />
-                      Detener reproducción
-                    </Button>
-                  </div>
-                )}
-              </div>
-            )}
-            {demo.status === "error" && (
-              <p className="mt-4 text-center text-sm text-destructive" role="alert">
-                No fue posible completar la acción. Revisa el permiso del micrófono o inicia una
-                nueva conversación.
-              </p>
-            )}
-            {demo.error && (
-              <p className="mt-4 text-center text-sm text-destructive" role="alert">
-                {demo.error}
-              </p>
-            )}
+            <MatildaLiveCallButton
+              call={call}
+              spanish={spanish}
+              className="border-t border-white/10 pt-5 text-center text-muted-foreground"
+            />
             <p className="mx-auto mt-5 max-w-2xl px-2 text-center text-xs leading-relaxed text-muted-foreground/70 sm:px-4">
               {t("matilda.demoLatencyDisclaimer")}
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <Button type="button" variant="ghost" onClick={resetConversation}>
-                <RefreshCw />
-                Reiniciar conversación
-              </Button>
-              <Button
-                type="button"
-                variant="heroOutline"
-                asChild
-                onClick={() =>
-                  window.dispatchEvent(
-                    new CustomEvent("matilda-demo-metric", { detail: { name: "cta_clicked" } }),
-                  )
-                }
-              >
+              <Button type="button" variant="heroOutline" asChild>
                 <a href="#early-adopters">
-                  Quiero ver cómo funcionaría en mi negocio <CheckCircle2 />
+                  {spanish
+                    ? "Quiero ver cómo funcionaría en mi negocio"
+                    : "See how it would work for my business"}{" "}
+                  <CheckCircle2 />
                 </a>
               </Button>
             </div>
