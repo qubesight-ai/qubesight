@@ -35,8 +35,9 @@ const PrototypeHero = () => {
       <div className="qs-hero-vignette" aria-hidden="true" />
       <div className="qs-hero-copy">
         <h1>
-          {spanish ? "Tus clientes quieren respuestas" : "Your customers want answers"}<br />
-          {spanish ? "cuando las necesitan" : "when they need them"}
+          <span>{spanish ? "Tus clientes" : "Your customers"}</span>
+          <span>{spanish ? "quieren respuestas" : "want answers"}</span>
+          <span>{spanish ? "cuando las necesitan" : "when they need them"}</span>
         </h1>
         <p>{spanish ? "QubeSight ayuda a que tu negocio pueda atenderlos." : "QubeSight helps your business be there for them."}</p>
         <div className="qs-hero-actions">

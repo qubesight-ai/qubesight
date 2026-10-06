@@ -3374,7 +3374,7 @@
   right: 3.2vw !important;
   border: 1px solid rgba(255,255,255,.54) !important;
   border-radius: 28px !important;
-  background: linear-gradient(180deg, rgba(55,133,220,.34), rgba(24,93,186,.22)) !important;
+  background: linear-gradient(180deg, rgba(41,122,216,.78), rgba(18,80,174,.66)) !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.72), inset 0 -1px 0 rgba(17,80,171,.18), 0 16px 44px rgba(16,74,153,.16) !important;
   backdrop-filter: blur(20px) saturate(155%) !important;
   transition: transform .7s cubic-bezier(.32,.72,0,1), background .7s cubic-bezier(.32,.72,0,1) !important;
@@ -3442,13 +3442,14 @@
   max-width: 620px !important;
   margin: 0 !important;
   color: #fff !important;
-  font-size: clamp(3rem, 4.5vw, 5.15rem) !important;
+  font-size: clamp(3rem, 4.05vw, 4.6rem) !important;
   line-height: 1.04 !important;
   font-weight: 720;
   letter-spacing: 0 !important;
   text-shadow: 0 3px 20px rgba(0,62,145,.3);
   text-wrap: balance;
 }
+.prototype-shell .prototype-hero .qs-hero-copy h1 > span { display:block; color:#fff !important; }
 .qs-hero-copy > p {
   max-width: 520px;
   margin: 1.2rem 0 1.5rem;
@@ -3588,14 +3589,14 @@
 }
 @media (max-width: 900px) {
   .prototype-shell .qs-site-header { top:8px !important; left:10px !important; right:10px !important; border-radius:22px !important; }
-  .prototype-shell .prototype-hero { min-height:1120px; height:auto; padding:7.5rem 1rem 18rem; display:flex; flex-direction:column; align-items:center; }
+  .prototype-shell .prototype-hero { min-height:980px; height:auto; padding:7.5rem 1rem 15rem; display:flex; flex-direction:column; align-items:center; }
   .qs-hero-sky { object-position:65% center; }
   .qs-hero-vignette { background:linear-gradient(180deg,rgba(5,76,164,.25),rgba(13,100,190,.04) 50%,rgba(8,79,161,.25)); }
   .qs-hero-copy { position:relative; top:auto; left:auto; width:100%; text-align:center; }
-  .prototype-shell .prototype-hero .qs-hero-copy h1 { font-size:clamp(2.55rem,10vw,4rem) !important; }
+  .prototype-shell .prototype-hero .qs-hero-copy h1 { font-size:clamp(2.35rem,9.5vw,3.7rem) !important; }
   .qs-hero-copy > p { margin-left:auto; margin-right:auto; }
   .qs-hero-actions { justify-content:center; }
-  .qs-cube-stage { position:relative; top:auto; left:auto; width:min(90vw,440px); margin:-1rem auto -1.2rem; }
+  .qs-cube-stage { position:relative; top:auto; left:auto; width:min(76vw,360px); margin:-1.8rem auto -2.2rem; }
   .qs-matilda-glass { position:relative; top:auto; right:auto; display:block !important; width:min(100%,430px); margin:0 auto; transform:none; }
   .qs-hero-teasers { left:1rem; right:1rem; bottom:-100px; grid-template-columns:1fr; gap:.8rem; transform:none; }
   .qs-teaser-card { min-height:150px; padding:1.3rem; border-radius:22px; }
@@ -3604,7 +3605,7 @@
   .prototype-shell .prototype-content { padding-top:8rem; }
 }
 @media (max-width: 520px) {
-  .prototype-shell .prototype-hero { min-height:1080px; padding-bottom:16rem; }
+  .prototype-shell .prototype-hero { min-height:980px; padding-bottom:14rem; }
   .qs-channel { width:52px; height:52px; border-radius:17px; }
   .qs-channel svg { width:24px; height:24px; }
   .qs-matilda-glass { padding:.8rem; border-radius:24px; }
