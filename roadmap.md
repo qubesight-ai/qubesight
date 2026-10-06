@@ -5,4 +5,4 @@
 - [x] Mostrar navegación horizontal en escritorio y hamburguesa solo en pantallas pequeñas.
 - [x] Replicar la referencia visual aprobada en toda la landing sin alterar funcionalidad.
 - [x] Verificar navegación, contenido y experiencia en escritorio y móvil.
-- [x] Extender la dirección visual aprobada a todas las secciones, botones y al menú completo.
+- [x] Mantener visible el paisaje del hero de forma continua detrás de todas las secciones hasta el footer.
