@@ -51,7 +51,7 @@ A `voice_agents` row is desired configuration, not proof of a running agent. Run
 
 ## Secrets
 
-Never place credentials, JWTs, service-role keys, Twilio secrets, HMAC keys, private URLs or production `.env` values in source, issues, PR text, tests, logs, screenshots or chat.
+Never put credentials, JWTs, service-role/Twilio/HMAC keys, private URLs or production `.env` values in source, PRs, tests, logs, screenshots or chat.
 
 - `VITE_*` is public browser configuration only.
 - Server secrets belong in Lovable Cloud/Supabase Secrets.
