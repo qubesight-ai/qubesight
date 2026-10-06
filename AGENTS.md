@@ -41,7 +41,7 @@ A `voice_agents` row is desired configuration, not proof of a running agent. Run
 - Application code is TypeScript; isolate the landing chat simulation from backend voice-demo logic.
 - Routes are centralized; pages correspond to URLs; feature modules own domain UI, hooks, schemas, types and services.
 - `src/pages/Dashboard.tsx` is still too large. New work must not enlarge it; extract a feature before extending it.
-- Browser code calls only QubeSight/Supabase boundaries, never Groq, OpenRouter, ElevenLabs, Twilio administrative APIs, the provisioner or VPS directly.
+- Browser code calls only QubeSight/Supabase boundaries, never AI providers, Twilio admin APIs, the provisioner or VPS.
 - Validate every server boundary with Zod or an equivalent strict schema.
 - Authorize in PostgreSQL/Edge Functions, not only UI. Resolve tenant membership server-side; never trust browser-supplied `organization_id` alone.
 - Tenant tables require `organization_id` and tested RLS.
