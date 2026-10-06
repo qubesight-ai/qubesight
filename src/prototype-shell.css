@@ -3973,10 +3973,17 @@
   background: hsl(var(--primary));
   animation: qs-typing-dot 0.9s ease-in-out infinite alternate;
 }
-.qs-typing i:nth-child(2) { animation-delay: 0.15s; }
-.qs-typing i:nth-child(3) { animation-delay: 0.3s; }
+.qs-typing i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.qs-typing i:nth-child(3) {
+  animation-delay: 0.3s;
+}
 @keyframes qs-typing-dot {
-  to { transform: translateY(-3px); opacity: 0.45; }
+  to {
+    transform: translateY(-3px);
+    opacity: 0.45;
+  }
 }
 
 .qs-hero-teasers {
@@ -4358,8 +4365,7 @@
 }
 
 .prototype-shell .prototype-content > section:nth-child(even) {
-  background:
-    linear-gradient(135deg, hsl(0 0% 100% / 0.14), hsl(202 95% 89% / 0.2)) !important;
+  background: linear-gradient(135deg, hsl(0 0% 100% / 0.14), hsl(202 95% 89% / 0.2)) !important;
   border-block: 1px solid hsl(0 0% 100% / 0.72) !important;
 }
 
@@ -4424,8 +4430,7 @@
 .prototype-shell .contact-compact-card {
   border: 1px solid hsl(0 0% 100% / 0.82) !important;
   border-radius: 24px !important;
-  background:
-    linear-gradient(145deg, hsl(0 0% 100% / 0.74), hsl(205 91% 91% / 0.54)) !important;
+  background: linear-gradient(145deg, hsl(0 0% 100% / 0.74), hsl(205 91% 91% / 0.54)) !important;
   box-shadow:
     inset 0 1px 0 hsl(0 0% 100% / 0.96),
     inset 0 -1px 0 hsl(211 57% 55% / 0.1),
@@ -4470,8 +4475,7 @@
 }
 
 .prototype-shell #solution {
-  background:
-    linear-gradient(150deg, hsl(0 0% 100% / 0.16), hsl(199 96% 91% / 0.22)) !important;
+  background: linear-gradient(150deg, hsl(0 0% 100% / 0.16), hsl(199 96% 91% / 0.22)) !important;
 }
 
 .prototype-shell #solution > div[aria-hidden],
@@ -4513,8 +4517,7 @@
 }
 
 .prototype-shell .founders-aero-section {
-  background:
-    linear-gradient(135deg, hsl(212 91% 92% / 0.2), hsl(0 0% 100% / 0.14)) !important;
+  background: linear-gradient(135deg, hsl(212 91% 92% / 0.2), hsl(0 0% 100% / 0.14)) !important;
 }
 
 .prototype-shell .founders-aero-grid {
@@ -4578,8 +4581,7 @@
 }
 
 .prototype-shell .contact-compact-section {
-  background:
-    linear-gradient(145deg, hsl(211 91% 92% / 0.2), hsl(196 96% 92% / 0.16)) !important;
+  background: linear-gradient(145deg, hsl(211 91% 92% / 0.2), hsl(196 96% 92% / 0.16)) !important;
 }
 
 .prototype-shell .contact-compact-card {

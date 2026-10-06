@@ -34,7 +34,13 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
   const [draft, setDraft] = useState("");
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState<DemoMessage[]>([
-    { id: 1, sender: "user", text: spanish ? "Hola, ¿cuál es su horario de atención?" : "Hi, what are your business hours?" },
+    {
+      id: 1,
+      sender: "user",
+      text: spanish
+        ? "Hola, ¿cuál es su horario de atención?"
+        : "Hi, what are your business hours?",
+    },
     {
       id: 2,
       sender: "assistant",
@@ -44,9 +50,12 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
     },
   ]);
 
-  useEffect(() => () => {
-    if (replyTimer.current) window.clearTimeout(replyTimer.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (replyTimer.current) window.clearTimeout(replyTimer.current);
+    },
+    [],
+  );
 
   const answerFor = (text: string) => {
     const normalized = text.toLocaleLowerCase();
@@ -60,7 +69,10 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
   const sendMessage = (text: string) => {
     const cleanText = text.trim();
     if (!cleanText || typing) return;
-    setMessages((current) => [...current.slice(-3), { id: nextId.current++, sender: "user", text: cleanText }]);
+    setMessages((current) => [
+      ...current.slice(-3),
+      { id: nextId.current++, sender: "user", text: cleanText },
+    ]);
     setDraft("");
     setTyping(true);
     const response = answerFor(cleanText);
@@ -79,28 +91,98 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
   };
 
   return (
-    <div className="qs-matilda-glass" aria-label={spanish ? "Demo interactiva de Matilda" : "Interactive Matilda demo"}>
+    <div
+      className="qs-matilda-glass"
+      aria-label={spanish ? "Demo interactiva de Matilda" : "Interactive Matilda demo"}
+    >
       <div className="qs-matilda-header">
         <div className="hero-matilda-avatar">M</div>
-        <div><div className="qs-matilda-name">Matilda</div><span>{spanish ? "Tu recepcionista de IA" : "Your AI receptionist"}</span></div>
-        <div className="qs-online"><i /> {spanish ? "En línea" : "Online"}</div>
+        <div>
+          <div className="qs-matilda-name">Matilda</div>
+          <span>{spanish ? "Tu recepcionista de IA" : "Your AI receptionist"}</span>
+        </div>
+        <div className="qs-online">
+          <i /> {spanish ? "En línea" : "Online"}
+        </div>
       </div>
       <div className="qs-demo-conversation" aria-live="polite">
-        {messages.map((message) => message.sender === "user" ? (
-          <div key={message.id} className="qs-message qs-message-user">{message.text}</div>
-        ) : (
-          <div key={message.id} className="qs-message-row"><div className="hero-matilda-avatar qs-avatar-small">M</div><div className="qs-message">{message.text}</div></div>
-        ))}
-        {typing && <div className="qs-message-row" aria-label={spanish ? "Matilda está escribiendo" : "Matilda is typing"}><div className="hero-matilda-avatar qs-avatar-small">M</div><div className="qs-message qs-typing" aria-hidden="true"><i /><i /><i /></div></div>}
+        {messages.map((message) =>
+          message.sender === "user" ? (
+            <div key={message.id} className="qs-message qs-message-user">
+              {message.text}
+            </div>
+          ) : (
+            <div key={message.id} className="qs-message-row">
+              <div className="hero-matilda-avatar qs-avatar-small">M</div>
+              <div className="qs-message">{message.text}</div>
+            </div>
+          ),
+        )}
+        {typing && (
+          <div
+            className="qs-message-row"
+            aria-label={spanish ? "Matilda está escribiendo" : "Matilda is typing"}
+          >
+            <div className="hero-matilda-avatar qs-avatar-small">M</div>
+            <div className="qs-message qs-typing" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+            </div>
+          </div>
+        )}
       </div>
       <div className="qs-quick-actions">
-        <Button type="button" variant="ghost" onClick={() => sendMessage(spanish ? "Quiero agendar una presentación" : "I want to book a presentation")}><CalendarDays />{spanish ? "Agendar presentación" : "Book presentation"}</Button>
-        <Button type="button" variant="ghost" onClick={() => sendMessage(spanish ? "¿Qué servicios ofrecen?" : "What services do you offer?")}><MessageCircle />{spanish ? "Ver servicios" : "See services"}</Button>
-        <Button type="button" variant="ghost" onClick={() => sendMessage(spanish ? "Quiero hablar con un humano" : "I want to talk to a person")}><CircleUserRound />{spanish ? "Hablar con alguien" : "Talk to a person"}</Button>
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={() =>
+            sendMessage(
+              spanish ? "Quiero agendar una presentación" : "I want to book a presentation",
+            )
+          }
+        >
+          <CalendarDays />
+          {spanish ? "Agendar presentación" : "Book presentation"}
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={() =>
+            sendMessage(spanish ? "¿Qué servicios ofrecen?" : "What services do you offer?")
+          }
+        >
+          <MessageCircle />
+          {spanish ? "Ver servicios" : "See services"}
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={() =>
+            sendMessage(spanish ? "Quiero hablar con un humano" : "I want to talk to a person")
+          }
+        >
+          <CircleUserRound />
+          {spanish ? "Hablar con alguien" : "Talk to a person"}
+        </Button>
       </div>
       <form className="qs-chat-input" onSubmit={submit}>
-        <input value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={spanish ? "Escribe tu mensaje..." : "Type your message..."} aria-label={spanish ? "Mensaje para Matilda" : "Message for Matilda"} maxLength={180} />
-        <Button type="submit" variant="default" size="icon" disabled={!draft.trim() || typing} aria-label={spanish ? "Enviar mensaje" : "Send message"}><Send /></Button>
+        <input
+          value={draft}
+          onChange={(event) => setDraft(event.target.value)}
+          placeholder={spanish ? "Escribe tu mensaje..." : "Type your message..."}
+          aria-label={spanish ? "Mensaje para Matilda" : "Message for Matilda"}
+          maxLength={180}
+        />
+        <Button
+          type="submit"
+          variant="default"
+          size="icon"
+          disabled={!draft.trim() || typing}
+          aria-label={spanish ? "Enviar mensaje" : "Send message"}
+        >
+          <Send />
+        </Button>
       </form>
     </div>
   );
