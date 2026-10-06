@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import qubesightLogo from "@/assets/qubesight-logo.png.asset.json";
+import qubesightLogo from "@/assets/qubesight-logo.png";
 
 interface LogoCubeProps {
   className?: string;
@@ -19,7 +19,7 @@ const LogoCube = ({ className = "" }: LogoCubeProps) => {
         transition={{ type: "spring", stiffness: 260, damping: 18 }}
       >
         <img
-          src={qubesightLogo.url}
+          src={qubesightLogo}
           alt="QubeSight"
           className="block h-full w-full aspect-square object-contain"
           style={{ filter: "drop-shadow(0 2px 8px rgba(7, 80, 201, 0.28))" }}
