@@ -28,157 +28,58 @@ const PrototypeHero = () => {
   const { language } = useTranslation();
   const spanish = language === "es";
 
-  const floatingNodes = [
-    { className: "vaio-node vaio-node-chat", icon: MessageCircle, label: "Chat" },
-    { className: "vaio-node vaio-node-phone", icon: PhoneCall, label: spanish ? "Llamadas" : "Calls" },
-    { className: "vaio-node vaio-node-calendar", icon: CalendarDays, label: spanish ? "Agenda" : "Calendar" },
-    { className: "vaio-node vaio-node-voice", icon: Volume2, label: spanish ? "Voz" : "Voice" },
-    { className: "vaio-node vaio-node-spark", icon: Sparkles, label: "AI" },
-  ];
-
   return (
-    <section id="hero" className="prototype-hero vaio-hero vaio-reference-replica">
-      <div className="vaio-sky" aria-hidden="true">
-        <div className="vaio-sunflare" />
-        <div className="vaio-cloud vaio-cloud-a" />
-        <div className="vaio-cloud vaio-cloud-b" />
-        <div className="vaio-cloud vaio-cloud-c" />
-        <div className="vaio-cloud vaio-cloud-d" />
-        <div className="vaio-cloud-bank" />
-        <div className="vaio-glass-tower vaio-tower-a" />
-        <div className="vaio-glass-tower vaio-tower-b" />
-        <div className="vaio-glass-tower vaio-tower-c" />
-        <div className="vaio-glass-tower vaio-tower-d" />
-        <div className="vaio-chrome-orbit vaio-orbit-a" />
-        <div className="vaio-chrome-orbit vaio-orbit-b" />
-        <div className="vaio-chrome-ribbon vaio-ribbon-a" />
-        <div className="vaio-chrome-ribbon vaio-ribbon-b" />
-      </div>
-
-      <div className="vaio-hero-copy">
+    <section
+      id="hero"
+      className="prototype-hero vaio-hero vaio-exact-reference-hero"
+      aria-label={spanish ? "QubeSight — recepción con IA" : "QubeSight — AI reception"}
+    >
+      <div className="sr-only">
         <h1>
-          {spanish ? "Tus clientes" : "Your customers"}
-          <br />
-          {spanish ? "quieren respuestas" : "want answers"}
-          <br />
-          {spanish ? "cuando las necesitan" : "when they need them"}
+          {spanish
+            ? "Tus clientes quieren respuestas cuando las necesitan"
+            : "Your customers want answers when they need them"}
         </h1>
-
-        <p className="vaio-hero-subtitle">
+        <p>
           {spanish
             ? "QubeSight ayuda a que tu negocio pueda atenderlos."
             : "QubeSight helps your business be there for them."}
         </p>
-
-        <div className="vaio-hero-actions">
-          <a href="#early-adopters" className="prototype-button vaio-primary-cta">
-            {spanish ? "Solicitar demostración" : "Request a demo"}
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
-          <a href="#demo" className="vaio-secondary-cta">
-            <span className="vaio-play-dot">▶</span>
-            {spanish ? "Ver cómo funciona" : "See how it works"}
-          </a>
-        </div>
       </div>
 
-      <div className="vaio-world" aria-hidden="true">
-        <div className="vaio-cube-stage">
-          <div className="vaio-cube-core">
-            <span className="vaio-cube-face vaio-cube-front" />
-            <span className="vaio-cube-face vaio-cube-top" />
-            <span className="vaio-cube-face vaio-cube-side" />
-            <span className="vaio-cube-inner" />
-            <span className="vaio-cube-glow" />
-          </div>
-          <div className="vaio-cube-ring vaio-cube-ring-one" />
-          <div className="vaio-cube-ring vaio-cube-ring-two" />
-        </div>
-
-        {floatingNodes.map(({ className, icon: Icon, label }) => (
-          <div className={className} key={label}>
-            <span className="vaio-node-highlight" />
-            <Icon className="h-7 w-7" />
-            <small>{label}</small>
-          </div>
-        ))}
-
-        <div className="vaio-gear" />
-        <div className="vaio-disc" />
-      </div>
-
-      <div
-        className="aero-hero-panel hero-matilda-card vaio-matilda-panel vaio-chat-panel"
-        aria-label={spanish ? "Hablar con Matilda" : "Talk to Matilda"}
-      >
-        <div className="vaio-chat-header">
-          <div className="hero-matilda-avatar">M</div>
-          <div>
-            <div className="vaio-chat-name-row">
-              <h3>Matilda</h3>
-              <span className="hero-matilda-online">
-                <i />
-                {spanish ? "En línea" : "Online"}
-              </span>
-            </div>
-            <p>{spanish ? "Tu recepcionista de IA" : "Your AI receptionist"}</p>
-          </div>
-        </div>
-
-        <div className="vaio-chat-thread">
-          <div className="vaio-chat-message vaio-chat-message-user">
-            <span>{spanish ? "Hola, ¿cuál es su horario de atención?" : "Hi, what are your business hours?"}</span>
-            <small>10:24</small>
-          </div>
-
-          <div className="vaio-chat-reply-row">
-            <div className="vaio-mini-avatar">M</div>
-            <div className="vaio-chat-message vaio-chat-message-ai">
-              <strong>Matilda</strong>
-              <span>
-                {spanish
-                  ? "Nuestro horario de atención es de lunes a viernes, de 9:00 a 18:00 hs. ¿Te gustaría que agende una cita?"
-                  : "We're available Monday through Friday, 9:00 to 18:00. Would you like me to schedule an appointment?"}
-              </span>
-              <small>10:24</small>
-            </div>
-          </div>
-        </div>
-
-        <div className="vaio-chat-quick-actions">
-          <a href="#demo"><CalendarDays className="h-4 w-4" />{spanish ? "Agendar una cita" : "Book a meeting"}</a>
-          <a href="#solucion"><Sparkles className="h-4 w-4" />{spanish ? "Ver servicios" : "See services"}</a>
-          <a href="#early-adopters"><PhoneCall className="h-4 w-4" />{spanish ? "Hablar con un humano" : "Talk to a human"}</a>
-        </div>
-
-        <a href="#demo" className="vaio-chat-input">
-          <span>{spanish ? "Escribe tu mensaje..." : "Type your message..."}</span>
-          <span className="vaio-chat-send">➤</span>
+      <nav className="vaio-reference-hotspots" aria-label={spanish ? "Accesos del hero" : "Hero shortcuts"}>
+        <a className="vaio-hotspot vaio-hotspot-value" href="#propuesta-de-valor">
+          <span className="sr-only">{spanish ? "Propuesta de valor" : "Value proposition"}</span>
         </a>
-      </div>
+        <a className="vaio-hotspot vaio-hotspot-solution" href="#solucion">
+          <span className="sr-only">{spanish ? "Solución" : "Solution"}</span>
+        </a>
+        <a className="vaio-hotspot vaio-hotspot-how" href="#como-funciona">
+          <span className="sr-only">{spanish ? "Cómo funciona" : "How it works"}</span>
+        </a>
+        <a className="vaio-hotspot vaio-hotspot-demos" href="#demo">
+          <span className="sr-only">ChatBot Demos</span>
+        </a>
+        <a className="vaio-hotspot vaio-hotspot-top-cta" href="#early-adopters">
+          <span className="sr-only">{spanish ? "Solicitar demostración" : "Request a demo"}</span>
+        </a>
 
-      <a href="#quienes-somos" className="vaio-preview-card vaio-preview-about">
-        <span className="vaio-preview-kicker">{spanish ? "QUIÉNES SOMOS" : "ABOUT US"}</span>
-        <strong>{spanish ? "Tecnología que acerca personas" : "Technology that brings people closer"}</strong>
-        <p>
-          {spanish
-            ? "Creemos en un mundo donde ninguna oportunidad se pierda por falta de atención."
-            : "We believe no opportunity should be lost because no one was there to answer."}
-        </p>
-        <span className="vaio-preview-arrow">→</span>
-        <div className="vaio-preview-image vaio-preview-city" aria-hidden="true" />
-      </a>
-
-      <a href="#early-adopters" className="vaio-preview-card vaio-preview-early">
-        <span className="vaio-preview-kicker">EARLY ADOPTERS</span>
-        <strong>{spanish ? "Negocios que ya están un paso adelante" : "Businesses already one step ahead"}</strong>
-        <p>
-          {spanish
-            ? "Empresas que confían en QubeSight para transformar su atención al cliente."
-            : "Companies trusting QubeSight to transform customer service."}
-        </p>
-        <div className="vaio-preview-image vaio-preview-office" aria-hidden="true" />
-      </a>
+        <a className="vaio-hotspot vaio-hotspot-main-cta" href="#early-adopters">
+          <span className="sr-only">{spanish ? "Solicitar demostración" : "Request a demo"}</span>
+        </a>
+        <a className="vaio-hotspot vaio-hotspot-see-how" href="#demo">
+          <span className="sr-only">{spanish ? "Ver cómo funciona" : "See how it works"}</span>
+        </a>
+        <a className="vaio-hotspot vaio-hotspot-matilda" href="#demo">
+          <span className="sr-only">{spanish ? "Hablar con Matilda" : "Talk to Matilda"}</span>
+        </a>
+        <a className="vaio-hotspot vaio-hotspot-about" href="#quienes-somos">
+          <span className="sr-only">{spanish ? "Quiénes somos" : "About us"}</span>
+        </a>
+        <a className="vaio-hotspot vaio-hotspot-early" href="#early-adopters">
+          <span className="sr-only">Early Adopters</span>
+        </a>
+      </nav>
     </section>
   );
 };
