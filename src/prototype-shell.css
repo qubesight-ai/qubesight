@@ -4114,3 +4114,628 @@
     animation: none !important;
   }
 }
+
+
+/* =========================================================
+   APPROVED MOCKUP REPLICA PASS
+   Closer composition to the generated VAIO/Aero reference
+   ========================================================= */
+
+.vaio-reference-replica {
+  min-height: 1120px !important;
+  padding-top: 190px !important;
+  padding-bottom: 250px !important;
+}
+
+.vaio-reference-replica .vaio-hero-copy {
+  width: min(520px, 38vw) !important;
+  margin-left: 1vw;
+  margin-top: 42px;
+}
+
+.vaio-reference-replica .prototype-hero h1 {
+  font-size: clamp(3.55rem, 5.55vw, 5.9rem) !important;
+  max-width: 560px !important;
+  line-height: .98 !important;
+  margin: 0 0 1.1rem !important;
+  text-shadow:
+    0 2px 0 rgba(20,84,150,.14),
+    0 12px 32px rgba(19,84,150,.28) !important;
+}
+
+.vaio-reference-replica .vaio-hero-subtitle {
+  max-width: 420px;
+  font-size: clamp(1.25rem, 1.7vw, 1.65rem) !important;
+  margin-bottom: 1.4rem !important;
+}
+
+.vaio-reference-replica .vaio-hero-actions {
+  gap: .72rem;
+}
+
+.vaio-reference-replica .vaio-primary-cta,
+.vaio-reference-replica .vaio-secondary-cta {
+  min-height: 58px !important;
+  padding-inline: 1.35rem !important;
+}
+
+.vaio-reference-replica .vaio-world {
+  left: 37.5% !important;
+  top: 17.5% !important;
+  width: 35% !important;
+  height: 49% !important;
+}
+
+.vaio-reference-replica .vaio-cube-stage {
+  left: 49% !important;
+  top: 47% !important;
+  width: 270px !important;
+  height: 270px !important;
+}
+
+.vaio-reference-replica .vaio-cube-core {
+  inset: 34px !important;
+  transform: rotateX(56deg) rotateZ(40deg) rotateY(-10deg) scale(1.08);
+}
+
+.vaio-reference-replica .vaio-cube-face {
+  border-width: 4px !important;
+  background:
+    linear-gradient(135deg,
+      rgba(236,255,255,.95) 0%,
+      rgba(85,211,244,.82) 22%,
+      rgba(77,171,239,.80) 48%,
+      rgba(90,229,182,.76) 70%,
+      rgba(218,255,249,.82) 100%) !important;
+  box-shadow:
+    inset 0 0 25px rgba(255,255,255,.72),
+    inset 0 -12px 24px rgba(15,93,164,.14),
+    0 0 14px rgba(255,255,255,.68),
+    0 0 34px rgba(89,201,244,.38) !important;
+}
+
+.vaio-reference-replica .vaio-cube-front,
+.vaio-reference-replica .vaio-cube-top,
+.vaio-reference-replica .vaio-cube-side {
+  border-radius: 28px !important;
+}
+
+.vaio-cube-inner {
+  position: absolute;
+  inset: 29%;
+  border-radius: 18px;
+  transform: translateZ(68px);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.88), rgba(139,235,241,.36) 52%, rgba(75,176,228,.48));
+  border: 2px solid rgba(255,255,255,.76);
+  box-shadow:
+    inset 0 0 18px rgba(255,255,255,.64),
+    0 0 20px rgba(127,231,246,.35);
+}
+
+.vaio-reference-replica .vaio-cube-ring-one {
+  width: 430px !important;
+  height: 125px !important;
+  margin: -62px 0 0 -215px !important;
+  border-width: 3px !important;
+  opacity: .78 !important;
+}
+
+.vaio-reference-replica .vaio-cube-ring-two {
+  width: 340px !important;
+  height: 340px !important;
+  margin: -170px 0 0 -170px !important;
+  opacity: .30 !important;
+}
+
+.vaio-reference-replica .vaio-node {
+  width: 84px !important;
+  min-height: 84px !important;
+  border-radius: 26px !important;
+  border: 2px solid rgba(255,255,255,.80) !important;
+  background:
+    radial-gradient(circle at 28% 13%, rgba(255,255,255,.90), transparent 24%),
+    linear-gradient(180deg, rgba(75,170,255,.96), rgba(38,109,215,.86)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.96),
+    inset 0 -4px 9px rgba(11,59,132,.26),
+    0 0 0 1px rgba(18,81,168,.20),
+    0 18px 36px rgba(8,66,136,.26) !important;
+}
+
+.vaio-reference-replica .vaio-node-chat {
+  left: 8% !important;
+  top: 0 !important;
+}
+
+.vaio-reference-replica .vaio-node-phone {
+  right: 2% !important;
+  top: 6% !important;
+}
+
+.vaio-reference-replica .vaio-node-calendar {
+  right: 7% !important;
+  bottom: 0 !important;
+}
+
+.vaio-reference-replica .vaio-node-voice {
+  left: 9% !important;
+  bottom: 7% !important;
+}
+
+.vaio-reference-replica .vaio-node-spark {
+  left: 72% !important;
+  top: 47% !important;
+  width: 62px !important;
+  min-height: 62px !important;
+}
+
+.vaio-gear {
+  position: absolute;
+  left: 17%;
+  bottom: 3%;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: 9px dashed rgba(199,231,248,.85);
+  box-shadow:
+    inset 0 0 0 5px rgba(69,127,198,.30),
+    0 8px 18px rgba(13,70,132,.20);
+  animation: vaio-gear-spin 14s linear infinite;
+}
+
+.vaio-disc {
+  position: absolute;
+  left: 2%;
+  top: 29%;
+  width: 62px;
+  height: 22px;
+  border-radius: 50%;
+  border: 4px solid rgba(228,246,255,.82);
+  background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(93,152,216,.40));
+  box-shadow: 0 8px 16px rgba(11,66,130,.18);
+  transform: rotate(-28deg);
+}
+
+.vaio-reference-replica .vaio-chat-panel {
+  right: 1.8vw !important;
+  top: 18% !important;
+  width: min(390px, 28vw) !important;
+  min-height: 515px;
+  transform: perspective(1200px) rotateY(-4deg) rotateX(1deg) !important;
+  padding: 1.1rem !important;
+  border-radius: 34px !important;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255,255,255,.78), transparent 24%),
+    linear-gradient(180deg, rgba(231,247,255,.56), rgba(154,209,243,.28)) !important;
+}
+
+.vaio-chat-header {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .3rem .1rem .9rem;
+}
+
+.vaio-chat-header .hero-matilda-avatar {
+  width: 58px !important;
+  height: 58px !important;
+  flex: 0 0 58px;
+  border-radius: 50% !important;
+  font-size: 1.3rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.92),
+    0 7px 18px rgba(17,80,140,.18);
+}
+
+.vaio-chat-name-row {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.vaio-chat-name-row h3 {
+  margin: 0;
+  font-size: 1.45rem;
+}
+
+.vaio-chat-header p {
+  margin: .15rem 0 0;
+  font-size: .86rem;
+}
+
+.vaio-chat-thread {
+  display: grid;
+  gap: .9rem;
+  margin: .55rem 0 .9rem;
+}
+
+.vaio-chat-message {
+  display: grid;
+  gap: .25rem;
+  padding: .72rem .85rem;
+  border: 1px solid rgba(255,255,255,.62);
+  border-radius: 17px;
+  background: rgba(245,252,255,.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.86),
+    0 8px 18px rgba(18,78,139,.08);
+  backdrop-filter: blur(12px);
+}
+
+.vaio-chat-message-user {
+  width: 78%;
+  margin-left: auto;
+}
+
+.vaio-chat-message-ai {
+  width: 100%;
+}
+
+.vaio-chat-message span,
+.vaio-chat-message strong,
+.vaio-chat-message small {
+  color: #164b74 !important;
+}
+
+.vaio-chat-message span {
+  font-size: .82rem;
+  line-height: 1.45;
+}
+
+.vaio-chat-message small {
+  justify-self: end;
+  opacity: .62;
+  font-size: .63rem;
+}
+
+.vaio-chat-reply-row {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: .55rem;
+  align-items: start;
+}
+
+.vaio-mini-avatar {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff !important;
+  font-weight: 900;
+  font-size: .72rem;
+  background: linear-gradient(180deg, #66c7ea, #277dbf);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.78);
+}
+
+.vaio-chat-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin: .55rem 0 1rem;
+}
+
+.vaio-chat-quick-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 38px;
+  padding: .55rem .7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.64);
+  text-decoration: none;
+  color: #18538a !important;
+  font-size: .72rem;
+  font-weight: 760;
+  background: rgba(242,250,255,.58);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 6px 13px rgba(17,76,135,.07);
+}
+
+.vaio-chat-quick-actions a svg {
+  stroke: #1d6ab0 !important;
+}
+
+.vaio-chat-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px;
+  padding: .6rem .65rem .6rem .9rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.68);
+  text-decoration: none;
+  background: rgba(245,252,255,.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.84),
+    0 10px 22px rgba(18,79,140,.10);
+}
+
+.vaio-chat-input > span:first-child {
+  color: rgba(46,91,127,.62) !important;
+  font-size: .82rem;
+}
+
+.vaio-chat-send {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff !important;
+  background: linear-gradient(180deg, #4f9dfa, #1967ce);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.88),
+    0 7px 16px rgba(21,82,156,.24);
+}
+
+.vaio-preview-card {
+  position: absolute;
+  z-index: 4;
+  bottom: -30px;
+  min-height: 270px;
+  padding: 1.55rem 1.7rem;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,.70);
+  text-decoration: none;
+  color: #fff !important;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255,255,255,.34), transparent 26%),
+    linear-gradient(180deg, rgba(60,129,194,.34), rgba(38,97,160,.24));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.86),
+    0 28px 58px rgba(8,64,127,.22);
+  backdrop-filter: blur(22px) saturate(145%);
+  overflow: hidden;
+}
+
+.vaio-preview-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 52% 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.26), transparent);
+  pointer-events: none;
+}
+
+.vaio-preview-about {
+  left: 4.5%;
+  width: 42%;
+  transform: rotate(-1.2deg);
+}
+
+.vaio-preview-early {
+  right: 2.5%;
+  width: 49%;
+  transform: rotate(1deg);
+}
+
+.vaio-preview-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.vaio-preview-kicker {
+  display: block;
+  margin-bottom: .8rem;
+  color: rgba(230,247,255,.76) !important;
+  font-size: .66rem;
+  font-weight: 850;
+  letter-spacing: .22em;
+}
+
+.vaio-preview-card strong {
+  display: block;
+  max-width: 58%;
+  color: #fff !important;
+  font-size: 1.5rem;
+  line-height: 1.05;
+  text-shadow: 0 4px 14px rgba(12,66,123,.20);
+}
+
+.vaio-preview-card p {
+  max-width: 55%;
+  margin-top: .7rem;
+  color: rgba(245,251,255,.88) !important;
+  font-size: .77rem;
+  line-height: 1.45;
+}
+
+.vaio-preview-arrow {
+  margin-top: 1rem;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.42);
+  background: rgba(255,255,255,.10);
+}
+
+.vaio-preview-image {
+  position: absolute !important;
+  z-index: 1 !important;
+  right: 1rem;
+  bottom: 1.2rem;
+  width: 37%;
+  height: 60%;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.64),
+    0 14px 26px rgba(7,58,118,.16);
+  overflow: hidden;
+}
+
+.vaio-preview-city {
+  background:
+    linear-gradient(180deg, rgba(164,221,250,.16), rgba(29,99,166,.20)),
+    linear-gradient(90deg,
+      transparent 0 8%,
+      rgba(31,104,168,.34) 8% 12%,
+      transparent 12% 20%,
+      rgba(56,127,187,.38) 20% 27%,
+      transparent 27% 36%,
+      rgba(34,99,158,.44) 36% 42%,
+      transparent 42% 53%,
+      rgba(62,135,190,.36) 53% 61%,
+      transparent 61% 70%,
+      rgba(25,90,150,.38) 70% 77%,
+      transparent 77% 100%),
+    linear-gradient(180deg, #bde8fb 0%, #eaf8ff 54%, #8dc0dc 55%, #6aa2c9 100%);
+}
+
+.vaio-preview-office {
+  background:
+    linear-gradient(180deg, rgba(176,225,250,.10), rgba(24,84,146,.18)),
+    linear-gradient(90deg,
+      rgba(255,255,255,.28) 0 2%,
+      transparent 2% 17%,
+      rgba(255,255,255,.24) 17% 19%,
+      transparent 19% 38%,
+      rgba(255,255,255,.22) 38% 40%,
+      transparent 40% 61%,
+      rgba(255,255,255,.20) 61% 63%,
+      transparent 63% 100%),
+    radial-gradient(ellipse at 62% 78%, rgba(16,62,107,.70) 0 7%, transparent 8%),
+    radial-gradient(ellipse at 76% 76%, rgba(17,65,109,.58) 0 6%, transparent 7%),
+    linear-gradient(180deg, #bfe9fb 0%, #e8f7ff 58%, #6f9fc0 59%, #446f95 100%);
+}
+
+.vaio-ribbon-a,
+.vaio-ribbon-b {
+  position: absolute;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.52);
+  background:
+    linear-gradient(180deg, rgba(245,253,255,.84), rgba(88,149,211,.48));
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.92),
+    inset 0 -3px 5px rgba(22,79,143,.20),
+    0 12px 24px rgba(12,68,131,.14);
+}
+
+.vaio-ribbon-a {
+  left: -7%;
+  bottom: 17%;
+  width: 48%;
+  transform: rotate(10deg);
+}
+
+.vaio-ribbon-b {
+  right: -5%;
+  bottom: 12%;
+  width: 43%;
+  transform: rotate(-8deg);
+}
+
+.vaio-tower-d {
+  right: 27%;
+  bottom: 3%;
+  height: 245px;
+  width: 58px;
+  opacity: .30;
+}
+
+@keyframes vaio-gear-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 1120px) {
+  .vaio-reference-replica {
+    min-height: 1060px !important;
+  }
+
+  .vaio-reference-replica .vaio-world {
+    left: 42% !important;
+    width: 29% !important;
+  }
+
+  .vaio-reference-replica .vaio-chat-panel {
+    width: 330px !important;
+  }
+
+  .vaio-preview-card {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 940px) {
+  .vaio-reference-replica {
+    min-height: auto !important;
+    padding-bottom: 5rem !important;
+  }
+
+  .vaio-reference-replica .vaio-hero-copy {
+    width: 100% !important;
+    margin: 0;
+  }
+
+  .vaio-reference-replica .vaio-world {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: min(520px,100%) !important;
+    height: 380px !important;
+    margin: 2.2rem auto 1rem;
+  }
+
+  .vaio-reference-replica .vaio-chat-panel {
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    width: min(560px,100%) !important;
+    min-height: 0;
+    margin: 1rem auto 0;
+    transform: none !important;
+  }
+
+  .vaio-preview-card {
+    position: relative;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto;
+    width: min(680px,100%) !important;
+    margin: 1rem auto 0;
+    transform: none !important;
+  }
+
+  .vaio-preview-card strong,
+  .vaio-preview-card p {
+    max-width: 62%;
+  }
+}
+
+@media (max-width: 620px) {
+  .vaio-reference-replica .prototype-hero h1 {
+    font-size: clamp(2.7rem, 13.4vw, 4.2rem) !important;
+  }
+
+  .vaio-preview-card {
+    min-height: 250px;
+    padding: 1.25rem;
+  }
+
+  .vaio-preview-card strong,
+  .vaio-preview-card p {
+    max-width: 100%;
+    padding-right: 0;
+  }
+
+  .vaio-preview-image {
+    position: relative !important;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    height: 120px;
+    margin-top: 1rem;
+  }
+
+  .vaio-reference-replica .vaio-node {
+    width: 64px !important;
+    min-height: 64px !important;
+  }
+}
