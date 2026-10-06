@@ -4739,3 +4739,164 @@
     min-height: 64px !important;
   }
 }
+
+
+/* =========================================================
+   EXACT APPROVED MOCKUP HERO
+   ========================================================= */
+
+.vaio-immersive > header[data-site-header] {
+  display: none !important;
+}
+
+.vaio-exact-reference-hero {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  aspect-ratio: 4 / 3 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  isolation: isolate;
+  background-image: url("/hero/qubesight-vaio-reference.webp") !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+  border: 0 !important;
+}
+
+.vaio-exact-reference-hero::before,
+.vaio-exact-reference-hero::after {
+  display: none !important;
+}
+
+.vaio-reference-hotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.vaio-hotspot {
+  position: absolute;
+  display: block;
+  pointer-events: auto;
+  border-radius: 999px;
+  outline: none;
+  background: transparent;
+}
+
+.vaio-hotspot:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.96),
+    0 0 0 7px rgba(34,116,221,.78),
+    0 0 24px rgba(84,169,255,.56);
+}
+
+.vaio-hotspot-value {
+  left: 27.1%;
+  top: 3.2%;
+  width: 11.8%;
+  height: 4.1%;
+}
+
+.vaio-hotspot-solution {
+  left: 39.2%;
+  top: 3.2%;
+  width: 7.6%;
+  height: 4.1%;
+}
+
+.vaio-hotspot-how {
+  left: 47.4%;
+  top: 3.2%;
+  width: 9.7%;
+  height: 4.1%;
+}
+
+.vaio-hotspot-demos {
+  left: 57.4%;
+  top: 3.2%;
+  width: 10.3%;
+  height: 4.1%;
+}
+
+.vaio-hotspot-top-cta {
+  right: 2.4%;
+  top: 2.3%;
+  width: 22.8%;
+  height: 5.6%;
+}
+
+.vaio-hotspot-main-cta {
+  left: 3.6%;
+  top: 50.0%;
+  width: 18.2%;
+  height: 6.1%;
+}
+
+.vaio-hotspot-see-how {
+  left: 22.2%;
+  top: 50.2%;
+  width: 13.9%;
+  height: 5.8%;
+}
+
+.vaio-hotspot-matilda {
+  right: 1.9%;
+  top: 18.8%;
+  width: 30.9%;
+  height: 53.5%;
+  border-radius: 5%;
+}
+
+.vaio-hotspot-about {
+  left: 3.2%;
+  bottom: 0.5%;
+  width: 43.1%;
+  height: 29.5%;
+  border-radius: 5%;
+}
+
+.vaio-hotspot-early {
+  right: 2.0%;
+  bottom: -0.5%;
+  width: 49.0%;
+  height: 25.5%;
+  border-radius: 5%;
+}
+
+/* Blend the rest of the page directly out of the mockup */
+.vaio-exact-reference-hero + .prototype-content {
+  margin-top: 0 !important;
+}
+
+.vaio-immersive .prototype-content {
+  background:
+    linear-gradient(180deg, #e8f6fc 0%, #d7eef8 14%, #ecf7fb 58%, #f7fbfd 100%) !important;
+}
+
+@media (max-width: 900px) {
+  .vaio-immersive > header[data-site-header] {
+    display: block !important;
+  }
+
+  .vaio-exact-reference-hero {
+    aspect-ratio: auto !important;
+    min-height: 100svh !important;
+    background-position: 42% top !important;
+    background-size: cover !important;
+  }
+
+  .vaio-reference-hotspots {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .vaio-exact-reference-hero {
+    min-height: 84svh !important;
+    background-position: 41% center !important;
+  }
+}
