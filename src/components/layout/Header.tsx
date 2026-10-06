@@ -60,9 +60,7 @@ const Header = () => {
     href: sectionHref(id),
     label: t(navLabelKeys[id]),
   }));
-  const featuredDesktopLinks = navLinks.filter(({ id }) =>
-    ["value-proposition", "solution", "how-it-works", "demo"].includes(id),
-  );
+  const featuredDesktopLinks = navLinks;
 
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     if (!isHome) return;
@@ -149,7 +147,7 @@ const Header = () => {
             <LogoCube />
           </Link>
 
-          <div className="hidden xl:flex items-center gap-4 whitespace-nowrap qs-primary-nav">
+          <div className="hidden xl:flex items-center gap-3 whitespace-nowrap qs-primary-nav">
             {featuredDesktopLinks.map((link, index) => {
               const isActive = activeSection === link.id;
               return (
