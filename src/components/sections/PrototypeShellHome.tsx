@@ -19,6 +19,7 @@ import {
   Linkedin,
   Play,
   Send,
+  Sparkles,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import skyCity from "@/assets/qubesight-sky-city.jpg";
