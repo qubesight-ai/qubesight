@@ -4661,3 +4661,45 @@
     border-radius: 26px !important;
   }
 }
+
+/* Keep navigation and footer controls legible over the bright sky scene. */
+@media (max-width: 1023px) {
+  .prototype-shell .qs-site-header #mobile-nav-panel {
+    margin: 0 0.75rem 0.75rem;
+    border: 1px solid hsl(var(--primary-foreground) / 0.55) !important;
+    border-radius: 22px;
+    background: hsl(var(--secondary-foreground) / 0.82) !important;
+    box-shadow:
+      inset 0 1px 0 hsl(var(--primary-foreground) / 0.34),
+      0 20px 48px hsl(var(--secondary-foreground) / 0.24) !important;
+    backdrop-filter: blur(24px) saturate(135%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(135%) !important;
+  }
+
+  .prototype-shell .qs-site-header #mobile-nav-panel a,
+  .prototype-shell .qs-site-header #mobile-nav-panel button,
+  .prototype-shell .qs-site-header #mobile-nav-panel span,
+  .prototype-shell .qs-site-header #mobile-nav-panel svg {
+    color: hsl(var(--primary-foreground)) !important;
+    stroke: currentColor !important;
+  }
+
+  .prototype-shell .qs-site-header #mobile-nav-panel a:hover,
+  .prototype-shell .qs-site-header #mobile-nav-panel a[aria-current="location"],
+  .prototype-shell .qs-site-header #mobile-nav-panel button:hover {
+    background: hsl(var(--primary-foreground) / 0.14) !important;
+  }
+}
+
+.prototype-shell footer .glass-card {
+  border-color: hsl(var(--primary-foreground) / 0.45) !important;
+  background: hsl(var(--primary-foreground) / 0.12) !important;
+  color: hsl(var(--primary-foreground)) !important;
+  box-shadow: inset 0 1px 0 hsl(var(--primary-foreground) / 0.24) !important;
+}
+
+.prototype-shell footer .glass-card svg {
+  color: hsl(var(--primary-foreground)) !important;
+  stroke: currentColor !important;
+  opacity: 1;
+}
