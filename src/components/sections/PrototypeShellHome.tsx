@@ -11,13 +11,11 @@ import Footer from "@/components/sections/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import {
-  ArrowDown,
   ArrowUpRight,
   CalendarDays,
   CircleUserRound,
   Headphones,
   MessageCircle,
-  Mic,
   Linkedin,
   Play,
   Send,
