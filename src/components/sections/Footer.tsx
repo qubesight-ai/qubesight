@@ -51,14 +51,14 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
-                className="h-10 w-10 rounded-xl glass-card flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
+                className="footer-social-link h-10 w-10 rounded-xl glass-card flex items-center justify-center transition-colors"
               >
                 <MessageCircle className="h-5 w-5" />
               </a>
               <a
                 href="#"
                 aria-label="LinkedIn"
-                className="h-10 w-10 rounded-xl glass-card flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
+                className="footer-social-link h-10 w-10 rounded-xl glass-card flex items-center justify-center transition-colors"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
