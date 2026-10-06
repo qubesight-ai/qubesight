@@ -1,0 +1,136 @@
+/* QubeSight Skyworld theme for the dashboard — scoped to .qs-dashboard only. */
+.qs-dashboard {
+  position: relative;
+  isolation: isolate;
+  color: hsl(216 60% 14%);
+  font-family: "Inter", system-ui, sans-serif;
+  background: hsl(205 90% 92%) !important;
+}
+.qs-dashboard::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, hsl(205 100% 96% / 0.55), hsl(210 90% 88% / 0.7) 60%, hsl(214 80% 80% / 0.82)),
+    url("./assets/qubesight-sky-city.jpg") center bottom / cover no-repeat;
+}
+.qs-dashboard h1,
+.qs-dashboard h2,
+.qs-dashboard h3 {
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: -0.02em;
+  color: hsl(216 70% 16%);
+}
+
+/* Sidebar: deep blue glass */
+.qs-dashboard .admin-sidebar {
+  background: linear-gradient(170deg, hsl(214 80% 30% / 0.78), hsl(218 85% 18% / 0.86)) !important;
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  border-right: 1px solid hsl(0 0% 100% / 0.28);
+  box-shadow: 8px 0 40px -18px hsl(216 80% 20% / 0.55);
+}
+.qs-dashboard .admin-sidebar nav button {
+  color: hsl(205 90% 92% / 0.85);
+  border-radius: 0.9rem;
+  transition: background 0.35s cubic-bezier(0.32, 0.72, 0, 1), color 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+.qs-dashboard .admin-sidebar nav button:hover,
+.qs-dashboard .admin-sidebar nav button.active {
+  background: hsl(0 0% 100% / 0.18) !important;
+  color: hsl(0 0% 100%) !important;
+  box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.35);
+}
+.qs-dashboard .admin-sidebar .text-slate-500,
+.qs-dashboard .admin-sidebar .text-slate-400 {
+  color: hsl(205 80% 85% / 0.8) !important;
+}
+
+/* Top header: light glass */
+.qs-dashboard main > header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: hsl(0 0% 100% / 0.42) !important;
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border-bottom: 1px solid hsl(0 0% 100% / 0.6) !important;
+}
+
+/* Cards, panels, tables: frosted glass */
+.qs-dashboard main [class*="bg-white"],
+.qs-dashboard main [class*="bg-card"],
+.qs-dashboard main [class*="bg-slate-50"],
+.qs-dashboard main [class*="bg-gray-50"],
+.qs-dashboard [role="dialog"],
+.qs-dashboard .fixed > [class*="bg-white"] {
+  background: hsl(0 0% 100% / 0.58) !important;
+  border-color: hsl(0 0% 100% / 0.75) !important;
+  box-shadow:
+    inset 0 1px 0 hsl(0 0% 100% / 0.8),
+    0 18px 40px -24px hsl(216 80% 30% / 0.45);
+}
+.qs-dashboard main > header[class*="bg-white"] {
+  box-shadow: none;
+}
+.qs-dashboard main [class*="rounded-xl"],
+.qs-dashboard main [class*="rounded-2xl"] {
+  border-radius: 1.25rem;
+}
+.qs-dashboard main [class*="border-slate"],
+.qs-dashboard main [class*="border-gray"],
+.qs-dashboard main .border {
+  border-color: hsl(0 0% 100% / 0.7) !important;
+}
+
+/* Text contrast on glass */
+.qs-dashboard main .text-slate-400 { color: hsl(214 35% 40%) !important; }
+.qs-dashboard main .text-slate-500 { color: hsl(214 35% 34%) !important; }
+.qs-dashboard main .text-slate-600,
+.qs-dashboard main .text-slate-700 { color: hsl(216 45% 24%) !important; }
+
+/* Inputs */
+.qs-dashboard main input,
+.qs-dashboard main textarea,
+.qs-dashboard main select,
+.qs-dashboard .fixed input,
+.qs-dashboard .fixed textarea,
+.qs-dashboard .fixed select {
+  background: hsl(0 0% 100% / 0.72) !important;
+  border-color: hsl(210 70% 80%) !important;
+  border-radius: 0.8rem;
+}
+.qs-dashboard input:focus,
+.qs-dashboard textarea:focus,
+.qs-dashboard select:focus {
+  outline: 2px solid hsl(206 95% 55% / 0.55);
+  outline-offset: 1px;
+}
+
+/* Primary buttons: same blue gradient pill as landing */
+.qs-dashboard main button[class*="bg-blue"],
+.qs-dashboard main a[class*="bg-blue"],
+.qs-dashboard main button[class*="bg-primary"],
+.qs-dashboard main a[class*="bg-primary"],
+.qs-dashboard .fixed button[class*="bg-blue"],
+.qs-dashboard .fixed button[class*="bg-primary"] {
+  background: linear-gradient(135deg, hsl(199 95% 55%), hsl(218 90% 52%)) !important;
+  color: hsl(0 0% 100%) !important;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px -12px hsl(214 90% 45% / 0.7), inset 0 1px 0 hsl(0 0% 100% / 0.4);
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+.qs-dashboard main button[class*="bg-blue"]:hover,
+.qs-dashboard main button[class*="bg-primary"]:hover {
+  transform: translateY(-1px);
+}
+.qs-dashboard main button:active {
+  transform: scale(0.98);
+}
+
+/* Onboarding / loading full-screen states */
+.qs-dashboard-fullscreen {
+  min-height: 100dvh;
+}
