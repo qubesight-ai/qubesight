@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import skyCity from "@/assets/qubesight-sky-city.jpg";
-import qubesightLogo from "@/assets/qubesight-logo.png";
+import heroCube from "@/assets/qubesight-hero-cube.png";
 
 const PrototypeHero = () => {
   const { language } = useTranslation();
