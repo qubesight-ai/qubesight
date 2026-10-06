@@ -6,4 +6,4 @@
 - [x] Replicar la referencia visual aprobada en toda la landing sin alterar funcionalidad.
 - [x] Verificar navegación, contenido y experiencia en escritorio y móvil.
 - [x] Mantener visible el paisaje del hero de forma continua detrás de todas las secciones hasta el footer.
-- [ ] Hacer transparente el vidrio del menú y convertir la demo del héroe en una experiencia interactiva.
+- [x] Hacer transparente el vidrio del menú y convertir la demo del héroe en una experiencia interactiva.

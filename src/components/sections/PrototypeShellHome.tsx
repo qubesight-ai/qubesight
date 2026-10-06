@@ -13,6 +13,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import {
   ArrowUpRight,
+  CalendarDays,
   Headphones,
   MessageCircle,
   Linkedin,

@@ -4255,7 +4255,7 @@
     padding: 0.8rem;
     border-radius: 24px;
   }
-  .qs-quick-actions a {
+  .qs-quick-actions button {
     font-size: 0.57rem;
   }
   .qs-teaser-card > strong,

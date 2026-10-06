@@ -38,7 +38,7 @@ A `voice_agents` row is desired configuration, not proof of a running agent. Run
 
 ## Architecture rules
 
-- Application code is TypeScript (`.ts`/`.tsx`).
+- Application code is TypeScript; isolate the landing chat simulation from backend voice-demo logic.
 - Routes are centralized; pages correspond to URLs; feature modules own domain UI, hooks, schemas, types and services.
 - `src/pages/Dashboard.tsx` is still too large. New work must not enlarge it; extract a feature before extending it.
 - Browser code calls only QubeSight/Supabase boundaries, never Groq, OpenRouter, ElevenLabs, Twilio administrative APIs, the provisioner or VPS directly.
