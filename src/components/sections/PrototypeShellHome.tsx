@@ -28,42 +28,99 @@ const PrototypeHero = () => {
   const { language } = useTranslation();
   const spanish = language === "es";
 
-  const widgets = [
-    {
-      icon: PhoneCall,
-      title: spanish ? "Llamadas" : "Calls",
-      value: spanish ? "Atención 24/7" : "24/7 coverage",
-    },
-    {
-      icon: MessageCircle,
-      title: "WhatsApp",
-      value: spanish ? "Respuestas al instante" : "Instant replies",
-    },
-    {
-      icon: CalendarDays,
-      title: spanish ? "Agenda" : "Calendar",
-      value: spanish ? "Citas organizadas" : "Appointments organized",
-    },
+  const floatingNodes = [
+    { className: "vaio-node vaio-node-chat", icon: MessageCircle, label: "Chat" },
+    { className: "vaio-node vaio-node-phone", icon: PhoneCall, label: spanish ? "Llamadas" : "Calls" },
+    { className: "vaio-node vaio-node-calendar", icon: CalendarDays, label: spanish ? "Agenda" : "Calendar" },
+    { className: "vaio-node vaio-node-voice", icon: Volume2, label: spanish ? "Voz" : "Voice" },
+    { className: "vaio-node vaio-node-spark", icon: Sparkles, label: "AI" },
   ];
 
   return (
-    <section id="hero" className="prototype-hero">
-      <div className="aero-ambient aero-ambient-left" aria-hidden="true" />
-      <div className="aero-ambient aero-ambient-right" aria-hidden="true" />
-      <div className="aero-horizon" aria-hidden="true" />
+    <section id="hero" className="prototype-hero vaio-hero">
+      <div className="vaio-sky" aria-hidden="true">
+        <div className="vaio-sunflare" />
+        <div className="vaio-cloud vaio-cloud-a" />
+        <div className="vaio-cloud vaio-cloud-b" />
+        <div className="vaio-cloud vaio-cloud-c" />
+        <div className="vaio-cloud vaio-cloud-d" />
+        <div className="vaio-cloud-bank" />
+        <div className="vaio-glass-tower vaio-tower-a" />
+        <div className="vaio-glass-tower vaio-tower-b" />
+        <div className="vaio-glass-tower vaio-tower-c" />
+        <div className="vaio-chrome-orbit vaio-orbit-a" />
+        <div className="vaio-chrome-orbit vaio-orbit-b" />
+      </div>
 
-      <div className="aero-orbit aero-orbit-large" aria-hidden="true" />
-      <div className="aero-orbit aero-orbit-small" aria-hidden="true" />
+      <div className="vaio-hero-copy">
+        <div className="prototype-eyebrow vaio-eyebrow">
+          <Sparkles className="h-3.5 w-3.5" />
+          {spanish ? "RECEPCIÓN CON IA PARA NEGOCIOS" : "AI RECEPTION FOR BUSINESSES"}
+        </div>
+
+        <h1>
+          {spanish ? "Tus clientes quieren respuestas" : "Your customers want answers"}
+          <br />
+          {spanish ? "cuando las necesitan" : "when they need them"}
+        </h1>
+
+        <p className="vaio-hero-subtitle">
+          {spanish
+            ? "QubeSight ayuda a que tu negocio pueda atenderlos."
+            : "QubeSight helps your business be there for them."}
+        </p>
+
+        <div className="vaio-hero-actions">
+          <a href="#early-adopters" className="prototype-button vaio-primary-cta">
+            {spanish ? "Solicitar demostración" : "Request a demo"}
+            <ArrowUpRight className="h-4 w-4" />
+          </a>
+          <a href="#demo" className="vaio-secondary-cta">
+            <span className="vaio-play-dot">▶</span>
+            {spanish ? "Ver cómo funciona" : "See how it works"}
+          </a>
+        </div>
+
+        <div className="vaio-trust-strip">
+          <ShieldCheck className="h-4 w-4" />
+          <span>
+            {spanish
+              ? "Atención 24/7 · Voz + Chat · Agenda automática"
+              : "24/7 coverage · Voice + Chat · Automated scheduling"}
+          </span>
+        </div>
+      </div>
+
+      <div className="vaio-world" aria-hidden="true">
+        <div className="vaio-cube-stage">
+          <div className="vaio-cube-core">
+            <span className="vaio-cube-face vaio-cube-front" />
+            <span className="vaio-cube-face vaio-cube-top" />
+            <span className="vaio-cube-face vaio-cube-side" />
+            <span className="vaio-cube-glow" />
+          </div>
+          <div className="vaio-cube-ring vaio-cube-ring-one" />
+          <div className="vaio-cube-ring vaio-cube-ring-two" />
+        </div>
+
+        {floatingNodes.map(({ className, icon: Icon, label }) => (
+          <div className={className} key={label}>
+            <span className="vaio-node-highlight" />
+            <Icon className="h-7 w-7" />
+            <small>{label}</small>
+          </div>
+        ))}
+      </div>
 
       <div
-        className="aero-hero-panel hero-matilda-card"
+        className="aero-hero-panel hero-matilda-card vaio-matilda-panel"
         aria-label={spanish ? "Hablar con Matilda" : "Talk to Matilda"}
       >
         <div className="aero-panel-topline hero-matilda-topline">
           <span />
           <span />
           <span />
-          <strong>{spanish ? "DEMO DE VOZ EN VIVO" : "LIVE VOICE DEMO"}</strong>
+          <strong>{spanish ? "MATILDA · DEMO EN VIVO" : "MATILDA · LIVE DEMO"}</strong>
         </div>
 
         <div className="hero-matilda-body">
@@ -79,8 +136,8 @@ const PrototypeHero = () => {
               </div>
               <p>
                 {spanish
-                  ? "Recepcionista de voz con IA de QubeSight"
-                  : "QubeSight AI voice receptionist"}
+                  ? "Tu recepcionista de IA"
+                  : "Your AI receptionist"}
               </p>
             </div>
           </div>
@@ -88,27 +145,17 @@ const PrototypeHero = () => {
           <div className="hero-matilda-console">
             <div className="hero-matilda-console-top">
               <Volume2 className="h-4 w-4" />
-              <span>{spanish ? "Matilda está lista para escucharte" : "Matilda is ready to listen"}</span>
+              <span>{spanish ? "Lista para escucharte" : "Ready to listen"}</span>
             </div>
 
             <div className="hero-matilda-wave" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
+              <span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span />
             </div>
 
             <div className="hero-matilda-bubble">
               {spanish
-                ? "Podés hablar conmigo como si llamaras a una recepción real. Preguntame por servicios, horarios o una demostración."
-                : "Talk to me like you would with a real receptionist. Ask about services, hours, or a demo."}
+                ? "Hola. Puedo responder consultas, gestionar citas y atender a tus clientes mientras tu equipo está ocupado."
+                : "Hi. I can answer questions, manage appointments, and help customers while your team is busy."}
             </div>
 
             <a href="#demo" className="hero-matilda-talk">
@@ -125,76 +172,18 @@ const PrototypeHero = () => {
 
           <div className="hero-matilda-footnote">
             <ShieldCheck className="h-3.5 w-3.5" />
-            <span>
-              {spanish ? "Demo segura · hasta 5 turnos de conversación" : "Secure demo · up to 5 conversation turns"}
-            </span>
+            <span>{spanish ? "Experiencia segura y privada" : "Secure, private experience"}</span>
           </div>
         </div>
       </div>
 
-      <div className="prototype-eyebrow">
-        <Sparkles className="h-3.5 w-3.5" />
-        {spanish ? "RECEPCIÓN CON IA PARA NEGOCIOS" : "AI RECEPTION FOR BUSINESSES"}
-      </div>
-
-      <h1>
-        {spanish ? "Tus clientes quieren respuestas" : "Your customers want answers"}
-        <br />
-        {spanish ? "cuando las necesitan." : "when they need them."}
-        <br />
-        <em>
-          {spanish
-            ? "QubeSight ayuda a que tu negocio pueda atenderlos."
-            : "QubeSight helps your business be there for them."}
-        </em>
-      </h1>
-
-      <div className="aero-trustline">
-        <ShieldCheck className="h-4 w-4" />
-        <span>
-          {spanish
-            ? "Automatización clara, profesional y diseñada para negocios reales."
-            : "Clear, professional automation designed for real businesses."}
-        </span>
-      </div>
-
-      <div
-        className="aero-widget-dock"
-        aria-label={spanish ? "Capacidades de QubeSight" : "QubeSight capabilities"}
-      >
-        {widgets.map(({ icon: Icon, title, value }) => (
-          <div className="aero-widget" key={title}>
-            <div className="aero-widget-icon">
-              <Icon className="h-5 w-5" />
-            </div>
-            <div>
-              <strong>{title}</strong>
-              <span>{value}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="prototype-hero-bottom">
-        <p>
-          {spanish
-            ? "QubeSight es una recepción con inteligencia artificial para atender llamadas y consultas digitales, responder preguntas frecuentes y gestionar oportunidades cuando tu equipo está ocupado."
-            : "QubeSight is an AI reception service for calls and digital inquiries, answering common questions and managing opportunities while your team is busy."}
-        </p>
-        <div>
-          <a href="#early-adopters" className="prototype-button">
-            {spanish ? "Solicitar una presentación" : "Request a demo"}{" "}
-            <ArrowDown className="h-4 w-4" />
-          </a>
-          <a href="#demo" className="prototype-text-link">
-            {spanish ? "Ver demo" : "See demo"} <ArrowUpRight className="inline h-4 w-4" />
-          </a>
-        </div>
+      <div className="vaio-scroll-cue" aria-hidden="true">
+        <span>{spanish ? "Explorar" : "Explore"}</span>
+        <ArrowDown className="h-4 w-4" />
       </div>
     </section>
   );
 };
-
 
 const WhoWeAre = () => {
   const { language } = useTranslation();
@@ -272,7 +261,7 @@ const PrototypeShellHome = () => {
   useScrollReveal();
 
   return (
-    <div className="prototype-shell">
+    <div className="prototype-shell vaio-immersive">
       <Header />
       <main>
         <PrototypeHero />
