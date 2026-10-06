@@ -8,17 +8,16 @@ import EarlyAdopters from "@/components/sections/EarlyAdopters";
 import FAQ from "@/components/sections/FAQ";
 import FinalCTA from "@/components/sections/FinalCTA";
 import Footer from "@/components/sections/Footer";
+import HeroInteractiveDemo from "@/components/sections/HeroInteractiveDemo";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import {
   ArrowUpRight,
   CalendarDays,
-  CircleUserRound,
   Headphones,
   MessageCircle,
   Linkedin,
   Play,
-  Send,
   Sparkles,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -71,52 +70,7 @@ const PrototypeHero = () => {
           <CalendarDays />
         </span>
       </div>
-      <div
-        className="qs-matilda-glass"
-        aria-label={spanish ? "Vista previa de Matilda" : "Matilda preview"}
-      >
-        <div className="qs-matilda-header">
-          <div className="hero-matilda-avatar">M</div>
-          <div>
-            <div className="qs-matilda-name">Matilda</div>
-            <span>{spanish ? "Tu recepcionista de IA" : "Your AI receptionist"}</span>
-          </div>
-          <div className="qs-online">
-            <i /> {spanish ? "En línea" : "Online"}
-          </div>
-        </div>
-        <div className="qs-message qs-message-user">
-          {spanish ? "Hola, ¿cuál es su horario de atención?" : "Hi, what are your business hours?"}
-        </div>
-        <div className="qs-message-row">
-          <div className="hero-matilda-avatar qs-avatar-small">M</div>
-          <div className="qs-message">
-            {spanish
-              ? "Nuestro horario es de lunes a viernes, de 9:00 a 18:00 hrs. ¿Te gustaría que agende una cita?"
-              : "We're open Monday through Friday, 9:00 to 18:00. Would you like me to book an appointment?"}
-          </div>
-        </div>
-        <div className="qs-quick-actions">
-          <a href="#demo">
-            <CalendarDays />
-            {spanish ? "Agendar una cita" : "Book a meeting"}
-          </a>
-          <a href="#solution">
-            <MessageCircle />
-            {spanish ? "Ver servicios" : "See services"}
-          </a>
-          <a href="#contacto">
-            <CircleUserRound />
-            {spanish ? "Hablar con un humano" : "Talk to a person"}
-          </a>
-        </div>
-        <a href="#demo" className="qs-chat-input">
-          <span>{spanish ? "Escribe tu mensaje..." : "Type your message..."}</span>
-          <i>
-            <Send />
-          </i>
-        </a>
-      </div>
+      <HeroInteractiveDemo spanish={spanish} />
       <div className="qs-hero-teasers">
         <a href="#quienes-somos" className="qs-teaser-card">
           <span>{spanish ? "QUIÉNES SOMOS" : "ABOUT US"}</span>
