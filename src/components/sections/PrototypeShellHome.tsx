@@ -37,7 +37,7 @@ const PrototypeHero = () => {
   ];
 
   return (
-    <section id="hero" className="prototype-hero vaio-hero">
+    <section id="hero" className="prototype-hero vaio-hero vaio-reference-replica">
       <div className="vaio-sky" aria-hidden="true">
         <div className="vaio-sunflare" />
         <div className="vaio-cloud vaio-cloud-a" />
@@ -48,18 +48,18 @@ const PrototypeHero = () => {
         <div className="vaio-glass-tower vaio-tower-a" />
         <div className="vaio-glass-tower vaio-tower-b" />
         <div className="vaio-glass-tower vaio-tower-c" />
+        <div className="vaio-glass-tower vaio-tower-d" />
         <div className="vaio-chrome-orbit vaio-orbit-a" />
         <div className="vaio-chrome-orbit vaio-orbit-b" />
+        <div className="vaio-chrome-ribbon vaio-ribbon-a" />
+        <div className="vaio-chrome-ribbon vaio-ribbon-b" />
       </div>
 
       <div className="vaio-hero-copy">
-        <div className="prototype-eyebrow vaio-eyebrow">
-          <Sparkles className="h-3.5 w-3.5" />
-          {spanish ? "RECEPCIÓN CON IA PARA NEGOCIOS" : "AI RECEPTION FOR BUSINESSES"}
-        </div>
-
         <h1>
-          {spanish ? "Tus clientes quieren respuestas" : "Your customers want answers"}
+          {spanish ? "Tus clientes" : "Your customers"}
+          <br />
+          {spanish ? "quieren respuestas" : "want answers"}
           <br />
           {spanish ? "cuando las necesitan" : "when they need them"}
         </h1>
@@ -80,15 +80,6 @@ const PrototypeHero = () => {
             {spanish ? "Ver cómo funciona" : "See how it works"}
           </a>
         </div>
-
-        <div className="vaio-trust-strip">
-          <ShieldCheck className="h-4 w-4" />
-          <span>
-            {spanish
-              ? "Atención 24/7 · Voz + Chat · Agenda automática"
-              : "24/7 coverage · Voice + Chat · Automated scheduling"}
-          </span>
-        </div>
       </div>
 
       <div className="vaio-world" aria-hidden="true">
@@ -97,6 +88,7 @@ const PrototypeHero = () => {
             <span className="vaio-cube-face vaio-cube-front" />
             <span className="vaio-cube-face vaio-cube-top" />
             <span className="vaio-cube-face vaio-cube-side" />
+            <span className="vaio-cube-inner" />
             <span className="vaio-cube-glow" />
           </div>
           <div className="vaio-cube-ring vaio-cube-ring-one" />
@@ -110,77 +102,83 @@ const PrototypeHero = () => {
             <small>{label}</small>
           </div>
         ))}
+
+        <div className="vaio-gear" />
+        <div className="vaio-disc" />
       </div>
 
       <div
-        className="aero-hero-panel hero-matilda-card vaio-matilda-panel"
+        className="aero-hero-panel hero-matilda-card vaio-matilda-panel vaio-chat-panel"
         aria-label={spanish ? "Hablar con Matilda" : "Talk to Matilda"}
       >
-        <div className="aero-panel-topline hero-matilda-topline">
-          <span />
-          <span />
-          <span />
-          <strong>{spanish ? "MATILDA · DEMO EN VIVO" : "MATILDA · LIVE DEMO"}</strong>
+        <div className="vaio-chat-header">
+          <div className="hero-matilda-avatar">M</div>
+          <div>
+            <div className="vaio-chat-name-row">
+              <h3>Matilda</h3>
+              <span className="hero-matilda-online">
+                <i />
+                {spanish ? "En línea" : "Online"}
+              </span>
+            </div>
+            <p>{spanish ? "Tu recepcionista de IA" : "Your AI receptionist"}</p>
+          </div>
         </div>
 
-        <div className="hero-matilda-body">
-          <div className="hero-matilda-header">
-            <div className="hero-matilda-avatar">M</div>
-            <div className="hero-matilda-meta">
-              <div className="hero-matilda-name-row">
-                <h3>Matilda</h3>
-                <span className="hero-matilda-online">
-                  <i />
-                  {spanish ? "En línea" : "Online"}
-                </span>
-              </div>
-              <p>
-                {spanish
-                  ? "Tu recepcionista de IA"
-                  : "Your AI receptionist"}
-              </p>
-            </div>
+        <div className="vaio-chat-thread">
+          <div className="vaio-chat-message vaio-chat-message-user">
+            <span>{spanish ? "Hola, ¿cuál es su horario de atención?" : "Hi, what are your business hours?"}</span>
+            <small>10:24</small>
           </div>
 
-          <div className="hero-matilda-console">
-            <div className="hero-matilda-console-top">
-              <Volume2 className="h-4 w-4" />
-              <span>{spanish ? "Lista para escucharte" : "Ready to listen"}</span>
-            </div>
-
-            <div className="hero-matilda-wave" aria-hidden="true">
-              <span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span />
-            </div>
-
-            <div className="hero-matilda-bubble">
-              {spanish
-                ? "Hola. Puedo responder consultas, gestionar citas y atender a tus clientes mientras tu equipo está ocupado."
-                : "Hi. I can answer questions, manage appointments, and help customers while your team is busy."}
-            </div>
-
-            <a href="#demo" className="hero-matilda-talk">
-              <span className="hero-matilda-mic">
-                <Mic className="h-5 w-5" />
-              </span>
+          <div className="vaio-chat-reply-row">
+            <div className="vaio-mini-avatar">M</div>
+            <div className="vaio-chat-message vaio-chat-message-ai">
+              <strong>Matilda</strong>
               <span>
-                <strong>{spanish ? "Hablar con Matilda" : "Talk to Matilda"}</strong>
-                <small>{spanish ? "Demo de voz interactiva" : "Interactive voice demo"}</small>
+                {spanish
+                  ? "Nuestro horario de atención es de lunes a viernes, de 9:00 a 18:00 hs. ¿Te gustaría que agende una cita?"
+                  : "We're available Monday through Friday, 9:00 to 18:00. Would you like me to schedule an appointment?"}
               </span>
-              <ArrowDown className="ml-auto h-4 w-4" />
-            </a>
-          </div>
-
-          <div className="hero-matilda-footnote">
-            <ShieldCheck className="h-3.5 w-3.5" />
-            <span>{spanish ? "Experiencia segura y privada" : "Secure, private experience"}</span>
+              <small>10:24</small>
+            </div>
           </div>
         </div>
+
+        <div className="vaio-chat-quick-actions">
+          <a href="#demo"><CalendarDays className="h-4 w-4" />{spanish ? "Agendar una cita" : "Book a meeting"}</a>
+          <a href="#solucion"><Sparkles className="h-4 w-4" />{spanish ? "Ver servicios" : "See services"}</a>
+          <a href="#early-adopters"><PhoneCall className="h-4 w-4" />{spanish ? "Hablar con un humano" : "Talk to a human"}</a>
+        </div>
+
+        <a href="#demo" className="vaio-chat-input">
+          <span>{spanish ? "Escribe tu mensaje..." : "Type your message..."}</span>
+          <span className="vaio-chat-send">➤</span>
+        </a>
       </div>
 
-      <div className="vaio-scroll-cue" aria-hidden="true">
-        <span>{spanish ? "Explorar" : "Explore"}</span>
-        <ArrowDown className="h-4 w-4" />
-      </div>
+      <a href="#quienes-somos" className="vaio-preview-card vaio-preview-about">
+        <span className="vaio-preview-kicker">{spanish ? "QUIÉNES SOMOS" : "ABOUT US"}</span>
+        <strong>{spanish ? "Tecnología que acerca personas" : "Technology that brings people closer"}</strong>
+        <p>
+          {spanish
+            ? "Creemos en un mundo donde ninguna oportunidad se pierda por falta de atención."
+            : "We believe no opportunity should be lost because no one was there to answer."}
+        </p>
+        <span className="vaio-preview-arrow">→</span>
+        <div className="vaio-preview-image vaio-preview-city" aria-hidden="true" />
+      </a>
+
+      <a href="#early-adopters" className="vaio-preview-card vaio-preview-early">
+        <span className="vaio-preview-kicker">EARLY ADOPTERS</span>
+        <strong>{spanish ? "Negocios que ya están un paso adelante" : "Businesses already one step ahead"}</strong>
+        <p>
+          {spanish
+            ? "Empresas que confían en QubeSight para transformar su atención al cliente."
+            : "Companies trusting QubeSight to transform customer service."}
+        </p>
+        <div className="vaio-preview-image vaio-preview-office" aria-hidden="true" />
+      </a>
     </section>
   );
 };
