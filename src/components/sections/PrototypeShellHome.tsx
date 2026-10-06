@@ -238,6 +238,7 @@ const PrototypeShellHome = () => {
 
   return (
     <div className="prototype-shell">
+      <img className="qs-world-sky" src={skyCity} alt="" aria-hidden="true" />
       <Header />
       <main>
         <PrototypeHero />

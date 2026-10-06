@@ -4241,6 +4241,44 @@
    SKYWORLD — COMPLETE LANDING SYSTEM
    Extends the approved hero language through every section.
    ========================================================= */
+.prototype-shell {
+  position: relative;
+  isolation: isolate;
+  background: hsl(var(--background));
+}
+
+.prototype-shell .qs-world-sky {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  width: 100vw;
+  height: 100dvh;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+.prototype-shell::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, hsl(207 92% 94% / 0.08), hsl(207 83% 91% / 0.3));
+}
+
+.prototype-shell .prototype-hero {
+  overflow: visible;
+  background: transparent !important;
+}
+
+.prototype-shell .prototype-hero::before,
+.prototype-shell .prototype-hero::after,
+.prototype-shell .qs-hero-sky,
+.prototype-shell .qs-hero-vignette {
+  display: none;
+}
+
 .prototype-shell .qs-site-header nav {
   min-width: 0;
 }
@@ -4259,9 +4297,7 @@
 .prototype-shell .prototype-content {
   padding: 5rem 0 0;
   overflow: clip;
-  background:
-    linear-gradient(180deg, hsl(207 90% 95% / 0.16), hsl(207 83% 91% / 0.28)),
-    url("/src/assets/qubesight-sky-city.jpg") center center / cover fixed !important;
+  background: transparent !important;
 }
 
 .prototype-shell .prototype-content::before {
@@ -4550,11 +4586,13 @@
 }
 
 @media (max-width: 900px) {
+  .prototype-shell .qs-world-sky {
+    object-position: 66% center;
+  }
+
   .prototype-shell .prototype-content {
     padding-top: 7.5rem;
-    background:
-      linear-gradient(180deg, hsl(207 90% 95% / 0.2), hsl(207 83% 91% / 0.3)),
-      url("/src/assets/qubesight-sky-city.jpg") 66% center / cover fixed !important;
+    background: transparent !important;
   }
 
   .prototype-shell .prototype-content > section,
