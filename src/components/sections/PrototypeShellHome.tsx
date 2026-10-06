@@ -14,182 +14,66 @@ import {
   ArrowDown,
   ArrowUpRight,
   CalendarDays,
+  CircleUserRound,
+  Headphones,
   MessageCircle,
   Mic,
-  PhoneCall,
-  ShieldCheck,
-  Sparkles,
-  Volume2,
   Linkedin,
+  Play,
+  Send,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import skyCity from "@/assets/qubesight-sky-city.jpg";
+import heroCube from "@/assets/qubesight-hero-cube.png";
 
 const PrototypeHero = () => {
   const { language } = useTranslation();
   const spanish = language === "es";
 
-  const widgets = [
-    {
-      icon: PhoneCall,
-      title: spanish ? "Llamadas" : "Calls",
-      value: spanish ? "Atención 24/7" : "24/7 coverage",
-    },
-    {
-      icon: MessageCircle,
-      title: "WhatsApp",
-      value: spanish ? "Respuestas al instante" : "Instant replies",
-    },
-    {
-      icon: CalendarDays,
-      title: spanish ? "Agenda" : "Calendar",
-      value: spanish ? "Citas organizadas" : "Appointments organized",
-    },
-  ];
-
   return (
     <section id="hero" className="prototype-hero">
-      <div className="aero-ambient aero-ambient-left" aria-hidden="true" />
-      <div className="aero-ambient aero-ambient-right" aria-hidden="true" />
-      <div className="aero-horizon" aria-hidden="true" />
-
-      <div className="aero-orbit aero-orbit-large" aria-hidden="true" />
-      <div className="aero-orbit aero-orbit-small" aria-hidden="true" />
-
-      <div
-        className="aero-hero-panel hero-matilda-card"
-        aria-label={spanish ? "Hablar con Matilda" : "Talk to Matilda"}
-      >
-        <div className="aero-panel-topline hero-matilda-topline">
-          <span />
-          <span />
-          <span />
-          <strong>{spanish ? "DEMO DE VOZ EN VIVO" : "LIVE VOICE DEMO"}</strong>
-        </div>
-
-        <div className="hero-matilda-body">
-          <div className="hero-matilda-header">
-            <div className="hero-matilda-avatar">M</div>
-            <div className="hero-matilda-meta">
-              <div className="hero-matilda-name-row">
-                <h3>Matilda</h3>
-                <span className="hero-matilda-online">
-                  <i />
-                  {spanish ? "En línea" : "Online"}
-                </span>
-              </div>
-              <p>
-                {spanish
-                  ? "Recepcionista de voz con IA de QubeSight"
-                  : "QubeSight AI voice receptionist"}
-              </p>
-            </div>
-          </div>
-
-          <div className="hero-matilda-console">
-            <div className="hero-matilda-console-top">
-              <Volume2 className="h-4 w-4" />
-              <span>{spanish ? "Matilda está lista para escucharte" : "Matilda is ready to listen"}</span>
-            </div>
-
-            <div className="hero-matilda-wave" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
-
-            <div className="hero-matilda-bubble">
-              {spanish
-                ? "Podés hablar conmigo como si llamaras a una recepción real. Preguntame por servicios, horarios o una demostración."
-                : "Talk to me like you would with a real receptionist. Ask about services, hours, or a demo."}
-            </div>
-
-            <a href="#demo" className="hero-matilda-talk">
-              <span className="hero-matilda-mic">
-                <Mic className="h-5 w-5" />
-              </span>
-              <span>
-                <strong>{spanish ? "Hablar con Matilda" : "Talk to Matilda"}</strong>
-                <small>{spanish ? "Demo de voz interactiva" : "Interactive voice demo"}</small>
-              </span>
-              <ArrowDown className="ml-auto h-4 w-4" />
-            </a>
-          </div>
-
-          <div className="hero-matilda-footnote">
-            <ShieldCheck className="h-3.5 w-3.5" />
-            <span>
-              {spanish ? "Demo segura · hasta 5 turnos de conversación" : "Secure demo · up to 5 conversation turns"}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div className="prototype-eyebrow">
-        <Sparkles className="h-3.5 w-3.5" />
-        {spanish ? "RECEPCIÓN CON IA PARA NEGOCIOS" : "AI RECEPTION FOR BUSINESSES"}
-      </div>
-
-      <h1>
-        {spanish ? "Tus clientes quieren respuestas" : "Your customers want answers"}
-        <br />
-        {spanish ? "cuando las necesitan." : "when they need them."}
-        <br />
-        <em>
-          {spanish
-            ? "QubeSight ayuda a que tu negocio pueda atenderlos."
-            : "QubeSight helps your business be there for them."}
-        </em>
-      </h1>
-
-      <div className="aero-trustline">
-        <ShieldCheck className="h-4 w-4" />
-        <span>
-          {spanish
-            ? "Automatización clara, profesional y diseñada para negocios reales."
-            : "Clear, professional automation designed for real businesses."}
-        </span>
-      </div>
-
-      <div
-        className="aero-widget-dock"
-        aria-label={spanish ? "Capacidades de QubeSight" : "QubeSight capabilities"}
-      >
-        {widgets.map(({ icon: Icon, title, value }) => (
-          <div className="aero-widget" key={title}>
-            <div className="aero-widget-icon">
-              <Icon className="h-5 w-5" />
-            </div>
-            <div>
-              <strong>{title}</strong>
-              <span>{value}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="prototype-hero-bottom">
-        <p>
-          {spanish
-            ? "QubeSight es una recepción con inteligencia artificial para atender llamadas y consultas digitales, responder preguntas frecuentes y gestionar oportunidades cuando tu equipo está ocupado."
-            : "QubeSight is an AI reception service for calls and digital inquiries, answering common questions and managing opportunities while your team is busy."}
-        </p>
-        <div>
+      <img className="qs-hero-sky" src={skyCity} alt="" width={1920} height={1080} />
+      <div className="qs-hero-vignette" aria-hidden="true" />
+      <div className="qs-hero-copy">
+        <h1>
+          {spanish ? "Tus clientes quieren respuestas" : "Your customers want answers"}<br />
+          {spanish ? "cuando las necesitan" : "when they need them"}
+        </h1>
+        <p>{spanish ? "QubeSight ayuda a que tu negocio pueda atenderlos." : "QubeSight helps your business be there for them."}</p>
+        <div className="qs-hero-actions">
           <a href="#early-adopters" className="prototype-button">
-            {spanish ? "Solicitar una presentación" : "Request a demo"}{" "}
-            <ArrowDown className="h-4 w-4" />
+            {spanish ? "Solicitar presentación" : "Request a demo"}<ArrowUpRight className="h-4 w-4" />
           </a>
-          <a href="#demo" className="prototype-text-link">
-            {spanish ? "Ver demo" : "See demo"} <ArrowUpRight className="inline h-4 w-4" />
+          <a href="#how-it-works" className="qs-secondary-button">
+            <span><Play className="h-3.5 w-3.5" /></span>{spanish ? "Ver cómo funciona" : "See how it works"}
           </a>
         </div>
+      </div>
+      <div className="qs-cube-stage" aria-hidden="true">
+        <div className="qs-orbit qs-orbit-one" /><div className="qs-orbit qs-orbit-two" />
+        <img src={heroCube} alt="" width={1024} height={1024} />
+        <span className="qs-channel qs-channel-chat"><MessageCircle /></span>
+        <span className="qs-channel qs-channel-phone"><Headphones /></span>
+        <span className="qs-channel qs-channel-calendar"><CalendarDays /></span>
+      </div>
+      <div className="qs-matilda-glass" aria-label={spanish ? "Vista previa de Matilda" : "Matilda preview"}>
+        <div className="qs-matilda-header">
+          <div className="hero-matilda-avatar">M</div>
+          <div><div className="qs-matilda-name">Matilda</div><span>{spanish ? "Tu recepcionista de IA" : "Your AI receptionist"}</span></div>
+          <div className="qs-online"><i /> {spanish ? "En línea" : "Online"}</div>
+        </div>
+        <div className="qs-message qs-message-user">{spanish ? "Hola, ¿cuál es su horario de atención?" : "Hi, what are your business hours?"}</div>
+        <div className="qs-message-row"><div className="hero-matilda-avatar qs-avatar-small">M</div><div className="qs-message">{spanish ? "Nuestro horario es de lunes a viernes, de 9:00 a 18:00 hrs. ¿Te gustaría que agende una cita?" : "We're open Monday through Friday, 9:00 to 18:00. Would you like me to book an appointment?"}</div></div>
+        <div className="qs-quick-actions">
+          <a href="#demo"><CalendarDays />{spanish ? "Agendar una cita" : "Book a meeting"}</a>
+          <a href="#solution"><MessageCircle />{spanish ? "Ver servicios" : "See services"}</a>
+          <a href="#contacto"><CircleUserRound />{spanish ? "Hablar con un humano" : "Talk to a person"}</a>
+        </div>
+        <a href="#demo" className="qs-chat-input"><span>{spanish ? "Escribe tu mensaje..." : "Type your message..."}</span><i><Send /></i></a>
+      </div>
+      <div className="qs-hero-teasers">
+        <a href="#quienes-somos" className="qs-teaser-card"><span>{spanish ? "QUIÉNES SOMOS" : "ABOUT US"}</span><strong>{spanish ? "Tecnología que acerca personas" : "Technology that brings people closer"}</strong><p>{spanish ? "Creamos un mundo donde ninguna oportunidad se pierda por falta de atención." : "We create a world where no opportunity is lost for lack of attention."}</p><i><ArrowUpRight /></i></a>
+        <a href="#early-adopters" className="qs-teaser-card qs-teaser-wide"><span>EARLY ADOPTERS</span><strong>{spanish ? "Negocios que ya están un paso adelante" : "Businesses already one step ahead"}</strong><p>{spanish ? "Empresas que confían en QubeSight para transformar su atención al cliente." : "Businesses trusting QubeSight to transform customer service."}</p><i><ArrowUpRight /></i></a>
       </div>
     </section>
   );

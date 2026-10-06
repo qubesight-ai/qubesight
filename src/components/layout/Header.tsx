@@ -134,10 +134,10 @@ const Header = () => {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled || isMobileMenuOpen ? "glass-nav" : "bg-transparent"
-      }`}
+      } qs-site-header`}
     >
       <div className="container">
-        <nav className="flex items-center justify-between gap-6 h-20" aria-label={navAriaLabel}>
+        <nav className="flex items-center justify-between gap-4 h-20" aria-label={navAriaLabel}>
           <Link
             to="/"
             className="group flex h-10 w-10 min-[420px]:w-[10.75rem] shrink-0 items-center overflow-hidden"
@@ -146,7 +146,7 @@ const Header = () => {
             <LogoCube />
           </Link>
 
-          <div className="hidden 2xl:flex items-center gap-3 whitespace-nowrap">
+          <div className="hidden 2xl:flex items-center gap-5 whitespace-nowrap qs-primary-nav">
             {navLinks.map((link, index) => {
               const isActive = activeSection === link.id;
               return (
