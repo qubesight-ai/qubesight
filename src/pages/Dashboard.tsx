@@ -31,6 +31,8 @@ import AgentsPage from "@/features/voice-agents/pages/AgentsPage";
 import CreateAgentPage from "@/features/voice-agents/pages/CreateAgentPage";
 import AgentDetailPage from "@/features/voice-agents/pages/AgentDetailPage";
 import { dashboardPath, dashboardSectionFromPath } from "@/routes/dashboardRoutes";
+import qubesightLogo from "@/assets/qubesight-logo.png";
+import "@/dashboard-skyworld.css";
 const emptyChatbot: Chatbot = {
   id: "",
   name: "",
@@ -73,11 +75,16 @@ export default function Dashboard() {
   }, [error]);
   if (loading)
     return (
-      <div className="min-h-screen grid place-items-center">
+      <div className="qs-dashboard min-h-screen grid place-items-center">
         <Loader2 className="animate-spin text-primary" size={34} />
       </div>
     );
-  if (!org) return <Onboarding userName={profile?.full_name || ""} done={load} />;
+  if (!org)
+    return (
+      <div className="qs-dashboard">
+        <Onboarding userName={profile?.full_name || ""} done={load} />
+      </div>
+    );
   const nav: [Section, string, typeof LayoutDashboard][] = [
     ["overview", "Resumen", LayoutDashboard],
     ["agents", "Agentes de voz", Mic2],
@@ -87,13 +94,11 @@ export default function Dashboard() {
     ["profile", "Perfil", UserRound],
   ];
   return (
-    <div className="min-h-screen bg-[#f4f7fb] text-slate-900 flex">
+    <div className="qs-dashboard min-h-screen flex">
       <aside className={`admin-sidebar ${mobile ? "open" : ""}`}>
         <div className="p-5 flex items-center justify-between">
           <span className="flex items-center gap-3 text-white font-semibold text-lg">
-            <i className="w-9 h-9 rounded-xl bg-blue-500 grid place-items-center">
-              <Mic2 size={18} />
-            </i>
+            <img src={qubesightLogo} alt="QubeSight" className="w-9 h-9 object-contain" />
             QubeSight
           </span>
           <button className="md:hidden text-slate-400" onClick={() => setMobile(false)}>
