@@ -12,7 +12,7 @@ Read this file before editing code, migrations, infrastructure, or documentation
 
 ## Product boundary
 
-QubeSight is a multi-tenant React/TypeScript dashboard backed by Lovable Cloud/Supabase. It includes authentication, organizations and RLS, voice-agent configuration, calls, chatbot configuration/Groq streaming, and a secure Twilio connection MVP.
+QubeSight is a multi-tenant React/TypeScript dashboard on Lovable Cloud/Supabase: auth, organizations/RLS, voice agents, calls, chatbots (Groq streaming) and a secure Twilio MVP.
 
 A `voice_agents` row is desired configuration, not proof of a running agent. Runtime provisioning is a separate security-sensitive system.
 
@@ -88,5 +88,5 @@ Repository work does not authorize operations in Lovable, Supabase production, T
 
 Finish with repository, branch/base/result SHA; completed and excluded scope; changed files; exact validations; migrations created/applied; required secret names only; deployments performed/pending; risks; rollback; and one recommended next action.
 
-- vite.config.ts defines public VITE_SUPABASE_* fallbacks because .gitignore (read-only in Lovable) excludes .env, which otherwise breaks builds with "supabaseUrl is required".
+- vite.config.ts holds public VITE_SUPABASE_* fallbacks because read-only .gitignore excludes .env (else "supabaseUrl is required").
 - Public voice demo: `voice-demo-session` (anon, rate-limited, 2-min cap) dispatches `PUBLIC_DEMO_VOICE_AGENT_ID` via the worker's browser_test contract; avoids worker changes.
