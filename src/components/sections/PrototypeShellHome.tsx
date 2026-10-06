@@ -59,7 +59,7 @@ const PrototypeHero = () => {
       <div className="qs-cube-stage" aria-hidden="true">
         <div className="qs-orbit qs-orbit-one" />
         <div className="qs-orbit qs-orbit-two" />
-        <img src={heroCube} alt="" width={1024} height={1024} />
+        <img src={qubesightLogo.url} alt="" width={512} height={512} />
         <span className="qs-channel qs-channel-chat">
           <MessageCircle />
         </span>
