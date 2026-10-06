@@ -10,18 +10,7 @@ import FinalCTA from "@/components/sections/FinalCTA";
 import Footer from "@/components/sections/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import {
-  ArrowDown,
-  ArrowUpRight,
-  CalendarDays,
-  MessageCircle,
-  Mic,
-  PhoneCall,
-  ShieldCheck,
-  Sparkles,
-  Volume2,
-  Linkedin,
-} from "lucide-react";
+import { Linkedin, Sparkles } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const PrototypeHero = () => {
