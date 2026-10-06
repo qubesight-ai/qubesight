@@ -4698,8 +4698,24 @@
   box-shadow: inset 0 1px 0 hsl(var(--primary-foreground) / 0.24) !important;
 }
 
-.prototype-shell footer .glass-card svg {
+.prototype-shell footer .footer-social-link {
+  position: relative;
+  z-index: 2;
+  border: 1px solid hsl(var(--primary-foreground) / 0.7) !important;
+  background: hsl(var(--secondary-foreground) / 0.88) !important;
   color: hsl(var(--primary-foreground)) !important;
+  box-shadow:
+    inset 0 1px 0 hsl(var(--primary-foreground) / 0.24),
+    0 8px 20px hsl(var(--secondary-foreground) / 0.2) !important;
+}
+
+.prototype-shell footer .footer-social-link:hover {
+  background: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+.prototype-shell footer .footer-social-link svg {
+  color: currentColor !important;
   stroke: currentColor !important;
-  opacity: 1;
+  opacity: 1 !important;
 }
