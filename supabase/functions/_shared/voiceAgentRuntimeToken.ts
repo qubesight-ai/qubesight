@@ -10,7 +10,7 @@ const claimsSchema = z
     sub: z.string().uuid(),
     organization_id: z.string().uuid(),
     room_name: z.string().min(1).max(200),
-    mode: z.literal("browser_test"),
+    mode: z.enum(["browser_test", "public_demo"]),
     iat: z.number().int().nonnegative(),
     exp: z.number().int().positive(),
     jti: z.string().uuid(),
