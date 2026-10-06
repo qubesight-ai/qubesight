@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import skyCity from "@/assets/qubesight-sky-city.jpg";
-import qubesightLogo from "@/assets/qubesight-logo.png";
+import heroCube from "@/assets/qubesight-hero-cube.png";
 
 const PrototypeHero = () => {
   const { language } = useTranslation();
@@ -59,7 +59,7 @@ const PrototypeHero = () => {
       <div className="qs-cube-stage" aria-hidden="true">
         <div className="qs-orbit qs-orbit-one" />
         <div className="qs-orbit qs-orbit-two" />
-        <img src={qubesightLogo} alt="" width={512} height={512} />
+        <img src={heroCube} alt="" width={512} height={512} />
         <span className="qs-channel qs-channel-chat">
           <MessageCircle />
         </span>
