@@ -5,6 +5,7 @@ import { issueVoiceAgentRuntimeToken } from "../_shared/voiceAgentRuntimeToken.t
 
 // Public landing-page voice demo: anonymous visitors talk to the fixed demo agent
 // (PUBLIC_DEMO_VOICE_AGENT_ID) through the shared matilda-realtime-agent worker.
+// Uses the worker's existing browser_test contract (qs-test- room prefix) so no worker change is needed.
 const MAX_CALL_SECONDS = 120;
 
 const corsHeaders = {
@@ -108,13 +109,13 @@ serve(async (req) => {
       return json({ error: "La demostración no está disponible en este momento." }, 503);
     }
 
-    const roomName = `qs-demo-${crypto.randomUUID()}`;
+    const roomName = `qs-test-demo-${crypto.randomUUID()}`;
     const runtimeToken = await issueVoiceAgentRuntimeToken(
       {
         sub: agent.id,
         organization_id: agent.organization_id,
         room_name: roomName,
-        mode: "public_demo",
+        mode: "browser_test",
       },
       600,
     );
@@ -122,7 +123,7 @@ serve(async (req) => {
       voice_agent_id: agent.id,
       agent_id: agent.id,
       organization_id: agent.organization_id,
-      mode: "public_demo",
+      mode: "browser_test",
       runtime_token: runtimeToken,
     });
 
