@@ -4260,16 +4260,16 @@
   padding: 5rem 0 0;
   overflow: clip;
   background:
-    linear-gradient(180deg, hsl(207 90% 95% / 0.5), hsl(207 83% 91% / 0.64)),
-    url("./assets/qubesight-sky-city.jpg") center top / cover fixed;
+    linear-gradient(180deg, hsl(207 90% 95% / 0.16), hsl(207 83% 91% / 0.28)),
+    url("/src/assets/qubesight-sky-city.jpg") center center / cover fixed;
 }
 
 .prototype-shell .prototype-content::before {
   position: absolute;
   background:
-    linear-gradient(180deg, hsl(205 100% 98% / 0.38), hsl(210 75% 90% / 0.48)),
-    radial-gradient(circle at 15% 24%, hsl(0 0% 100% / 0.5), transparent 18%),
-    radial-gradient(circle at 86% 48%, hsl(194 83% 76% / 0.16), transparent 23%);
+    linear-gradient(180deg, hsl(205 100% 98% / 0.08), hsl(210 75% 90% / 0.18)),
+    radial-gradient(circle at 15% 24%, hsl(0 0% 100% / 0.24), transparent 18%),
+    radial-gradient(circle at 86% 48%, hsl(194 83% 76% / 0.12), transparent 23%);
 }
 
 .prototype-shell .prototype-content > section,
@@ -4553,8 +4553,8 @@
   .prototype-shell .prototype-content {
     padding-top: 7.5rem;
     background:
-      linear-gradient(180deg, hsl(207 90% 95% / 0.56), hsl(207 83% 91% / 0.66)),
-      url("./assets/qubesight-sky-city.jpg") 66% top / auto 100vh fixed;
+      linear-gradient(180deg, hsl(207 90% 95% / 0.2), hsl(207 83% 91% / 0.3)),
+      url("/src/assets/qubesight-sky-city.jpg") 66% center / cover fixed;
   }
 
   .prototype-shell .prototype-content > section,
