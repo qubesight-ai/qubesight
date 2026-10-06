@@ -60,6 +60,9 @@ const Header = () => {
     href: sectionHref(id),
     label: t(navLabelKeys[id]),
   }));
+  const featuredDesktopLinks = navLinks.filter(({ id }) =>
+    ["value-proposition", "solution", "how-it-works", "demo"].includes(id),
+  );
 
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     if (!isHome) return;
@@ -134,10 +137,10 @@ const Header = () => {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled || isMobileMenuOpen ? "glass-nav" : "bg-transparent"
-      }`}
+      } qs-site-header`}
     >
       <div className="container">
-        <nav className="flex items-center justify-between gap-6 h-20" aria-label={navAriaLabel}>
+        <nav className="flex items-center justify-between gap-4 h-20" aria-label={navAriaLabel}>
           <Link
             to="/"
             className="group flex h-10 w-10 min-[420px]:w-[10.75rem] shrink-0 items-center overflow-hidden"
@@ -146,8 +149,8 @@ const Header = () => {
             <LogoCube />
           </Link>
 
-          <div className="hidden 2xl:flex items-center gap-3 whitespace-nowrap">
-            {navLinks.map((link, index) => {
+          <div className="hidden xl:flex items-center gap-4 whitespace-nowrap qs-primary-nav">
+            {featuredDesktopLinks.map((link, index) => {
               const isActive = activeSection === link.id;
               return (
                 <a
@@ -245,7 +248,7 @@ const Header = () => {
         </nav>
 
         <nav
-          className="hidden lg:flex 2xl:hidden items-center gap-5 overflow-x-auto whitespace-nowrap pb-3"
+          className="hidden lg:flex xl:hidden items-center gap-5 overflow-x-auto whitespace-nowrap pb-3"
           aria-label={navAriaLabel}
         >
           {navLinks.map((link) => (
