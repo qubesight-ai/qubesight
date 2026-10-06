@@ -4900,3 +4900,49 @@
     background-position: 41% center !important;
   }
 }
+
+
+/* =========================================================
+   INLINE EXACT HERO IMAGE — PATH-INDEPENDENT
+   ========================================================= */
+
+.vaio-exact-reference-hero {
+  background: #2f91d7 !important;
+}
+
+.vaio-reference-image {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: fill !important;
+  display: block !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+.vaio-reference-hotspots {
+  z-index: 5 !important;
+}
+
+.vaio-preview-build-stamp {
+  position: absolute;
+  z-index: 9;
+  left: 10px;
+  bottom: 10px;
+  padding: 4px 7px;
+  border-radius: 8px;
+  background: rgba(4,49,93,.62);
+  color: rgba(255,255,255,.78);
+  font: 700 10px/1 system-ui, sans-serif;
+  letter-spacing: .08em;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .vaio-reference-image {
+    object-fit: cover !important;
+    object-position: 42% top !important;
+  }
+}
