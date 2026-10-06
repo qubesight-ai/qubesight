@@ -89,3 +89,4 @@ Repository work does not authorize operations in Lovable, Supabase production, T
 Finish with repository, branch/base/result SHA; completed and excluded scope; changed files; exact validations; migrations created/applied; required secret names only; deployments performed/pending; risks; rollback; and one recommended next action.
 
 - vite.config.ts defines public VITE_SUPABASE_* fallbacks because .gitignore (read-only in Lovable) excludes .env, which otherwise breaks builds with "supabaseUrl is required".
+- Public landing voice demo uses the `voice-demo-session` function (anonymous, IP/global rate-limited, 2-min room cap) dispatching the fixed `PUBLIC_DEMO_VOICE_AGENT_ID` agent to the shared LiveKit worker via its existing browser_test contract, so the worker needs no public-mode changes.
