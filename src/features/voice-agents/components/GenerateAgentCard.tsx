@@ -2,7 +2,10 @@ import { useState } from "react";
 import { CheckCircle2, Loader2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import type { Agent } from "@/types/dashboard";
+import { supabase } from "@/integrations/supabase/client";
+import type { Json } from "@/integrations/supabase/types";
 import { generateVoiceAgent } from "@/lib/voiceAgentGeneration";
+import { capabilitiesArePersisted, normalizeCapabilities } from "../capabilities";
 import { generationBlocker } from "../generation";
 
 type GenerateAgentCardProps = {
@@ -23,6 +26,20 @@ export default function GenerateAgentCard({ agent, onGenerated }: GenerateAgentC
 
     setBusy(true);
     try {
+      if (!capabilitiesArePersisted(agent.capabilities)) {
+        // Persist the capabilities the user sees so the generated prompt and the
+        // call worker read the same stored values, not UI defaults.
+        const { error } = await supabase
+          .from("voice_agents")
+          .update({
+            capabilities: normalizeCapabilities(
+              agent.capabilities,
+              agent.agent_type,
+            ) as unknown as Json,
+          })
+          .eq("id", agent.id);
+        if (error) throw error;
+      }
       await generateVoiceAgent(agent.id);
       toast.success("Agente generado. Ya puedes revisar el resultado.");
       onGenerated();

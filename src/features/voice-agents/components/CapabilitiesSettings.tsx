@@ -76,7 +76,11 @@ export default function CapabilitiesSettings({ agent, onSaved }: CapabilitiesSet
       return;
     }
 
-    toast.success("Capacidades actualizadas");
+    toast.success(
+      agent.configuration_status === "draft"
+        ? "Capacidades actualizadas"
+        : "Capacidades actualizadas. Genera el agente de nuevo para aplicarlas en la llamada.",
+    );
     onSaved();
   };
 

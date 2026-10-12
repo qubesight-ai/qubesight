@@ -20,3 +20,13 @@ describe("voice agent capabilities", () => {
     expect(capabilities.whatsapp_followup).toBe(false);
   });
 });
+
+describe("persisted capabilities", () => {
+  it("detects whether every flag is stored in the database row", async () => {
+    const { capabilitiesArePersisted } = await import("@/features/voice-agents/capabilities");
+    expect(capabilitiesArePersisted({})).toBe(false);
+    expect(capabilitiesArePersisted(null)).toBe(false);
+    expect(capabilitiesArePersisted({ faq: true })).toBe(false);
+    expect(capabilitiesArePersisted(defaultCapabilities("customer_service"))).toBe(true);
+  });
+});
