@@ -104,4 +104,53 @@ def test_voice_agent_id_selects_agent_and_builds_its_own_instructions() -> None:
     }, metadata)
     text = config.instructions()
     assert "Lucía" in text and "Clínica Sol" in text and "emergency" in text
-    assert "Matilda" not in text
+    assert "Tu nombre es Matilda" not in text
+
+
+def test_agente_prueba_uses_its_own_name_and_greeting_never_matilda() -> None:
+    agent_id = str(uuid4())
+    organization_id = str(uuid4())
+    room_name = f"qs-test-{agent_id}-{uuid4()}"
+    raw = json.dumps({"voice_agent_id": agent_id, "organization_id": organization_id,
+                      "mode": "browser_test", "runtime_token": "t" * 64})
+    metadata = DispatchMetadata.parse(raw, room_name)
+    runtime_payload = {
+        "agent": {
+            "id": agent_id, "name": "Agente Prueba", "language": "Español",
+            "voice_name": "Sofia", "greeting": "Hola, soy Agente Prueba de Ferretería Luna.",
+            "system_prompt": "Atiende consultas de la ferretería con amabilidad.",
+            "revision": 2, "business_name": "Ferretería Luna",
+            "assistant_description": "Recepcionista de la ferretería",
+            "capabilities": {"faq": True}, "behavior": {"tone": "cercano"},
+            "escalation_rules": {"human": "pedidos grandes"},
+        },
+        "session": {"room_name": room_name},
+    }
+    client = RuntimeClient("https://runtime.example.test/functions/v1/voice-agent-runtime")
+    with patch.object(RuntimeClient, "_post", return_value=runtime_payload) as post:
+        config = client.fetch_config(metadata)
+    post.assert_called_once_with("t" * 64, {"action": "config"})
+
+    text = config.instructions()
+    assert config.greeting == "Hola, soy Agente Prueba de Ferretería Luna."
+    assert "Matilda" not in config.greeting
+    assert "Tu nombre es Agente Prueba" in text
+    assert "Tu nombre es Matilda" not in text
+    for expected in ("Ferretería Luna", "Recepcionista", "faq", "cercano", "pedidos grandes"):
+        assert expected in text
+
+
+def test_missing_configuration_raises_instead_of_falling_back() -> None:
+    metadata, room_name = valid_metadata()
+    client = RuntimeClient("https://runtime.example.test/functions/v1/voice-agent-runtime")
+    incomplete = {"agent": {"id": metadata.agent_id, "name": "Agente Prueba"},
+                  "session": {"room_name": room_name}}
+    with patch.object(RuntimeClient, "_post", return_value=incomplete):
+        with pytest.raises(RuntimeContractError):
+            client.fetch_config(metadata)
+
+
+def test_runtime_url_is_required() -> None:
+    with patch.dict("os.environ", {"QUBESIGHT_RUNTIME_URL": ""}):
+        with pytest.raises(RuntimeContractError):
+            RuntimeClient()
