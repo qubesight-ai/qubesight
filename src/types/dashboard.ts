@@ -16,6 +16,7 @@ export type Agent = {
   lead_fields: unknown;
   escalation_rules: unknown;
   published_at: string | null;
+  updated_at: string;
   name: string;
   status: ResourceStatus;
   twilio_phone: string | null;
