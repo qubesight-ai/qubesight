@@ -40,6 +40,24 @@ def language_code(language: str) -> str:
     return "en" if language.casefold().startswith("english") else "es"
 
 
+CONFIG_ERROR_MESSAGE = (
+    "No se pudo cargar la configuración de este agente. "
+    "Genera el agente nuevamente e inténtalo otra vez."
+)
+
+
+async def announce_configuration_error(ctx: agents.JobContext) -> None:
+    try:
+        session = AgentSession(tts=inference.TTS(model=TTS_MODEL, voice=TTS_VOICE, language="es"))
+        await session.start(room=ctx.room, agent=Agent(instructions="Solo informa el error."))
+        handle = session.say(CONFIG_ERROR_MESSAGE, allow_interruptions=False)
+        await handle
+    except Exception:  # noqa: BLE001 - best effort notice, never a persona fallback
+        logger.exception("Could not announce configuration error")
+    finally:
+        ctx.shutdown(reason="agent_configuration_unavailable")
+
+
 server = AgentServer()
 
 
@@ -75,7 +93,9 @@ async def qubesight_voice_agent(ctx: agents.JobContext) -> None:
     try:
         config = await asyncio.to_thread(runtime.fetch_config, metadata)
     except (RuntimeContractError, RuntimeServiceError):
+        # Never fall back to a default persona: tell the tester explicitly and end.
         logger.exception("Could not load QubeSight agent configuration")
+        await announce_configuration_error(ctx)
         return
 
     language = language_code(config.language)

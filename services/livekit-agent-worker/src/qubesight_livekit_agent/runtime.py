@@ -120,7 +120,14 @@ class AgentRuntimeConfig:
         )
 
     def instructions(self) -> str:
-        sections = [self.system_prompt, f"Tu nombre es {self.name}."]
+        sections = [
+            self.system_prompt,
+            f"Tu nombre es {self.name}. Preséntate siempre como {self.name}.",
+        ]
+        if "matilda" not in self.name.casefold():
+            sections.append(
+                "Nunca digas que te llamas Matilda ni que eres la recepcionista de QubeSight."
+            )
         labeled = [
             ("Tipo de agente", self.agent_type),
             ("Negocio", self.business_name),
