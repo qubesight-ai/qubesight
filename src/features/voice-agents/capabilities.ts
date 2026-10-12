@@ -63,3 +63,18 @@ export function normalizeCapabilities(value: unknown, type: AgentType | null): A
         : defaults.whatsapp_followup,
   };
 }
+
+const capabilityKeys: Array<keyof AgentCapabilities> = [
+  "faq",
+  "lead_capture",
+  "appointments",
+  "human_transfer",
+  "whatsapp_followup",
+];
+
+/** True when the stored value already holds every capability flag as a boolean. */
+export function capabilitiesArePersisted(value: unknown): boolean {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const source = value as Record<string, unknown>;
+  return capabilityKeys.every((key) => typeof source[key] === "boolean");
+}

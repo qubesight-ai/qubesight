@@ -2,8 +2,10 @@ import { useState } from "react";
 import { ArrowLeft, ArrowRight, Loader2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import type { Json } from "@/integrations/supabase/types";
 import type { AgentType } from "@/types/dashboard";
 import { normalizeAgent } from "../agentModel";
+import { defaultCapabilities } from "../capabilities";
 import { getAgentTemplate } from "../agentTemplates";
 import { createAgentSchema, type CreateAgentValues } from "../schemas/createAgent";
 import AgentTypeSelector from "./AgentTypeSelector";
@@ -75,6 +77,7 @@ export default function CreateAgentWizard({
         language: values.language,
         voice_name: values.voice_name,
         greeting: "",
+        capabilities: defaultCapabilities(values.agent_type) as unknown as Json,
       })
       .select("*")
       .single();

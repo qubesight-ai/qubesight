@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import type { Agent } from "@/types/dashboard";
 import { getAgentTemplate } from "../agentTemplates";
 import AgentForm from "../components/AgentForm";
+import BehaviorSettings from "../components/BehaviorSettings";
 import AgentStatusBadge from "../components/AgentStatusBadge";
 import CallFlowSummary from "../components/CallFlowSummary";
 import CapabilitiesSettings from "../components/CapabilitiesSettings";
@@ -43,6 +44,7 @@ export default function AgentDetailPage({
     );
   }
 
+  const version = `${agent.id}-${agent.updated_at}`;
   const template = agent.agent_type ? getAgentTemplate(agent.agent_type) : null;
 
   return (
@@ -80,7 +82,14 @@ export default function AgentDetailPage({
         <CallFlowSummary agent={agent} />
       </div>
 
-      <AgentForm agent={agent} organizationId={organizationId} onSaved={onChanged} />
+      <BehaviorSettings key={`behavior-${version}`} agent={agent} onSaved={onChanged} />
+
+      <AgentForm
+        key={`form-${version}`}
+        agent={agent}
+        organizationId={organizationId}
+        onSaved={onChanged}
+      />
     </div>
   );
 }
