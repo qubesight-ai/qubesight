@@ -12,6 +12,7 @@ export const emptyAgent: Agent = {
   lead_fields: [],
   escalation_rules: {},
   published_at: null,
+  updated_at: "",
   name: "",
   status: "inactive",
   twilio_phone: "",
