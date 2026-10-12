@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LiveKitRoom, RoomAudioRenderer, useRoomContext } from "@livekit/components-react";
+import { RoomEvent } from "livekit-client";
 import { Loader2, Mic, PhoneOff, Volume2 } from "lucide-react";
 import type { VoiceAgentTestSession } from "@/lib/voiceAgentTestCall";
 
@@ -11,6 +12,21 @@ type TestCallRoomProps = {
 
 function RoomControls({ agentName }: { agentName: string }) {
   const room = useRoomContext();
+  const [agentJoined, setAgentJoined] = useState(room.remoteParticipants.size > 0);
+  const [agentTimedOut, setAgentTimedOut] = useState(false);
+
+  useEffect(() => {
+    const onConnected = () => setAgentJoined(true);
+    const onDisconnected = () => setAgentJoined(false);
+    room.on(RoomEvent.ParticipantConnected, onConnected);
+    room.on(RoomEvent.ParticipantDisconnected, onDisconnected);
+    const timer = setTimeout(() => setAgentTimedOut(true), 15000);
+    return () => {
+      room.off(RoomEvent.ParticipantConnected, onConnected);
+      room.off(RoomEvent.ParticipantDisconnected, onDisconnected);
+      clearTimeout(timer);
+    };
+  }, [room]);
 
   return (
     <div className="text-center">
@@ -21,17 +37,38 @@ function RoomControls({ agentName }: { agentName: string }) {
       <p className="mt-2 text-sm text-slate-500">
         La prueba usa el micrófono de este dispositivo. No consume una línea telefónica.
       </p>
-      <div className="mt-5 flex items-center justify-center gap-2 text-xs text-emerald-700">
-        <span className="h-2 w-2 rounded-full bg-emerald-500" />
-        Micrófono conectado
-      </div>
-      <button
-        type="button"
-        className="mt-7 inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-3 text-sm font-semibold text-white"
-        onClick={() => room.disconnect()}
+      <div
+        className={`mt-5 flex items-center justify-center gap-2 text-xs ${
+          agentJoined ? "text-emerald-700" : "text-amber-700"
+        }`}
       >
-        <PhoneOff size={17} /> Terminar prueba
-      </button>
+        <span
+          className={`h-2 w-2 rounded-full ${agentJoined ? "bg-emerald-500" : "bg-amber-500"}`}
+        />
+        {agentJoined ? "Agente conectado" : "Esperando al agente…"}
+      </div>
+      {agentTimedOut && !agentJoined ? (
+        <div className="mt-6">
+          <p className="text-sm font-medium text-red-600">
+            No se pudo conectar el agente. Inténtalo de nuevo.
+          </p>
+          <button
+            type="button"
+            className="mt-4 inline-flex items-center gap-2 rounded-lg bg-slate-700 px-4 py-2 text-sm font-semibold text-white"
+            onClick={() => room.disconnect()}
+          >
+            Cerrar y reintentar
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          className="mt-7 inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-3 text-sm font-semibold text-white"
+          onClick={() => room.disconnect()}
+        >
+          <PhoneOff size={17} /> Terminar prueba
+        </button>
+      )}
     </div>
   );
 }
