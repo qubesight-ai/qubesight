@@ -41,6 +41,7 @@ function json(body: unknown, status = 200, extra: Record<string, string> = {}) {
 async function anonymize(value: string) {
   const secret = Deno.env.get("RATE_LIMIT_HASH_SECRET");
   if (!secret) throw new Error("RATE_LIMIT_HASH_SECRET missing");
+
   const key = await crypto.subtle.importKey(
     "raw",
     new TextEncoder().encode(secret),
@@ -48,7 +49,9 @@ async function anonymize(value: string) {
     false,
     ["sign"],
   );
+
   const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(value));
+
   return Array.from(new Uint8Array(sig))
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
@@ -70,8 +73,13 @@ async function consume(subject: string, action: string, limit: number, window: n
     p_limit: limit,
     p_window_seconds: window,
   });
-  if (error) throw new RateLimitError("Servicio temporalmente no disponible.", 30);
+
+  if (error) {
+    throw new RateLimitError("Servicio temporalmente no disponible.", 30);
+  }
+
   const row = Array.isArray(data) ? data[0] : data;
+
   if (!row?.allowed) {
     throw new RateLimitError(
       "Alcanzaste el límite de llamadas de demostración. Inténtalo más tarde.",
@@ -81,11 +89,17 @@ async function consume(subject: string, action: string, limit: number, window: n
 }
 
 serve(async (req) => {
-  if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
-  if (req.method !== "POST") return json({ error: "Método no permitido" }, 405);
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
+
+  if (req.method !== "POST") {
+    return json({ error: "Método no permitido" }, 405);
+  }
 
   try {
     const ipHash = await anonymize(`voice-demo:ip:${clientIp(req)}`);
+
     await consume(ipHash, "voice-demo:ip:hour", 3, 3600);
     await consume(ipHash, "voice-demo:ip:day", 8, 86400);
     await consume("voice-demo:global", "voice-demo:global:day", 300, 86400);
@@ -95,6 +109,7 @@ serve(async (req) => {
     const apiKey = Deno.env.get("LIVEKIT_API_KEY");
     const apiSecret = Deno.env.get("LIVEKIT_API_SECRET");
     const agentName = Deno.env.get("LIVEKIT_AGENT_NAME");
+
     if (!agentId || !livekitUrl || !apiKey || !apiSecret || !agentName) {
       throw new Error("Demo no configurada");
     }
@@ -104,12 +119,15 @@ serve(async (req) => {
       .select("id,organization_id,configuration_status,greeting,system_prompt")
       .eq("id", agentId)
       .maybeSingle();
+
     if (error) throw error;
+
     if (!agent || agent.configuration_status === "draft" || !agent.system_prompt?.trim()) {
       return json({ error: "La demostración no está disponible en este momento." }, 503);
     }
 
     const roomName = `qs-test-demo-${crypto.randomUUID()}`;
+
     const runtimeToken = await issueVoiceAgentRuntimeToken(
       {
         sub: agent.id,
@@ -119,6 +137,7 @@ serve(async (req) => {
       },
       600,
     );
+
     const metadata = JSON.stringify({
       voice_agent_id: agent.id,
       agent_id: agent.id,
@@ -132,7 +151,13 @@ serve(async (req) => {
       apiKey,
       secret: apiSecret,
     });
-    await api.room.createRoom({ name: roomName, emptyTimeout: 30, maxParticipants: 2 });
+
+    await api.room.createRoom({
+      name: roomName,
+      emptyTimeout: 30,
+      maxParticipants: 2,
+    });
+
     await api.agentDispatch.createDispatch(roomName, agentName, { metadata });
 
     const token = new AccessToken(apiKey, apiSecret, {
@@ -140,6 +165,7 @@ serve(async (req) => {
       name: "Visitante web",
       ttl: "3m",
     });
+
     token.addGrant({
       roomJoin: true,
       room: roomName,
@@ -150,17 +176,27 @@ serve(async (req) => {
 
     // Hard server-side cap: close the room after the maximum demo duration.
     const closeRoom = new Promise<void>((resolve) =>
-      setTimeout(async () => {
-        try {
-          await api.room.deleteRoom(roomName);
-        } catch {
-          // room already closed
-        }
-        resolve();
-      }, (MAX_CALL_SECONDS + 5) * 1000),
+      setTimeout(
+        async () => {
+          try {
+            await api.room.deleteRoom(roomName);
+          } catch {
+            // room already closed
+          }
+
+          resolve();
+        },
+        (MAX_CALL_SECONDS + 5) * 1000,
+      ),
     );
-    // deno-lint-ignore no-explicit-any
-    (globalThis as any).EdgeRuntime?.waitUntil?.(closeRoom);
+
+    const edgeRuntime = globalThis as {
+      EdgeRuntime?: {
+        waitUntil?: (promise: Promise<void>) => void;
+      };
+    };
+
+    edgeRuntime.EdgeRuntime?.waitUntil?.(closeRoom);
 
     return json(
       {
@@ -173,12 +209,16 @@ serve(async (req) => {
     );
   } catch (error) {
     if (error instanceof RateLimitError) {
-      return json({ error: error.message }, 429, { "Retry-After": String(error.retryAfter) });
+      return json({ error: error.message }, 429, {
+        "Retry-After": String(error.retryAfter),
+      });
     }
+
     console.error(
       "voice-demo-session error",
       error instanceof Error ? `${error.name}: ${error.message}` : "unknown_error",
     );
+
     return json({ error: "No se pudo iniciar la llamada de demostración." }, 500);
   }
 });
