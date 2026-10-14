@@ -1,5 +1,10 @@
 /* QubeSight Skyworld theme for the dashboard — scoped to .qs-dashboard only. */
 .qs-dashboard {
+  --field-foreground: 216 60% 14%;
+  --field-muted-foreground: 214 35% 34%;
+  --field-autofill-background: var(--field-light-background);
+  --field-autofill-foreground: var(--field-light-foreground);
+  --muted-foreground: 214 35% 34%;
   position: relative;
   isolation: isolate;
   color: hsl(216 60% 14%);
@@ -97,10 +102,24 @@
 .qs-dashboard main select,
 .qs-dashboard .fixed input,
 .qs-dashboard .fixed textarea,
-.qs-dashboard .fixed select {
+.qs-dashboard .fixed select,
+.qs-dashboard input,
+.qs-dashboard textarea,
+.qs-dashboard select {
   background: hsl(0 0% 100% / 0.72) !important;
+  color: hsl(var(--field-foreground)) !important;
+  caret-color: hsl(var(--field-foreground));
+  -webkit-text-fill-color: currentColor;
   border-color: hsl(210 70% 80%) !important;
   border-radius: 0.8rem;
+}
+.qs-dashboard input::placeholder,
+.qs-dashboard textarea::placeholder {
+  color: hsl(var(--field-muted-foreground)) !important;
+  opacity: 1;
+}
+.qs-dashboard select option {
+  color: hsl(var(--field-foreground));
 }
 .qs-dashboard input:focus,
 .qs-dashboard textarea:focus,
