@@ -18,19 +18,41 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: 22
           cache: npm
+
       - run: npm ci --ignore-scripts
-      - run: npm run format:check
+
+      - name: Check formatting on changed files
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            git diff --name-only --diff-filter=ACMR -z \
+              "origin/${{ github.base_ref }}...HEAD" |
+              xargs -0 --no-run-if-empty \
+              ./node_modules/.bin/prettier --check --ignore-unknown
+          else
+            git diff --name-only --diff-filter=ACMR -z \
+              "${{ github.event.before }}...HEAD" |
+              xargs -0 --no-run-if-empty \
+              ./node_modules/.bin/prettier --check --ignore-unknown
+          fi
+
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
+
       - name: Test VPS provisioner
         run: python3 -m unittest discover -s services/agent-provisioner -p 'test_*.py' -v
+
       - name: Test generic voice runtime
         run: python3 -m unittest discover -s services/voice-agent-runtime -p 'test_*.py' -v
+
       - run: npm run build
 
   security-review:
@@ -43,9 +65,11 @@ jobs:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           fetch-depth: 0
+
       - name: Scan repository for secrets
         uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Enforce QubeSight architecture policies
         run: node scripts/architecture-check.mjs

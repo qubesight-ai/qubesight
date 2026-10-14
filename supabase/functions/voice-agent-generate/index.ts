@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.58.0";
 import { z } from "https://esm.sh/zod@3.25.76";
+import { canManageVoiceAgent } from "../_shared/voiceAgentAuthorization.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -224,16 +225,26 @@ serve(async (req) => {
     if (agentError) throw agentError;
     if (!agent) return json({ error: "Agente no encontrado" }, 404);
 
-    const [{ data: membership }, { data: profile }] = await Promise.all([
-      admin
-        .from("organization_members")
-        .select("member_role")
-        .eq("organization_id", agent.organization_id)
-        .eq("user_id", userId)
-        .maybeSingle(),
-      admin.from("profiles").select("role").eq("id", userId).maybeSingle(),
-    ]);
-    if (membership?.member_role !== "owner" && profile?.role !== "admin") {
+    const authorized = await canManageVoiceAgent(agent.organization_id, userId, {
+      getMembershipRole: async (organizationId, memberId) => {
+        const { data } = await admin
+          .from("organization_members")
+          .select("member_role")
+          .eq("organization_id", organizationId)
+          .eq("user_id", memberId)
+          .maybeSingle();
+        return data?.member_role ?? null;
+      },
+      getProfileRole: async (memberId) => {
+        const { data } = await admin
+          .from("profiles")
+          .select("role")
+          .eq("id", memberId)
+          .maybeSingle();
+        return data?.role ?? null;
+      },
+    });
+    if (!authorized) {
       return json({ error: "No tienes permiso para generar este agente" }, 403);
     }
 
