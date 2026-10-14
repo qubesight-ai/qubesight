@@ -37,6 +37,9 @@
 
     --field-light-foreground: 216 60% 14%;
     --field-light-muted-foreground: 214 35% 34%;
+    --field-autofill-background: 240 18% 14%;
+    --field-autofill-foreground: 240 18% 93%;
+    --field-light-background: 0 0% 100%;
 
     --radius: 1rem;
 
@@ -520,6 +523,17 @@ html {
 }
 .auth-input::placeholder {
   color: hsl(var(--muted-foreground));
+  opacity: 1;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: hsl(var(--field-autofill-foreground)) !important;
+  caret-color: hsl(var(--field-autofill-foreground));
+  -webkit-box-shadow: 0 0 0 1000px hsl(var(--field-autofill-background)) inset !important;
+}
+.qs-input::placeholder {
+  color: hsl(var(--field-light-muted-foreground)) !important;
   opacity: 1;
 }
 .auth-input:focus {

@@ -19,6 +19,8 @@
   --border: 198 33% 79%;
   --input: 198 33% 79%;
   --ring: 204 94% 43%;
+  --field-autofill-background: var(--field-light-background);
+  --field-autofill-foreground: var(--foreground);
 
   min-height: 100vh;
   color: #123b56;

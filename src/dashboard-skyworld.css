@@ -2,6 +2,8 @@
 .qs-dashboard {
   --field-foreground: 216 60% 14%;
   --field-muted-foreground: 214 35% 34%;
+  --field-autofill-background: var(--field-light-background);
+  --field-autofill-foreground: var(--field-light-foreground);
   --muted-foreground: 214 35% 34%;
   position: relative;
   isolation: isolate;
