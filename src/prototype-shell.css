@@ -509,8 +509,15 @@
   border: 1px solid #b4ced8 !important;
   border-radius: 10px !important;
   background: #fff !important;
-  color: #123b56 !important;
+  color: hsl(var(--foreground)) !important;
+  caret-color: currentColor;
+  -webkit-text-fill-color: currentColor;
   box-shadow: inset 0 1px 2px rgba(35, 83, 101, 0.04) !important;
+}
+.prototype-shell input::placeholder,
+.prototype-shell textarea::placeholder {
+  color: hsl(var(--muted-foreground)) !important;
+  opacity: 1;
 }
 
 /* Demo section gets extra polish */

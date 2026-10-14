@@ -35,6 +35,9 @@
     --input: 240 15% 26%;
     --ring: 249 75% 64%;
 
+    --field-light-foreground: 216 60% 14%;
+    --field-light-muted-foreground: 214 35% 34%;
+
     --radius: 1rem;
 
     --sidebar-background: 240 40% 4%;
@@ -511,6 +514,8 @@ html {
   border: 1px solid hsl(0 0% 100% / 0.14);
   background: hsl(0 0% 100% / 0.05);
   color: hsl(var(--foreground));
+  caret-color: currentColor;
+  -webkit-text-fill-color: currentColor;
   outline: none;
 }
 .auth-input::placeholder {
@@ -704,7 +709,15 @@ html {
   border-radius: 0.55rem;
   padding: 0.65rem 0.75rem;
   font: inherit;
+  color: hsl(var(--field-light-foreground));
+  caret-color: currentColor;
+  -webkit-text-fill-color: currentColor;
   outline: none;
+}
+.editor-grid input::placeholder,
+.editor-grid textarea::placeholder {
+  color: hsl(var(--field-light-muted-foreground));
+  opacity: 1;
 }
 .editor-grid input:focus,
 .editor-grid textarea:focus {
