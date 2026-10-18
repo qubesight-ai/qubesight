@@ -32,6 +32,7 @@ vi.mock("livekit-client", () => ({
   RoomEvent: Object.fromEntries(
     [
       "TrackSubscribed",
+      "TrackUnsubscribed",
       "AudioPlaybackStatusChanged",
       "ActiveSpeakersChanged",
       "TranscriptionReceived",
@@ -248,13 +249,15 @@ describe("public Matilda call lifecycle", () => {
     const room = latestRoom();
     const audio = document.createElement("audio");
     const pause = vi.spyOn(audio, "pause").mockImplementation(() => undefined);
+    const detach = vi.fn();
     act(() =>
-      room.emit("TrackSubscribed", { kind: "audio", attach: () => audio }, {}, { kind: "agent" }),
+      room.emit("TrackSubscribed", { kind: "audio", attach: () => audio, detach }, {}, { kind: "agent" }),
     );
     expect(document.body.contains(audio)).toBe(true);
     act(() => result.current.hangUp());
     expect(document.body.contains(audio)).toBe(false);
     expect(stop).toHaveBeenCalled();
+    expect(detach).toHaveBeenCalledWith(audio);
     expect(pause).toHaveBeenCalled();
     expect(room.removeAllListeners).toHaveBeenCalled();
     act(() => room.emit("ActiveSpeakersChanged", [{ kind: "agent" }]));
