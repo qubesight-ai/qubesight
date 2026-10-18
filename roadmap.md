@@ -1,5 +1,7 @@
 # Sitio web
 
+- [x] Enderezar la demo y añadir opciones globales de movimiento, contraste, tamaño de texto y enlaces; comprobar persistencia, cierre con Escape y vistas de 390, 870 y 1280 px sin llamadas ni despliegues.
+
 - [x] Ajustar y verificar validación, cancelación, estados y duración de la demo pública con proveedores simulados; entregar diff, sin llamadas reales ni despliegues.
 - [ ] WhatsApp de la demo: bloqueado hasta revisar el contrato desplegado y obtener aprobación para pruebas reales; no implementar envíos en el navegador.
 

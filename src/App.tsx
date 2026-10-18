@@ -8,6 +8,7 @@ import { TranslationProvider } from "@/hooks/useTranslation";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import DemoTemplateShell from "./components/layout/DemoTemplateShell";
+import AccessibilityOptions from "./components/AccessibilityOptions";
 
 const queryClient = new QueryClient();
 const Index = lazy(() => import("./pages/Index"));
@@ -119,68 +120,70 @@ const App = () => (
     <AuthProvider>
       <TranslationProvider>
         <TooltipProvider>
-          <WaterRippleOverlay />
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Suspense fallback={<PageFallback />}>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/case-study/:slug" element={<CaseStudyPage />} />
-                <Route
-                  path="/restaurantes"
-                  element={
-                    <DemoTemplateShell>
-                      <Restaurantes />
-                    </DemoTemplateShell>
-                  }
-                />
-                <Route
-                  path="/salones"
-                  element={
-                    <DemoTemplateShell>
-                      <Salones />
-                    </DemoTemplateShell>
-                  }
-                />
-                <Route
-                  path="/dental"
-                  element={
-                    <DemoTemplateShell>
-                      <Dental />
-                    </DemoTemplateShell>
-                  }
-                />
-                <Route
-                  path="/gimnasios"
-                  element={
-                    <DemoTemplateShell>
-                      <Gimnasios />
-                    </DemoTemplateShell>
-                  }
-                />
-                <Route
-                  path="/inmobiliarias"
-                  element={
-                    <DemoTemplateShell>
-                      <Inmobiliarias />
-                    </DemoTemplateShell>
-                  }
-                />
-                <Route path="/payment/success" element={<PaymentSuccess />} />
-                <Route path="/payment/failure" element={<PaymentFailure />} />
-                <Route path="/dev/logo-test" element={<LogoResponsiveTest />} />
-                <Route path="/login" element={<Auth mode="login" />} />
-                <Route path="/register" element={<Auth mode="register" />} />
-                <Route path="/forgot-password" element={<Auth mode="forgot" />} />
-                <Route element={<ProtectedRoute />}>
-                  <Route path="/dashboard/*" element={<Dashboard />} />
-                </Route>
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
+          <AccessibilityOptions>
+            <WaterRippleOverlay />
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Suspense fallback={<PageFallback />}>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/case-study/:slug" element={<CaseStudyPage />} />
+                  <Route
+                    path="/restaurantes"
+                    element={
+                      <DemoTemplateShell>
+                        <Restaurantes />
+                      </DemoTemplateShell>
+                    }
+                  />
+                  <Route
+                    path="/salones"
+                    element={
+                      <DemoTemplateShell>
+                        <Salones />
+                      </DemoTemplateShell>
+                    }
+                  />
+                  <Route
+                    path="/dental"
+                    element={
+                      <DemoTemplateShell>
+                        <Dental />
+                      </DemoTemplateShell>
+                    }
+                  />
+                  <Route
+                    path="/gimnasios"
+                    element={
+                      <DemoTemplateShell>
+                        <Gimnasios />
+                      </DemoTemplateShell>
+                    }
+                  />
+                  <Route
+                    path="/inmobiliarias"
+                    element={
+                      <DemoTemplateShell>
+                        <Inmobiliarias />
+                      </DemoTemplateShell>
+                    }
+                  />
+                  <Route path="/payment/success" element={<PaymentSuccess />} />
+                  <Route path="/payment/failure" element={<PaymentFailure />} />
+                  <Route path="/dev/logo-test" element={<LogoResponsiveTest />} />
+                  <Route path="/login" element={<Auth mode="login" />} />
+                  <Route path="/register" element={<Auth mode="register" />} />
+                  <Route path="/forgot-password" element={<Auth mode="forgot" />} />
+                  <Route element={<ProtectedRoute />}>
+                    <Route path="/dashboard/*" element={<Dashboard />} />
+                  </Route>
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </BrowserRouter>
+          </AccessibilityOptions>
         </TooltipProvider>
       </TranslationProvider>
     </AuthProvider>
