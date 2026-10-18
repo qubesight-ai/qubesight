@@ -4738,3 +4738,26 @@
   width: 100%;
   border-radius: 9999px;
 }
+
+/* Responsive fix: keep the floating header inside the viewport at every size */
+.prototype-shell .qs-site-header {
+  position: fixed !important;
+  width: auto !important;
+  max-width: none !important;
+  box-sizing: border-box;
+}
+.prototype-shell .qs-site-header .container {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.prototype-shell .qs-site-header nav > div {
+  min-width: 0;
+}
+.prototype-shell .qs-site-header nav.overflow-x-auto {
+  justify-content: center;
+  gap: clamp(0.6rem, 1.1vw, 1.1rem) !important;
+  font-size: 0.8rem;
+}
+html, body { max-width: 100%; overflow-x: hidden; }
+.prototype-shell .qs-site-header nav.overflow-x-auto > * { font-size: 0.74rem !important; }
