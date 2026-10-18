@@ -4581,7 +4581,7 @@
     margin: 0 0.75rem 0.75rem;
     border: 1px solid hsl(var(--primary-foreground) / 0.55) !important;
     border-radius: 22px;
-    background: hsl(var(--secondary-foreground) / 0.82) !important;
+    background: hsl(var(--card) / 0.96) !important;
     box-shadow:
       inset 0 1px 0 hsl(var(--primary-foreground) / 0.34),
       0 20px 48px hsl(var(--secondary-foreground) / 0.24) !important;
@@ -4593,14 +4593,17 @@
   .prototype-shell .qs-site-header #mobile-nav-panel button,
   .prototype-shell .qs-site-header #mobile-nav-panel span,
   .prototype-shell .qs-site-header #mobile-nav-panel svg {
-    color: hsl(var(--primary-foreground)) !important;
+    color: hsl(var(--foreground)) !important;
     stroke: currentColor !important;
   }
 
   .prototype-shell .qs-site-header #mobile-nav-panel a:hover,
   .prototype-shell .qs-site-header #mobile-nav-panel a[aria-current="location"],
   .prototype-shell .qs-site-header #mobile-nav-panel button:hover {
-    background: hsl(var(--primary-foreground) / 0.14) !important;
+    background: hsl(var(--secondary)) !important;
+  }
+  .prototype-shell .qs-site-header #mobile-nav-panel :is(.gradient-bg, .bg-primary) {
+    color: hsl(var(--primary-foreground)) !important;
   }
 }
 

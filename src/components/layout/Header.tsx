@@ -147,7 +147,7 @@ const Header = () => {
             <LogoCube />
           </Link>
 
-          <div className="hidden xl:flex items-center gap-3 whitespace-nowrap qs-primary-nav">
+          <div className="hidden min-[1440px]:flex items-center gap-3 whitespace-nowrap qs-primary-nav">
             {featuredDesktopLinks.map((link, index) => {
               const isActive = activeSection === link.id;
               return (
@@ -246,7 +246,7 @@ const Header = () => {
         </nav>
 
         <nav
-          className="hidden lg:flex xl:hidden items-center gap-5 overflow-x-auto whitespace-nowrap pb-3"
+          className="hidden lg:flex min-[1440px]:hidden items-center gap-5 overflow-x-auto whitespace-nowrap pb-3"
           aria-label={navAriaLabel}
         >
           {navLinks.map((link) => (
