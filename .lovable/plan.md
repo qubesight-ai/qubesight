@@ -38,7 +38,7 @@ Ya están instalados `livekit-client` (`^2.22.3`), Zod, Vitest y Testing Library
 
 1. El visitante ve que la llamada utiliza su micrófono y pulsa el botón existente.
 2. Bloquear un segundo inicio y solicitar `voice-demo-session` con una señal de cancelación.
-3. Validar `server_url` como URL segura, `participant_token` no vacío, `room_name` con prefijo exacto `qs-test-demo-` y `max_seconds` entero positivo. No generar, almacenar persistentemente ni registrar tokens.
+3. Validar `server_url` como URL `wss:` sin credenciales incrustadas, `participant_token` no vacío, `room_name` con prefijo exacto `qs-test-demo-` y `max_seconds` entero positivo. No generar, almacenar persistentemente ni registrar tokens.
 4. Iniciar el plazo al recibir la sesión, antes de conectar, para que los permisos y conexión no extiendan su duración.
 5. Conectar a LiveKit, habilitar reproducción y solicitar/publicar el micrófono usando el SDK. Mostrar micrófono activo solo cuando su publicación sea confirmada.
 6. Separar conexión a la sala de presencia del participante de tipo agente: conectado → esperando a Matilda → Matilda conectada. Mostrar hablando solo a partir del agente, no de cualquier participante remoto.
@@ -66,7 +66,10 @@ Los siguientes fragmentos describen el cambio; el diff completo se mostrará des
 +import { readFunctionError } from "@/lib/functionError";
 +
 +const sessionSchema = z.object({
-+  server_url: z.string().url().refine((url) => new URL(url).protocol === "wss:"),
++  server_url: z.string().url().refine((url) => {
++    const parsed = new URL(url);
++    return parsed.protocol === "wss:" && !parsed.username && !parsed.password;
++  }),
 +  participant_token: z.string().min(1),
 +  room_name: z.string().startsWith("qs-test-demo-"),
 +  max_seconds: z.number().int().positive(),
@@ -142,6 +145,8 @@ Los siguientes fragmentos describen el cambio; el diff completo se mostrará des
 
 - Los navegadores móviles pueden exigir interacción adicional para audio; se mostrará un control de reproducción solo si el SDK informa bloqueo.
 - Cancelar en el navegador no garantiza eliminar una sala ya creada en el servidor; se conserva la limpieza existente del backend y no se modifica en este alcance.
+- La función intenta eliminar la sala a los 125 segundos mediante `EdgeRuntime.waitUntil`; esta inspección no verifica que esa tarea se complete en producción ni permite conocer el plazo exacto restante del servidor.
+- El Hero y la sección inferior tienen hoy llamadas independientes. No se ampliará el alcance para reorganizarlas en esta primera propuesta; la protección contra doble inicio se aplica por instancia.
 - El envío de WhatsApp queda sin certificar hasta revisar la herramienta desplegada y realizar una prueba aprobada.
 - Rollback: revertir únicamente los cambios de frontend y sus tests; no existen migraciones ni cambios de infraestructura que deshacer.
 
