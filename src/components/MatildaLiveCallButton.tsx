@@ -31,29 +31,50 @@ const MatildaLiveCallButton = ({ call, spanish, className }: Props) => {
       {call.roomConnected && (
         <div className="mt-2 space-y-1 text-xs opacity-80" role="status" aria-live="polite">
           <p>{spanish ? "Conectado a la sala" : "Connected to the room"}</p>
-          <p>{call.agentSpeaking
-            ? spanish ? "Matilda está hablando…" : "Matilda is speaking…"
-            : call.agentConnected
-              ? spanish ? "Matilda conectada" : "Matilda connected"
-              : spanish ? "Esperando a Matilda…" : "Waiting for Matilda…"}</p>
+          <p>
+            {call.agentSpeaking
+              ? spanish
+                ? "Matilda está hablando…"
+                : "Matilda is speaking…"
+              : call.agentConnected
+                ? spanish
+                  ? "Matilda conectada"
+                  : "Matilda connected"
+                : spanish
+                  ? "Esperando a Matilda…"
+                  : "Waiting for Matilda…"}
+          </p>
           <p className="flex items-center justify-center gap-1">
             <Mic className="h-3 w-3" />
             {call.microphoneActive
-              ? spanish ? "Micrófono activo" : "Microphone active"
-              : spanish ? "Permite el acceso al micrófono" : "Allow microphone access"}
+              ? spanish
+                ? "Micrófono activo"
+                : "Microphone active"
+              : spanish
+                ? "Permite el acceso al micrófono"
+                : "Allow microphone access"}
           </p>
         </div>
       )}
       {call.audioBlocked && (
-        <Button type="button" variant="outline" className="mt-2" onClick={() => void call.resumeAudio()}>
+        <Button
+          type="button"
+          variant="outline"
+          className="mt-2"
+          onClick={() => void call.resumeAudio()}
+        >
           <Volume2 /> {spanish ? "Activar audio" : "Enable audio"}
         </Button>
       )}
       {call.status === "ended" && (
         <p className="mt-2 text-xs opacity-80" role="status">
           {call.endReason === "expired"
-            ? spanish ? "La sesión expiró. Puedes iniciar una nueva llamada." : "The session expired. You can start a new call."
-            : spanish ? "Llamada finalizada." : "Call ended."}
+            ? spanish
+              ? "La sesión expiró. Puedes iniciar una nueva llamada."
+              : "The session expired. You can start a new call."
+            : spanish
+              ? "Llamada finalizada."
+              : "Call ended."}
         </p>
       )}
       {call.error && (

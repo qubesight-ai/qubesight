@@ -1,6 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Room, RoomEvent, Track, ParticipantKind, createLocalAudioTrack, DisconnectReason, type LocalAudioTrack, type RemoteTrack, type TranscriptionSegment } from "livekit-client";
-import { createMatildaLiveSession, matildaCallErrorCode, type MatildaCallErrorCode } from "@/lib/matildaLiveSession";
+import {
+  Room,
+  RoomEvent,
+  Track,
+  ParticipantKind,
+  createLocalAudioTrack,
+  DisconnectReason,
+  type LocalAudioTrack,
+  type RemoteTrack,
+  type TranscriptionSegment,
+} from "livekit-client";
+import {
+  createMatildaLiveSession,
+  matildaCallErrorCode,
+  type MatildaCallErrorCode,
+} from "@/lib/matildaLiveSession";
 
 export type LiveCallStatus = "idle" | "connecting" | "live" | "ended" | "error";
 export type LiveCallLine = { id: string; speaker: "user" | "agent"; text: string };
@@ -21,7 +35,11 @@ function dispose(attempt: Attempt): void {
   attempt.timer = null;
   attempt.deadlineTimer = null;
   attempt.microphone?.stop();
-  attempt.audio.forEach((el) => { el.pause(); el.srcObject = null; el.remove(); });
+  attempt.audio.forEach((el) => {
+    el.pause();
+    el.srcObject = null;
+    el.remove();
+  });
   attempt.audio = [];
   attempt.room?.removeAllListeners();
   if (attempt.room) void attempt.room.disconnect().catch(() => undefined);
@@ -61,7 +79,14 @@ export function useMatildaLiveCall() {
 
   const start = useCallback(async () => {
     if (operation.current) return;
-    const attempt: Attempt = { controller: new AbortController(), room: null, microphone: null, audio: [], timer: null, deadlineTimer: null };
+    const attempt: Attempt = {
+      controller: new AbortController(),
+      room: null,
+      microphone: null,
+      audio: [],
+      timer: null,
+      deadlineTimer: null,
+    };
     operation.current = attempt;
     const owns = () => operation.current === attempt && !attempt.controller.signal.aborted;
     const finish = (reason: "expired" | "disconnected") => {
@@ -91,13 +116,21 @@ export function useMatildaLiveCall() {
       attempt.room = lk;
       const updateAgent = () => {
         if (!owns()) return;
-        setAgentConnected([...lk.remoteParticipants.values()].some((p) => p.kind === ParticipantKind.AGENT));
+        setAgentConnected(
+          [...lk.remoteParticipants.values()].some((p) => p.kind === ParticipantKind.AGENT),
+        );
       };
       lk.on(RoomEvent.ParticipantConnected, updateAgent);
       lk.on(RoomEvent.ParticipantDisconnected, updateAgent);
-      lk.on(RoomEvent.AudioPlaybackStatusChanged, () => { if (owns()) setAudioBlocked(!lk.canPlaybackAudio); });
+      lk.on(RoomEvent.AudioPlaybackStatusChanged, () => {
+        if (owns()) setAudioBlocked(!lk.canPlaybackAudio);
+      });
       lk.on(RoomEvent.TrackSubscribed, (track: RemoteTrack, _publication, participant) => {
-        if (owns() && participant.kind === ParticipantKind.AGENT && track.kind === Track.Kind.Audio) {
+        if (
+          owns() &&
+          participant.kind === ParticipantKind.AGENT &&
+          track.kind === Track.Kind.Audio
+        ) {
           const el = track.attach();
           el.style.display = "none";
           document.body.appendChild(el);
@@ -125,7 +158,10 @@ export function useMatildaLiveCall() {
       });
       lk.on(RoomEvent.Disconnected, (reason) => {
         if (!owns()) return;
-        if (reason === DisconnectReason.JOIN_FAILURE || reason === DisconnectReason.STATE_MISMATCH) {
+        if (
+          reason === DisconnectReason.JOIN_FAILURE ||
+          reason === DisconnectReason.STATE_MISMATCH
+        ) {
           cleanup();
           setError("connection");
           setStatus("error");
@@ -133,21 +169,35 @@ export function useMatildaLiveCall() {
       });
 
       await lk.connect(data.server_url, data.participant_token);
-      if (!owns()) { dispose(attempt); return; }
+      if (!owns()) {
+        dispose(attempt);
+        return;
+      }
       setRoomConnected(true);
       updateAgent();
-      await lk.startAudio().catch(() => { if (owns()) setAudioBlocked(true); });
+      await lk.startAudio().catch(() => {
+        if (owns()) setAudioBlocked(true);
+      });
       if (!owns()) return;
       setAudioBlocked(!lk.canPlaybackAudio);
       const microphone = await createLocalAudioTrack();
       attempt.microphone = microphone;
-      if (!owns()) { dispose(attempt); return; }
+      if (!owns()) {
+        dispose(attempt);
+        return;
+      }
       await lk.localParticipant.publishTrack(microphone);
-      if (!owns()) { dispose(attempt); return; }
+      if (!owns()) {
+        dispose(attempt);
+        return;
+      }
       setMicrophoneActive(true);
       setStatus("live");
     } catch (err) {
-      if (!owns()) { dispose(attempt); return; }
+      if (!owns()) {
+        dispose(attempt);
+        return;
+      }
       cleanup();
       setError(matildaCallErrorCode(err));
       setStatus("error");
@@ -165,11 +215,28 @@ export function useMatildaLiveCall() {
     }
   }, []);
 
-  useEffect(() => () => {
-    const current = operation.current;
-    operation.current = null;
-    if (current) dispose(current);
-  }, []);
+  useEffect(
+    () => () => {
+      const current = operation.current;
+      operation.current = null;
+      if (current) dispose(current);
+    },
+    [],
+  );
 
-  return { status, error, remaining, lines, agentSpeaking, agentConnected, microphoneActive, roomConnected, audioBlocked, endReason, start, hangUp, resumeAudio };
+  return {
+    status,
+    error,
+    remaining,
+    lines,
+    agentSpeaking,
+    agentConnected,
+    microphoneActive,
+    roomConnected,
+    audioBlocked,
+    endReason,
+    start,
+    hangUp,
+    resumeAudio,
+  };
 }
