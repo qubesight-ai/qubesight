@@ -4760,3 +4760,4 @@
   font-size: 0.8rem;
 }
 html, body { max-width: 100%; overflow-x: hidden; }
+.prototype-shell .qs-site-header nav.overflow-x-auto > * { font-size: 0.74rem !important; }
