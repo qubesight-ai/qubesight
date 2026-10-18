@@ -251,7 +251,12 @@ describe("public Matilda call lifecycle", () => {
     const pause = vi.spyOn(audio, "pause").mockImplementation(() => undefined);
     const detach = vi.fn();
     act(() =>
-      room.emit("TrackSubscribed", { kind: "audio", attach: () => audio, detach }, {}, { kind: "agent" }),
+      room.emit(
+        "TrackSubscribed",
+        { kind: "audio", attach: () => audio, detach },
+        {},
+        { kind: "agent" },
+      ),
     );
     expect(document.body.contains(audio)).toBe(true);
     act(() => result.current.hangUp());

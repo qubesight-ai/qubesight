@@ -106,7 +106,10 @@ export function useMatildaLiveCall() {
       const ends = Date.now() + data.max_seconds * 1000;
       const stillValid = () => {
         if (!owns()) return false;
-        if (Date.now() >= ends) { finish("expired"); return false; }
+        if (Date.now() >= ends) {
+          finish("expired");
+          return false;
+        }
         return true;
       };
       setRemaining(data.max_seconds);
@@ -122,7 +125,9 @@ export function useMatildaLiveCall() {
       attempt.room = lk;
       const updateAgent = () => {
         if (!owns()) return;
-        const present = [...lk.remoteParticipants.values()].some((p) => p.kind === ParticipantKind.AGENT);
+        const present = [...lk.remoteParticipants.values()].some(
+          (p) => p.kind === ParticipantKind.AGENT,
+        );
         setAgentConnected(present);
         if (!present) setAgentSpeaking(false);
       };
