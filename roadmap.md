@@ -1,6 +1,6 @@
 # Sitio web
 
-- [ ] Ajustar y verificar validación, cancelación, estados y duración de la demo pública con proveedores simulados; mostrar diff, sin llamadas reales ni despliegues.
+- [x] Ajustar y verificar validación, cancelación, estados y duración de la demo pública con proveedores simulados; entregar diff, sin llamadas reales ni despliegues.
 - [ ] WhatsApp de la demo: bloqueado hasta revisar el contrato desplegado y obtener aprobación para pruebas reales; no implementar envíos en el navegador.
 
 - [x] Incorporar todo el contenido de Mejoras Sitio Web dentro de las secciones existentes, en español e inglés.
