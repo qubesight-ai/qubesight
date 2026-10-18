@@ -4673,11 +4673,10 @@
 html, body { max-width: 100%; overflow-x: hidden; }
 .prototype-shell .qs-site-header nav.overflow-x-auto > * { font-size: 1rem !important; }
 @media (max-width: 1180px) {
-  .prototype-shell .qs-site-header nav.overflow-x-auto > * { font-size: 1rem !important; }
-  .prototype-shell .qs-site-header nav.overflow-x-auto {
-    flex-wrap: wrap;
-    overflow-x: visible;
-    row-gap: 0.3rem !important;
-    padding-bottom: 0.55rem;
-  }
+  .prototype-shell .qs-site-header nav.overflow-x-auto > * { font-size: 0.9rem !important; }
+  .prototype-shell .qs-site-header nav.overflow-x-auto { gap: 0.5rem !important; }
+}
+@media (max-width: 1080px) {
+  .prototype-shell .qs-site-header nav.overflow-x-auto > * { font-size: 0.82rem !important; }
+  .prototype-shell .qs-site-header nav.overflow-x-auto { gap: 0.35rem !important; }
 }
