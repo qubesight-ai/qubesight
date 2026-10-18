@@ -4741,6 +4741,7 @@
 
 /* Responsive fix: keep the floating header inside the viewport at every size */
 .prototype-shell .qs-site-header {
+  position: fixed !important;
   width: auto !important;
   max-width: none !important;
   box-sizing: border-box;
