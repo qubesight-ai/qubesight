@@ -3995,82 +3995,6 @@
   }
 }
 
-.qs-hero-teasers {
-  position: absolute;
-  z-index: 5;
-  left: 4%;
-  right: 4%;
-  bottom: -72px;
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 1.6rem;
-  transform: perspective(1200px) rotateX(3deg);
-  transform-origin: bottom;
-}
-.qs-teaser-card {
-  position: relative;
-  min-height: 210px;
-  padding: 2rem;
-  border: 2px solid rgba(255, 255, 255, 0.64);
-  border-radius: 28px 28px 0 0;
-  background: linear-gradient(140deg, rgba(220, 243, 255, 0.38), rgba(71, 146, 224, 0.2));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    0 26px 70px rgba(0, 63, 142, 0.24);
-  backdrop-filter: blur(14px);
-  overflow: hidden;
-}
-.qs-teaser-card::after {
-  content: "";
-  position: absolute;
-  right: 5%;
-  top: 17%;
-  width: 35%;
-  height: 62%;
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: 8px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(37, 113, 200, 0.2));
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.7);
-}
-.qs-teaser-card > span {
-  display: block;
-  color: rgba(235, 248, 255, 0.82) !important;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-}
-.qs-teaser-card > strong {
-  display: block;
-  width: 58%;
-  margin-top: 0.75rem;
-  color: #fff;
-  font-size: 1.35rem;
-  line-height: 1.08;
-}
-.qs-teaser-card > p {
-  width: 58%;
-  margin-top: 0.55rem;
-  color: rgba(245, 251, 255, 0.88) !important;
-  font-size: 0.72rem;
-  line-height: 1.35;
-}
-.qs-teaser-card > i {
-  position: absolute;
-  bottom: 1.7rem;
-  left: 2rem;
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.14);
-}
-.qs-teaser-card > i svg {
-  width: 16px;
-  stroke: #fff;
-}
 
 .prototype-shell .prototype-content {
   padding: 7rem 0 6rem;
@@ -4228,27 +4152,6 @@
     margin: 0 auto;
     transform: none;
   }
-  .qs-hero-teasers {
-    left: 1rem;
-    right: 1rem;
-    bottom: -100px;
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
-    transform: none;
-  }
-  .qs-teaser-card {
-    min-height: 150px;
-    padding: 1.3rem;
-    border-radius: 22px;
-  }
-  .qs-teaser-card:nth-child(2) {
-    display: none;
-  }
-  .qs-teaser-card > i {
-    left: auto;
-    right: 1.2rem;
-    bottom: 1.2rem;
-  }
   .prototype-shell .prototype-content {
     padding-top: 8rem;
   }
@@ -4273,10 +4176,6 @@
   }
   .qs-quick-actions button {
     font-size: 0.57rem;
-  }
-  .qs-teaser-card > strong,
-  .qs-teaser-card > p {
-    width: 75%;
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -71,38 +71,6 @@ const PrototypeHero = () => {
         </span>
       </div>
       <HeroInteractiveDemo spanish={spanish} />
-      <div className="qs-hero-teasers">
-        <a href="#quienes-somos" className="qs-teaser-card">
-          <span>{spanish ? "QUIÉNES SOMOS" : "ABOUT US"}</span>
-          <strong>
-            {spanish ? "Tecnología que acerca personas" : "Technology that brings people closer"}
-          </strong>
-          <p>
-            {spanish
-              ? "Creamos un mundo donde ninguna oportunidad se pierda por falta de atención."
-              : "We create a world where no opportunity is lost for lack of attention."}
-          </p>
-          <i>
-            <ArrowUpRight />
-          </i>
-        </a>
-        <a href="#early-adopters" className="qs-teaser-card qs-teaser-wide">
-          <span>EARLY ADOPTERS</span>
-          <strong>
-            {spanish
-              ? "Negocios que ya están un paso adelante"
-              : "Businesses already one step ahead"}
-          </strong>
-          <p>
-            {spanish
-              ? "Empresas que confían en QubeSight para transformar su atención al cliente."
-              : "Businesses trusting QubeSight to transform customer service."}
-          </p>
-          <i>
-            <ArrowUpRight />
-          </i>
-        </a>
-      </div>
     </section>
   );
 };
