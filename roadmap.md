@@ -9,3 +9,4 @@
 - [x] Hacer transparente el vidrio del menú y convertir la demo del héroe en una experiencia interactiva.
 - [x] Hacer visibles los íconos del footer y usar el logo oficial de QubeSight en el menú y favicon.
 - [x] Corregir y comprobar el contraste del texto escrito en creación de empresa y formularios del sitio, sin alterar funciones.
+- [x] Eliminar las dos tarjetas «Quiénes somos» y «Early Adopters» del hero, conservando sus secciones y accesos desde el menú.
