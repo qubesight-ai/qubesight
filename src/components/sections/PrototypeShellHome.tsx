@@ -19,6 +19,12 @@ import {
   Linkedin,
   Play,
   Sparkles,
+  Mail,
+  Users,
+  Wifi,
+  Heart,
+  Bot,
+  ChevronRight,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import skyCity from "@/assets/qubesight-sky-city.jpg";
@@ -28,80 +34,151 @@ const PrototypeHero = () => {
   const { language } = useTranslation();
   const spanish = language === "es";
 
+  const demoPods = [
+    { emoji: "🍽️", label: spanish ? "Restaurantes" : "Restaurants", href: "/restaurantes" },
+    { emoji: "💇", label: spanish ? "Salones" : "Salons", href: "/salones" },
+    { emoji: "🦷", label: spanish ? "Clínicas" : "Dental", href: "/dental" },
+    { emoji: "🏠", label: spanish ? "Inmobiliarias" : "Real estate", href: "/inmobiliarias" },
+  ];
+
   return (
-    <section id="hero" className="prototype-hero">
-      <img className="qs-hero-sky" src={skyCity} alt="" width={1920} height={1080} />
-      <div className="qs-hero-vignette" aria-hidden="true" />
-      <div className="qs-hero-copy">
-        <h1>
-          <span>{spanish ? "Tus clientes" : "Your customers"}</span>
-          <span>{spanish ? "quieren respuestas" : "want answers"}</span>
-          <span>{spanish ? "cuando las necesitan" : "when they need them"}</span>
-        </h1>
-        <p>
-          {spanish
-            ? "QubeSight ayuda a que tu negocio pueda atenderlos."
-            : "QubeSight helps your business be there for them."}
-        </p>
-        <div className="qs-hero-actions">
-          <a href="#early-adopters" className="prototype-button">
-            {spanish ? "Solicitar presentación" : "Request a demo"}
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
-          <a href="#how-it-works" className="qs-secondary-button">
-            <span>
-              <Play className="h-3.5 w-3.5" />
+    <section id="hero" className="prototype-hero piko-hero">
+      <div className="piko-pixel-cloud piko-cloud-one" aria-hidden="true" />
+      <div className="piko-pixel-cloud piko-cloud-two" aria-hidden="true" />
+      <div className="piko-doodle piko-doodle-star" aria-hidden="true">✦</div>
+      <div className="piko-doodle piko-doodle-heart" aria-hidden="true">♥</div>
+      <div className="piko-doodle piko-doodle-flower" aria-hidden="true">✿</div>
+
+      <div className="piko-window piko-main-window">
+        <div className="piko-window-bar">
+          <div className="piko-window-dots" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+          <span className="piko-window-title">QubeSight.home</span>
+          <span className="piko-window-status">
+            <Wifi className="h-3.5 w-3.5" />
+            {spanish ? "en línea" : "online"}
+          </span>
+        </div>
+
+        <div className="piko-main-grid">
+          <aside className="piko-profile-card">
+            <div className="piko-avatar-frame">
+              <img src={heroCube} alt="" width={180} height={180} />
+              <span className="piko-avatar-online" />
+            </div>
+
+            <div className="piko-profile-copy">
+              <span className="piko-handle">@qubesight</span>
+              <strong>{spanish ? "recepción con IA" : "AI reception"}</strong>
+              <p>
+                {spanish
+                  ? "Tu negocio, atendiendo incluso cuando vos no podés."
+                  : "Your business, answering even when you cannot."}
+              </p>
+            </div>
+
+            <div className="piko-status-meter">
+              <div className="piko-status-row">
+                <span>{spanish ? "disponibilidad" : "availability"}</span>
+                <b>24/7</b>
+              </div>
+              <div className="piko-meter-track">
+                <span />
+              </div>
+            </div>
+
+            <div className="piko-mini-stats">
+              <span><MessageCircle className="h-4 w-4" /> Chat</span>
+              <span><Headphones className="h-4 w-4" /> Voice</span>
+              <span><CalendarDays className="h-4 w-4" /> Agenda</span>
+            </div>
+          </aside>
+
+          <div className="piko-hero-message">
+            <span className="piko-sticker">
+              <Sparkles className="h-4 w-4" />
+              {spanish ? "IA PARA NEGOCIOS" : "AI FOR BUSINESS"}
             </span>
-            {spanish ? "Ver cómo funciona" : "See how it works"}
-          </a>
+
+            <h1>
+              {spanish ? "Tus clientes quieren respuestas" : "Your customers want answers"}
+              <span>{spanish ? " cuando las necesitan." : " when they need them."}</span>
+            </h1>
+
+            <p>
+              {spanish
+                ? "QubeSight atiende llamadas y chats, agenda citas y mantiene tu negocio disponible sin convertir la experiencia en algo frío."
+                : "QubeSight handles calls and chats, books appointments, and keeps your business available without making the experience feel cold."}
+            </p>
+
+            <div className="piko-hero-actions">
+              <a href="#early-adopters" className="piko-button piko-button-primary">
+                <Heart className="h-4 w-4" />
+                {spanish ? "Quiero una demo" : "I want a demo"}
+              </a>
+              <a href="#demo" className="piko-button piko-button-soft">
+                <Play className="h-4 w-4" />
+                {spanish ? "Hablar con Matilda" : "Talk to Matilda"}
+              </a>
+            </div>
+
+            <div className="piko-note">
+              <Mail className="h-4 w-4" />
+              <span>
+                {spanish
+                  ? "nuevo mensaje: podés probar la experiencia antes de hablar con nosotros :)"
+                  : "new message: you can try the experience before talking to us :)"}
+              </span>
+            </div>
+          </div>
+
+          <div className="piko-matilda-card">
+            <div className="piko-card-tab">
+              <Bot className="h-4 w-4" />
+              <span>Matilda</span>
+              <i>{spanish ? "disponible" : "available"}</i>
+            </div>
+
+            <div className="piko-chat-log">
+              <div className="piko-chat-line piko-chat-line-user">
+                <span className="piko-chat-name">{spanish ? "cliente" : "customer"}</span>
+                <p>{spanish ? "Hola, ¿tienen espacio hoy?" : "Hi, do you have availability today?"}</p>
+              </div>
+              <div className="piko-chat-line piko-chat-line-matilda">
+                <span className="piko-chat-name">matilda.ai</span>
+                <p>
+                  {spanish
+                    ? "Sí ✿ Tengo dos horarios. ¿Querés que te agende?"
+                    : "Yes ✿ I have two openings. Want me to book one?"}
+                </p>
+              </div>
+            </div>
+
+            <a href="#demo" className="piko-chat-cta">
+              <span>{spanish ? "abrir demo de voz" : "open voice demo"}</span>
+              <ChevronRight className="h-4 w-4" />
+            </a>
+          </div>
         </div>
       </div>
-      <div className="qs-cube-stage" aria-hidden="true">
-        <div className="qs-orbit qs-orbit-one" />
-        <div className="qs-orbit qs-orbit-two" />
-        <img src={heroCube} alt="" width={512} height={512} />
-        <span className="qs-channel qs-channel-chat">
-          <MessageCircle />
-        </span>
-        <span className="qs-channel qs-channel-phone">
-          <Headphones />
-        </span>
-        <span className="qs-channel qs-channel-calendar">
-          <CalendarDays />
-        </span>
-      </div>
-      <HeroInteractiveDemo spanish={spanish} />
-      <div className="qs-hero-teasers">
-        <a href="#quienes-somos" className="qs-teaser-card">
-          <span>{spanish ? "QUIÉNES SOMOS" : "ABOUT US"}</span>
-          <strong>
-            {spanish ? "Tecnología que acerca personas" : "Technology that brings people closer"}
-          </strong>
-          <p>
-            {spanish
-              ? "Creamos un mundo donde ninguna oportunidad se pierda por falta de atención."
-              : "We create a world where no opportunity is lost for lack of attention."}
-          </p>
-          <i>
-            <ArrowUpRight />
-          </i>
-        </a>
-        <a href="#early-adopters" className="qs-teaser-card qs-teaser-wide">
-          <span>EARLY ADOPTERS</span>
-          <strong>
-            {spanish
-              ? "Negocios que ya están un paso adelante"
-              : "Businesses already one step ahead"}
-          </strong>
-          <p>
-            {spanish
-              ? "Empresas que confían en QubeSight para transformar su atención al cliente."
-              : "Businesses trusting QubeSight to transform customer service."}
-          </p>
-          <i>
-            <ArrowUpRight />
-          </i>
-        </a>
+
+      <div className="piko-pods-window piko-window">
+        <div className="piko-window-bar piko-pods-bar">
+          <span className="piko-window-title">{spanish ? "chatbot demos / pods" : "chatbot demos / pods"}</span>
+          <span className="piko-tiny-count"><Users className="h-3.5 w-3.5" /> 4 online</span>
+        </div>
+        <div className="piko-pod-grid">
+          {demoPods.map((pod) => (
+            <a href={pod.href} className="piko-pod-card" key={pod.href}>
+              <span className="piko-pod-emoji">{pod.emoji}</span>
+              <strong>{pod.label}</strong>
+              <small>{spanish ? "abrir demo" : "open demo"}</small>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -191,7 +268,7 @@ const PrototypeShellHome = () => {
   useScrollReveal();
 
   return (
-    <div className="prototype-shell">
+    <div className="prototype-shell piko-preview-shell">
       <img className="qs-world-sky" src={skyCity} alt="" aria-hidden="true" />
       <Header />
       <main>
