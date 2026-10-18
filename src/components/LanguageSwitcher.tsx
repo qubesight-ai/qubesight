@@ -13,7 +13,7 @@ const LanguageSwitcher = () => {
         type="button"
         onClick={() => setLanguage("es")}
         aria-pressed={language === "es"}
-        className={`min-h-[32px] min-w-[40px] rounded-full px-2.5 text-xs font-semibold uppercase tracking-wide transition-colors ${
+        className={`min-h-[32px] min-w-[40px] rounded-full px-2.5 text-sm font-semibold uppercase tracking-wide transition-colors ${
           language === "es"
             ? "bg-primary text-primary-foreground shadow-sm"
             : "text-muted-foreground hover:text-foreground"
@@ -25,7 +25,7 @@ const LanguageSwitcher = () => {
         type="button"
         onClick={() => setLanguage("en")}
         aria-pressed={language === "en"}
-        className={`min-h-[32px] min-w-[40px] rounded-full px-2.5 text-xs font-semibold uppercase tracking-wide transition-colors ${
+        className={`min-h-[32px] min-w-[40px] rounded-full px-2.5 text-sm font-semibold uppercase tracking-wide transition-colors ${
           language === "en"
             ? "bg-primary text-primary-foreground shadow-sm"
             : "text-muted-foreground hover:text-foreground"
