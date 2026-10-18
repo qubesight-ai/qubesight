@@ -5,7 +5,7 @@ Read this file before editing code, migrations, infrastructure, or documentation
 ## Source of truth
 
 - Canonical repository: `qubesight-ai/qubesight`.
-- The former `qubesight-bit/qubesight` redirects here; do not use it in new docs.
+- Do not use the former repository in new docs.
 - Begin from a clean, current `origin/main` and record `git rev-parse HEAD`.
 - Repository code and migrations override historical ZIPs or handoff notes.
 - Read `docs/CONTINUITY_INDEX.md` before substantial work.
@@ -89,4 +89,5 @@ Repository work does not authorize operations in Lovable, Supabase production, T
 Finish with repository, branch/base/result SHA; completed and excluded scope; changed files; exact validations; migrations created/applied; required secret names only; deployments performed/pending; risks; rollback; and one recommended next action.
 
 - vite.config.ts holds public VITE_SUPABASE_* fallbacks because read-only .gitignore excludes .env (else "supabaseUrl is required").
-- Public demos share a session service/hook, separate from Test Call and WhatsApp tools, to isolate browser state; `voice-demo-session` uses the existing worker contract.
+- Public demos share a session hook, separate from Test Call/WhatsApp, using the existing worker contract.
+- Accessibility uses root attributes and MotionConfig; store display preferences only locally.
