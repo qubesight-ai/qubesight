@@ -169,7 +169,7 @@ const Header = () => {
                         : `${link.label}, current section`
                       : link.label
                   }
-                  className={`text-xs font-medium transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm ${
+                  className={`text-sm 2xl:text-base font-medium transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm ${
                     isActive ? "text-foreground" : "text-muted-foreground"
                   }`}
                 >
@@ -179,7 +179,7 @@ const Header = () => {
             })}
 
             <DropdownMenu>
-              <DropdownMenuTrigger className="group inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-brand-soft transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary/60 rounded-sm">
+              <DropdownMenuTrigger className="group inline-flex items-center gap-1.5 text-sm 2xl:text-base font-semibold text-primary hover:text-brand-soft transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary/60 rounded-sm">
                 <Sparkles className="h-3.5 w-3.5" />
                 {demosLabel}
                 <ChevronDown className="h-3.5 w-3.5 transition-transform group-data-[state=open]:rotate-180" />
@@ -189,7 +189,7 @@ const Header = () => {
                   <DropdownMenuItem key={d.to} asChild className="cursor-pointer">
                     <Link
                       to={d.to}
-                      className="chatbot-demos-item flex items-center gap-3 py-2.5 px-3 text-sm"
+                      className="chatbot-demos-item flex items-center gap-3 py-2.5 px-3 text-base"
                     >
                       <span className="text-lg">{d.emoji}</span>
                       <span className="flex-1">{d.label}</span>
@@ -256,13 +256,13 @@ const Header = () => {
               data-nav-section={link.id}
               onClick={(e) => handleNavClick(e, link.id)}
               aria-current={activeSection === link.id ? "location" : undefined}
-              className={`shrink-0 text-sm font-medium transition-colors hover:text-foreground ${activeSection === link.id ? "text-foreground" : "text-muted-foreground"}`}
+              className={`shrink-0 text-[0.95rem] font-medium transition-colors hover:text-foreground ${activeSection === link.id ? "text-foreground" : "text-muted-foreground"}`}
             >
               {link.label}
             </a>
           ))}
           <DropdownMenu>
-            <DropdownMenuTrigger className="shrink-0 inline-flex items-center gap-1 text-sm font-semibold text-primary">
+            <DropdownMenuTrigger className="shrink-0 inline-flex items-center gap-1 text-[0.95rem] font-semibold text-primary">
               <Sparkles className="h-3.5 w-3.5" /> {demosLabel}{" "}
               <ChevronDown className="h-3.5 w-3.5" />
             </DropdownMenuTrigger>
@@ -271,7 +271,7 @@ const Header = () => {
                 <DropdownMenuItem key={d.to} asChild className="cursor-pointer">
                   <Link
                     to={d.to}
-                    className="chatbot-demos-item flex items-center gap-3 py-2.5 px-3 text-sm"
+                    className="chatbot-demos-item flex items-center gap-3 py-2.5 px-3 text-base"
                   >
                     <span className="text-lg">{d.emoji}</span>
                     <span className="flex-1">{d.label}</span>
@@ -310,7 +310,7 @@ const Header = () => {
                       data-nav-section={link.id}
                       onClick={(e) => handleNavClick(e, link.id)}
                       aria-current={isActive ? "location" : undefined}
-                      className={`block px-4 py-3 rounded-lg transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
+                      className={`block px-4 py-3 text-lg rounded-lg transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
                         isActive ? "text-primary bg-secondary/60" : "text-foreground"
                       }`}
                     >
@@ -323,7 +323,7 @@ const Header = () => {
                   type="button"
                   onClick={() => setIsMobileDemosOpen((v) => !v)}
                   aria-expanded={isMobileDemosOpen}
-                  className="w-full flex items-center justify-between px-4 py-3 text-primary hover:bg-secondary rounded-lg transition-colors"
+                  className="w-full flex items-center justify-between px-4 py-3 text-lg text-primary hover:bg-secondary rounded-lg transition-colors"
                 >
                   <span className="flex items-center gap-2 font-semibold">
                     <Sparkles className="h-4 w-4" />
@@ -354,10 +354,10 @@ const Header = () => {
                               setIsMobileMenuOpen(false);
                               setIsMobileDemosOpen(false);
                             }}
-                            className="flex items-center gap-3 px-4 py-3 text-foreground hover:bg-secondary rounded-lg transition-colors"
+                            className="flex items-center gap-3 px-4 py-3 text-lg text-foreground hover:bg-secondary rounded-lg transition-colors"
                           >
                             <span className="text-lg">{d.emoji}</span>
-                            <span className="flex-1 text-sm">{d.label}</span>
+                            <span className="flex-1">{d.label}</span>
                             <ArrowRight className="h-3.5 w-3.5 opacity-50" />
                           </Link>
                         ))}
