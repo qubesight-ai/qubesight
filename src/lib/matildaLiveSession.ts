@@ -8,8 +8,12 @@ const sessionSchema = z.object({
     .string()
     .url()
     .refine((value) => {
-      const url = new URL(value);
-      return url.protocol === "wss:" && !url.username && !url.password;
+      try {
+        const url = new URL(value);
+        return url.protocol === "wss:" && !url.username && !url.password;
+      } catch {
+        return false;
+      }
     }),
   participant_token: z.string().trim().min(1),
   room_name: z.string().startsWith("qs-test-demo-"),
@@ -56,7 +60,7 @@ export function matildaCallErrorCode(error: unknown): MatildaCallErrorCode {
   if (error instanceof MatildaCallError) return error.code;
   if (error instanceof ConnectionError && error.reason === ConnectionErrorReason.NotAllowed)
     return "session-rejected";
-  const name = error instanceof Error ? error.name : "";
+  const name = error instanceof Error || error instanceof DOMException ? error.name : "";
   if (name === "NotAllowedError" || name === "SecurityError") return "permission";
   if (name === "NotFoundError" || name === "DevicesNotFoundError") return "microphone-missing";
   if (name === "NotReadableError" || name === "TrackStartError") return "microphone-busy";

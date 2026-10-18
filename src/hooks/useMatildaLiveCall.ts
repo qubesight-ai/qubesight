@@ -23,7 +23,7 @@ type Attempt = {
   controller: AbortController;
   room: Room | null;
   microphone: LocalAudioTrack | null;
-  audio: HTMLMediaElement[];
+  audio: Map<RemoteTrack, HTMLMediaElement>;
   timer: number | null;
   deadlineTimer: number | null;
 };
@@ -35,12 +35,13 @@ function dispose(attempt: Attempt): void {
   attempt.timer = null;
   attempt.deadlineTimer = null;
   attempt.microphone?.stop();
-  attempt.audio.forEach((el) => {
+  attempt.audio.forEach((el, track) => {
+    track.detach(el);
     el.pause();
     el.srcObject = null;
     el.remove();
   });
-  attempt.audio = [];
+  attempt.audio.clear();
   attempt.room?.removeAllListeners();
   if (attempt.room) void attempt.room.disconnect().catch(() => undefined);
 }
@@ -83,7 +84,7 @@ export function useMatildaLiveCall() {
       controller: new AbortController(),
       room: null,
       microphone: null,
-      audio: [],
+      audio: new Map(),
       timer: null,
       deadlineTimer: null,
     };
@@ -103,6 +104,11 @@ export function useMatildaLiveCall() {
       const data = await createMatildaLiveSession(attempt.controller.signal);
       if (!owns()) return;
       const ends = Date.now() + data.max_seconds * 1000;
+      const stillValid = () => {
+        if (!owns()) return false;
+        if (Date.now() >= ends) { finish("expired"); return false; }
+        return true;
+      };
       setRemaining(data.max_seconds);
       attempt.deadlineTimer = window.setTimeout(() => finish("expired"), data.max_seconds * 1000);
       attempt.timer = window.setInterval(() => {
@@ -116,9 +122,9 @@ export function useMatildaLiveCall() {
       attempt.room = lk;
       const updateAgent = () => {
         if (!owns()) return;
-        setAgentConnected(
-          [...lk.remoteParticipants.values()].some((p) => p.kind === ParticipantKind.AGENT),
-        );
+        const present = [...lk.remoteParticipants.values()].some((p) => p.kind === ParticipantKind.AGENT);
+        setAgentConnected(present);
+        if (!present) setAgentSpeaking(false);
       };
       lk.on(RoomEvent.ParticipantConnected, updateAgent);
       lk.on(RoomEvent.ParticipantDisconnected, updateAgent);
@@ -134,8 +140,17 @@ export function useMatildaLiveCall() {
           const el = track.attach();
           el.style.display = "none";
           document.body.appendChild(el);
-          attempt.audio.push(el);
+          attempt.audio.set(track, el);
         }
+      });
+      lk.on(RoomEvent.TrackUnsubscribed, (track: RemoteTrack) => {
+        const el = attempt.audio.get(track);
+        if (!el) return;
+        track.detach(el);
+        el.pause();
+        el.srcObject = null;
+        el.remove();
+        attempt.audio.delete(track);
       });
       lk.on(RoomEvent.ActiveSpeakersChanged, (speakers) => {
         if (owns()) setAgentSpeaking(speakers.some((p) => p.kind === ParticipantKind.AGENT));
@@ -169,25 +184,27 @@ export function useMatildaLiveCall() {
       });
 
       await lk.connect(data.server_url, data.participant_token);
-      if (!owns()) {
+      if (!stillValid()) {
         dispose(attempt);
         return;
       }
       setRoomConnected(true);
       updateAgent();
+      let playbackFailed = false;
       await lk.startAudio().catch(() => {
+        playbackFailed = true;
         if (owns()) setAudioBlocked(true);
       });
-      if (!owns()) return;
-      setAudioBlocked(!lk.canPlaybackAudio);
+      if (!stillValid()) return;
+      setAudioBlocked(playbackFailed || !lk.canPlaybackAudio);
       const microphone = await createLocalAudioTrack();
       attempt.microphone = microphone;
-      if (!owns()) {
+      if (!stillValid()) {
         dispose(attempt);
         return;
       }
       await lk.localParticipant.publishTrack(microphone);
-      if (!owns()) {
+      if (!stillValid()) {
         dispose(attempt);
         return;
       }
