@@ -4755,9 +4755,8 @@
   min-width: 0;
 }
 .prototype-shell .qs-site-header nav.overflow-x-auto {
-  flex-wrap: wrap;
-  row-gap: 0.4rem;
   justify-content: center;
-  overflow: visible;
+  gap: clamp(0.6rem, 1.1vw, 1.1rem) !important;
+  font-size: 0.8rem;
 }
 html, body { max-width: 100%; overflow-x: hidden; }
