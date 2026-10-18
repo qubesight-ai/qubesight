@@ -164,6 +164,9 @@ html[data-contrast="true"] :is(.qs-site-header, .qs-hero-copy) {
   background: hsl(var(--a11y-ink)) !important;
   color: hsl(var(--a11y-on-primary)) !important;
 }
+html[data-contrast="true"] .prototype-shell .qs-site-header :is(a, button, .logo-text-mobile) {
+  color: hsl(var(--a11y-on-primary)) !important;
+}
 html[data-contrast="true"] .qs-hero-copy {
   padding: 1rem;
 }
