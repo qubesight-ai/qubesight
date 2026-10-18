@@ -17,3 +17,4 @@
 - [x] Hacer visibles los íconos del footer y usar el logo oficial de QubeSight en el menú y favicon.
 - [x] Corregir y comprobar el contraste del texto escrito en creación de empresa y formularios del sitio, sin alterar funciones.
 - [x] Eliminar las dos tarjetas «Quiénes somos» y «Early Adopters» del hero, conservando sus secciones y accesos desde el menú.
+- [x] Aumentar el tamaño de letra del menú en escritorio y en el panel de móvil, comprobando que ningún elemento se corte ni tape el titular.
