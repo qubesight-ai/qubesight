@@ -34,6 +34,8 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
   const nextId = useRef(3);
   const replyTimer = useRef<number | null>(null);
   const call = useMatildaLiveCall();
+  const voiceActive = call.status === "connecting" || call.status === "live";
+  const voiceSessionVisible = voiceActive || call.lines.length > 0;
   const [draft, setDraft] = useState("");
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState<DemoMessage[]>([
@@ -69,9 +71,16 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
     return replies.default;
   };
 
+  useEffect(() => {
+    if (!voiceActive) return;
+    if (replyTimer.current !== null) window.clearTimeout(replyTimer.current);
+    replyTimer.current = null;
+    setTyping(false);
+  }, [voiceActive]);
+
   const sendMessage = (text: string) => {
     const cleanText = text.trim();
-    if (!cleanText || typing) return;
+    if (!cleanText || typing || voiceActive) return;
     setMessages((current) => [
       ...current.slice(-3),
       { id: nextId.current++, sender: "user", text: cleanText },
@@ -105,11 +114,11 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
           <span>{spanish ? "Tu recepcionista de IA" : "Your AI receptionist"}</span>
         </div>
         <div className="qs-online">
-          <i /> {spanish ? "En línea" : "Online"}
+          <i /> {call.agentConnected ? (spanish ? "Conectada" : "Connected") : "Matilda"}
         </div>
       </div>
       <div className="qs-demo-conversation" aria-live="polite">
-        {messages.map((message) =>
+        {(!voiceSessionVisible ? messages : []).map((message) =>
           message.sender === "user" ? (
             <div key={message.id} className="qs-message qs-message-user">
               {message.text}
@@ -133,7 +142,7 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
             </div>
           ),
         )}
-        {typing && (
+        {!voiceSessionVisible && typing && (
           <div
             className="qs-message-row"
             aria-label={spanish ? "Matilda está escribiendo" : "Matilda is typing"}
@@ -152,6 +161,7 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
         <Button
           type="button"
           variant="ghost"
+          disabled={voiceActive}
           onClick={() =>
             sendMessage(
               spanish ? "Quiero agendar una presentación" : "I want to book a presentation",
@@ -164,6 +174,7 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
         <Button
           type="button"
           variant="ghost"
+          disabled={voiceActive}
           onClick={() =>
             sendMessage(spanish ? "¿Qué servicios ofrecen?" : "What services do you offer?")
           }
@@ -174,6 +185,7 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
         <Button
           type="button"
           variant="ghost"
+          disabled={voiceActive}
           onClick={() =>
             sendMessage(spanish ? "Quiero hablar con un humano" : "I want to talk to a person")
           }
@@ -185,6 +197,7 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
       <form className="qs-chat-input" onSubmit={submit}>
         <input
           value={draft}
+          disabled={voiceActive}
           onChange={(event) => setDraft(event.target.value)}
           placeholder={spanish ? "Escribe tu mensaje..." : "Type your message..."}
           aria-label={spanish ? "Mensaje para Matilda" : "Message for Matilda"}
@@ -194,7 +207,7 @@ const HeroInteractiveDemo = ({ spanish }: HeroInteractiveDemoProps) => {
           type="submit"
           variant="default"
           size="icon"
-          disabled={!draft.trim() || typing}
+          disabled={voiceActive || !draft.trim() || typing}
           aria-label={spanish ? "Enviar mensaje" : "Send message"}
         >
           <Send />
