@@ -8,11 +8,9 @@ import EarlyAdopters from "@/components/sections/EarlyAdopters";
 import FAQ from "@/components/sections/FAQ";
 import FinalCTA from "@/components/sections/FinalCTA";
 import Footer from "@/components/sections/Footer";
-import HeroInteractiveDemo from "@/components/sections/HeroInteractiveDemo";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import {
-  ArrowUpRight,
   CalendarDays,
   Headphones,
   MessageCircle,
