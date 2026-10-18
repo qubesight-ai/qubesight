@@ -4274,10 +4274,6 @@
   .qs-quick-actions button {
     font-size: 0.57rem;
   }
-  .qs-teaser-card > strong,
-  .qs-teaser-card > p {
-    width: 75%;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .qs-cube-stage > img {
