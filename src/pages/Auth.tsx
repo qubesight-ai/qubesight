@@ -13,6 +13,7 @@ export default function Auth({ mode }: { mode: "login" | "register" | "forgot" }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [organizationName, setOrganizationName] = useState("");
   const [busy, setBusy] = useState(false);
 
   if (user) return <Navigate to="/dashboard" replace />;
@@ -26,7 +27,7 @@ export default function Auth({ mode }: { mode: "login" | "register" | "forgot" }
           email,
           password,
           options: {
-            data: { full_name: name },
+            data: { full_name: name, organization_name: organizationName },
             emailRedirectTo: `${window.location.origin}/dashboard`,
           },
         });
@@ -108,15 +109,28 @@ export default function Auth({ mode }: { mode: "login" | "register" | "forgot" }
 
             <form onSubmit={submit} className="space-y-4">
               {mode === "register" && (
-                <label className="block text-sm">
-                  Nombre completo
-                  <input
-                    className="auth-input"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </label>
+                <>
+                  <label className="block text-sm">
+                    Nombre completo
+                    <input
+                      className="auth-input"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label className="block text-sm">
+                    Nombre de la empresa
+                    <input
+                      className="auth-input"
+                      value={organizationName}
+                      onChange={(e) => setOrganizationName(e.target.value)}
+                      required
+                      minLength={2}
+                      maxLength={120}
+                    />
+                  </label>
+                </>
               )}
               <label className="block text-sm">
                 Correo electrónico

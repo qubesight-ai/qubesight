@@ -33,6 +33,38 @@ async function loadChatbots(organizationId: string) {
   return data ?? [];
 }
 
+async function loadOrganizationForUser(
+  userId: string,
+  activeOrganizationId: string | null,
+): Promise<Organization | null> {
+  let query = supabase
+    .from("organization_members")
+    .select("organization_id, organizations(id,name,industry)")
+    .eq("user_id", userId)
+    .order("created_at")
+    .limit(1);
+
+  if (activeOrganizationId) {
+    query = query.eq("organization_id", activeOrganizationId);
+  }
+
+  const { data: membership, error } = await query.maybeSingle();
+  if (error) throw error;
+
+  const organization = membership?.organizations ?? null;
+
+  // Self-heal legacy accounts that already had a membership before
+  // active_organization_id existed. The RPC validates membership server-side.
+  if (!activeOrganizationId && organization) {
+    const { error: selectionError } = await supabase.rpc("set_active_organization", {
+      target_org: organization.id,
+    });
+    if (selectionError) throw selectionError;
+  }
+
+  return organization;
+}
+
 export function useDashboardData(userId?: string) {
   const [organization, setOrganization] = useState<Organization | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -47,24 +79,27 @@ export function useDashboardData(userId?: string) {
       setLoading(false);
       return;
     }
+
     setLoading(true);
     setError(null);
+
     try {
-      const [{ data: profileData, error: profileError }, { data: membership, error: orgError }] =
-        await Promise.all([
-          supabase.from("profiles").select("full_name,role").eq("id", userId).single(),
-          supabase
-            .from("organization_members")
-            .select("organization_id, organizations(id,name,industry)")
-            .eq("user_id", userId)
-            .maybeSingle(),
-        ]);
+      const { data: profileData, error: profileError } = await supabase
+        .from("profiles")
+        .select("full_name,role,active_organization_id")
+        .eq("id", userId)
+        .single();
+
       if (profileError) throw profileError;
-      if (orgError) throw orgError;
       setProfile(profileData);
 
-      const currentOrganization = membership?.organizations ?? null;
+      const currentOrganization = await loadOrganizationForUser(
+        userId,
+        profileData.active_organization_id,
+      );
+
       setOrganization(currentOrganization);
+
       if (!currentOrganization) {
         setAgents([]);
         setChatbots([]);
@@ -86,8 +121,10 @@ export function useDashboardData(userId?: string) {
           .order("started_at", { ascending: false })
           .limit(50),
       ]);
+
       if (agentsResult.error) throw agentsResult.error;
       if (callsResult.error) throw callsResult.error;
+
       setAgents((agentsResult.data ?? []).map(normalizeAgent));
       setChatbots(chatbotRows.map(normalizeChatbot));
       setCalls((callsResult.data ?? []) as Call[]);
@@ -99,5 +136,6 @@ export function useDashboardData(userId?: string) {
   }, [userId]);
 
   useEffect(() => void reload(), [reload]);
+
   return { organization, profile, agents, chatbots, calls, loading, error, reload };
 }
