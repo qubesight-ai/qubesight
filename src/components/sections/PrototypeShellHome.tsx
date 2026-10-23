@@ -16,13 +16,8 @@ import {
   MessageCircle,
   Linkedin,
   Sparkles,
-  Globe2,
-  Network,
-  Activity,
-  ShieldCheck,
   Radio,
   Cpu,
-  Terminal,
   PhoneCall,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
