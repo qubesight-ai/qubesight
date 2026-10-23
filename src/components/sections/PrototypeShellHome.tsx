@@ -13,7 +13,6 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import {
   ArrowUpRight,
   CalendarDays,
-  Headphones,
   MessageCircle,
   Linkedin,
   Sparkles,
@@ -28,7 +27,6 @@ import {
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import skyCity from "@/assets/qubesight-sky-city.jpg";
-import heroCube from "@/assets/qubesight-hero-cube.png";
 
 const PrototypeHero = () => {
   const { language } = useTranslation();
