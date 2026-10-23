@@ -8,7 +8,6 @@ import EarlyAdopters from "@/components/sections/EarlyAdopters";
 import FAQ from "@/components/sections/FAQ";
 import FinalCTA from "@/components/sections/FinalCTA";
 import Footer from "@/components/sections/Footer";
-import HeroInteractiveDemo from "@/components/sections/HeroInteractiveDemo";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import {
@@ -17,8 +16,15 @@ import {
   Headphones,
   MessageCircle,
   Linkedin,
-  Play,
   Sparkles,
+  Globe2,
+  Network,
+  Activity,
+  ShieldCheck,
+  Radio,
+  Cpu,
+  Terminal,
+  PhoneCall,
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import skyCity from "@/assets/qubesight-sky-city.jpg";
@@ -28,49 +34,153 @@ const PrototypeHero = () => {
   const { language } = useTranslation();
   const spanish = language === "es";
 
+  const telemetry = [
+    { label: spanish ? "Canales activos" : "Active channels", value: "04", icon: Network },
+    { label: spanish ? "Disponibilidad" : "Availability", value: "24/7", icon: Activity },
+    { label: spanish ? "Seguridad" : "Security", value: "TLS", icon: ShieldCheck },
+  ];
+
   return (
-    <section id="hero" className="prototype-hero">
-      <img className="qs-hero-sky" src={skyCity} alt="" width={1920} height={1080} />
-      <div className="qs-hero-vignette" aria-hidden="true" />
-      <div className="qs-hero-copy">
-        <h1>
-          <span>{spanish ? "Tus clientes" : "Your customers"}</span>
-          <span>{spanish ? "quieren respuestas" : "want answers"}</span>
-          <span>{spanish ? "cuando las necesitan" : "when they need them"}</span>
-        </h1>
-        <p>
-          {spanish
-            ? "QubeSight ayuda a que tu negocio pueda atenderlos."
-            : "QubeSight helps your business be there for them."}
-        </p>
-        <div className="qs-hero-actions">
-          <a href="#early-adopters" className="prototype-button">
-            {spanish ? "Solicitar presentación" : "Request a demo"}
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
-          <a href="#how-it-works" className="qs-secondary-button">
-            <span>
-              <Play className="h-3.5 w-3.5" />
-            </span>
-            {spanish ? "Ver cómo funciona" : "See how it works"}
-          </a>
+    <section id="hero" className="prototype-hero cyberspace-hero">
+      <div className="cyberspace-grid" aria-hidden="true" />
+      <div className="cyberspace-scanlines" aria-hidden="true" />
+
+      <div className="cyberspace-coordinate cyberspace-coordinate-a" aria-hidden="true">
+        09°55' N / 84°05' W
+      </div>
+      <div className="cyberspace-coordinate cyberspace-coordinate-b" aria-hidden="true">
+        QBS-NET // NODE 01
+      </div>
+
+      <div className="cyberspace-shell">
+        <div className="cyberspace-meta-bar">
+          <span><i /> QUBESIGHT NETWORK</span>
+          <span>{spanish ? "SISTEMA OPERATIVO" : "SYSTEM OPERATIONAL"}</span>
+          <span>LATAM / AI RECEPTION</span>
+        </div>
+
+        <div className="cyberspace-hero-grid">
+          <div className="cyberspace-copy">
+            <div className="cyberspace-kicker">
+              <Terminal className="h-4 w-4" />
+              <span>{spanish ? "INTERFAZ DE ATENCIÓN AUTÓNOMA" : "AUTONOMOUS SERVICE INTERFACE"}</span>
+            </div>
+
+            <h1>
+              {spanish ? "Infraestructura digital" : "Digital infrastructure"}
+              <span>{spanish ? " para conversaciones reales." : " for real conversations."}</span>
+            </h1>
+
+            <p>
+              {spanish
+                ? "QubeSight conecta llamadas, chat, agenda y automatización en una sola capa de atención con IA para tu negocio."
+                : "QubeSight connects calls, chat, scheduling and automation in one AI service layer for your business."}
+            </p>
+
+            <div className="cyberspace-actions">
+              <a href="#early-adopters" className="cyberspace-button cyberspace-button-primary">
+                <span>{spanish ? "Solicitar demostración" : "Request a demo"}</span>
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+              <a href="#demo" className="cyberspace-button cyberspace-button-ghost">
+                <Radio className="h-4 w-4" />
+                <span>{spanish ? "Probar Matilda" : "Try Matilda"}</span>
+              </a>
+            </div>
+
+            <div className="cyberspace-status-row">
+              {telemetry.map(({ label, value, icon: Icon }) => (
+                <div className="cyberspace-status-cell" key={label}>
+                  <Icon className="h-4 w-4" />
+                  <span>{label}</span>
+                  <strong>{value}</strong>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="cyberspace-orbit-stage" aria-hidden="true">
+            <div className="cyberspace-globe">
+              <div className="cyberspace-globe-ring ring-a" />
+              <div className="cyberspace-globe-ring ring-b" />
+              <div className="cyberspace-globe-ring ring-c" />
+              <div className="cyberspace-globe-latitude lat-a" />
+              <div className="cyberspace-globe-latitude lat-b" />
+              <div className="cyberspace-globe-longitude long-a" />
+              <div className="cyberspace-globe-longitude long-b" />
+              <div className="cyberspace-globe-core">
+                <Globe2 className="h-20 w-20" />
+              </div>
+              <span className="cyberspace-node node-a" />
+              <span className="cyberspace-node node-b" />
+              <span className="cyberspace-node node-c" />
+              <span className="cyberspace-node node-d" />
+            </div>
+
+            <div className="cyberspace-orbit-chip chip-chat">
+              <MessageCircle className="h-4 w-4" />
+              <span>CHAT</span>
+            </div>
+            <div className="cyberspace-orbit-chip chip-voice">
+              <PhoneCall className="h-4 w-4" />
+              <span>VOICE</span>
+            </div>
+            <div className="cyberspace-orbit-chip chip-calendar">
+              <CalendarDays className="h-4 w-4" />
+              <span>CAL</span>
+            </div>
+            <div className="cyberspace-orbit-chip chip-ai">
+              <Cpu className="h-4 w-4" />
+              <span>AI</span>
+            </div>
+          </div>
+
+          <aside className="cyberspace-console">
+            <div className="cyberspace-console-head">
+              <div>
+                <span>MATILDA // LIVE NODE</span>
+                <strong>{spanish ? "Recepción IA" : "AI Reception"}</strong>
+              </div>
+              <i className="cyberspace-live-dot" />
+            </div>
+
+            <div className="cyberspace-console-body">
+              <div className="cyberspace-signal">
+                <span /><span /><span /><span /><span /><span /><span /><span /><span />
+              </div>
+
+              <div className="cyberspace-log">
+                <p><time>08:41:02</time> inbound.session <b>CONNECTED</b></p>
+                <p><time>08:41:07</time> intent.detected <b>APPOINTMENT</b></p>
+                <p><time>08:41:08</time> calendar.query <b>AVAILABLE</b></p>
+              </div>
+
+              <div className="cyberspace-dialogue">
+                <span className="cyberspace-dialogue-label">MATILDA.AI</span>
+                <p>
+                  {spanish
+                    ? "Tengo disponibilidad hoy a las 3:30 p. m. ¿Querés que reserve el espacio?"
+                    : "I have availability today at 3:30 PM. Would you like me to reserve it?"}
+                </p>
+              </div>
+
+              <a href="#demo" className="cyberspace-console-action">
+                <Radio className="h-4 w-4" />
+                <span>{spanish ? "ABRIR DEMO DE VOZ" : "OPEN VOICE DEMO"}</span>
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+          </aside>
+        </div>
+
+        <div className="cyberspace-bottom-rail">
+          <span>01 / VOICE</span>
+          <span>02 / CHAT</span>
+          <span>03 / SCHEDULING</span>
+          <span>04 / AUTOMATION</span>
+          <span className="cyberspace-rail-end">QUBESIGHT / 2026</span>
         </div>
       </div>
-      <div className="qs-cube-stage" aria-hidden="true">
-        <div className="qs-orbit qs-orbit-one" />
-        <div className="qs-orbit qs-orbit-two" />
-        <img src={heroCube} alt="" width={512} height={512} />
-        <span className="qs-channel qs-channel-chat">
-          <MessageCircle />
-        </span>
-        <span className="qs-channel qs-channel-phone">
-          <Headphones />
-        </span>
-        <span className="qs-channel qs-channel-calendar">
-          <CalendarDays />
-        </span>
-      </div>
-      <HeroInteractiveDemo spanish={spanish} />
     </section>
   );
 };
@@ -159,7 +269,7 @@ const PrototypeShellHome = () => {
   useScrollReveal();
 
   return (
-    <div className="prototype-shell">
+    <div className="prototype-shell corporate-cyberspace-shell">
       <img className="qs-world-sky" src={skyCity} alt="" aria-hidden="true" />
       <Header />
       <main>
