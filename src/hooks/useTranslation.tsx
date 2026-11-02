@@ -500,7 +500,7 @@ export const translations: Translations = {
   "footer.company": { es: "Compañía", en: "Company" },
   "footer.legal": { es: "Legal", en: "Legal" },
   "footer.terms": { es: "Términos", en: "Terms" },
-  "footer.privacy": { es: "Privacidad", en: "Privacy" },
+  "footer.privacy": { es: "Política de privacidad", en: "Privacy Policy" },
   "footer.rights": { es: "Todos los derechos reservados.", en: "All rights reserved." },
   "footer.backToTop": { es: "Volver arriba", en: "Back to top" },
 
