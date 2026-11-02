@@ -50,11 +50,15 @@ const PrivacyPolicy = () => {
                   ))}
                   {section.items && (
                     <ul className="list-disc pl-6 text-muted-foreground leading-relaxed mb-4 space-y-2">
-                      {section.items.map((item) => <li key={item}>{item}</li>)}
+                      {section.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
                     </ul>
                   )}
                   {section.closingParagraphs?.map((paragraph) => (
-                    <p key={paragraph} className="text-muted-foreground leading-relaxed mb-4">{paragraph}</p>
+                    <p key={paragraph} className="text-muted-foreground leading-relaxed mb-4">
+                      {paragraph}
+                    </p>
                   ))}
                 </div>
               ))}
@@ -65,20 +69,14 @@ const PrivacyPolicy = () => {
         <section className="py-16 bg-secondary/30">
           <div className="container relative z-10 max-w-3xl">
             <motion.div {...fadeUp} className="rounded-3xl glass-card p-8 sm:p-10">
-              <h2 className="font-display text-xl sm:text-2xl font-semibold mb-6">
-                Contacto
-              </h2>
+              <h2 className="font-display text-xl sm:text-2xl font-semibold mb-6">Contacto</h2>
               <dl className="space-y-3 text-sm">
                 <div className="flex flex-wrap gap-x-4 gap-y-1">
-                  <dt className="font-semibold w-40 shrink-0">
-                    Responsable:
-                  </dt>
+                  <dt className="font-semibold w-40 shrink-0">Responsable:</dt>
                   <dd className="text-muted-foreground">{PRIVACY_CONTACT.company}</dd>
                 </div>
                 <div className="flex flex-wrap gap-x-4 gap-y-1">
-                  <dt className="font-semibold w-40 shrink-0">
-                    Sitio web:
-                  </dt>
+                  <dt className="font-semibold w-40 shrink-0">Sitio web:</dt>
                   <dd>
                     <a
                       href={PRIVACY_CONTACT.website}
@@ -91,9 +89,7 @@ const PrivacyPolicy = () => {
                   </dd>
                 </div>
                 <div className="flex flex-wrap gap-x-4 gap-y-1">
-                  <dt className="font-semibold w-40 shrink-0">
-                    Correo:
-                  </dt>
+                  <dt className="font-semibold w-40 shrink-0">Correo:</dt>
                   <dd>
                     <a
                       href={`mailto:${PRIVACY_CONTACT.email}`}
