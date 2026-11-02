@@ -31,12 +31,12 @@ describe("public privacy policy page", () => {
 
   it("shows the required contact information", () => {
     renderPage();
-    expect(screen.getByText("QubeSight")).toBeTruthy();
+    expect(screen.getByText("QubeSight", { exact: true })).toBeTruthy();
     expect(screen.getByText("Costa Rica")).toBeTruthy();
     expect(screen.getByRole("link", { name: "privacy@qubesight.lat" }).getAttribute("href")).toBe(
       "mailto:privacy@qubesight.lat",
     );
-    expect(screen.getByRole("link", { name: "qubesight.lat" }).getAttribute("href")).toBe(
+    expect(screen.getByRole("link", { name: "https://qubesight.lat" }).getAttribute("href")).toBe(
       "https://qubesight.lat",
     );
   });
