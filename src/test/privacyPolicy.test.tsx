@@ -5,7 +5,11 @@ import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import { translations } from "@/hooks/useTranslation";
 
 const state = vi.hoisted(() => ({ language: "es" }));
-vi.mock("@/hooks/useTranslation", () => ({ useTranslation: () => state }));
+vi.mock("@/hooks/useTranslation", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/hooks/useTranslation")>();
+  return { ...actual, useTranslation: () => state };
+});
+
 vi.mock("@/components/layout/Header", () => ({ default: () => null }));
 vi.mock("@/components/sections/Footer", () => ({ default: () => null }));
 
