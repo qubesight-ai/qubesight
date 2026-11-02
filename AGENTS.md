@@ -91,3 +91,4 @@ Finish with repository, branch/base/result SHA; completed and excluded scope; ch
 - vite.config.ts holds public VITE_SUPABASE_* fallbacks because read-only .gitignore excludes .env (else "supabaseUrl is required").
 - Public demos share a session hook, separate from Test Call/WhatsApp, using the existing worker contract.
 - Accessibility uses root attributes and MotionConfig; store display preferences only locally.
+- Keep approved privacy content in the dedicated content module, with structured lists and closing paragraphs, so the public page preserves legal wording without changing shared UI.

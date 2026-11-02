@@ -1,5 +1,7 @@
 # Sitio web
 
+- [x] Sustituir el aviso provisional de /privacy por el texto legal adjunto, sin modificar páginas compartidas; verificar acceso público y fidelidad del contenido. Publicación pendiente de autorización.
+
 - [x] Corregir el contraste de textos, logo y controles del menú de vidrio en escritorio y móvil, conservando la opción de alto contraste.
 
 - [x] Enderezar la demo y añadir opciones globales de movimiento, contraste, tamaño de texto y enlaces; comprobar persistencia, cierre con Escape y vistas de 390, 870 y 1280 px sin llamadas ni despliegues.
