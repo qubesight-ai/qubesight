@@ -3,6 +3,8 @@ import { MessageCircle, Linkedin, ArrowUp } from "lucide-react";
 import LogoCube from "@/components/LogoCube";
 import { useTranslation } from "@/hooks/useTranslation";
 import { getScrollBehavior } from "@/lib/sectionNav";
+import { Link } from "react-router-dom";
+
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -97,13 +99,14 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/privacy"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {t("footer.privacy")}
-                </a>
+                </Link>
               </li>
+
             </ul>
           </div>
         </div>
