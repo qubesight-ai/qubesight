@@ -160,12 +160,6 @@ export default function Auth({ mode }: { mode: "login" | "register" | "forgot" }
                   <Link className="text-primary" to="/forgot-password">
                     ¿Olvidaste tu contraseña?
                   </Link>
-                  <p className="mt-3">
-                    ¿No tienes cuenta?{" "}
-                    <Link className="text-primary" to="/register">
-                      Regístrate
-                    </Link>
-                  </p>
                 </>
               ) : (
                 <p>

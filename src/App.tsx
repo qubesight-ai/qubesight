@@ -175,7 +175,6 @@ const App = () => (
                   <Route path="/payment/failure" element={<PaymentFailure />} />
                   <Route path="/dev/logo-test" element={<LogoResponsiveTest />} />
                   <Route path="/login" element={<Auth mode="login" />} />
-                  <Route path="/register" element={<Auth mode="register" />} />
                   <Route path="/forgot-password" element={<Auth mode="forgot" />} />
                   <Route element={<ProtectedRoute />}>
                     <Route path="/dashboard/*" element={<Dashboard />} />
