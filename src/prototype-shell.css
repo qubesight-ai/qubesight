@@ -4586,6 +4586,13 @@
       0 20px 48px hsl(var(--secondary-foreground) / 0.24) !important;
     backdrop-filter: blur(24px) saturate(135%) !important;
     -webkit-backdrop-filter: blur(24px) saturate(135%) !important;
+    /* Framer Motion leaves inline overflow:hidden after the height
+       animation, which kills scrolling — force it back on. */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
   }
 
   .prototype-shell .qs-site-header #mobile-nav-panel a,
