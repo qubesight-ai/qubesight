@@ -6,13 +6,12 @@ import { useAuth } from "@/contexts/AuthContext";
 import LogoCube from "@/components/LogoCube";
 import { toast } from "sonner";
 
-export default function Auth({ mode }: { mode: "login" | "register" | "forgot" }) {
+export default function Auth({ mode }: { mode: "login" | "forgot" }) {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
 
   if (user) return <Navigate to="/dashboard" replace />;
@@ -21,19 +20,7 @@ export default function Auth({ mode }: { mode: "login" | "register" | "forgot" }
     e.preventDefault();
     setBusy(true);
     try {
-      if (mode === "register") {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            data: { full_name: name },
-            emailRedirectTo: `${window.location.origin}/dashboard`,
-          },
-        });
-        if (error) throw error;
-        toast.success("Cuenta creada. Revisa tu correo si se requiere confirmación.");
-        navigate("/dashboard");
-      } else if (mode === "forgot") {
+      if (mode === "forgot") {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: `${window.location.origin}/login`,
         });
@@ -92,32 +79,15 @@ export default function Auth({ mode }: { mode: "login" | "register" | "forgot" }
 
           <div className="glass-card rounded-2xl p-7 md:p-9">
             <h2 className="text-2xl mb-2">
-              {mode === "login"
-                ? "Bienvenido de nuevo"
-                : mode === "register"
-                  ? "Crea tu cuenta"
-                  : "Recupera tu acceso"}
+              {mode === "login" ? "Bienvenido de nuevo" : "Recupera tu acceso"}
             </h2>
             <p className="text-sm text-muted-foreground mb-7">
               {mode === "login"
                 ? "Ingresa al panel de tu empresa."
-                : mode === "register"
-                  ? "Comienza a administrar tus agentes de voz."
-                  : "Te enviaremos un enlace seguro por correo."}
+                : "Te enviaremos un enlace seguro por correo."}
             </p>
 
             <form onSubmit={submit} className="space-y-4">
-              {mode === "register" && (
-                <label className="block text-sm">
-                  Nombre completo
-                  <input
-                    className="auth-input"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </label>
-              )}
               <label className="block text-sm">
                 Correo electrónico
                 <input
@@ -146,11 +116,7 @@ export default function Auth({ mode }: { mode: "login" | "register" | "forgot" }
                 className="w-full gradient-bg text-primary-foreground rounded-xl py-3 font-medium flex justify-center gap-2"
               >
                 {busy && <Loader2 className="animate-spin" size={18} />}
-                {mode === "login"
-                  ? "Iniciar sesión"
-                  : mode === "register"
-                    ? "Crear cuenta"
-                    : "Enviar enlace"}
+                {mode === "login" ? "Iniciar sesión" : "Enviar enlace"}
               </button>
             </form>
 
@@ -163,7 +129,7 @@ export default function Auth({ mode }: { mode: "login" | "register" | "forgot" }
                 </>
               ) : (
                 <p>
-                  {mode === "register" ? "¿Ya tienes cuenta?" : "¿Recordaste tu contraseña?"}{" "}
+                  ¿Recordaste tu contraseña?{" "}
                   <Link className="text-primary" to="/login">
                     Inicia sesión
                   </Link>
