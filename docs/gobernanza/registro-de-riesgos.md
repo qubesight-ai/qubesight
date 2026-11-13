@@ -1,0 +1,18 @@
+# Registro de riesgos
+
+| #   | Riesgo                                                                   | Quién sale afectado                     | Probabilidad (B/M/A) | Impacto (B/M/A) | Mitigación                                                                                 | Estado    | Responsable           |
+| --- | ------------------------------------------------------------------------ | --------------------------------------- | -------------------- | --------------- | ------------------------------------------------------------------------------------------ | --------- | --------------------- |
+| R1  | Datos de una organización quedan visibles para otra                      | Clientes y sus usuarios                 | M                    | A               | Aislamiento por organización, autorización server-side y pruebas con dos organizaciones    | En curso  | Ingeniería            |
+| R2  | La IA inventa información o confirma una acción no realizada             | Personas que llaman y clientes          | M                    | A               | Conocimiento aprobado, confirmación verificable y derivación humana                        | En curso  | Producto e ingeniería |
+| R3  | Una credencial de proveedor aparece en código, logs o una respuesta      | QubeSight y sus clientes                | M                    | A               | Almacén protegido, revisión de secretos y rotación inmediata                               | En curso  | Ingeniería            |
+| R4  | Un agente o proceso modifica un recurso sin autorización                 | Clientes y operación de QubeSight       | B                    | A               | Revisión separada, allowlist, firma, idempotencia y rollback probado                       | En curso  | Ingeniería            |
+| R5  | El consumo de IA o telefonía supera el presupuesto                       | QubeSight y clientes con límite mensual | M                    | A               | Cuotas por organización, alertas y límites de costo                                        | Pendiente | Producto y finanzas   |
+| R6  | Audio, transcripciones o teléfonos se conservan más tiempo del necesario | Personas que llaman                     | M                    | A               | Inventario, minimización, plazo aprobado y borrado                                         | Pendiente | Producto y privacidad |
+| R7  | Un canal externo incumple políticas o falla al enviar un mensaje         | Clientes y destinatarios                | M                    | A               | Validar consentimiento, política, plantillas y confirmación de entrega antes de prometerlo | En curso  | Producto              |
+| R8  | La indisponibilidad de un proveedor interrumpe la atención               | Personas que llaman y clientes          | M                    | M               | Monitoreo, respuesta segura, proveedor alternativo y derivación humana                     | Pendiente | Operaciones           |
+| R9  | Un lead se envía a un tercero sin autorización                           | Prospectos y clientes                   | B                    | A               | Integraciones con finalidad explícita, consentimiento y acceso restringido                 | En curso  | Producto e ingeniería |
+| R10 | Cambios de producción no tienen reversión verificable                    | QubeSight y sus clientes                | M                    | A               | Revisión, validaciones, registro de cambio y rollback documentado                          | En curso  | Ingeniería            |
+
+## Criterio de aceptación
+
+Un riesgo no se considera cerrado porque exista código. Debe existir una prueba, una persona responsable, una señal observable y un procedimiento de reversión o contención.

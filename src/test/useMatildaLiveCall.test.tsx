@@ -19,9 +19,10 @@ const mocks = vi.hoisted(() => ({
   publish: vi.fn(),
   rooms: [] as MockRoom[],
 }));
-vi.mock("@/lib/matildaLiveSession", async (original) => ({
-  ...(await original<typeof import("@/lib/matildaLiveSession")>()),
+vi.mock("@/lib/matildaLiveSession", () => ({
   createMatildaLiveSession: mocks.session,
+  matildaCallErrorCode: (error: unknown) =>
+    error instanceof DOMException && error.name === "NotAllowedError" ? "permission" : "connection",
 }));
 vi.mock("livekit-client", () => ({
   ParticipantKind: { AGENT: "agent" },
