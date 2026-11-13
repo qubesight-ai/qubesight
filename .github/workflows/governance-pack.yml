@@ -15,11 +15,11 @@ name: Governance Pack
 on:
   pull_request:
     paths:
-      - 'AGENTS.md'
-      - 'docs/adr/**'
-      - 'docs/gobernanza/**'
-      - '.github/governance-pack/**'
-      - '.github/workflows/governance-pack.yml'
+      - "AGENTS.md"
+      - "docs/adr/**"
+      - "docs/gobernanza/**"
+      - ".github/governance-pack/**"
+      - ".github/workflows/governance-pack.yml"
   workflow_dispatch:
 
 permissions:
@@ -46,4 +46,3 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: gh pr comment "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file reporte.md
-
