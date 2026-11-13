@@ -20,4 +20,3 @@ No se puede gobernar lo que no se sabe que se tiene. Este inventario evita publi
 - Cédula, contraseña o información financiera de la persona que llama: no son necesarias para el MVP de atención y prospección.
 - Datos sensibles no solicitados: no se piden para responder consultas generales.
 - Contenido completo de una conversación para proveedores que no participan en esa tarea: se aplica minimización.
-
