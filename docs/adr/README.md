@@ -11,4 +11,3 @@ Cada decisión que no es obvia queda escrita aquí: qué se decidió, por qué, 
 | [0003](0003-donde-viven-los-datos.md)    | Dónde viven los datos                     | Propuesto |
 
 Origen del formato: Michael Nygard, [Documenting Architecture Decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) (2011). Plantilla abierta de referencia: [MADR](https://adr.github.io/madr/).
-
