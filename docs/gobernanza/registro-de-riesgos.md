@@ -16,4 +16,3 @@
 ## Criterio de aceptación
 
 Un riesgo no se considera cerrado porque exista código. Debe existir una prueba, una persona responsable, una señal observable y un procedimiento de reversión o contención.
-
