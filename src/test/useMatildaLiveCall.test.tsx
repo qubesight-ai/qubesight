@@ -1,4 +1,10 @@
-import { act, fireEvent, render, renderHook, screen } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  renderHook,
+  screen,
+} from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { useMatildaLiveCall } from "@/hooks/useMatildaLiveCall";
 import HeroInteractiveDemo from "@/components/sections/HeroInteractiveDemo";
@@ -29,7 +35,11 @@ vi.mock("@/lib/matildaLiveSession", () => ({
 vi.mock("livekit-client", () => ({
   ParticipantKind: { AGENT: "agent" },
   Track: { Kind: { Audio: "audio" } },
-  DisconnectReason: { ROOM_DELETED: "deleted", JOIN_FAILURE: "failed", STATE_MISMATCH: "mismatch" },
+  DisconnectReason: {
+    ROOM_DELETED: "deleted",
+    JOIN_FAILURE: "failed",
+    STATE_MISMATCH: "mismatch",
+  },
   ConnectionError: class extends Error {},
   ConnectionErrorReason: { NotAllowed: 0 },
   RoomEvent: Object.fromEntries(
@@ -107,7 +117,10 @@ describe("public Matilda call lifecycle", () => {
   it("connects with returned credentials and publishes the microphone", async () => {
     const { result } = renderHook(() => useMatildaLiveCall());
     await act(() => result.current.start());
-    expect(mocks.connect).toHaveBeenCalledWith(session.server_url, session.participant_token);
+    expect(mocks.connect).toHaveBeenCalledWith(
+      session.server_url,
+      session.participant_token,
+    );
     expect(mocks.publish).toHaveBeenCalledWith({ stop });
     expect(result.current).toMatchObject({
       status: "live",
@@ -238,7 +251,11 @@ describe("public Matilda call lifecycle", () => {
     act(() => vi.advanceTimersByTime(19_999));
     expect(result.current.status).toBe("connecting");
     act(() => vi.advanceTimersByTime(1));
-    expect(result.current).toMatchObject({ status: "ended", endReason: "expired", remaining: 0 });
+    expect(result.current).toMatchObject({
+      status: "ended",
+      endReason: "expired",
+      remaining: 0,
+    });
     await act(async () => {
       waiting.resolve(undefined);
       await pending;
@@ -316,12 +333,16 @@ describe("public Matilda call lifecycle", () => {
   it("blocks simulated Hero interactions while voice is active", async () => {
     render(<HeroInteractiveDemo spanish />);
     await act(async () => {
-      fireEvent.click(screen.getByRole("button", { name: "Hablar con Matilda por voz" }));
+      fireEvent.click(
+        screen.getByRole("button", { name: "Hablar con Matilda por voz" }),
+      );
     });
     expect(screen.getByRole("textbox").hasAttribute("disabled")).toBe(true);
-    expect(screen.getByRole("button", { name: "Ver servicios" }).hasAttribute("disabled")).toBe(
-      true,
-    );
+    expect(
+      screen
+        .getByRole("button", { name: "Ver servicios" })
+        .hasAttribute("disabled"),
+    ).toBe(true);
     expect(mocks.session).toHaveBeenCalledTimes(1);
   });
 });
