@@ -28,4 +28,3 @@ Se reduce el riesgo de promesas falsas, acciones no autorizadas y pérdida de co
 ## Cómo se verifica
 
 Las pruebas deben demostrar que una respuesta generada no puede ejecutar una acción externa sin pasar por su control autorizado. Debe existir un caso de prueba para fallos de herramienta y otro para derivación humana. El texto de confirmación solo se permite después de una respuesta verificable de éxito.
-
