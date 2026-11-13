@@ -32,4 +32,3 @@ Se facilita la auditoría, el aislamiento y la recuperación. Antes de una expan
 ## Cómo se verifica
 
 La revisión debe comprobar reglas de acceso por organización, pruebas con dos organizaciones, ausencia de secretos en respuestas del cliente, validación de borrado y un inventario actualizado de los terceros que reciben datos.
-
