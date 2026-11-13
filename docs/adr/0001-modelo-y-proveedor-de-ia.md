@@ -29,4 +29,3 @@ Se obtiene mayor control de seguridad, presupuesto y sustitución de proveedores
 ## Cómo se verifica
 
 La revisión de código debe confirmar que las llamadas externas ocurren solo en servicios confiables, que no hay credenciales en el cliente y que existen límites de entrada, salida y consumo. El checklist de CI y las pruebas de autorización deben pasar antes de publicar.
-
